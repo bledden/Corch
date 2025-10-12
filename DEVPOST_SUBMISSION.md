@@ -192,9 +192,6 @@ Unlike single-model approaches that attempt everything in one pass, this multi-s
 
 **APIs:**
 - W&B Weave
-- OpenAI API
-- Anthropic API
-- Google Gemini API
 - Tavily API
 
 **Sponsor Integrations (Active):**
