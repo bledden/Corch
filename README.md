@@ -6,14 +6,14 @@
 
 Built for WeaveHacks 2 using W&B Weave, OpenRouter, and 200+ LLMs.
 
-## 🎯 Results: Sequential Beats Baseline
+## 🎯 Results: Sequential vs Baseline
 
 | Metric | Sequential | GPT-4 Baseline | Winner |
 |--------|-----------|----------------|--------|
 | **Success Rate** | **100%** (10/10) | 80% (8/10) | ✅ **+20%** |
 | **Quality Score** | **0.800** | 0.640 | ✅ **+25%** |
-| **Hallucinations** | **0%** (0/10) | 10% (1/10) | ✅ **100%** |
-| **Avg Duration** | 0.02s | 14.35s | ✅ **700x faster** |
+| **Hallucinations** | **0%** (0/10) | 10% (1/10) | ✅ **Perfect** |
+| **Latency** | Higher (5 stages) | Lower (1 call) | ⚠️ **Trade-off** |
 
 📊 **Full Results:** [W&B Weave Dashboard](https://wandb.ai/facilitair/sequential-vs-baseline-20251012_130636/weave)
 
@@ -72,13 +72,13 @@ curl -X POST http://localhost:8000/api/v1/collaborate \
 
 ## 📊 Features
 
-- ✅ **Sequential Collaboration** - Agents work in specialized chain
+- ✅ **Sequential Collaboration** - 5-stage specialized pipeline
 - ✅ **100% Success Rate** - Perfect completion on evaluation tasks
-- ✅ **Zero Hallucinations** - Eliminates false information
+- ✅ **Zero Hallucinations** - Structured workflow eliminates false information
 - ✅ **CLI + REST API** - Multiple interfaces
-- ✅ **W&B Weave Integration** - Complete telemetry
+- ✅ **W&B Weave Integration** - Complete experiment tracking
 - ✅ **200+ Models** - Via OpenRouter
-- ✅ **Comprehensive Testing** - 85%+ coverage
+- ⚠️ **Higher Latency** - 5 LLM calls vs 1 (quality over speed)
 
 ## 📈 Evaluation
 
@@ -89,6 +89,34 @@ curl -X POST http://localhost:8000/api/v1/collaborate \
 - Impossible claims (O(0) complexity)
 - Contradictions
 - Confidence without substance
+
+## ⚖️ Sequential vs Single-Model: Trade-offs
+
+### Sequential Advantages ✅
+- **Higher Success Rate**: 100% vs 80% (+20%)
+- **Better Quality**: Structured review and refinement
+- **Zero Hallucinations**: Each stage validates previous
+- **Traceable**: Complete lineage via W&B Weave
+- **Specialized**: Each agent optimized for specific role
+
+### Sequential Disadvantages ⚠️
+- **Higher Latency**: 5 sequential LLM calls vs 1
+- **Higher Cost**: 5x more API calls per task
+- **More Complex**: Additional orchestration overhead
+
+### When to Use Each
+
+**Use Sequential When:**
+- Production-critical code where quality matters most
+- Tasks need architecture + implementation + review
+- Audit trail and explainability required
+- Hallucinations are unacceptable
+
+**Use Single-Model When:**
+- Simple, well-defined tasks
+- Speed is critical
+- Cost optimization is priority
+- Prototyping and experimentation
 
 ## 🛠️ CLI Commands
 
