@@ -670,7 +670,8 @@ Return Markdown documentation."""
         """Call LLM with timeout and error handling"""
         try:
             async def _call():
-                return await self.llm.execute_agent_task(model, prompt, temperature=temperature)
+                # Note: temperature is configured in agent config, not passed as parameter
+                return await self.llm.execute_agent_task(model, prompt)
 
             output = await asyncio.wait_for(_call(), timeout=timeout)
             return output if isinstance(output, str) else str(output)
