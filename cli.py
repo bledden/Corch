@@ -33,7 +33,7 @@ logger = logging.getLogger('facilitair_cli')
 # Load environment
 load_dotenv()
 
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
 
 console = Console()
@@ -91,7 +91,7 @@ class FacilitairCLI:
             # Initialize W&B Weave
             weave.init("facilitair/cli")
 
-            self.orchestrator = SelfImprovingCollaborativeOrchestrator(
+            self.orchestrator = CollaborativeOrchestrator(
                 use_sequential=self.config["use_sequential"]
             )
             logger.info("Orchestrator initialized successfully")

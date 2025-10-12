@@ -25,7 +25,7 @@ async def run_simple_test():
     console.print(Panel.fit("[bold cyan]🚀 Testing Collaborative System[/bold cyan]", border_style="cyan"))
 
     # Import after environment is loaded
-    from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator as CollaborativeOrchestrator
+    from collaborative_orchestrator import CollaborativeOrchestrator
 
     # Simple config for testing
     config = {

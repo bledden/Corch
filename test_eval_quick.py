@@ -2,7 +2,7 @@
 
 import asyncio
 from run_comprehensive_eval import run_single_evaluation, generate_statistics, print_results_dashboard
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator, Strategy
+from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 from datetime import datetime
@@ -63,7 +63,7 @@ async def main():
 
     # Init orchestrator
     console.print("🔧 Initializing orchestrator...")
-    orchestrator = SelfImprovingCollaborativeOrchestrator(
+    orchestrator = CollaborativeOrchestrator(
         use_sponsors=True,
         user_strategy=Strategy.BALANCED
     )

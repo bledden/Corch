@@ -132,8 +132,8 @@ class CollaborationResult:
     consensus_rounds: int
 
 
-class SelfImprovingCollaborativeOrchestrator:
-    """Orchestrator that learns optimal collaboration strategies using SEQUENTIAL workflows"""
+class CollaborativeOrchestrator:
+    """Orchestrator for sequential agent collaboration workflows"""
 
     def __init__(self, config: Optional[Dict[str, Any]] = None, use_sponsors: bool = True,
                  user_strategy: Strategy = Strategy.BALANCED, use_sequential: bool = True):
@@ -772,7 +772,7 @@ class SelfImprovingCollaborativeOrchestrator:
 async def demo_collaboration_learning():
     """Demonstrate collaborative learning over multiple generations"""
 
-    orchestrator = SelfImprovingCollaborativeOrchestrator()
+    orchestrator = CollaborativeOrchestrator()
 
     # Test tasks for different types
     test_tasks = [

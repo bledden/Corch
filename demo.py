@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import our orchestrator
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 
 console = Console()
 
@@ -33,7 +33,7 @@ class CollaborativeDemoRunner:
     """Demo runner for hackathon presentation"""
 
     def __init__(self):
-        self.orchestrator = SelfImprovingCollaborativeOrchestrator()
+        self.orchestrator = CollaborativeOrchestrator()
         self.demo_tasks = [
             # Architecture Task
             {
@@ -72,7 +72,7 @@ class CollaborativeDemoRunner:
 
         header_text = Text()
         header_text.append("🤖 ", style="bold cyan")
-        header_text.append("Self-Improving Collaborative Agent System\n", style="bold white")
+        header_text.append("Collaborative Agent System\n", style="bold white")
         header_text.append("WeaveHacks 2 | July 12-13, 2025\n\n", style="dim")
         header_text.append("Powered by: ", style="white")
         header_text.append("W&B Weave", style="bold yellow")

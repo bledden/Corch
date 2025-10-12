@@ -1,0 +1,28 @@
+{
+  "classes": {
+    "SelfImprovingCollaborativeOrchestrator": {
+      "new_name": "CollaborativeOrchestrator",
+      "reason": "Removed marketing buzzword 'SelfImproving'",
+      "files_updated": [
+        "collaborative_orchestrator.py",
+        "cli.py",
+        "api.py",
+        "execute.py",
+        "run_sequential_vs_baseline_eval.py",
+        "demo.py",
+        "test_sequential_workflow.py",
+        "test_eval_quick.py",
+        "run_comprehensive_eval.py",
+        "run_demo_non_interactive.py",
+        "demo_with_strategy.py",
+        "train.py",
+        "tests/test_cli.py",
+        "smoke_test.sh"
+      ],
+      "completed": true
+    }
+  },
+  "functions": {},
+  "variables": {},
+  "files": {}
+}

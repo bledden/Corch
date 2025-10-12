@@ -30,7 +30,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger('facilitair_api')
 
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
 
 # Initialize W&B Weave
@@ -58,7 +58,7 @@ app.add_middleware(
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
 # Global orchestrator instance
-orchestrator: Optional[SelfImprovingCollaborativeOrchestrator] = None
+orchestrator: Optional[CollaborativeOrchestrator] = None
 
 # In-memory task storage (use Redis/DB in production)
 task_results = {}
@@ -127,12 +127,12 @@ class EvaluationRequest(BaseModel):
 # Dependency Functions
 # ============================================================================
 
-def get_orchestrator() -> SelfImprovingCollaborativeOrchestrator:
+def get_orchestrator() -> CollaborativeOrchestrator:
     """Get or create orchestrator instance"""
     global orchestrator
     if orchestrator is None:
         logger.info("Initializing orchestrator...")
-        orchestrator = SelfImprovingCollaborativeOrchestrator(use_sequential=True)
+        orchestrator = CollaborativeOrchestrator(use_sequential=True)
         logger.info("Orchestrator initialized")
     return orchestrator
 

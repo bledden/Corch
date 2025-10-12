@@ -6,7 +6,7 @@ Allows users to choose between QUALITY, COST, or BALANCED approaches
 
 import asyncio
 import weave
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 from agents.strategy_selector import Strategy, interactive_setup
 from rich.console import Console
 from rich.table import Table
@@ -145,7 +145,7 @@ async def main():
 
     # Create orchestrator with selected strategy
     console.print(f"\n🎯 Creating orchestrator with {strategy_name} strategy...")
-    orchestrator = SelfImprovingCollaborativeOrchestrator(user_strategy=strategy)
+    orchestrator = CollaborativeOrchestrator(user_strategy=strategy)
 
     # Demo tasks
     tasks = [

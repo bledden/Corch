@@ -5,7 +5,7 @@ Verifies that the new Facilitair_v2-style sequential architecture works correctl
 
 import asyncio
 import sys
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator, Strategy
+from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 
 async def main():
     print("=" * 80)
@@ -15,7 +15,7 @@ async def main():
 
     # Initialize orchestrator with sequential mode ENABLED
     print("🔧 Initializing orchestrator with sequential collaboration...")
-    orchestrator = SelfImprovingCollaborativeOrchestrator(
+    orchestrator = CollaborativeOrchestrator(
         use_sequential=True,
         use_sponsors=False,  # Disable sponsors for quick test
         user_strategy=Strategy.BALANCED

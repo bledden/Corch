@@ -13,7 +13,7 @@ from rich.panel import Panel
 from rich.layout import Layout
 from rich.live import Live
 import weave
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 
 console = Console()
 
@@ -22,7 +22,7 @@ class CollaborativeTrainer:
     """Trainer for collaborative learning"""
 
     def __init__(self):
-        self.orchestrator = SelfImprovingCollaborativeOrchestrator()
+        self.orchestrator = CollaborativeOrchestrator()
         self.training_tasks = {
             "architecture": [
                 "Design a microservices architecture for an e-commerce platform",

@@ -14,7 +14,7 @@ from rich.table import Table
 from rich.panel import Panel
 import numpy as np
 
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator, Strategy
+from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 
 console = Console()
 
@@ -210,7 +210,7 @@ def _suggest_agents(category: str) -> List[str]:
 
 @weave.op()
 async def run_single_evaluation(
-    orchestrator: SelfImprovingCollaborativeOrchestrator,
+    orchestrator: CollaborativeOrchestrator,
     task: Dict[str, Any],
     progress: Progress,
     task_progress_id
@@ -313,7 +313,7 @@ async def run_comprehensive_evaluation(batch_size: int = 5):
 
     # Initialize orchestrator
     console.print("🔧 Initializing collaborative orchestrator...")
-    orchestrator = SelfImprovingCollaborativeOrchestrator(
+    orchestrator = CollaborativeOrchestrator(
         use_sponsors=True,
         user_strategy=Strategy.BALANCED
     )

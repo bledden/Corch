@@ -12,7 +12,7 @@ from rich.panel import Panel
 from rich.columns import Columns
 from rich.syntax import Syntax
 import weave
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator
+from collaborative_orchestrator import CollaborativeOrchestrator
 
 console = Console()
 
@@ -26,8 +26,8 @@ async def compare_generations(task: str, show_outputs: bool = False):
     ))
 
     # Create two orchestrators
-    untrained = SelfImprovingCollaborativeOrchestrator()
-    trained = SelfImprovingCollaborativeOrchestrator()
+    untrained = CollaborativeOrchestrator()
+    trained = CollaborativeOrchestrator()
 
     # Simulate training for the trained one
     console.print("\n[yellow]Training orchestrator (simulated fast training)...[/yellow]")

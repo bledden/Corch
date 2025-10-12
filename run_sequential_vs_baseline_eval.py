@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
-from collaborative_orchestrator import SelfImprovingCollaborativeOrchestrator, Strategy
+from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 from agents.llm_client import MultiAgentLLMOrchestrator
 
 console = Console()
@@ -99,7 +99,7 @@ class HallucinationDetector:
 
 @weave.op()
 async def run_sequential_collaborative(
-    orchestrator: SelfImprovingCollaborativeOrchestrator,
+    orchestrator: CollaborativeOrchestrator,
     task: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Run sequential collaboration on a task"""
@@ -222,7 +222,7 @@ async def run_comparison_evaluation():
 
     # Initialize orchestrator (sequential only)
     console.print("🔧 Initializing sequential orchestrator...")
-    orchestrator = SelfImprovingCollaborativeOrchestrator(
+    orchestrator = CollaborativeOrchestrator(
         use_sequential=True,
         use_sponsors=False,
         user_strategy=Strategy.BALANCED

@@ -144,7 +144,7 @@ class TestCLIIntegration:
             }
 
             # Mock the orchestrator to avoid actual API calls
-            with patch('cli.SelfImprovingCollaborativeOrchestrator'):
+            with patch('cli.CollaborativeOrchestrator'):
                 result = self.runner.invoke(cli, [
                     'collaborate',
                     'Write a hello world function',
