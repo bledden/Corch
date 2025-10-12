@@ -1,0 +1,76 @@
+================================================================================
+OPENROUTER MODEL ANALYSIS - Release Dates & Versions
+================================================================================
+
+📅 MODELS BY RELEASE DATE:
+----------------------------------------
+
+🔥 LATEST (Last 30 days): 12 models
+  • alibaba/qvq-72b-preview (2024-12-24)
+  • google/gemini-2.0-flash-thinking-exp-1219:free (2024-12-19)
+  • openai/o1 (2024-12-17)
+  • openai/o1-2024-12-17 (2024-12-17)
+  • openai/o1-mini (2024-12-17)
+  • alibaba/marco-o1 (2024-12-17)
+  • x-ai/grok-2-1212 (2024-12-12)
+  • x-ai/grok-2-vision-1212 (2024-12-12)
+  • google/gemini-exp-1206:free (2024-12-06)
+  • google/gemini-2.0-flash-exp:free (2024-12-01)
+
+📍 RECENT (Last 90 days): 16 models
+  • alibaba/qwq-32b-preview (2024-11-28)
+  • google/gemini-exp-1121:free (2024-11-21)
+  • openai/gpt-4o-2024-11-20 (2024-11-20)
+  • deepseek/deepseek-r1 (2024-11-20)
+  • deepseek/deepseek-r1-distill-qwen-32b (2024-11-20)
+
+⭐ ESTABLISHED (3-6 months): 10 models
+  • meta-llama/llama-3.2-1b-instruct (2024-10-01)
+  • meta-llama/llama-3.2-3b-instruct (2024-10-01)
+  • meta-llama/llama-3.2-11b-vision-instruct (2024-10-01)
+
+================================================================================
+🏆 LATEST MODEL IN EACH FAMILY:
+----------------------------------------
+  alibaba/o1: alibaba/marco-o1 (2024-12-17)
+  alibaba/qwen-family: alibaba/qvq-72b-preview (2024-12-24)
+  anthropic/claude-2: anthropic/claude-2 (unknown)
+  anthropic/claude-3: anthropic/claude-3-opus (unknown)
+  anthropic/claude-3.5: anthropic/claude-3-5-haiku (2024-11-01)
+  anthropic/other: anthropic/claude-1 (unknown)
+  deepseek/deepseek: deepseek/deepseek-r1 (2024-11-20)
+  deepseek/qwen-family: deepseek/deepseek-r1-distill-qwen-32b (2024-11-20)
+  google/gemini-1.x: google/gemini-exp-1206:free (2024-12-06)
+  google/gemini-2: google/gemini-2.0-flash-thinking-exp-1219:free (2024-12-19)
+  google/other: google/learnlm-1.5-pro-experimental:free (unknown)
+  meta-llama/llama-3.0: meta-llama/llama-3-8b-instruct (unknown)
+  meta-llama/llama-3.1: meta-llama/llama-3.1-8b-instruct (2024-07-01)
+  meta-llama/llama-3.2: meta-llama/llama-3.2-1b-instruct (2024-10-01)
+  meta-llama/llama-3.3: meta-llama/llama-3.3-70b-instruct (2024-12-01)
+  mistralai/mistral-family: mistralai/mistral-large-2411 (2024-11-01)
+  mistralai/other: mistralai/pixtral-large-2411 (2024-11-01)
+  openai/gpt-3.5: openai/gpt-3.5-turbo-1106 (2024-11-06)
+  openai/gpt-4: openai/gpt-4-1106-preview (2024-11-06)
+  openai/gpt-4o: openai/gpt-4o-2024-11-20 (2024-11-20)
+  openai/o1: openai/o1 (2024-12-17)
+  openrouter/other: openrouter/auto (unknown)
+  perplexity/llama-3.1: perplexity/llama-3.1-sonar-small-128k-online (2024-07-01)
+  x-ai/grok: x-ai/grok-2-1212 (2024-12-12)
+
+================================================================================
+💡 RECOMMENDED MODELS FOR CODE GENERATION (Based on recency):
+----------------------------------------
+
+Top Code Generation Models (Latest):
+  • openai/o1 (2024-12-17)
+  • openai/o1-2024-12-17 (2024-12-17)
+  • openai/o1-mini (2024-12-17)
+  • alibaba/marco-o1 (2024-12-17)
+
+================================================================================
+📊 SUMMARY STATISTICS:
+----------------------------------------
+Total models analyzed: 110
+Models with identifiable dates: 56
+Models without dates: 54
+Unique model families: 24
