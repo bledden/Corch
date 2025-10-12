@@ -7,9 +7,9 @@ This document summarizes all critical security and stability fixes that were imp
 ### 1. API Keys Configured (5 minutes)
 **Status**: ✅ COMPLETE
 
-- **W&B Weave**: `5317641347be58d3774b20067f75e38d9bd83467` - CONNECTED
-- **OpenRouter**: `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` - CONNECTED
-- **Tavily**: `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` - CONNECTED
+- **W&B Weave**: Configured - CONNECTED
+- **OpenRouter**: Configured - CONNECTED
+- **Tavily**: Configured - CONNECTED
 - **OpenAI**: From environment - CONNECTED
 
 **Files Modified**:
