@@ -15,9 +15,13 @@ from rich.table import Table
 
 from collaborative_orchestrator import CollaborativeOrchestrator
 from agents.llm_client import MultiAgentLLMOrchestrator
+from web_search_router import WebSearchRouter
 import yaml
 
 console = Console()
+
+# Initialize web search router for task type detection
+web_search_router = WebSearchRouter()
 
 # 500-task benchmark covering HumanEval and MBPP-style problems
 BENCHMARK_TASKS = {
@@ -470,6 +474,9 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
     """Run sequential collaboration (our approach)"""
     start = datetime.now()
 
+    # Detect if task needs external information (web search)
+    needs_search, patterns, confidence = web_search_router.detect_needs_web_search(task["description"])
+
     try:
         result = await orchestrator.collaborate(task["description"])
         duration = (datetime.now() - start).total_seconds()
@@ -501,6 +508,10 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
             "duration": duration,
             "hallucination": hallucination,
             "output": result.final_output[:500],
+            # Task type differentiation
+            "needs_external_info": needs_search,
+            "search_confidence": confidence,
+            "matched_patterns": patterns,
         }
 
     except Exception as e:
@@ -518,6 +529,9 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
 async def run_baseline(llm: MultiAgentLLMOrchestrator, task: Dict) -> Dict:
     """Run single-model baseline (GPT-4 direct)"""
     start = datetime.now()
+
+    # Detect if task needs external information (web search)
+    needs_search, patterns, confidence = web_search_router.detect_needs_web_search(task["description"])
 
     try:
         output = await llm.execute_agent_task("coder", task["description"])
@@ -553,6 +567,10 @@ async def run_baseline(llm: MultiAgentLLMOrchestrator, task: Dict) -> Dict:
             "duration": duration,
             "hallucination": hallucination,
             "output": output[:500],
+            # Task type differentiation
+            "needs_external_info": needs_search,
+            "search_confidence": confidence,
+            "matched_patterns": patterns,
         }
 
     except Exception as e:
@@ -613,6 +631,12 @@ async def run_benchmark():
     seq_passes = [r["pass"] for r in sequential_results]
     base_passes = [r["pass"] for r in baseline_results]
 
+    # Task type differentiation
+    seq_needs_search = [r for r in sequential_results if r.get("needs_external_info", False)]
+    base_needs_search = [r for r in baseline_results if r.get("needs_external_info", False)]
+    seq_self_contained = [r for r in sequential_results if not r.get("needs_external_info", False)]
+    base_self_contained = [r for r in baseline_results if not r.get("needs_external_info", False)]
+
     metrics = {
         "sequential": {
             "pass@1": sum(seq_passes) / len(seq_passes) * 100,
@@ -621,6 +645,11 @@ async def run_benchmark():
             "hallucinations": sum(1 for r in sequential_results if r.get("hallucination", {}).get("hallucination_detected")),
             "avg_quality": sum(r.get("quality_score", 0) for r in sequential_results) / len(sequential_results),
             "avg_duration": sum(r.get("duration", 0) for r in sequential_results) / len(sequential_results),
+            # Task type breakdown
+            "self_contained_tasks": len(seq_self_contained),
+            "non_self_contained_tasks": len(seq_needs_search),
+            "self_contained_pass_rate": (sum(r["pass"] for r in seq_self_contained) / len(seq_self_contained) * 100) if seq_self_contained else 0,
+            "non_self_contained_pass_rate": (sum(r["pass"] for r in seq_needs_search) / len(seq_needs_search) * 100) if seq_needs_search else 0,
         },
         "baseline": {
             "pass@1": sum(base_passes) / len(base_passes) * 100,
@@ -629,6 +658,11 @@ async def run_benchmark():
             "hallucinations": sum(1 for r in baseline_results if r.get("hallucination", {}).get("hallucination_detected")),
             "avg_quality": sum(r.get("quality_score", 0) for r in baseline_results) / len(baseline_results),
             "avg_duration": sum(r.get("duration", 0) for r in baseline_results) / len(baseline_results),
+            # Task type breakdown
+            "self_contained_tasks": len(base_self_contained),
+            "non_self_contained_tasks": len(base_needs_search),
+            "self_contained_pass_rate": (sum(r["pass"] for r in base_self_contained) / len(base_self_contained) * 100) if base_self_contained else 0,
+            "non_self_contained_pass_rate": (sum(r["pass"] for r in base_needs_search) / len(base_needs_search) * 100) if base_needs_search else 0,
         }
     }
 
@@ -690,9 +724,39 @@ async def run_benchmark():
         f"+{metrics['sequential']['avg_duration'] - metrics['baseline']['avg_duration']:.2f}"
     )
 
+    # Task type differentiation section
     console.print("\n")
     console.print(table)
+
+    # Task Type Breakdown
+    type_table = Table(title="Task Type Breakdown")
+    type_table.add_column("Task Type", style="cyan")
+    type_table.add_column("Count", style="white")
+    type_table.add_column("Sequential Pass Rate", style="green")
+    type_table.add_column("Baseline Pass Rate", style="yellow")
+
+    type_table.add_row(
+        "Self-Contained",
+        f"{metrics['sequential']['self_contained_tasks']}",
+        f"{metrics['sequential']['self_contained_pass_rate']:.1f}%",
+        f"{metrics['baseline']['self_contained_pass_rate']:.1f}%"
+    )
+
+    type_table.add_row(
+        "Non-Self-Contained (needs web search)",
+        f"{metrics['sequential']['non_self_contained_tasks']}",
+        f"{metrics['sequential']['non_self_contained_pass_rate']:.1f}%" if metrics['sequential']['non_self_contained_tasks'] > 0 else "N/A",
+        f"{metrics['baseline']['non_self_contained_pass_rate']:.1f}%" if metrics['baseline']['non_self_contained_tasks'] > 0 else "N/A"
+    )
+
+    console.print("\n")
+    console.print(type_table)
     console.print(f"\n[green]Results saved to: {output_file}[/green]")
+
+    # Print summary about task types
+    if metrics['sequential']['non_self_contained_tasks'] == 0:
+        console.print("\n[yellow]Note: All 498 benchmark tasks are self-contained (algorithms, data structures).")
+        console.print("No tasks required external information or web search.[/yellow]")
 
 
 if __name__ == "__main__":
