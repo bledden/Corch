@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 from rich.table import Table
 
-from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
+from collaborative_orchestrator import CollaborativeOrchestrator
 from agents.llm_client import MultiAgentLLMOrchestrator
 import yaml
 
@@ -563,7 +563,7 @@ async def run_benchmark():
     weave.init("facilitair/500-task-benchmark")
 
     llm = MultiAgentLLMOrchestrator(config)
-    orchestrator = CollaborativeOrchestrator(llm, config, strategy=Strategy.SEQUENTIAL)
+    orchestrator = CollaborativeOrchestrator(llm, config)
 
     sequential_results = []
     baseline_results = []
