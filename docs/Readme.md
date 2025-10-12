@@ -1,41 +1,12 @@
 # Facilitair Documentation
 
-Sequential collaborative AI orchestration system built for WeaveHacks 2.
+## Analysis Documents
+- [analysis/BENCHMARK_REDESIGN.md](analysis/BENCHMARK_REDESIGN.md) - Complete benchmark redesign (500 tasks)
+- [analysis/BENCHMARK_V2_SUMMARY.md](analysis/BENCHMARK_V2_SUMMARY.md) - Implementation summary
+- [analysis/BENCHMARKS_RUNNING_SIMULATED.md](analysis/BENCHMARKS_RUNNING_SIMULATED.md) - Previous simulated run
+- [analysis/CRITICAL_ISSUE_SIMULATED_RESPONSES.md](analysis/CRITICAL_ISSUE_SIMULATED_RESPONSES.md) - Issue discovered
 
-## Documentation Structure
-
-- [architecture/](architecture/) - System architecture and design documents
-- [guides/](guides/) - User guides and tutorials
-- [api/](api/) - API documentation
-- [integrations/](integrations/) - Integration guides for sponsors
-- [evaluations/](evaluations/) - Evaluation results and analysis
-- [cleanup/](cleanup/) - Cleanup and refactoring documentation
-
-## Quick Links
-
-- [Architecture Overview](architecture/ARCHITECTURE_EXPLANATION.md)
-- [API Reference](../README.md#api)
-- [CLI Guide](../README.md#cli)
-- [Evaluation Results](evaluations/EVALUATION_RESULTS_SUMMARY.md)
-
-## Project Overview
-
-Facilitair is a sequential collaborative AI orchestration system that coordinates multiple AI agents through a structured workflow:
-
-**Architect** → **Coder** → **Reviewer** → **Refiner** → **Documenter**
-
-Each stage builds on the previous, creating a deterministic and traceable development process.
-
-### Key Features
-
-- **Sequential Workflow**: Deterministic 5-stage pipeline
-- **W&B Weave Integration**: Complete experiment tracking and lineage
-- **Multi-Model Support**: 200+ models via OpenRouter
-- **CLI & REST API**: Multiple interfaces for different use cases
-- **Production Ready**: Comprehensive evaluation with 100% success rate
-
-### Sponsor Integrations
-
-- **W&B Weave**: Experiment tracking and metrics
-- **Tavily**: Web search capabilities
-- **Daytona**: Development environment management
+## Context Documents
+- [context/HACKATHON_ASSISTANT_PROMPT.md](context/HACKATHON_ASSISTANT_PROMPT.md) - Original prompt
+- [context/HACKATHON_CONTEXT.md](context/HACKATHON_CONTEXT.md) - Project context
+- [context/SPONSOR_API_STATUS.md](context/SPONSOR_API_STATUS.md) - Sponsor integrations
