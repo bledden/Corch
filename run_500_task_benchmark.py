@@ -563,7 +563,7 @@ async def run_benchmark():
     weave.init("facilitair/500-task-benchmark")
 
     llm = MultiAgentLLMOrchestrator(config)
-    orchestrator = CollaborativeOrchestrator(llm, config)
+    orchestrator = CollaborativeOrchestrator(config)
 
     sequential_results = []
     baseline_results = []
