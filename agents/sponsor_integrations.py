@@ -14,10 +14,10 @@ import weave
 WEAVE_TRACKING = hasattr(weave, 'op')
 
 def track_event(event_name: str, data: Dict[str, Any]):
-    """Track events - uses Weave if available, otherwise prints"""
-    if os.getenv("DEMO_MODE"):
-        print(f"[Track] {event_name}: {str(data)[:100]}")
-    # In production with proper Weave setup, would use actual tracking
+    """Track events - uses Weave if available, otherwise silent"""
+    # DISABLED: Mock tracking removed to prevent fake telemetry
+    # Only real W&B Weave tracking should be used
+    pass
 
 
 @dataclass

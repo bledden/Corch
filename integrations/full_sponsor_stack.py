@@ -139,13 +139,8 @@ class TavilySearch:
             except Exception as e:
                 print(f"Tavily search error: {e}")
 
-        # Fallback mock search
-        return [{
-            "title": f"Mock result for: {query}",
-            "url": f"https://example.com/{query.replace(' ', '-')}",
-            "content": f"This is simulated search content for query: {query}",
-            "score": 0.95
-        }]
+        # No client available - return empty
+        return []
 
     async def get_answer(self, question: str) -> str:
         """Get direct AI answer using Tavily"""
@@ -159,7 +154,7 @@ class TavilySearch:
             except Exception as e:
                 print(f"Tavily QnA error: {e}")
 
-        return f"Mock answer for: {question}"
+        return "Tavily not configured"
 
 
 class BrowserBaseAutomation:
@@ -192,9 +187,8 @@ class BrowserBaseAutomation:
                 except Exception as e:
                     print(f"BrowserBase session error: {e}")
 
-        # Mock session
-        self.session_id = f"mock-session-{os.urandom(4).hex()}"
-        return self.session_id
+        # No API key - return None
+        return None
 
     async def navigate(self, url: str) -> Dict:
         """Navigate to URL and get page content"""
@@ -211,12 +205,8 @@ class BrowserBaseAutomation:
                 except Exception as e:
                     print(f"BrowserBase navigation error: {e}")
 
-        # Mock response
-        return {
-            "status": "success",
-            "title": f"Mock page: {url}",
-            "content": f"Simulated content from {url}"
-        }
+        # No API key - return error
+        return {"error": "BrowserBase not configured"}
 
     async def extract_data(self, selectors: Dict[str, str]) -> Dict:
         """Extract data from current page using selectors"""
@@ -233,8 +223,8 @@ class BrowserBaseAutomation:
                 except Exception as e:
                     print(f"BrowserBase extraction error: {e}")
 
-        # Mock extracted data
-        return {key: f"Mock value for {key}" for key in selectors}
+        # No API key - return error
+        return {"error": "BrowserBase not configured"}
 
 
 class OpenRouterModels:
@@ -289,8 +279,8 @@ class OpenRouterModels:
                 except Exception as e:
                     print(f"OpenRouter error: {e}")
 
-        # Fallback to mock response
-        return f"[Mock {model_type} response for: {prompt[:50]}...]"
+        # No API key - return error message
+        return f"[Error: OpenRouter not configured]"
 
 
 class MastraWorkflows:
