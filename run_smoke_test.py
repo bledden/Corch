@@ -23,6 +23,42 @@ console = Console()
 # Initialize web search router
 web_search_router = WebSearchRouter()
 
+
+def categorize_model(model_name: str) -> str:
+    """
+    Categorize a model as open_source or closed_source based on provider.
+
+    Closed Source: openai/*, anthropic/*, google/gemini*, perplexity/*
+    Open Source: qwen/*, deepseek/*, mistralai/codestral*, alibaba/qwen*,
+                 meta-llama/*, cohere/command-r*
+    """
+    if not model_name:
+        return "unknown"
+
+    model_lower = model_name.lower()
+
+    # Closed source providers
+    closed_source_prefixes = [
+        "openai/", "anthropic/", "google/gemini", "perplexity/"
+    ]
+
+    # Open source providers
+    open_source_prefixes = [
+        "qwen/", "deepseek", "alibaba/qwen", "meta-llama/",
+        "mistralai/codestral", "cohere/command-r"
+    ]
+
+    for prefix in closed_source_prefixes:
+        if model_lower.startswith(prefix):
+            return "closed_source"
+
+    for prefix in open_source_prefixes:
+        if prefix in model_lower:
+            return "open_source"
+
+    # Default to unknown if not matched
+    return "unknown"
+
 # 10 Smoke Test Tasks
 SMOKE_TEST_TASKS = [
     # 5 Self-Contained (should not trigger web search)
@@ -100,6 +136,11 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
         quality = result.metrics.get("quality", 0.0)
         overall = result.metrics.get("overall", 0.0)
 
+        # Get model used (from orchestrator's last execution)
+        models_used = result.metadata.get("models_used", {})
+        primary_model = models_used.get("coder", "unknown")
+        model_type = categorize_model(primary_model)
+
         has_substantial_output = len(result.final_output.strip()) > 50
         pass_at_1 = (quality > 0.7 and
                      not hallucination["hallucination_detected"] and
@@ -121,6 +162,8 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
             "search_executed": search_info["search_executed"],
             "search_method_used": search_info["search_method"],
             "search_cost": search_info["search_cost"],
+            "model_used": primary_model,
+            "model_type": model_type,
         }
 
     except Exception as e:
@@ -162,6 +205,11 @@ async def run_baseline(llm: MultiAgentLLMOrchestrator, task: Dict) -> Dict:
         detector = HallucinationDetector()
         hallucination = detector.detect(output)
 
+        # Get model used for coder agent
+        coder_config = llm.config.get("agents", {}).get("coder", {})
+        baseline_model = coder_config.get("default_model", "unknown")
+        model_type = categorize_model(baseline_model)
+
         has_code = any(m in output for m in ["```", "def ", "class ", "function "])
         has_logic = any(keyword in output.lower() for keyword in ["if ", "for ", "while ", "return "])
         reasonable_length = 100 < len(output) < 10000
@@ -190,6 +238,8 @@ async def run_baseline(llm: MultiAgentLLMOrchestrator, task: Dict) -> Dict:
             "search_executed": search_info["search_executed"],
             "search_method_used": search_info["search_method"],
             "search_cost": search_info["search_cost"],
+            "model_used": baseline_model,
+            "model_type": model_type,
         }
 
     except Exception as e:
@@ -264,6 +314,22 @@ async def run_smoke_test():
     total_searches = sum(1 for r in sequential_results + baseline_results if r.get("search_executed", False))
     total_search_cost = sum(r.get("search_cost", 0.0) for r in sequential_results + baseline_results)
 
+    # Model type breakdown
+    def calculate_model_stats(results):
+        open_source = [r for r in results if r.get("model_type") == "open_source"]
+        closed_source = [r for r in results if r.get("model_type") == "closed_source"]
+        return {
+            "open_source_count": len(open_source),
+            "closed_source_count": len(closed_source),
+            "open_source_pass_rate": (sum(r["pass"] for r in open_source) / len(open_source) * 100) if open_source else 0,
+            "closed_source_pass_rate": (sum(r["pass"] for r in closed_source) / len(closed_source) * 100) if closed_source else 0,
+            "open_source_avg_quality": sum(r.get("quality_score", 0) for r in open_source) / len(open_source) if open_source else 0,
+            "closed_source_avg_quality": sum(r.get("quality_score", 0) for r in closed_source) / len(closed_source) if closed_source else 0,
+        }
+
+    seq_model_stats = calculate_model_stats(sequential_results)
+    base_model_stats = calculate_model_stats(baseline_results)
+
     metrics = {
         "sequential": {
             "pass@1": sum(seq_passes) / len(seq_passes) * 100 if seq_passes else 0,
@@ -276,6 +342,7 @@ async def run_smoke_test():
             "web_search_tasks": len(seq_web_search),
             "self_contained_pass_rate": (sum(r["pass"] for r in seq_self_contained) / len(seq_self_contained) * 100) if seq_self_contained else 0,
             "web_search_pass_rate": (sum(r["pass"] for r in seq_web_search) / len(seq_web_search) * 100) if seq_web_search else 0,
+            "model_stats": seq_model_stats,
         },
         "baseline": {
             "pass@1": sum(base_passes) / len(base_passes) * 100 if base_passes else 0,
@@ -288,6 +355,7 @@ async def run_smoke_test():
             "web_search_tasks": len(base_web_search),
             "self_contained_pass_rate": (sum(r["pass"] for r in base_self_contained) / len(base_self_contained) * 100) if base_self_contained else 0,
             "web_search_pass_rate": (sum(r["pass"] for r in base_web_search) / len(base_web_search) * 100) if base_web_search else 0,
+            "model_stats": base_model_stats,
         },
         "search": {
             "total_searches": total_searches,
@@ -390,6 +458,39 @@ async def run_smoke_test():
 
     console.print("\n")
     console.print(search_table)
+
+    # Model Type Statistics
+    model_type_table = Table(title="Model Type Performance (Open vs Closed Source)")
+    model_type_table.add_column("Model Type", style="cyan")
+    model_type_table.add_column("Sequential Tasks", style="white")
+    model_type_table.add_column("Sequential Pass Rate", style="green")
+    model_type_table.add_column("Sequential Avg Quality", style="green")
+    model_type_table.add_column("Baseline Tasks", style="white")
+    model_type_table.add_column("Baseline Pass Rate", style="yellow")
+    model_type_table.add_column("Baseline Avg Quality", style="yellow")
+
+    model_type_table.add_row(
+        "Open Source",
+        f"{metrics['sequential']['model_stats']['open_source_count']}",
+        f"{metrics['sequential']['model_stats']['open_source_pass_rate']:.1f}%",
+        f"{metrics['sequential']['model_stats']['open_source_avg_quality']:.3f}",
+        f"{metrics['baseline']['model_stats']['open_source_count']}",
+        f"{metrics['baseline']['model_stats']['open_source_pass_rate']:.1f}%",
+        f"{metrics['baseline']['model_stats']['open_source_avg_quality']:.3f}"
+    )
+
+    model_type_table.add_row(
+        "Closed Source",
+        f"{metrics['sequential']['model_stats']['closed_source_count']}",
+        f"{metrics['sequential']['model_stats']['closed_source_pass_rate']:.1f}%",
+        f"{metrics['sequential']['model_stats']['closed_source_avg_quality']:.3f}",
+        f"{metrics['baseline']['model_stats']['closed_source_count']}",
+        f"{metrics['baseline']['model_stats']['closed_source_pass_rate']:.1f}%",
+        f"{metrics['baseline']['model_stats']['closed_source_avg_quality']:.3f}"
+    )
+
+    console.print("\n")
+    console.print(model_type_table)
     console.print(f"\n[green]Results saved to: {output_file}[/green]")
 
     # Smoke test validation
