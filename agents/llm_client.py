@@ -131,11 +131,11 @@ class MultiAgentLLMOrchestrator:
         # Get agent configuration
         agent_config = self.agent_configs.get(agent_id, {})
 
-        # Execute with LLM
+        # Execute with LLM using default_model from config
         response = await self.llm_client.execute_llm(
             agent_id=agent_id,
             task=task,
-            model=agent_config.get("model", "gpt-4"),
+            model=agent_config.get("default_model", "alibaba/qwen2.5-coder-32b-instruct"),  # Use best open-source model as fallback
             temperature=agent_config.get("temperature", 0.7),
             max_tokens=agent_config.get("max_tokens", 2000),
             personality=agent_config.get("personality", ""),
