@@ -537,7 +537,7 @@ Return ONLY JSON with this exact schema:
     ) -> StageResult:
         """Refinement stage - REUSES CODER agent with review context"""
         start = time.time()
-        profile = self.agent_profiles[AgentRole.CODER]  # ← REUSE CODER!
+        profile = self.agent_profiles[AgentRole.CODER]
 
         code = context.get("implementation", "")
         review = context.get("review", "")

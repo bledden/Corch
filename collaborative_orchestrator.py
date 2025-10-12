@@ -165,7 +165,7 @@ class CollaborativeOrchestrator:
                 collaboration_scores={}
             )
 
-        # NEW: Sequential orchestrator (Facilitair_v2 style)
+        # Sequential orchestrator
         self.use_sequential = use_sequential
         if use_sequential and self.llm_orchestrator:
             from sequential_orchestrator import SequentialCollaborativeOrchestrator
@@ -177,7 +177,7 @@ class CollaborativeOrchestrator:
         else:
             self.sequential_orchestrator = None
 
-        # OLD: Consensus methods (deprecated, kept for backwards compatibility)
+        # Consensus methods (kept for backwards compatibility)
         self.consensus_methods = [
             "voting",           # Simple majority
             "weighted_voting",  # Weight by expertise
@@ -253,95 +253,6 @@ class CollaborativeOrchestrator:
         # Learn from this collaboration
         task_type = self._classify_task(task)
         await self._learn_from_collaboration(result, task_type)
-
-        return result
-
-        # CONSENSUS CODE COMPLETELY REMOVED
-        # All consensus logic has been deleted
-        task_type = self._classify_task(task)
-
-        # Select agents (learned or forced)
-        if force_agents:
-            selected_agents = force_agents
-        else:
-            selected_agents = self._select_optimal_agents(task, task_type)
-
-        # Choose consensus method (learned)
-        consensus_method = self._select_consensus_method(task_type)
-
-        # Setup sponsor environment if available
-        sponsor_setup = None
-        if self.sponsor_orchestrator:
-            sponsor_setup = await self.sponsor_orchestrator.setup_collaboration_environment(selected_agents)
-
-        # Log collaboration setup
-        log_metric({
-            "generation": self.generation,
-            "task": task[:100],
-            "task_type": task_type,
-            "selected_agents": selected_agents,
-            "consensus_method": consensus_method
-        })
-
-        # Execute with each agent
-        individual_outputs = {}
-        for agent_id in selected_agents:
-            output = await self._execute_agent(self.agents[agent_id], task)
-            individual_outputs[agent_id] = output
-
-        # Reach consensus
-        final_output, consensus_metrics = await self._reach_consensus(
-            individual_outputs,
-            consensus_method,
-            task_type
-        )
-
-        # Calculate collaboration metrics
-        metrics = self._calculate_metrics(
-            individual_outputs,
-            final_output,
-            consensus_metrics
-        )
-
-        # Create result
-        result = CollaborationResult(
-            task=task,
-            agents_used=selected_agents,
-            consensus_method=consensus_method,
-            individual_outputs=individual_outputs,
-            final_output=final_output,
-            metrics=metrics,
-            conflicts_resolved=consensus_metrics.get("conflicts", 0),
-            consensus_rounds=consensus_metrics.get("rounds", 1)
-        )
-
-        # Learn from this collaboration
-        await self._learn_from_collaboration(result, task_type)
-
-        # Log final result
-        log_metric({
-            "collaboration_result": {
-                "agents": selected_agents,
-                "consensus_method": consensus_method,
-                "metrics": metrics,
-                "conflicts": result.conflicts_resolved,
-                "rounds": result.consensus_rounds,
-                "sponsors_used": bool(self.sponsor_orchestrator)
-            }
-        })
-
-        # Store in history (protected by lock to prevent race conditions)
-        async with self._history_lock:
-            self.collaboration_history.append(result)
-
-        # Cleanup sponsor resources if used
-        if self.sponsor_orchestrator:
-            try:
-                insights = await self.sponsor_orchestrator.cleanup(selected_agents)
-                if insights:
-                    log_metric({"sponsor_insights": insights})
-            except Exception as e:
-                log_metric({"sponsor_cleanup_error": str(e)})
 
         return result
 
