@@ -5,6 +5,7 @@ Supports OpenAI, Anthropic, and Google models
 
 import os
 import asyncio
+import time
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
 import aiohttp
@@ -64,10 +65,10 @@ class LLMClient:
     def _initialize_clients(self):
         """Initialize LLM clients based on available API keys"""
 
-        # OpenAI
+        # OpenAI (using new client API)
         if OPENAI_AVAILABLE and os.getenv("OPENAI_API_KEY"):
-            openai.api_key = os.getenv("OPENAI_API_KEY")
-            self.openai_client = openai
+            from openai import OpenAI
+            self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
         # Anthropic
         if ANTHROPIC_AVAILABLE and os.getenv("ANTHROPIC_API_KEY"):
@@ -114,23 +115,16 @@ class LLMClient:
 
             response.latency = time.time() - start_time
 
-            # Log to Weave
-            weave.log({
-                "llm_execution": {
-                    "agent": agent_id,
-                    "model": model,
-                    "task_preview": task[:100],
-                    "response_preview": response.content[:200],
-                    "tokens": response.tokens_used,
-                    "latency": response.latency
-                }
-            })
+            # Log execution for demo
+            if os.getenv("DEMO_MODE"):
+                print(f"[LLM] {agent_id} using {model}: {response.content[:100]}...")
 
             return response
 
         except Exception as e:
             error_msg = f"LLM execution failed: {str(e)}"
-            weave.log({"llm_error": {"agent": agent_id, "error": error_msg}})
+            if os.getenv("DEMO_MODE"):
+                print(f"[ERROR] {agent_id}: {error_msg}")
 
             # Return fallback response
             return LLMResponse(
@@ -170,9 +164,9 @@ Response:"""
             return await self._simulate_response("openai_agent", prompt, model)
 
         try:
-            # Use async client for better performance
+            # Use the new OpenAI API v1.0+
             response = await asyncio.to_thread(
-                self.openai_client.ChatCompletion.create,
+                self.openai_client.chat.completions.create,
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=temperature,
@@ -313,7 +307,8 @@ class MultiAgentLLMOrchestrator:
 
         if response.error:
             # Log error but return content anyway
-            weave.log({"agent_error": {"agent": agent_id, "error": response.error}})
+            if os.getenv("DEMO_MODE"):
+                print(f"[WARN] {agent_id} error: {response.error}")
 
         return response.content
 

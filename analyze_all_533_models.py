@@ -876,7 +876,8 @@ def categorize_by_recency(model_dates: Dict[str, str]) -> Dict[str, List[Tuple[s
                 categories["established"].append((model, date_str))
             else:
                 categories["legacy"].append((model, date_str))
-        except:
+        except (ValueError, KeyError, AttributeError) as e:
+            # Skip models with invalid or missing dates
             pass
 
     # Sort each category by date

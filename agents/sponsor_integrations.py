@@ -10,6 +10,15 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 import weave
 
+# Check if weave has proper tracking
+WEAVE_TRACKING = hasattr(weave, 'op')
+
+def track_event(event_name: str, data: Dict[str, Any]):
+    """Track events - uses Weave if available, otherwise prints"""
+    if os.getenv("DEMO_MODE"):
+        print(f"[Track] {event_name}: {str(data)[:100]}")
+    # In production with proper Weave setup, would use actual tracking
+
 
 @dataclass
 class DaytonaEnvironment:
@@ -50,13 +59,11 @@ class DaytonaIntegration:
 
         self.workspaces[agent_id] = workspace
 
-        # Log to Weave
-        weave.log({
-            "daytona_workspace_created": {
-                "agent": agent_id,
-                "workspace_id": workspace.workspace_id,
-                "resources": workspace.resources
-            }
+        # Track workspace creation
+        track_event("daytona_workspace_created", {
+            "agent": agent_id,
+            "workspace_id": workspace.workspace_id,
+            "resources": workspace.resources
         })
 
         return workspace
@@ -72,12 +79,10 @@ class DaytonaIntegration:
         # In production, this would run code in the actual isolated environment
         result = f"[Daytona:{workspace.workspace_id}] Executed: {code[:100]}..."
 
-        weave.log({
-            "daytona_execution": {
-                "agent": agent_id,
-                "workspace": workspace.workspace_id,
-                "code_preview": code[:100]
-            }
+        track_event("daytona_execution", {
+            "agent": agent_id,
+            "workspace": workspace.workspace_id,
+            "code_preview": code[:100]
         })
 
         return result
@@ -90,11 +95,9 @@ class DaytonaIntegration:
             # In production, would call Daytona API to destroy workspace
             del self.workspaces[agent_id]
 
-            weave.log({
-                "daytona_cleanup": {
-                    "agent": agent_id,
-                    "workspace": workspace.workspace_id
-                }
+            track_event("daytona_cleanup", {
+                "agent": agent_id,
+                "workspace": workspace.workspace_id
             })
 
 
@@ -129,13 +132,11 @@ class MCPIntegration:
         self.message_queue.append(mcp_message)
 
         # Log to Weave
-        weave.log({
-            "mcp_message": {
-                "from": from_agent,
-                "to": to_agent,
-                "type": mcp_message["type"],
-                "preview": str(mcp_message["content"])[:100]
-            }
+        track_event("mcp_message", {
+            "from": from_agent,
+            "to": to_agent,
+            "type": mcp_message["type"],
+            "preview": str(mcp_message["content"])[:100]
         })
 
         return mcp_message
@@ -154,11 +155,9 @@ class MCPIntegration:
             "timestamp": asyncio.get_event_loop().time()
         }
 
-        weave.log({
-            "mcp_context_broadcast": {
+        track_event("mcp_context_broadcast", {
                 "agent": agent_id,
                 "context_keys": list(context.keys())
-            }
         })
 
         return context_update
@@ -198,11 +197,9 @@ class MCPIntegration:
             }
         }
 
-        weave.log({
-            "mcp_protocol_established": {
+        track_event("mcp_protocol_established", {
                 "agents": agents,
                 "capabilities": list(protocol["capabilities"].keys())
-            }
         })
 
         return protocol
@@ -256,13 +253,11 @@ class CopilotKitIntegration:
         self.guidance_history.append(guidance_request)
 
         # Log to Weave
-        weave.log({
-            "copilotkit_guidance": {
+        track_event("copilotkit_guidance", {
                 "request_id": guidance_request["id"],
                 "mode": "auto" if self.auto_mode else "manual",
                 "choice": choice,
                 "context_preview": str(context)[:100]
-            }
         })
 
         return choice
@@ -291,9 +286,7 @@ class CopilotKitIntegration:
             suggestions["team_composition"].append("Add domain expert to team")
 
         # Log suggestions
-        weave.log({
-            "copilotkit_suggestions": suggestions
-        })
+        track_event("copilotkit_suggestions", suggestions)
 
         return suggestions
 
@@ -302,11 +295,9 @@ class CopilotKitIntegration:
 
         self.auto_mode = not enabled
 
-        weave.log({
-            "copilotkit_mode_change": {
+        track_event("copilotkit_mode_change", {
                 "human_mode": enabled,
                 "auto_mode": self.auto_mode
-            }
         })
 
     async def get_human_insights(self) -> Dict[str, Any]:
@@ -332,9 +323,7 @@ class CopilotKitIntegration:
             insights["common_issues"].append("Consensus difficulties")
             insights["recommendations"].append("Consider hierarchy for faster decisions")
 
-        weave.log({
-            "copilotkit_insights": insights
-        })
+        track_event("copilotkit_insights", insights)
 
         return insights
 
@@ -373,13 +362,11 @@ class SponsorOrchestrator:
         # Initialize CopilotKit
         self.copilotkit.toggle_human_mode(False)  # Start in auto mode
 
-        weave.log({
-            "sponsor_environment_ready": {
+        track_event("sponsor_environment_ready", {
                 "agents": agents,
                 "daytona_workspaces": len(setup_results["daytona_workspaces"]),
                 "mcp_enabled": True,
                 "copilotkit_enabled": True
-            }
         })
 
         return setup_results
@@ -430,11 +417,9 @@ class SponsorOrchestrator:
         # Get final insights from CopilotKit
         insights = await self.copilotkit.get_human_insights()
 
-        weave.log({
-            "sponsor_cleanup_complete": {
+        track_event("sponsor_cleanup_complete", {
                 "agents_cleaned": agents,
                 "insights": insights
-            }
         })
 
         return insights

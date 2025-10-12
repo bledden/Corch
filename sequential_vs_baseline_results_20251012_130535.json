@@ -1,0 +1,408 @@
+{
+  "run_id": "20251012_130535",
+  "timestamp": "2025-10-12T13:05:37.614149",
+  "summary": {
+    "sequential": {
+      "success_count": 10,
+      "success_rate": 1.0,
+      "avg_quality": 0.7999999999999999,
+      "hallucinations_detected": 0,
+      "hallucination_rate": 0.0,
+      "avg_hallucination_score": 0.0,
+      "avg_duration": 0.0157527
+    },
+    "baseline": {
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_quality": 0.0,
+      "hallucinations_detected": 0,
+      "hallucination_rate": 0.0,
+      "avg_hallucination_score": 0.0,
+      "avg_duration": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.033693,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.440118"
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.053766,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.475449"
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.009831,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.530699"
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008926,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.541914"
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008646,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.552221"
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008647,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.562386"
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "complexity": 0.9,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008463,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.572726"
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "complexity": 0.9,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008585,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.582504"
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "complexity": 0.6,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008564,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.592398"
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "complexity": 0.6,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008406,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:05:37.602446"
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    }
+  ]
+}

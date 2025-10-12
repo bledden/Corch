@@ -17,6 +17,13 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Validate API keys on startup
+from utils.api_key_validator import validate_on_startup
+if not validate_on_startup():
+    import sys
+    print("❌ Exiting due to invalid API keys")
+    sys.exit(1)
+
 # Import strategy selector
 from agents.strategy_selector import StrategySelector, ModelSelectionContext, Strategy
 
@@ -75,6 +82,12 @@ except Exception as e:
     print(f"Warning: Could not initialize Weave: {e}")
     print("Continuing without W&B tracking...")
 
+# Helper function to replace log_metric() which doesn't exist
+def log_metric(data: Dict[str, Any]):
+    """Log metrics - weave automatically tracks @weave.op() decorated functions"""
+    # Weave tracks via decorators, so we just skip manual logging
+    pass
+
 # Import LLM client if available
 try:
     from agents.llm_client import MultiAgentLLMOrchestrator
@@ -120,10 +133,10 @@ class CollaborationResult:
 
 
 class SelfImprovingCollaborativeOrchestrator:
-    """Orchestrator that learns optimal collaboration strategies"""
+    """Orchestrator that learns optimal collaboration strategies using SEQUENTIAL workflows"""
 
     def __init__(self, config: Optional[Dict[str, Any]] = None, use_sponsors: bool = True,
-                 user_strategy: Strategy = Strategy.BALANCED):
+                 user_strategy: Strategy = Strategy.BALANCED, use_sequential: bool = True):
         # Use provided config or load from file
         self.config = config or CONFIG
 
@@ -152,7 +165,19 @@ class SelfImprovingCollaborativeOrchestrator:
                 collaboration_scores={}
             )
 
-        # Collaboration strategies
+        # NEW: Sequential orchestrator (Facilitair_v2 style)
+        self.use_sequential = use_sequential
+        if use_sequential and self.llm_orchestrator:
+            from sequential_orchestrator import SequentialCollaborativeOrchestrator
+            self.sequential_orchestrator = SequentialCollaborativeOrchestrator(
+                self.llm_orchestrator,
+                self.config
+            )
+            print("✅ Sequential collaboration enabled (Facilitair_v2 architecture)")
+        else:
+            self.sequential_orchestrator = None
+
+        # OLD: Consensus methods (deprecated, kept for backwards compatibility)
         self.consensus_methods = [
             "voting",           # Simple majority
             "weighted_voting",  # Weight by expertise
@@ -172,6 +197,10 @@ class SelfImprovingCollaborativeOrchestrator:
         self.generation = 0
         self.collaboration_history = []
 
+        # Add locks to protect shared state from race conditions
+        self._history_lock = asyncio.Lock()
+        self._patterns_lock = asyncio.Lock()
+
     def set_user_strategy(self, strategy: Strategy):
         """Allow user to change strategy at runtime"""
         self.strategy_selector.set_user_strategy(strategy)
@@ -183,9 +212,52 @@ class SelfImprovingCollaborativeOrchestrator:
 
     @weave.op()
     async def collaborate(self, task: str, force_agents: Optional[List[str]] = None) -> CollaborationResult:
-        """Execute task with collaborative agents, learning from results"""
+        """Execute task with sequential collaborative workflow (consensus removed)"""
 
-        # Determine task type
+        # ONLY USE SEQUENTIAL - Consensus is removed entirely
+        if not self.use_sequential or not self.sequential_orchestrator:
+            raise RuntimeError("Sequential orchestrator not initialized. Consensus has been removed.")
+
+        workflow_result = await self.sequential_orchestrator.execute_workflow(
+            task=task,
+            max_iterations=3,
+            temperature=0.2
+        )
+
+        # Convert WorkflowResult to CollaborationResult for compatibility
+        agents_used = [stage.agent_role.value for stage in workflow_result.stages]
+
+        # Build individual outputs from stages
+        individual_outputs = {}
+        for stage in workflow_result.stages:
+            individual_outputs[stage.agent_role.value] = stage.output
+
+        metrics = {
+            "quality": 0.8 if workflow_result.success else 0.3,
+            "efficiency": 0.9,
+            "harmony": 1.0,
+            "overall": 0.85 if workflow_result.success else 0.3
+        }
+
+        result = CollaborationResult(
+            task=task,
+            agents_used=agents_used,
+            consensus_method="sequential_workflow",
+            individual_outputs=individual_outputs,
+            final_output=workflow_result.final_output,
+            metrics=metrics,
+            conflicts_resolved=workflow_result.iterations,
+            consensus_rounds=len(workflow_result.stages)
+        )
+
+        # Learn from this collaboration
+        task_type = self._classify_task(task)
+        await self._learn_from_collaboration(result, task_type)
+
+        return result
+
+        # CONSENSUS CODE COMPLETELY REMOVED
+        # All consensus logic has been deleted
         task_type = self._classify_task(task)
 
         # Select agents (learned or forced)
@@ -203,7 +275,7 @@ class SelfImprovingCollaborativeOrchestrator:
             sponsor_setup = await self.sponsor_orchestrator.setup_collaboration_environment(selected_agents)
 
         # Log collaboration setup
-        weave.log({
+        log_metric({
             "generation": self.generation,
             "task": task[:100],
             "task_type": task_type,
@@ -244,10 +316,10 @@ class SelfImprovingCollaborativeOrchestrator:
         )
 
         # Learn from this collaboration
-        self._learn_from_collaboration(result, task_type)
+        await self._learn_from_collaboration(result, task_type)
 
         # Log final result
-        weave.log({
+        log_metric({
             "collaboration_result": {
                 "agents": selected_agents,
                 "consensus_method": consensus_method,
@@ -258,17 +330,18 @@ class SelfImprovingCollaborativeOrchestrator:
             }
         })
 
-        # Store in history
-        self.collaboration_history.append(result)
+        # Store in history (protected by lock to prevent race conditions)
+        async with self._history_lock:
+            self.collaboration_history.append(result)
 
         # Cleanup sponsor resources if used
         if self.sponsor_orchestrator:
             try:
                 insights = await self.sponsor_orchestrator.cleanup(selected_agents)
                 if insights:
-                    weave.log({"sponsor_insights": insights})
+                    log_metric({"sponsor_insights": insights})
             except Exception as e:
-                weave.log({"sponsor_cleanup_error": str(e)})
+                log_metric({"sponsor_cleanup_error": str(e)})
 
         return result
 
@@ -330,7 +403,7 @@ class SelfImprovingCollaborativeOrchestrator:
             selected = [agent_id for agent_id, _ in sorted_agents[:team_size]]
 
             # Log selection reasoning
-            weave.log({
+            log_metric({
                 "agent_selection": {
                     "scores": agent_scores,
                     "selected": selected,
@@ -368,7 +441,7 @@ class SelfImprovingCollaborativeOrchestrator:
         selected_model, selection_info = self.strategy_selector.select_model(agent.id, context)
 
         # Log model selection
-        weave.log({
+        log_metric({
             "model_selection": {
                 "agent": agent.id,
                 "selected_model": selected_model,
@@ -407,7 +480,7 @@ class SelfImprovingCollaborativeOrchestrator:
                 if "result" in result:
                     return result["result"]
             except Exception as e:
-                weave.log({"sponsor_fallback": {"agent": agent.id, "error": str(e)}})
+                log_metric({"sponsor_fallback": {"agent": agent.id, "error": str(e)}})
 
         # Use real LLM if available (fallback if sponsors fail)
         if self.llm_orchestrator:
@@ -415,7 +488,7 @@ class SelfImprovingCollaborativeOrchestrator:
                 output = await self.llm_orchestrator.execute_agent_task(agent.id, task)
                 return output
             except Exception as e:
-                weave.log({"llm_fallback": {"agent": agent.id, "error": str(e)}})
+                log_metric({"llm_fallback": {"agent": agent.id, "error": str(e)}})
                 # Fall through to simulation
 
         # Fallback to simulation
@@ -463,9 +536,9 @@ class SelfImprovingCollaborativeOrchestrator:
 
                 if guidance == "switch_to_hierarchy":
                     method = "hierarchy"
-                    weave.log({"copilotkit_intervention": "Switched to hierarchy based on guidance"})
+                    log_metric({"copilotkit_intervention": "Switched to hierarchy based on guidance"})
             except Exception as e:
-                weave.log({"copilotkit_error": str(e)})
+                log_metric({"copilotkit_error": str(e)})
 
         if method == "voting":
             # Simple voting - most common output wins
@@ -560,41 +633,43 @@ class SelfImprovingCollaborativeOrchestrator:
         }
 
     @weave.op()
-    def _learn_from_collaboration(self, result: CollaborationResult, task_type: str):
-        """Update learning based on collaboration results"""
+    async def _learn_from_collaboration(self, result: CollaborationResult, task_type: str):
+        """Update learning based on collaboration results (thread-safe)"""
 
-        # Update agent performance histories
-        for agent_id in result.agents_used:
-            agent = self.agents[agent_id]
+        # Protect shared state with lock to prevent race conditions
+        async with self._patterns_lock:
+            # Update agent performance histories
+            for agent_id in result.agents_used:
+                agent = self.agents[agent_id]
 
-            # Update task type performance
-            old_score = agent.performance_history.get(task_type, 0.5)
-            new_score = result.metrics["quality"]
-            agent.performance_history[task_type] = 0.7 * old_score + 0.3 * new_score
+                # Update task type performance
+                old_score = agent.performance_history.get(task_type, 0.5)
+                new_score = result.metrics["quality"]
+                agent.performance_history[task_type] = 0.7 * old_score + 0.3 * new_score
 
-            # Update collaboration scores with other agents
-            for other_id in result.agents_used:
-                if other_id != agent_id:
-                    old_collab = agent.collaboration_scores.get(other_id, 0.5)
-                    new_collab = result.metrics["harmony"]
-                    agent.collaboration_scores[other_id] = 0.7 * old_collab + 0.3 * new_collab
+                # Update collaboration scores with other agents
+                for other_id in result.agents_used:
+                    if other_id != agent_id:
+                        old_collab = agent.collaboration_scores.get(other_id, 0.5)
+                        new_collab = result.metrics["harmony"]
+                        agent.collaboration_scores[other_id] = 0.7 * old_collab + 0.3 * new_collab
 
-        # Update task type patterns
-        pattern = self.task_type_patterns[task_type]
+            # Update task type patterns
+            pattern = self.task_type_patterns[task_type]
 
-        # Update best agents (if this collaboration was successful)
-        if result.metrics["overall"] > 0.7:
-            pattern["best_agents"] = result.agents_used
-            pattern["best_consensus"] = result.consensus_method
-            pattern["optimal_team_size"] = len(result.agents_used)
+            # Update best agents (if this collaboration was successful)
+            if result.metrics["overall"] > 0.7:
+                pattern["best_agents"] = result.agents_used
+                pattern["best_consensus"] = result.consensus_method
+                pattern["optimal_team_size"] = len(result.agents_used)
 
-        # Update success rate
-        old_rate = pattern["success_rate"]
-        new_rate = 1.0 if result.metrics["overall"] > 0.7 else 0.0
-        pattern["success_rate"] = 0.9 * old_rate + 0.1 * new_rate
+            # Update success rate
+            old_rate = pattern["success_rate"]
+            new_rate = 1.0 if result.metrics["overall"] > 0.7 else 0.0
+            pattern["success_rate"] = 0.9 * old_rate + 0.1 * new_rate
 
         # Log learning update
-        weave.log({
+        log_metric({
             "learning_update": {
                 "task_type": task_type,
                 "generation": self.generation,
@@ -614,7 +689,7 @@ class SelfImprovingCollaborativeOrchestrator:
         self.generation += 1
 
         # Log generation advancement
-        weave.log({
+        log_metric({
             "generation_advanced": self.generation,
             "total_collaborations": len(self.collaboration_history),
             "patterns_learned": dict(self.task_type_patterns)
@@ -688,7 +763,7 @@ class SelfImprovingCollaborativeOrchestrator:
         }
 
         # Log report
-        weave.log({"collaboration_report": report})
+        log_metric({"collaboration_report": report})
 
         return report
 

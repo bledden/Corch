@@ -217,7 +217,8 @@ class CodeGenerationOrchestrator:
                 try:
                     ast.parse(fixed_code)
                     return True, fixed_code
-                except:
+                except SyntaxError:
+                    # Could not fix syntax error
                     return False, code
 
         # Other languages would use their respective parsers
@@ -591,7 +592,7 @@ class CodeGenerationOrchestrator:
             try:
                 ast.parse(code)
                 metrics.syntax_valid = True
-            except:
+            except SyntaxError:
                 metrics.syntax_valid = False
 
         # Security scoring
@@ -703,7 +704,8 @@ class TestGenerator:
                 node.name for node in ast.walk(tree)
                 if isinstance(node, ast.FunctionDef)
             ]
-        except:
+        except SyntaxError:
+            # Cannot parse code with syntax errors
             functions = []
 
         # Generate tests

@@ -115,10 +115,9 @@ class StrategySelector:
         return self.current_strategy
 
     def _evaluate_condition(self, condition: str, context: ModelSelectionContext) -> bool:
-        """Evaluate a condition string against context"""
-        # Simple evaluation - in production, use safe evaluation
+        """Evaluate a condition string against context using safe parsing"""
         try:
-            # Create safe evaluation context
+            # Create safe evaluation context with actual values
             eval_context = {
                 'task_complexity': context.task_complexity,
                 'remaining_budget': context.remaining_budget,
@@ -126,9 +125,56 @@ class StrategySelector:
                 'user_waiting_time': 30 if context.user_waiting else 0,
             }
 
-            # Safe evaluation of condition
-            return eval(condition, {"__builtins__": {}}, eval_context)
-        except:
+            # Safe evaluation using ast.literal_eval for literals only
+            # For simple comparisons, manually parse and evaluate
+            condition = condition.strip()
+
+            # Support simple comparison operators
+            for op in ['>=', '<=', '==', '!=', '>', '<']:
+                if op in condition:
+                    left, right = condition.split(op, 1)
+                    left = left.strip()
+                    right = right.strip()
+
+                    # Get left value from context
+                    left_val = eval_context.get(left)
+                    if left_val is None:
+                        return False
+
+                    # Parse right value (number or boolean)
+                    try:
+                        # Try to parse as number
+                        right_val = float(right)
+                    except ValueError:
+                        # Try as boolean
+                        if right.lower() == 'true':
+                            right_val = True
+                        elif right.lower() == 'false':
+                            right_val = False
+                        else:
+                            return False
+
+                    # Perform comparison
+                    if op == '>=':
+                        return left_val >= right_val
+                    elif op == '<=':
+                        return left_val <= right_val
+                    elif op == '==':
+                        return left_val == right_val
+                    elif op == '!=':
+                        return left_val != right_val
+                    elif op == '>':
+                        return left_val > right_val
+                    elif op == '<':
+                        return left_val < right_val
+
+            # If it's just a variable name, return its boolean value
+            if condition in eval_context:
+                return bool(eval_context[condition])
+
+            return False
+        except Exception as e:
+            logger.warning(f"Failed to evaluate condition '{condition}': {e}")
             return False
 
     def _pick_model(self,

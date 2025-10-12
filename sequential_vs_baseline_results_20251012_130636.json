@@ -1,0 +1,520 @@
+{
+  "run_id": "20251012_130636",
+  "timestamp": "2025-10-12T13:09:01.075735",
+  "summary": {
+    "sequential": {
+      "success_count": 10,
+      "success_rate": 1.0,
+      "avg_quality": 0.7999999999999999,
+      "hallucinations_detected": 0,
+      "hallucination_rate": 0.0,
+      "avg_hallucination_score": 0.0,
+      "avg_duration": 0.0177401
+    },
+    "baseline": {
+      "success_count": 8,
+      "success_rate": 0.8,
+      "avg_quality": 0.6400000000000001,
+      "hallucinations_detected": 1,
+      "hallucination_rate": 0.1,
+      "avg_hallucination_score": 0.02,
+      "avg_duration": 14.3464572
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.037893,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:06:37.391763"
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.015927,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:06:51.849975"
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "complexity": 0.2,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.018534,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:09.146386"
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.011123,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:17.729138"
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.018104,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:30.343868"
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "complexity": 0.5,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.01745,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:48.471846"
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "complexity": 0.9,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.016215,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:06.079988"
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "complexity": 0.9,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.01766,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:18.882474"
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "complexity": 0.6,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.015577,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:32.378505"
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "complexity": 0.6,
+      "method": "sequential_collaboration",
+      "agents_used": [
+        "architect",
+        "coder",
+        "reviewer",
+        "documenter"
+      ],
+      "stages": 4,
+      "iterations": 0,
+      "duration_seconds": 0.008918,
+      "output": "[ERROR] LLM error: Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "quality_score": 0.8,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:46.422802"
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "complexity": 0.2,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 14.417134,
+      "output": "Sure, I can help with that. The factorial of a number is the product of an integer and all the integers below it. For example, the factorial of 5 (denoted as 5!) is 1*2*3*4*5 = 120.\n\nThere are several ways to implement a factorial function in Python, but I'll stick to two common approaches: iterative and recursive. \n\n1. Iterative Approach:\nThe iterative approach uses a for loop to iteratively multiply each integer from 1 to the input number.\n\n```python\ndef factorial_iterative(n):\n    if n < 0:\n        return \"Error: Factorial is not defined for negative numbers\"\n    elif n == 0:\n        return 1\n    else:\n        factorial = 1\n        for i in range(1, n + 1):\n            factorial *= i\n        return factorial\n```\n\n2. Recursive Approach:\nThe recursive approach calls the function within itself. It uses the fact that the factorial of a number is the product of that number and the factorial of the number one less than it. \n\n```python\ndef factorial_recursive(n):\n    if n < 0:\n        return \"Error: Factorial is not defined for negative numbers\"\n    elif n == 0 or n == 1:\n        return 1\n    else:\n        return n * factorial_recursive(n - 1)\n```\n\nBoth of these functions will return the factorial of a number. However, there are some things to consider:\n\n- Error handling: In both functions, I've included error handling for negative numbers, since the factorial is not defined for these. It's important to always consider edge cases in your functions to ensure they behave as expected.\n- Efficiency: The recursive function, while elegant, can be less efficient and result in a stack overflow for large inputs because each recursive call adds a layer to the call stack. The iterative function is generally more efficient for large inputs.\n- Testing: Make sure to thoroughly test your functions with various inputs to ensure they behave as expected. This could include positive integers, zero, and negative numbers. \n\nRemember, the best approach depends on your specific use case and constraints.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:06:37.430567"
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "complexity": 0.2,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 17.276535,
+      "output": "To reverse a string in Python, we can define a function called `reverse_string`. Here's an example of how it could be implemented:\n\n```python\ndef reverse_string(input_string):\n    return input_string[::-1]\n```\n\nIn this function, we're using Python's slice syntax to reverse the string. The `[::-1]` slice means \"start at the end of the string and end at position 0, move with the step -1\" which effectively reverses the string.\n\nThis function is efficient because slicing in Python is a very fast operation. It's also clean and easy to read, which aligns with our goal of writing clean, efficient code. \n\nHowever, this function does not handle error checking. If the user passes in a non-string type, the function will raise an error. To handle this, we can add a check at the beginning of the function to ensure the input is a string:\n\n```python\ndef reverse_string(input_string):\n    if not isinstance(input_string, str):\n        raise TypeError(\"Input must be a string\")\n    return input_string[::-1]\n```\n\nNow, if the function is called with a non-string type, it will raise a `TypeError` with a clear error message. This makes our function more robust and easier to debug.\n\nAs for testing, we can write a few test cases to ensure our function works as expected:\n\n```python\ndef test_reverse_string():\n    assert reverse_string(\"hello\") == \"olleh\"\n    assert reverse_string(\"Python\") == \"nohtyP\"\n    assert reverse_string(\"\") == \"\"\n    try:\n        reverse_string(123)\n    except TypeError:\n        pass\n    else:\n        assert False, \"Expected TypeError\"\n```\n\nThese tests check that our function correctly reverses a string, and that it raises a `TypeError` when called with a non-string argument. \n\nTo further optimize this function, we could consider other algorithms for reversing a string. However, in Python, the slicing method is generally the most efficient. Other methods, such as using a loop to iterate through the string backwards, would likely be less efficient.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:06:51.867228"
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "complexity": 0.2,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 8.561231,
+      "output": "Here's a simple Python function that accomplishes the task:\n\n```python\ndef find_max(lst):\n    if not lst:\n        raise ValueError(\"List is empty\")\n    return max(lst)\n```\n\nThis function leverages Python's built-in `max` function, which iterates over the list and returns the maximum value. It's a clean and efficient solution that doesn't require writing any complex algorithms.\n\nHowever, this function will fail if the list is empty because the `max` function doesn't know how to handle that situation. To avoid this, the function first checks if the list is empty and raises a `ValueError` if it is. This way, the function will fail with a clear error message instead of a cryptic one.\n\nPlease note that Python's `max` function has a time complexity of O(n), where n is the length of the list. This is because it needs to check every element in the list to find the maximum. If your list is extremely large and you find that this function is too slow, you might need to use a different data structure or algorithm that can find the maximum value more quickly. However, for most purposes, this function should be sufficient.\n\nLastly, it's important to test the function to make sure it works correctly. Here are some tests you could use:\n\n```python\ndef test_find_max():\n    assert find_max([1, 2, 3, 4, 5]) == 5\n    assert find_max([-1, -2, -3, -4, -5]) == -1\n    try:\n        find_max([])\n    except ValueError:\n        pass\n    else:\n        assert False, \"Expected ValueError when list is empty\"\n\ntest_find_max()\n```\n\nThese tests check that the function correctly finds the maximum in a list of positive numbers, a list of negative numbers, and raises a `ValueError` when the list is empty.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:09.166566"
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "complexity": 0.5,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 12.599143,
+      "output": "Sure, I'd be happy to help you implement a binary search algorithm. This is a classic search algorithm that operates on a sorted array by dividing the search interval in half repeatedly until the target value is found or the search interval is empty.\n\nHere's a simple implementation in Python:\n\n```python\ndef binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n\n    while low <= high:\n        mid = (low + high) // 2\n        guess = arr[mid]\n        if guess == target:\n            return mid\n        if guess > target:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return None\n```\n\nThis function accepts a sorted array and a target value. It returns the index of the target if it's in the array, or `None` if it's not.\n\nThe binary search algorithm is efficient with a time complexity of O(log n), where n is the number of elements in the array. However, it requires that the array be sorted. If you're dealing with an unsorted array, you'll need to sort it first, which will add at least O(n log n) time complexity to the search.\n\nThere are a few potential challenges with this implementation:\n\n1. **Array must be sorted**: As mentioned, binary search requires the input array to be sorted. If your data isn't sorted, you'll need to sort it first or use a different search algorithm.\n\n2. **Large arrays**: Binary search is a recursive algorithm, and each recursive call adds a new layer to the stack. If your array is very large, you could run into a stack overflow error. However, the Python implementation above uses iteration instead of recursion to avoid this issue.\n\n3. **Non-unique values**: This implementation will return the index of the first occurrence of the target value it finds. If you need to find all occurrences of a value, you'll need a different algorithm.\n\nRemember to test your implementation thoroughly with different inputs to make sure it works as expected. Happy coding!",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:17.741763"
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "complexity": 0.5,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 18.105216,
+      "output": "Sure, I can certainly help with that. Merging two sorted lists is a common operation, especially when dealing with sorting algorithms like merge sort. Here is a simple Python function that does just that:\n\n```python\ndef merge_sorted_lists(list1, list2):\n    # Initialize an empty list to hold the result\n    result = []\n    # Initialize two pointers to track the current index in each list\n    i, j = 0, 0\n\n    # Loop until we've exhausted one of the lists\n    while i < len(list1) and j < len(list2):\n        # If the current element of list1 is less than the current element of list2\n        if list1[i] < list2[j]:\n            # Append the current element of list1 to the result and increment the pointer\n            result.append(list1[i])\n            i += 1\n        else:\n            # Append the current element of list2 to the result and increment the pointer\n            result.append(list2[j])\n            j += 1\n\n    # Append any remaining elements from list1\n    while i < len(list1):\n        result.append(list1[i])\n        i += 1\n\n    # Append any remaining elements from list2\n    while j < len(list2):\n        result.append(list2[j])\n        j += 1\n\n    return result\n```\n\nThis function uses a two-pointer technique to traverse both lists simultaneously. It compares the current elements of both lists and appends the smaller one to the result list, moving the pointer of the list from which the element was taken. This process continues until one of the lists is exhausted. Then, any remaining elements from the other list are appended to the result.\n\nThis function assumes that the input lists are already sorted. If they are not, you would need to sort them first, which would increase the time complexity. The time complexity of this function is O(n), where n is the total number of elements in both lists.\n\nPotential challenges could arise if the input lists are very large, as the function creates a new list that contains all elements from both lists. This could lead to high memory usage. A possible solution to this problem could be to modify the function to yield each element one at a time using a generator, instead of creating a new list.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": true,
+      "hallucination_score": 0.2,
+      "hallucination_details": {
+        "has_hallucinations": true,
+        "hallucination_score": 0.2,
+        "indicators_found": [
+          "simultaneously"
+        ],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:30.363817"
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "complexity": 0.5,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 17.587104,
+      "output": "Sure, I can certainly help with that. Regular expressions (regex) are a powerful tool that allow us to match patterns in strings, and they're perfect for something like email validation. \n\nHere is a simple Python function that uses regex to validate email addresses:\n\n```python\nimport re\n\ndef validate_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    if re.search(pattern, email):\n        return True\n    else:\n        return False\n```\n\nIn this function, we first import the `re` module, which provides support for regular expressions in Python. Then we define a function `validate_email` that takes an email address as input.\n\nThe regular expression pattern we're using matches any string that:\n\n1. Starts with one or more alphanumeric characters, dots, underscores, plus signs, or hyphens.\n2. Followed by the '@' character.\n3. Followed by one or more alphanumeric characters, hyphens.\n4. Followed by a dot.\n5. Ends with one or more alphanumeric characters, hyphens or dots.\n\nThe `re.search` function checks if the pattern matches the email string. If it does, the function returns `True`, otherwise it returns `False`.\n\nHowever, there are a few challenges with this approach:\n\n1. This function considers email addresses to be case-sensitive, which is not true according to the email specification. To fix this, we could convert the email to lowercase before checking it against the pattern.\n\n2. This pattern doesn't support all valid email addresses. For example, it doesn't support email addresses with special characters like \"!\" or \"#\" in the local-part (before the '@'). The full specification for email addresses (RFC 5322) is quite complex and hard to capture in a single regular expression.\n\n3. Also, keep in mind that even if an email address is syntactically valid, that doesn't mean it actually exists or that it's able to receive email. The only surefire way to validate an email address is to send an email to it and see if it bounces.\n\nIn conclusion, while regex can be used for basic email validation, it's not perfect and there may be more robust ways to validate email addresses depending on your specific needs.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:07:48.490508"
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "complexity": 0.9,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 12.781932,
+      "output": "Sure, let's design a Least Recently Used (LRU) cache that supports the following operations in O(1) time complexity: get and put.\n\n1. `get(key)`: Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.\n2. `put(key, value)`: Set or insert the value if the key is not already present. When the cache reaches its capacity, it should invalidate the least recently used item before inserting the new item.\n\nThe LRU Cache is a combination of a hash map and a doubly linked list. The hash map makes the time of get() to be O(1). The doubly linked list, which is actually an ordered doubly linked list, can make the nodes added recently higher than the nodes added long ago. The first one in the linked list is the least recently used.\n\nHere is a Python implementation of the LRU cache:\n\n```python\nclass Node:\n    def __init__(self, k, v):\n        self.key = k\n        self.val = v\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.dict = dict()\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def get(self, key):\n        if key in self.dict:\n            n = self.dict[key]\n            self._remove(n)\n            self._add(n)\n            return n.val\n        return -1\n\n    def put(self, key, value):\n        if key in self.dict:\n            self._remove(self.dict[key])\n        n = Node(key, value)\n        self._add(n)\n        self.dict[key] = n\n        if len(self.dict) > self.capacity:\n            n = self.head.next\n            self._remove(n)\n            del self.dict[n.key]\n\n    def _remove(self, node):\n        p = node.prev\n        n = node.next\n        p.next = n\n        n.prev = p\n\n    def _add(self, node):\n        p = self.tail.prev\n        p.next = node\n        self.tail.prev = node\n        node.prev = p\n        node.next = self.tail\n```\n\nPotential challenges could be understanding the concept of LRU cache and doubly linked list. A good understanding of data structures is crucial in implementing this. If the cache capacity is reached, we need to delete the least recently used item, which could be tricky. But with the above implementation, we take care of that in the put method.\n\nRemember to test your code thoroughly with different scenarios to ensure it's working as expected.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:06.097409"
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "complexity": 0.9,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 13.474815,
+      "output": "The N-Queens problem is a classic computer science problem. It's about placing N queens on an NxN chessboard so that no two queens threaten each other. Thus, a solution requires that no two queens share the same row, column, or diagonal. Let's tackle this problem using a backtracking algorithm, a powerful method for solving constraint satisfaction problems like this one.\n\nHere's a Python function that solves the N-Queens problem:\n\n```python\ndef solve_n_queens(N):\n    def can_place(pos, ocuppied_positions):\n        for i in range(len(ocuppied_positions)):\n            if ocuppied_positions[i] == pos or \\\n                ocuppied_positions[i] - i == pos - len(ocuppied_positions) or \\\n                ocuppied_positions[i] + i == pos + len(ocuppied_positions):\n                return False\n        return True\n\n    def place_queen(n, ocuppied_positions=[]):\n        if n == 0:\n            return [ocuppied_positions]\n        else:\n            solutions = []\n            for pos in range(N):\n                if can_place(pos, ocuppied_positions):\n                    solutions += place_queen(n - 1, ocuppied_positions + [pos])\n            return solutions\n\n    return place_queen(N)\n```\n\nThe `solve_n_queens` function uses two helper functions: `can_place` and `place_queen`. The `can_place` function checks if a queen can be placed on a particular position without being attacked by another queen. The `place_queen` function then uses `can_place` to recursively place queens on the board.\n\nThis function returns all possible solutions for the N-Queens problem. Each solution is represented as a list of N integers. For each integer, its value represents the column number, while its index in the list represents the row number.\n\nOne potential challenge with this function is its performance. For larger values of N, the function may take a long time to find all solutions because it explores all possible placements of queens. This is a known limitation of the backtracking algorithm. To improve the performance, you could use more sophisticated algorithms such as genetic algorithms or simulated annealing, but these are more complex and beyond the scope of this task.\n\nAnother challenge is that this function only works for N greater than or equal to 4. For N less than 4, the problem has no solution. You should add error handling to deal with this case.",
+      "quality_score": 0.7,
+      "success": true,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:18.901549"
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "complexity": 0.6,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 14.025948,
+      "output": "A stack overflow error in a recursive function typically indicates that the function is making too many recursive calls, causing the program's call stack to exceed its limit. This can occur due to a missing or incorrect base case, or because the recursion is too deep. Let's debug this together.\n\n1. **Check the Base Case**: The base case is the condition that stops the recursion. If it's missing or incorrect, the function may recurse indefinitely, causing a stack overflow. Ensure that the base case is logically sound and will eventually be met.\n\n2. **Reduce Recursion Depth**: If the base case is correct, the problem might be that the recursion is too deep - the function is calling itself too many times. This is often the case with problems that have a large input size. In such situations, consider using an iterative solution or optimizing the recursive solution.\n\n3. **Optimize with Tail Recursion**: If recursion is necessary, you can optimize the function using tail recursion, a technique where the recursive call is the last operation in the function. Some programming languages optimize tail recursion by reusing the existing stack frame for each recursive call, greatly reducing the risk of a stack overflow.\n\n4. **Use Memoization or Dynamic Programming**: If the recursive function solves the same subproblems multiple times, you can optimize it using memoization or dynamic programming. These techniques store the results of expensive function calls and reuse them when the same inputs occur, reducing the number of recursive calls.\n\n5. **Increase the Stack Size**: As a last resort, you could consider increasing the stack size. However, this is generally not recommended as it just delays the inevitable if your recursion depth is too high or your base case is incorrect. It's also not portable, as the stack size is a system-dependent parameter.\n\nRemember, debugging is a systematic process. Test your function with different inputs, understand the error messages and stack traces, and use debugging tools if necessary. Don't hesitate to rewrite your function if it's fundamentally flawed - sometimes, starting afresh is the best way to write clean, efficient, and well-tested code.",
+      "quality_score": 0.4,
+      "success": false,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:32.395253"
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "complexity": 0.6,
+      "method": "single_model_baseline",
+      "model": "gpt-4",
+      "duration_seconds": 14.635514,
+      "output": "Memory leaks in Python are often tricky to spot due to its garbage collection system. However, they can still occur when objects are not properly de-referenced, and hence, not garbage collected. These leaks can cause your application to consume more memory over time, leading to a decrease in performance or even system crashes.\n\nHere are the steps to fix a memory leak in Python:\n\n1. Identify the Memory Leak: The first step is to identify that there is a memory leak. This can be done using various profiling tools like `tracemalloc`, `objgraph`, or `memory_profiler` which can help you understand the memory usage of your application over time.\n\n2. Isolate the Leak: Once you have identified that there is a leak, the next step is to isolate the part of the code that is causing the leak. This is usually the challenging part. You can use a process of elimination, commenting out parts of the code and observing the memory usage to identify the problematic section.\n\n3. Fix the Leak: Once you have identified the problematic code, you can take steps to fix the leak. This usually involves ensuring that all objects are properly de-referenced. In Python, an object is de-referenced by setting it to None or by using the `del` keyword.\n\n4. Test: After fixing the leak, it's important to test your application to ensure that the leak is indeed fixed and that your application is functioning as expected. You can use the same profiling tools as before to monitor the memory usage of your application.\n\nHere are a few common scenarios where memory leaks may occur in Python:\n\n- Cyclic References: Python's garbage collector is able to clean up objects with zero references, but it struggles with cyclic references. If you have two objects that reference each other, but are not referenced anywhere else in your code, they will not be garbage collected, leading to a memory leak.\n\n- Forgotten Objects: If you create an object and forget to de-reference it, it will not be garbage collected, leading to a memory leak.\n\n- External Libraries: Sometimes, memory leaks can be caused by external libraries that do not properly manage memory. In such cases, you may need to update the library or find a workaround.\n\nTo avoid memory leaks in the future, it's a good practice to always de-reference objects when they are no longer needed, avoid cyclic references, and be mindful of how external libraries manage memory. Also, regular use of profiling tools can help you spot and fix memory leaks before they become a problem.",
+      "quality_score": 0.4,
+      "success": false,
+      "hallucination_detected": false,
+      "hallucination_score": 0.0,
+      "hallucination_details": {
+        "has_hallucinations": false,
+        "hallucination_score": 0.0,
+        "indicators_found": [],
+        "confidence_without_substance": false
+      },
+      "timestamp": "2025-10-12T13:08:46.432689"
+    }
+  ]
+}

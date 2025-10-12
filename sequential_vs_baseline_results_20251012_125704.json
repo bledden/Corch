@@ -1,0 +1,228 @@
+{
+  "run_id": "20251012_125704",
+  "timestamp": "2025-10-12T12:57:06.972469",
+  "summary": {
+    "sequential": {
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_quality": 0.0,
+      "hallucinations_detected": 0,
+      "hallucination_rate": 0.0,
+      "avg_hallucination_score": 0.0,
+      "avg_duration": 0.0
+    },
+    "baseline": {
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_quality": 0.0,
+      "hallucinations_detected": 0,
+      "hallucination_rate": 0.0,
+      "avg_hallucination_score": 0.0,
+      "avg_duration": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "method": "sequential_collaboration",
+      "success": false,
+      "error": "'tester'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "coding_easy",
+      "description": "Write a Python function to calculate factorial",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "coding_easy",
+      "description": "Create a function that reverses a string",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "coding_easy",
+      "description": "Write a function to find the maximum in a list",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "coding_medium",
+      "description": "Implement a binary search algorithm",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "coding_medium",
+      "description": "Create a function to merge two sorted lists",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "coding_medium",
+      "description": "Write a function to validate email addresses using regex",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "coding_hard",
+      "description": "Implement a LRU cache with O(1) operations",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "coding_hard",
+      "description": "Create a function to solve N-Queens problem",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "debugging",
+      "description": "Debug a recursive function that's causing stack overflow",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "debugging",
+      "description": "Fix a memory leak in Python code",
+      "method": "single_model_baseline",
+      "success": false,
+      "error": "Error calling MultiAgentLLMOrchestrator.execute_agent_task: got an unexpected keyword argument 'temperature'",
+      "hallucination_detected": false,
+      "hallucination_score": 0.0
+    }
+  ]
+}
