@@ -107,16 +107,19 @@ curl -X POST http://localhost:8000/api/v1/collaborate \
 ### When to Use Each
 
 **Use Sequential When:**
-- Production-critical code where quality matters most
-- Tasks need architecture + implementation + review
+- **Multi-category tasks** (architecture + coding + review + docs)
+- **High complexity** (LRU cache, N-Queens, system design)
+- **Production-critical** code where quality matters most
+- **Zero tolerance** for hallucinations
 - Audit trail and explainability required
-- Hallucinations are unacceptable
 
 **Use Single-Model When:**
-- Simple, well-defined tasks
-- Speed is critical
-- Cost optimization is priority
+- **Single-category tasks** (just coding, just review, just documentation)
+- **Low-medium complexity** (factorial, string reverse, simple algorithms)
+- Speed and cost are priorities
 - Prototyping and experimentation
+
+**Rule of Thumb:** Multi-category or high-complexity → Sequential. Single-category, focused tasks → Single-model.
 
 ## 🛠️ CLI Commands
 
