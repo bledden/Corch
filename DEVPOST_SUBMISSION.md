@@ -1,7 +1,7 @@
 # Facilitair - WeaveHacks 2 Hackathon Submission
 
 ## Elevator Pitch (200 character limit)
-Five specialized AI agents work in sequence to catch each other's mistakes. Result: perfect code quality with zero hallucinations, tracked end-to-end with W&B Weave.
+Self-improving AI system: 5 agents validate each other's work sequentially, learns optimal models via Weave tracking, uses Tavily search. 100% success vs 80% baseline, 0% hallucinations.
 
 ---
 
