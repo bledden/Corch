@@ -21,9 +21,24 @@
 6. All other importers
 
 ## Progress Tracking
-- [ ] Update class definition
-- [ ] Update all imports
-- [ ] Update all instantiations  
-- [ ] Update documentation
-- [ ] Run smoke tests
-- [ ] Commit changes
+- [x] Update class definition
+- [x] Update all imports
+- [x] Update all instantiations
+- [x] Update documentation
+- [x] Run smoke tests
+- [x] Commit changes
+
+## Completed Changes
+
+### Primary Rename
+✅ `SelfImprovingCollaborativeOrchestrator` → `CollaborativeOrchestrator`
+- Updated in 14 files
+- All imports fixed
+- All instantiations updated
+- Smoke tests passing
+- Committed: refactor commit 3e48c98
+
+### Notes on Deferred Items
+- `advance_generation()` and `task_type_patterns` are only used in demo/training scripts (demo.py, train.py, execute.py)
+- These are NOT used by main system (CLI, API, evaluations)
+- Can be addressed later if needed, but not breaking main functionality
