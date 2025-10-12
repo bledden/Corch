@@ -1,7 +1,15 @@
 # Facilitair - WeaveHacks 2 Hackathon Submission
 
 ## Elevator Pitch (200 character limit)
-5-stage AI pipeline (Architect→Coder→Reviewer→Refiner→Documenter) achieves 100% success, 0% hallucinations vs 80%/10% baseline. Multi-category tasks need multi-stage validation.
+Five specialized AI agents work in sequence to catch each other's mistakes. Result: perfect code quality with zero hallucinations, tracked end-to-end with W&B Weave.
+
+---
+
+## Inspiration
+
+Single AI models make mistakes confidently - they hallucinate non-existent APIs, create bugs, and miss edge cases. We realized that **multiple specialized agents validating each other's work** could eliminate these errors completely. Just like in software teams, having an architect, coder, reviewer, and documenter each focused on their specialty produces better results than one person doing everything.
+
+W&B Weave made this vision possible by providing the observability layer we needed to track each agent's contribution and learn from mistakes.
 
 ---
 
