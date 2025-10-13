@@ -59,9 +59,10 @@ class LLMClient:
         start_time = time.time()
 
         try:
-            # Use LiteLLM to call OpenRouter with any model
+            # Use LiteLLM to call OpenRouter - prefix model with "openrouter/"
+            openrouter_model = f"openrouter/{model}"
             response = await litellm.acompletion(
-                model=model,  # Already in OpenRouter format: "openai/gpt-4", "anthropic/claude-sonnet-4.5"
+                model=openrouter_model,  # e.g., "openrouter/openai/gpt-4", "openrouter/anthropic/claude-sonnet-4.5"
                 messages=[{"role": "user", "content": prompt}],
                 temperature=temperature,
                 max_tokens=max_tokens,
@@ -135,7 +136,7 @@ class MultiAgentLLMOrchestrator:
         response = await self.llm_client.execute_llm(
             agent_id=agent_id,
             task=task,
-            model=agent_config.get("default_model", "alibaba/qwen2.5-coder-32b-instruct"),  # Use best open-source model as fallback
+            model=agent_config.get("default_model", "qwen/qwen3-coder-plus"),  # Latest Qwen coding model as fallback
             temperature=agent_config.get("temperature", 0.7),
             max_tokens=agent_config.get("max_tokens", 2000),
             personality=agent_config.get("personality", ""),
