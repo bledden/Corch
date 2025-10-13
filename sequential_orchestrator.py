@@ -372,7 +372,7 @@ Return a structured design document in Markdown format."""
 
         try:
             output = await self._call_llm(
-                model=profile.model_id,
+                agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
@@ -433,7 +433,7 @@ Return ONLY the code, no explanations."""
 
         try:
             output = await self._call_llm(
-                model=profile.model_id,
+                agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
@@ -498,7 +498,7 @@ Return ONLY JSON with this exact schema:
 
         try:
             output = await self._call_llm(
-                model=profile.model_id,
+                agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
@@ -564,7 +564,7 @@ Return ONLY the complete refined code."""
 
         try:
             output = await self._call_llm(
-                model=profile.model_id,
+                agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
@@ -629,7 +629,7 @@ Return Markdown documentation."""
 
         try:
             output = await self._call_llm(
-                model=profile.model_id,
+                agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
@@ -662,7 +662,7 @@ Return Markdown documentation."""
 
     async def _call_llm(
         self,
-        model: str,
+        agent_role: AgentRole,
         prompt: str,
         temperature: float,
         timeout: float
@@ -670,8 +670,10 @@ Return Markdown documentation."""
         """Call LLM with timeout and error handling"""
         try:
             async def _call():
+                # Convert AgentRole enum to agent_id string (e.g., AgentRole.CODER -> "coder")
+                agent_id = agent_role.value
                 # Note: temperature is configured in agent config, not passed as parameter
-                return await self.llm.execute_agent_task(model, prompt)
+                return await self.llm.execute_agent_task(agent_id, prompt)
 
             output = await asyncio.wait_for(_call(), timeout=timeout)
             return output if isinstance(output, str) else str(output)
