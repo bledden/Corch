@@ -71,6 +71,9 @@ python3 cli.py collaborate "Write a factorial function"
 
 # Evaluate
 python3 cli.py evaluate --tasks 10
+
+# Streaming CLI (real-time output)
+python3 cli/streaming_client_simple.py "Write a factorial function"
 ```
 
 ### REST API
@@ -169,12 +172,18 @@ python3 cli.py init            # Create config
 
 ## API Endpoints
 
+### Standard Endpoints
 - `GET /api/v1/health` - Health check
 - `POST /api/v1/collaborate` - Execute task
 - `GET /api/v1/agents` - List agents
 - `GET /api/v1/tasks` - List tasks
 - `POST /api/v1/evaluate` - Run evaluation
 - `GET /api/v1/metrics` - Get metrics
+
+### Streaming Endpoints (SSE)
+- `POST /api/stream/task` - Create streaming task
+- `GET /api/stream/events/{stream_id}` - Stream real-time events
+- `GET /api/stream/status/{stream_id}` - Get stream status
 
 ## Logging & Telemetry
 
