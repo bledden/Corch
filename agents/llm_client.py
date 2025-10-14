@@ -1,6 +1,7 @@
 """
 LLM Client for real agent execution
 Supports OpenAI, Anthropic, and Google models
+With optional interactive fallback manager for manual mode
 """
 
 import os
@@ -17,6 +18,13 @@ import litellm
 # Load environment variables
 load_dotenv()
 
+# Import fallback manager (optional - only used in manual mode)
+try:
+    from agents.fallback_manager import FallbackManager, FallbackContext
+    FALLBACK_AVAILABLE = True
+except ImportError:
+    FALLBACK_AVAILABLE = False
+
 
 @dataclass
 class LLMResponse:
@@ -31,12 +39,20 @@ class LLMResponse:
 class LLMClient:
     """Unified client for multiple LLM providers using LiteLLM and OpenRouter"""
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: Dict[str, Any], manual_mode: bool = False):
         self.config = config
+        self.manual_mode = manual_mode
+        self.fallback_manager = None
 
         # Configure LiteLLM for OpenRouter
         litellm.api_key = os.getenv("OPENROUTER_API_KEY")
         litellm.api_base = "https://openrouter.ai/api/v1"
+
+        # Initialize fallback manager ONLY if manual mode is enabled
+        if manual_mode and FALLBACK_AVAILABLE:
+            self.fallback_manager = FallbackManager(config_path="config.yaml", config_dict=config)
+            if os.getenv("DEMO_MODE"):
+                print("[INFO] Fallback manager enabled (manual mode)")
 
     @weave.op()
     async def execute_llm(
@@ -86,7 +102,43 @@ class LLMClient:
             if os.getenv("DEMO_MODE"):
                 print(f"[ERROR] {agent_id}: {error_msg}")
 
-            # Return fallback response
+            # If manual mode and fallback manager available, offer to retry with different model
+            if self.manual_mode and self.fallback_manager:
+                # Classify error type
+                error_type = self._classify_error(e)
+
+                # Create fallback context
+                context = FallbackContext(
+                    agent_type=agent_id,
+                    task_description=task[:100],
+                    failed_model=model,
+                    error_type=error_type,
+                    error_message=error_msg,
+                    attempt_number=1,  # Could track this better
+                    session_cost=0.0,  # Could track this
+                    estimated_cost=0.0
+                )
+
+                # Ask user for fallback
+                next_model = self.fallback_manager.handle_model_failure(context)
+
+                if next_model and next_model != "__SKIP__":
+                    # Retry with the selected model
+                    if os.getenv("DEMO_MODE"):
+                        print(f"[RETRY] {agent_id} with model: {next_model}")
+
+                    # Recursive call with new model
+                    return await self.execute_llm(
+                        agent_id=agent_id,
+                        task=task,
+                        model=next_model,
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        personality=personality,
+                        expertise=expertise
+                    )
+
+            # Return fallback response if no retry or user aborted
             return LLMResponse(
                 content=f"[{agent_id}] encountered an error but suggests: {task[:50]}...",
                 model=model,
@@ -94,6 +146,19 @@ class LLMClient:
                 latency=time.time() - start_time,
                 error=error_msg
             )
+
+    def _classify_error(self, exception: Exception) -> str:
+        """Classify error type for fallback manager"""
+        error_str = str(exception).lower()
+
+        if "rate" in error_str or "429" in error_str or "too many requests" in error_str:
+            return "rate_limit"
+        elif "timeout" in error_str or "timed out" in error_str:
+            return "timeout"
+        elif "invalid" in error_str or "not found" in error_str or "400" in error_str:
+            return "invalid_model"
+        else:
+            return "api_error"
 
     def _build_prompt(self, agent_id: str, task: str, personality: str, expertise: list) -> str:
         """Build prompt for LLM"""
@@ -120,10 +185,15 @@ Response:"""
 class MultiAgentLLMOrchestrator:
     """Orchestrator for managing multiple LLM agents"""
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: Dict[str, Any], manual_mode: bool = False):
         self.config = config
-        self.llm_client = LLMClient(config)
+        self.manual_mode = manual_mode
+        self.llm_client = LLMClient(config, manual_mode=manual_mode)
         self.agent_configs = config.get("agents", {})
+
+        # Prompt user for fallback strategy BEFORE starting (if manual mode)
+        if manual_mode and self.llm_client.fallback_manager:
+            self.llm_client.fallback_manager.prompt_initial_strategy()
 
     @weave.op()
     async def execute_agent_task(self, agent_id: str, task: str) -> str:

@@ -8,8 +8,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends, Security
-from fastapi.security import APIKeyHeader
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
@@ -32,6 +31,7 @@ logger = logging.getLogger('facilitair_api')
 
 from collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
+from backend.routers import streaming
 
 # Initialize W&B Weave
 weave.init("facilitair/api")
@@ -45,6 +45,9 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+# Include streaming router
+app.include_router(streaming.router)
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -53,9 +56,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# API Key security (optional)
-api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
 # Global orchestrator instance
 orchestrator: Optional[CollaborativeOrchestrator] = None
@@ -137,13 +137,6 @@ def get_orchestrator() -> CollaborativeOrchestrator:
     return orchestrator
 
 
-async def verify_api_key(api_key: str = Security(api_key_header)) -> bool:
-    """Verify API key (optional authentication)"""
-    # Implement your API key verification logic here
-    # For now, we'll allow all requests
-    return True
-
-
 # ============================================================================
 # API Endpoints
 # ============================================================================
@@ -184,8 +177,7 @@ async def health_check():
 @weave.op()
 async def collaborate(
     request: CollaborateRequest,
-    background_tasks: BackgroundTasks,
-    api_key_valid: bool = Depends(verify_api_key)
+    background_tasks: BackgroundTasks
 ):
     """
     Execute a collaborative task with AI agents

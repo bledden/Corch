@@ -136,10 +136,9 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
         quality = result.metrics.get("quality", 0.0)
         overall = result.metrics.get("overall", 0.0)
 
-        # Get model used - infer from orchestrator's config
-        # CollaborationResult doesn't have metadata, use orchestrator's configured model
-        coder_config = orchestrator.llm.config.get("agents", {}).get("coder", {})
-        primary_model = coder_config.get("default_model", "unknown")
+        # Get model used (from orchestrator's last execution)
+        models_used = result.metadata.get("models_used", {})
+        primary_model = models_used.get("coder", "unknown")
         model_type = categorize_model(primary_model)
 
         has_substantial_output = len(result.final_output.strip()) > 50

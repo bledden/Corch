@@ -1,0 +1,405 @@
+{
+  "metadata": {
+    "timestamp": "20251012_165814",
+    "total_tasks": 10,
+    "test_type": "smoke_test"
+  },
+  "metrics": {
+    "sequential": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.0,
+      "avg_duration": 0.0,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "baseline": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.3200000000000001,
+      "avg_duration": 0.0033106000000000003,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 10,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0.0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0.3200000000000001,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "search": {
+      "total_searches": 0,
+      "total_cost_usd": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 0.009957,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Write a function to check if a number is prime...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002546,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Implement factorial using recursion...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 0.002796,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Create a function to reverse a string...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 0.00246,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Create a function to check if a string is palindro...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 0.002643,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Create a function to find GCD of two numbers...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002509,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Implement Next.js 15 App Router with Server Action...",
+      "needs_external_info": false,
+      "search_confidence": 0.25,
+      "matched_patterns": [
+        "next\\.?js \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002455,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Create React 19 component with new use() hook...",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "react \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002596,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Build Stripe API v2024 payment intent...",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "v\\d+\\.?\\d*"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002513,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Implement OpenAI GPT-4 Turbo API with streaming...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.002631,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "[coder] encountered an error but suggests: Implement OWASP Top 10 2023 security fixes...",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    }
+  ]
+}

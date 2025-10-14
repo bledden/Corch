@@ -1,0 +1,405 @@
+{
+  "metadata": {
+    "timestamp": "20251012_225414",
+    "total_tasks": 10,
+    "test_type": "smoke_test"
+  },
+  "metrics": {
+    "sequential": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.0,
+      "avg_duration": 0.0,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "baseline": {
+      "pass@1": 100.0,
+      "total_successes": 10,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.7999999999999999,
+      "avg_duration": 26.6219501,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 100.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 10,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 100.0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0.7999999999999999,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "search": {
+      "total_searches": 0,
+      "total_cost_usd": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborativeOrchestrator' object has no attribute 'llm'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 27.5193,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! Here's a Python function to check if a number is prime, leveraging my expertise in implementation, debugging, optimization, and algorithms. I'll also provide detailed insights and address potential challenges.\n\n### Function to Check if a Number is Prime\n\n```python\ndef is_prime(n):\n    \"\"\"\n    Check if a number is prime.\n\n    Args:\n        n (int): The number to check.\n\n    Returns:\n        bool: True if the number is prime, False otherwise.\n    \"\"\"\n    # Edge cases\n    if n <= 1:\n    ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 25.859391,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "# Implementing Factorial Using Recursion: An Expert's Approach\n\nAs a seasoned software engineer, I'll walk you through a robust recursive factorial implementation while addressing key engineering considerations.\n\n## Core Implementation\n\n```python\ndef factorial(n):\n    \"\"\"\n    Compute n! using recursion.\n    \n    Args:\n        n (int): Non-negative integer input\n        \n    Returns:\n        int: Factorial of n\n        \n    Raises:\n        ValueError: If n is negative\n    \"\"\"\n    # Base case vali",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 18.473457,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! As an expert software engineer, I\u2019ll guide you through creating a robust and efficient function to reverse a string. Let\u2019s break this down step by step, considering potential challenges and optimizing for clarity and performance.\n\n---\n\n### **Function to Reverse a String**\n\n#### **Step 1: Choose the Right Approach**\nReversing a string can be done in multiple ways, but we\u2019ll focus on a method that is both efficient and easy to understand. Here\u2019s the plan:\n1. Convert the string into a mu",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 24.31948,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! Let's tackle the problem of checking whether a string is a palindrome. A palindrome is a string that reads the same backward as forward, ignoring non-alphanumeric characters and case differences (e.g., \"A man, a plan, a canal: Panama\"). Here's how I'd approach this:\n\n### 1. **Problem Analysis**\n   - **Input**: A string `s` (could contain letters, numbers, punctuation, and whitespace).\n   - **Output**: `True` if `s` is a palindrome, `False` otherwise.\n   - **Key Considerations**:\n     ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 12.990809,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! Let\u2019s dive into creating a function to find the **Greatest Common Divisor (GCD)** of two numbers. As an expert software engineer, I\u2019ll ensure the solution is clean, efficient, and well-tested. I\u2019ll also address potential challenges and provide actionable insights.\n\n### Understanding the Problem\nThe GCD of two integers is the largest positive integer that divides both numbers without leaving a remainder. The most efficient algorithm for this is the **Euclidean Algorithm**, which levera",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 23.323726,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! Implementing Next.js 15 with the App Router and Server Actions involves leveraging the latest features of Next.js to build a performant, scalable, and maintainable application. Here\u2019s how I would approach it:\n\n### 1. **Understanding the Components**\n\n- **App Router**: Introduced in Next.js 13, the App Router (`app` directory) replaces the traditional `pages` directory. It offers features like nested layouts, React Server Components, and improved data fetching.\n- **Server Actions**: Th",
+      "needs_external_info": false,
+      "search_confidence": 0.25,
+      "matched_patterns": [
+        "next\\.?js \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 26.135125,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Certainly! Let\u2019s dive into creating a React 19 component using the new `use()` hook. The `use()` hook is designed to simplify data fetching and resource management by allowing components to directly consume promises, contexts, or other resources in a more declarative way. Here's how we can leverage it effectively:\n\n---\n\n### **Step 1: Understand the `use()` Hook**\nThe `use()` hook is a powerful addition to React 19 that enables components to directly consume asynchronous resources (like promises)",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "react \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 39.015201,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Got it! Let\u2019s dive into building a **Stripe API v2024 Payment Intent** with clean, efficient, and well-tested code. Here\u2019s how I\u2019d approach this task, leveraging my expertise in implementation, debugging, optimization, and algorithms.\n\n---\n\n### **1. Understanding the Requirements**\nBefore writing any code, I\u2019d ensure I fully understand the requirements:\n- **Payment Intent**: A PaymentIntent represents an attempt to collect payment from a customer. It\u2019s the core object in Stripe\u2019s API for handlin",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "v\\d+\\.?\\d*"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 37.67177,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "# Implementing OpenAI GPT-4 Turbo API with Streaming\n\nAs an experienced software engineer, I'll walk you through a robust implementation of the GPT-4 Turbo API with streaming support. Streaming is essential for creating responsive user experiences, especially when dealing with longer completions.\n\n## Core Implementation (Python)\n\n```python\nimport openai\nfrom typing import AsyncGenerator, Optional\n\nclass GPT4TurboStreamer:\n    def __init__(self, api_key: str, model: str = \"gpt-4-turbo\"):\n        ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 30.911242,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "### Implementing OWASP Top 10 2023 Security Fixes\n\nAs an expert software engineer, I\u2019ll guide you through implementing fixes for the OWASP Top 10 2023 vulnerabilities. My approach emphasizes clean, efficient, and well-tested code while addressing potential challenges and providing actionable insights.\n\n---\n\n### **1. Broken Access Control**\n**Challenge:** Ensuring users can only access resources they\u2019re authorized to.\n**Solution:** Implement Role-Based Access Control (RBAC) and validate permissio",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "deepseek/deepseek-chat",
+      "model_type": "open_source"
+    }
+  ]
+}

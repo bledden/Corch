@@ -1,0 +1,405 @@
+{
+  "metadata": {
+    "timestamp": "20251012_210644",
+    "total_tasks": 10,
+    "test_type": "smoke_test"
+  },
+  "metrics": {
+    "sequential": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.0,
+      "avg_duration": 0.0,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "baseline": {
+      "pass@1": 40.0,
+      "total_successes": 4,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.4400000000000001,
+      "avg_duration": 22.8555426,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 40.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 10,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 40.0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0.4400000000000001
+      }
+    },
+    "search": {
+      "total_searches": 0,
+      "total_cost_usd": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 90.414517,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 22.645909,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Here\u2019s a clean, safe, recursive factorial implementation, along with practical guidance I\u2019d apply as an engineer who cares about correctness, performance, and edge cases.\n\nKey points I optimize for\n- Correctness: handle 0!, 1!, negatives, and type issues.\n- Safety: avoid silent overflows; prefer big-integer types where applicable.\n- Recursion depth: note where stack limits will bite and how to mitigate.\n- Testability: include simple, deterministic tests.\n\nPython (arbitrary precision ints; watch ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 29.859643,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Below is a pragmatic, production-minded take on \u201creverse a string,\u201d with correct behavior, good performance, and attention to Unicode. The short version: reversing bytes or 16\u2011bit code units is easy but wrong for many real-world strings. If you need correctness for human text, reverse grapheme clusters. If you\u2019re reversing programmatic tokens (ASCII/UTF\u20118 identifiers, etc.), a simpler approach can be fine.\n\nKey challenges to address\n- Encodings and Unicode:\n  - Code units (UTF-16 in Java/C#, UTF",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 47.201661,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Below is a clean, efficient, and well-tested solution to check if a string is a palindrome, with practical options to handle real-world text (Unicode, punctuation, case, accents).\n\nKey design decisions:\n- Use a two-pointer scan to avoid allocating a reversed copy (O(1) extra space, O(n) time).\n- Offer robust Unicode handling: normalization, case folding, optional accent stripping.\n- Allow callers to choose whether to ignore non-alphanumeric characters.\n\nPython implementation (Unicode-aware, prod",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 33.329681,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Here\u2019s a clean, efficient, and well-tested implementation of GCD using the classic Euclidean algorithm, plus a bit-optimized variant (binary GCD). I\u2019ll also cover edge cases, performance, and testing so you can ship this with confidence.\n\nPrimary implementation (Python, Euclidean algorithm)\n- Why: Simple, fast, and proven. Runs in O(log min(a, b)).\n- Handles negatives, zeros, and very large integers.\n\nCode:\ndef gcd(a: int, b: int) -> int:\n    \"\"\"\n    Compute the greatest common divisor (GCD) of ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.654515,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.25,
+      "matched_patterns": [
+        "next\\.?js \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 2.153324,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "react \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.934335,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "v\\d+\\.?\\d*"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.573209,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 0.788632,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "openai/gpt-5",
+      "model_type": "closed_source"
+    }
+  ]
+}

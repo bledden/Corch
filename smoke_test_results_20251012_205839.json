@@ -1,0 +1,405 @@
+{
+  "metadata": {
+    "timestamp": "20251012_205839",
+    "total_tasks": 10,
+    "test_type": "smoke_test"
+  },
+  "metrics": {
+    "sequential": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.0,
+      "avg_duration": 0.0,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "baseline": {
+      "pass@1": 60.0,
+      "total_successes": 6,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.6799999999999999,
+      "avg_duration": 28.597675300000002,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 60.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 10,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 60.0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0.6799999999999999,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "search": {
+      "total_searches": 0,
+      "total_cost_usd": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 17.833,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As an experienced software engineer, I'll implement an efficient prime checking function with multiple optimization levels depending on your needs.\n\n## Basic Implementation\n\nLet me start with a clean, well-optimized solution:\n\n```python\ndef is_prime(n):\n    \"\"\"\n    Check if a number is prime.\n    \n    Args:\n        n (int): Number to check for primality\n        \n    Returns:\n        bool: True if n is prime, False otherwise\n        \n    Time Complexity: O(\u221an)\n    Space Complexity: O(1)\n    \"\"\"\n ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 18.970439,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As an experienced software engineer, I'll implement factorial using recursion with proper consideration for edge cases, efficiency, and best practices.\n\n## Basic Recursive Implementation\n\n```python\ndef factorial(n):\n    \"\"\"\n    Calculate factorial of n using recursion.\n    \n    Args:\n        n (int): Non-negative integer\n        \n    Returns:\n        int: Factorial of n\n        \n    Raises:\n        ValueError: If n is negative\n        TypeError: If n is not an integer\n    \"\"\"\n    # Input validat",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 19.954824,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As an experienced software engineer, I'll provide you with multiple implementations of a string reversal function, each optimized for different scenarios and requirements.\n\n## Basic Implementation\n\nLet me start with the most straightforward approach:\n\n```python\ndef reverse_string_basic(s: str) -> str:\n    \"\"\"\n    Reverse a string using Python's slice notation.\n    \n    Time Complexity: O(n)\n    Space Complexity: O(n)\n    \n    Args:\n        s: Input string to reverse\n        \n    Returns:\n       ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 23.499301,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As a software engineer, I'll create a robust palindrome checking function that handles various edge cases and requirements. Let me provide you with multiple implementations with different considerations.\n\n## Basic Implementation\n\n```python\ndef is_palindrome_basic(s: str) -> bool:\n    \"\"\"\n    Check if a string is a palindrome (basic version).\n    \n    Args:\n        s: Input string to check\n        \n    Returns:\n        bool: True if string is palindrome, False otherwise\n        \n    Time Complexi",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 19.971951,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As an experienced software engineer, I'll implement an efficient GCD (Greatest Common Divisor) function using Euclid's algorithm - the gold standard for this problem.\n\n## Implementation Options\n\nHere are two robust implementations with different approaches:\n\n### 1. Iterative Version (Recommended)\n```python\ndef gcd(a: int, b: int) -> int:\n    \"\"\"\n    Calculate the Greatest Common Divisor of two integers using Euclid's algorithm.\n    \n    Args:\n        a: First integer\n        b: Second integer\n  ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 37.036908,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "I'll help you implement a Next.js 15 App Router with Server Actions. This is a powerful combination that leverages React Server Components and Server Actions for optimal performance.\n\n## Project Structure\n\nFirst, let's establish the recommended structure:\n\n```\napp/\n\u251c\u2500\u2500 actions/\n\u2502   \u251c\u2500\u2500 userActions.ts\n\u2502   \u2514\u2500\u2500 validation.ts\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 ui/\n\u2502   \u2514\u2500\u2500 server/\n\u251c\u2500\u2500 lib/\n\u2502   \u2514\u2500\u2500 db.ts\n\u251c\u2500\u2500 types/\n\u2514\u2500\u2500 app/\n    \u251c\u2500\u2500 api/\n    \u251c\u2500\u2500 users/\n    \u2502   \u251c\u2500\u2500 page.tsx\n    \u2502   \u2514\u2500\u2500 [id]/\n    \u2502       \u2514\u2500\u2500 page.t",
+      "needs_external_info": false,
+      "search_confidence": 0.25,
+      "matched_patterns": [
+        "next\\.?js \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 36.17559,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "I'll create a React 19 component demonstrating the new `use()` hook for handling promises directly in components. This is one of the most exciting features in React 19!\n\n## React 19 Component with use() Hook\n\n```jsx\n// UserProfile.jsx - Modern React 19 approach with use() hook\nimport { use, Suspense } from 'react';\n\n// Simulate API fetch\nasync function fetchUser(userId) {\n  // In real app, this would be an actual API call\n  await new Promise(resolve => setTimeout(resolve, 800));\n  \n  if (userId ",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "react \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 40.179765,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "# Building Stripe API v2024 Payment Intent Implementation\n\nAs a software engineer, I'll build a robust Payment Intent integration that follows best practices and handles real-world scenarios. Here's my comprehensive implementation:\n\n## Core Implementation\n\n```python\nimport stripe\nfrom typing import Dict, Optional, Union\nfrom dataclasses import dataclass\nimport logging\nfrom enum import Enum\n\n# Configure logging for debugging and monitoring\nlogging.basicConfig(level=logging.INFO)\nlogger = logging.",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "v\\d+\\.?\\d*"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 31.873274,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "I'll implement a robust solution for OpenAI GPT-4 Turbo API with streaming support. Let me break this down into components with proper error handling, testing considerations, and optimization strategies.\n\n## Core Implementation\n\n```python\nimport asyncio\nimport json\nfrom typing import AsyncGenerator, Dict, Any, Optional, List\nfrom dataclasses import dataclass\nimport httpx\nfrom openai import AsyncOpenAI\nimport logging\n\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nlogger = logging.getLo",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.5,
+      "duration": 40.481701,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As a software engineer, I'll help you implement security fixes for the OWASP Top 10 2023 vulnerabilities. Let me break this down systematically with practical code examples and implementation strategies.\n\n## 1. Broken Access Control\n\n**Key Issue**: Insufficient authorization checks allowing unauthorized access to resources.\n\n**Implementation Fix**:\n```python\n# Decorator-based access control\nfrom functools import wraps\nfrom flask import abort, session\n\ndef require_permission(permission):\n    def ",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "qwen/qwen3-coder-plus",
+      "model_type": "open_source"
+    }
+  ]
+}

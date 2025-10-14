@@ -1,0 +1,405 @@
+{
+  "metadata": {
+    "timestamp": "20251012_171448",
+    "total_tasks": 10,
+    "test_type": "smoke_test"
+  },
+  "metrics": {
+    "sequential": {
+      "pass@1": 0.0,
+      "total_successes": 0,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.0,
+      "avg_duration": 0.0,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 0.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 0,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "baseline": {
+      "pass@1": 80.0,
+      "total_successes": 8,
+      "total_tasks": 10,
+      "hallucinations": 0,
+      "avg_quality": 0.6799999999999999,
+      "avg_duration": 14.166488699999999,
+      "self_contained_tasks": 10,
+      "web_search_tasks": 0,
+      "self_contained_pass_rate": 80.0,
+      "web_search_pass_rate": 0,
+      "model_stats": {
+        "open_source_count": 10,
+        "closed_source_count": 0,
+        "open_source_pass_rate": 80.0,
+        "closed_source_pass_rate": 0,
+        "open_source_avg_quality": 0.6799999999999999,
+        "closed_source_avg_quality": 0
+      }
+    },
+    "search": {
+      "total_searches": 0,
+      "total_cost_usd": 0.0
+    }
+  },
+  "sequential_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "sequential",
+      "success": false,
+      "pass": false,
+      "error": "'CollaborationResult' object has no attribute 'metadata'",
+      "needs_external_info": false,
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0
+    }
+  ],
+  "baseline_results": [
+    {
+      "task_id": 1,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 10.608944,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "To determine if a number is prime, we can write a function that checks if the number has any divisors other than 1 and itself. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. \n\nHere is a simple Python function that does this:\n\n```python\ndef is_prime(n):\n    if n <= 1:\n        return False\n    elif n <= 3:\n        return True\n    elif n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n %",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 2,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 11.14279,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Sure, I'd be happy to help with that! The factorial of a non-negative integer n is the product of all positive integers less than or equal to n. It's a common problem that can be solved using recursion, an approach where a function calls itself to solve a smaller instance of the same problem.\n\nHere is a simple and clean recursive implementation in Python:\n\n```python\ndef factorial(n):\n    # Base case: factorial of 0 is 1\n    if n == 0:\n        return 1\n    # Recursive case: n! = n * (n-1)!\n    el",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 3,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 10.711053,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "In Python, we can easily reverse a string using slicing technique, but let's implement it in a more general way that can be applied to other programming languages as well.\n\nHere is a simple algorithm that uses two-pointer technique to reverse a string:\n\n1. Initialize two pointers, one at the start of the string and the other at the end of the string.\n2. Swap the characters at the positions pointed by these two pointers.\n3. Increment the start pointer and decrement the end pointer.\n4. Repeat step",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 4,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 14.833783,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Sure, I'll be happy to create a function to check if a string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward, ignoring spaces, punctuation, and capitalization. \n\nHere is a simple Python function that checks if a string is a palindrome:\n\n```python\ndef is_palindrome(input_string):\n    input_string = input_string.lower()\n    reversed_string = input_string[::-1]\n    return input_string == reversed_string\n```\n\nThis fun",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 5,
+      "category": "self_contained",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 11.633166,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "The task at hand requires creating a function to find the Greatest Common Divisor (GCD) of two numbers. The GCD of two integers is the largest number that divides both of them without leaving a remainder. This is a common problem in number theory and has been studied extensively. \n\nGiven my expertise in algorithms, I will leverage the Euclidean algorithm to solve this problem. The Euclidean algorithm is a way to find the greatest common divisor of two integers. It's based on the principle that t",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 6,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 19.094663,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Creating a Next.js application with a custom server and routing can be a complex task, but with a solid understanding of JavaScript, Node.js, and the Next.js framework, it's entirely achievable. In the following sections, I'll guide you through the process of setting up a Next.js app, implementing a custom server, and creating server actions.\n\n1. **Setting up a Next.js Application**\n\n   The first step is to create a new Next.js application. To do this, you need to have Node.js and npm installed ",
+      "needs_external_info": false,
+      "search_confidence": 0.25,
+      "matched_patterns": [
+        "next\\.?js \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 7,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 14.261651,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Sure, I can definitely help with that. React 19 is not yet released, but I assume you're referring to the latest version of React, which is React 17 as of now. Let's create a simple functional component with a custom hook.\n\nFirst, let's define our custom hook. For example, let's create a hook that fetches data from an API:\n\n```javascript\nimport { useState, useEffect } from 'react';\nimport axios from 'axios';\n\nconst useFetchData = (url) => {\n  const [data, setData] = useState(null);\n  const [load",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "react \\d+"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 8,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 15.064348,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "Building the Stripe API v2024 payment intent requires a deep understanding of the Stripe API, as well as strong skills in software engineering, particularly in the areas of implementation, debugging, optimization, and algorithms. Here's a high-level approach to tackle this task:\n\n1. **Understand the Requirements**: The first step in any software development project is to understand the requirements. For building the Stripe API v2024 payment intent, we need to understand how Stripe's payment inte",
+      "needs_external_info": false,
+      "search_confidence": 0.5,
+      "matched_patterns": [
+        "latest|current|recent|2024|2025|new|updated|modern",
+        "v\\d+\\.?\\d*"
+      ],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 9,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8,
+      "duration": 17.996269,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "OpenAI's GPT-4 Turbo API is a powerful language model that can be used to generate human-like text. However, as of now, OpenAI doesn't support streaming directly. We'll need to implement a workaround to simulate streaming behavior. Here's how we can approach this:\n\n1. **Chunking the input**: We'll divide the input into manageable chunks. Each chunk will be processed individually, simulating a stream. This approach requires careful handling to ensure the context isn't lost between chunks.\n\n2. **C",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    },
+    {
+      "task_id": 10,
+      "category": "web_search",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.2,
+      "duration": 16.31822,
+      "hallucination": {
+        "hallucination_detected": false,
+        "confidence": 0.0,
+        "indicators": []
+      },
+      "output": "As an AI software engineer, I'm well-versed with the Open Web Application Security Project (OWASP) Top 10, which provides a powerful awareness document for web application security. The 2023 version hasn't been released yet, but I can provide general guidance on how to implement security fixes based on previous versions. \n\n1. Injection Flaws: Injection flaws such as SQL, OS, and LDAP injection occur when untrusted data is sent to an interpreter as part of a command or query. To fix this, use a s",
+      "needs_external_info": false,
+      "search_confidence": 0.0,
+      "matched_patterns": [],
+      "search_executed": false,
+      "search_method_used": null,
+      "search_cost": 0.0,
+      "model_used": "alibaba/qwen2.5-coder-32b-instruct",
+      "model_type": "open_source"
+    }
+  ]
+}
