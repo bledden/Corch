@@ -232,11 +232,25 @@ class CollaborativeOrchestrator:
         for stage in workflow_result.stages:
             individual_outputs[stage.agent_role.value] = stage.output
 
+        # Calculate REAL quality score from final output
+        try:
+            from src.evaluation.quality_evaluator import CodeQualityEvaluator, detect_language
+            evaluator = CodeQualityEvaluator()
+            language = detect_language(workflow_result.final_output)
+            quality_eval = evaluator.evaluate(workflow_result.final_output, language)
+            quality_score = quality_eval["overall_score"]
+        except Exception as e:
+            # Fallback to heuristic if evaluator fails
+            output = workflow_result.final_output
+            has_code = any(keyword in output for keyword in ['def ', 'function ', 'class ', 'const ', 'let '])
+            has_logic = len(output) > 100
+            quality_score = 0.7 if (has_code and has_logic and workflow_result.success) else 0.3
+
         metrics = {
-            "quality": 0.8 if workflow_result.success else 0.3,
+            "quality": quality_score,
             "efficiency": 0.9,
             "harmony": 1.0,
-            "overall": 0.85 if workflow_result.success else 0.3
+            "overall": quality_score
         }
 
         result = CollaborationResult(

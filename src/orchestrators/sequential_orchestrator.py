@@ -319,6 +319,10 @@ class SequentialCollaborativeOrchestrator:
 
             total_duration = time.time() - start_time
 
+            # Check if all stages succeeded
+            all_stages_succeeded = all(stage.success for stage in stages)
+            has_valid_output = len(context.get("final_implementation", "").strip()) > 50
+
             return WorkflowResult(
                 run_id=run_id,
                 original_request=task,
@@ -327,7 +331,7 @@ class SequentialCollaborativeOrchestrator:
                 final_output=context.get("final_implementation", ""),
                 iterations=iterations,
                 total_duration_seconds=total_duration,
-                success=True
+                success=all_stages_succeeded and has_valid_output
             )
 
         except Exception as e:
@@ -378,6 +382,11 @@ Return a structured design document in Markdown format."""
                 timeout=timeout
             )
 
+            # Better success detection: check output quality
+            has_substantial_content = len(output.strip()) > 100
+            not_error = not output.startswith("[ERROR]")
+            has_architecture_keywords = any(keyword in output.lower() for keyword in ['architecture', 'design', 'component', 'system', 'structure'])
+
             return StageResult(
                 stage="architecture",
                 agent_role=AgentRole.ARCHITECT,
@@ -387,7 +396,7 @@ Return a structured design document in Markdown format."""
                 output=output,
                 format="markdown",
                 duration_seconds=time.time() - start,
-                success=not output.startswith("[ERROR]")
+                success=not_error and has_substantial_content and has_architecture_keywords
             )
         except Exception as e:
             return StageResult(
