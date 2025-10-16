@@ -21,7 +21,7 @@ load_dotenv()
 from utils.api_key_validator import validate_on_startup
 if not validate_on_startup():
     import sys
-    print("❌ Exiting due to invalid API keys")
+    print("[FAIL] Exiting due to invalid API keys")
     sys.exit(1)
 
 # Import strategy selector
@@ -143,7 +143,7 @@ class CollaborativeOrchestrator:
         # Initialize strategy selector for model selection
         self.strategy_selector = StrategySelector()
         self.strategy_selector.set_user_strategy(user_strategy)
-        print(f"🎯 Model selection strategy: {user_strategy.value}")
+        print(f"[GOAL] Model selection strategy: {user_strategy.value}")
 
         # Initialize LLM orchestrator if available
         self.llm_orchestrator = MultiAgentLLMOrchestrator(self.config) if LLM_AVAILABLE else None
@@ -152,7 +152,7 @@ class CollaborativeOrchestrator:
         self.sponsor_orchestrator = None
         if SPONSORS_AVAILABLE and use_sponsors:
             self.sponsor_orchestrator = SponsorOrchestrator()
-            print("✅ Sponsor integrations enabled: Daytona, MCP, CopilotKit")
+            print("[OK] Sponsor integrations enabled: Daytona, MCP, CopilotKit")
 
         # Initialize agents from config
         self.agents = {}
@@ -173,7 +173,7 @@ class CollaborativeOrchestrator:
                 self.llm_orchestrator,
                 self.config
             )
-            print("✅ Sequential collaboration enabled (Facilitair_v2 architecture)")
+            print("[OK] Sequential collaboration enabled (Facilitair_v2 architecture)")
         else:
             self.sequential_orchestrator = None
 
@@ -204,7 +204,7 @@ class CollaborativeOrchestrator:
     def set_user_strategy(self, strategy: Strategy):
         """Allow user to change strategy at runtime"""
         self.strategy_selector.set_user_strategy(strategy)
-        print(f"✅ Strategy changed to: {strategy.value}")
+        print(f"[OK] Strategy changed to: {strategy.value}")
 
     def get_strategy_summary(self) -> Dict:
         """Get summary of model selection performance"""
@@ -240,11 +240,12 @@ class CollaborativeOrchestrator:
             quality_eval = evaluator.evaluate(workflow_result.final_output, language)
             quality_score = quality_eval["overall_score"]
         except Exception as e:
-            # Fallback to heuristic if evaluator fails
+            # Fallback to heuristic if evaluator fails (conservative scoring)
             output = workflow_result.final_output
             has_code = any(keyword in output for keyword in ['def ', 'function ', 'class ', 'const ', 'let '])
             has_logic = len(output) > 100
-            quality_score = 0.7 if (has_code and has_logic and workflow_result.success) else 0.3
+            # Use 0.6 max to stay below pass threshold (0.7) - be conservative when evaluator fails
+            quality_score = 0.6 if (has_code and has_logic and workflow_result.success) else 0.3
 
         metrics = {
             "quality": quality_score,

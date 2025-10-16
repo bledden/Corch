@@ -319,8 +319,8 @@ class SequentialCollaborativeOrchestrator:
 
             total_duration = time.time() - start_time
 
-            # Check if all stages succeeded
-            all_stages_succeeded = all(stage.success for stage in stages)
+            # Check if all stages succeeded (protect against empty stages list)
+            all_stages_succeeded = len(stages) > 0 and all(stage.success for stage in stages)
             has_valid_output = len(context.get("final_implementation", "").strip()) > 50
 
             return WorkflowResult(
