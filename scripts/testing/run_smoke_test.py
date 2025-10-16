@@ -3,6 +3,11 @@ Smoke Test: 10 Tasks (5 Self-Contained + 5 Web-Search)
 Quick validation before full 500-task benchmark
 """
 
+import sys
+import os
+# Add repo root to Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 import asyncio
 import json
 import weave
