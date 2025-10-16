@@ -60,15 +60,15 @@ async def test_auto_fallback():
     orchestrator = MultiAgentLLMOrchestrator(config, manual_mode=True)
 
     task = "Write a hello world function in Python"
-    console.print(f"[cyan]🚀 Task: {task}[/cyan]")
+    console.print(f"[cyan][START] Task: {task}[/cyan]")
 
     try:
         result = await orchestrator.execute_agent_task("coder", task)
-        console.print(f"[green]✅ SUCCESS! Auto-fallback worked![/green]")
+        console.print(f"[green][OK] SUCCESS! Auto-fallback worked![/green]")
         console.print(f"[dim]Result preview: {result[:150]}...[/dim]\n")
         return True
     except Exception as e:
-        console.print(f"[red]❌ FAILED: {e}[/red]\n")
+        console.print(f"[red][FAIL] FAILED: {e}[/red]\n")
         return False
 
 async def test_tier_escalation_auto():
@@ -104,15 +104,15 @@ async def test_tier_escalation_auto():
     orchestrator = MultiAgentLLMOrchestrator(config, manual_mode=True)
 
     task = "Implement binary search"
-    console.print(f"[cyan]🚀 Task: {task}[/cyan]")
+    console.print(f"[cyan][START] Task: {task}[/cyan]")
 
     try:
         result = await orchestrator.execute_agent_task("coder", task)
-        console.print(f"[green]✅ SUCCESS! Escalated to Tier 1 automatically![/green]")
+        console.print(f"[green][OK] SUCCESS! Escalated to Tier 1 automatically![/green]")
         console.print(f"[dim]Result preview: {result[:150]}...[/dim]\n")
         return True
     except Exception as e:
-        console.print(f"[red]❌ FAILED: {e}[/red]\n")
+        console.print(f"[red][FAIL] FAILED: {e}[/red]\n")
         return False
 
 async def test_multiple_agents_fallback():
@@ -150,30 +150,30 @@ async def test_multiple_agents_fallback():
     orchestrator = MultiAgentLLMOrchestrator(config, manual_mode=True)
 
     # Test architect
-    console.print(f"[cyan]🚀 Testing Architect agent...[/cyan]")
+    console.print(f"[cyan][START] Testing Architect agent...[/cyan]")
     try:
         result1 = await orchestrator.execute_agent_task("architect", "Design a REST API")
-        console.print(f"[green]✅ Architect fallback worked![/green]")
+        console.print(f"[green][OK] Architect fallback worked![/green]")
     except Exception as e:
-        console.print(f"[red]❌ Architect failed: {e}[/red]")
+        console.print(f"[red][FAIL] Architect failed: {e}[/red]")
         return False
 
     # Test coder
-    console.print(f"[cyan]🚀 Testing Coder agent...[/cyan]")
+    console.print(f"[cyan][START] Testing Coder agent...[/cyan]")
     try:
         result2 = await orchestrator.execute_agent_task("coder", "Implement the API")
-        console.print(f"[green]✅ Coder fallback worked![/green]\n")
+        console.print(f"[green][OK] Coder fallback worked![/green]\n")
         return True
     except Exception as e:
-        console.print(f"[red]❌ Coder failed: {e}[/red]\n")
+        console.print(f"[red][FAIL] Coder failed: {e}[/red]\n")
         return False
 
 async def main():
     """Run all fallback tests"""
 
-    console.print("\n[bold magenta]═" * 40)
+    console.print("\n[bold magenta]=" * 40)
     console.print("[bold magenta]STARTING AUTOMATED FALLBACK TESTS[/bold magenta]")
-    console.print("[bold magenta]═" * 40 + "\n")
+    console.print("[bold magenta]=" * 40 + "\n")
 
     results = []
 
@@ -190,12 +190,12 @@ async def main():
     results.append(("Multiple Agents", result3))
 
     # Summary
-    console.print("\n[bold magenta]═" * 40)
+    console.print("\n[bold magenta]=" * 40)
     console.print("[bold magenta]TEST RESULTS SUMMARY[/bold magenta]")
-    console.print("[bold magenta]═" * 40 + "\n")
+    console.print("[bold magenta]=" * 40 + "\n")
 
     for test_name, passed in results:
-        status = "[green]✅ PASSED[/green]" if passed else "[red]❌ FAILED[/red]"
+        status = "[green][OK] PASSED[/green]" if passed else "[red][FAIL] FAILED[/red]"
         console.print(f"{status} - {test_name}")
 
     total_passed = sum(1 for _, passed in results if passed)

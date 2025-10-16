@@ -37,12 +37,12 @@ def create_token(user_id: str) -> str:
 ```
 
 **Current Score:** 0.75+ (PASS)
-- Syntax: ✅ Valid Python
-- Completeness: ✅ Has function, docstring, returns
-- Code Quality: ✅ Good naming, proper structure
-- Documentation: ✅ Has docstring
-- Error Handling: ⚠️  Missing (minor penalty)
-- Testing: ⚠️  No tests (minor penalty)
+- Syntax: [OK] Valid Python
+- Completeness: [OK] Has function, docstring, returns
+- Code Quality: [OK] Good naming, proper structure
+- Documentation: [OK] Has docstring
+- Error Handling: [WARNING]  Missing (minor penalty)
+- Testing: [WARNING]  No tests (minor penalty)
 
 **Should Score:** 0.0 (FAIL) - It's solving a completely different problem!
 
@@ -57,11 +57,11 @@ Keywords Extracted: ['bcrypt', 'password', 'hash', 'salt', 'pepper']
 
 Code Analysis:
 - Keyword match ratio: 4/5 (80%)
-- Result: ✅ Likely relevant
+- Result: [OK] Likely relevant
 
 Hallucinated Code:
 - Keyword match ratio: 0/5 (0%)
-- Result: ⚠️  Likely hallucination - escalate to Tier 2
+- Result: [WARNING]  Likely hallucination - escalate to Tier 2
 ```
 
 ### Tier 2: Task-Specific Requirement Checks
@@ -78,15 +78,15 @@ Task: "Build JWT token validator with signature verification"
 Requirements Detected: ['jwt', 'signature', 'verify']
 
 Code Check:
-✅ Has 'jwt' import
-✅ Has 'verify' function
-✅ Has signature checking logic
+[OK] Has 'jwt' import
+[OK] Has 'verify' function
+[OK] Has signature checking logic
 Score: 1.0 (all requirements met)
 
 Hallucinated Code:
-❌ No 'jwt' import
-❌ No 'verify' function
-❌ No signature checking
+[FAIL] No 'jwt' import
+[FAIL] No 'verify' function
+[FAIL] No signature checking
 Score: 0.0 (0/3 requirements met)
 ```
 
@@ -124,7 +124,7 @@ If even 10-20% of outputs are hallucinations, the real scores could be:
 
 ## Implementation Plan
 
-### Phase 1: Add Semantic Relevance as 7th Dimension ✅ DONE
+### Phase 1: Add Semantic Relevance as 7th Dimension [OK] DONE
 
 ```python
 # quality_evaluator.py additions:
@@ -148,7 +148,7 @@ DIMENSION_WEIGHTS = {
 }
 ```
 
-### Phase 2: Integrate into Benchmark ⏳ IN PROGRESS
+### Phase 2: Integrate into Benchmark [WAITING] IN PROGRESS
 
 Create `run_100_task_benchmark_v3.py` that:
 1. Runs standard quality evaluation
@@ -156,7 +156,7 @@ Create `run_100_task_benchmark_v3.py` that:
 3. Flags likely hallucinations for manual review
 4. Reports hallucination rates per approach
 
-### Phase 3: Re-analyze Existing Results ⏳ PENDING
+### Phase 3: Re-analyze Existing Results [WAITING] PENDING
 
 Run `check_hallucinations.py` on completed checkpoints to identify:
 - How many outputs are hallucinations?
@@ -171,12 +171,12 @@ Run `check_hallucinations.py` on completed checkpoints to identify:
 
 ## Current Status
 
-- ✅ Semantic relevance checker implemented
-- ✅ Keyword matching working (fast, good enough)
-- ✅ Task-specific requirement checks working
-- ⏳ LLM-as-judge available but optional (slow, expensive)
-- ⏳ Waiting for 100-task benchmark checkpoint to test
-- ⏳ Need to integrate into v3 benchmark
+- [OK] Semantic relevance checker implemented
+- [OK] Keyword matching working (fast, good enough)
+- [OK] Task-specific requirement checks working
+- [WAITING] LLM-as-judge available but optional (slow, expensive)
+- [WAITING] Waiting for 100-task benchmark checkpoint to test
+- [WAITING] Need to integrate into v3 benchmark
 
 ## Recommendations
 
@@ -213,10 +213,10 @@ class RateLimiter:
 ```
 
 **Relevance Score: 0.95**
-- ✅ Redis imported and used
-- ✅ Rate limiting logic present
-- ✅ DoS prevention implemented
-- ✅ All requirements met
+- [OK] Redis imported and used
+- [OK] Rate limiting logic present
+- [OK] DoS prevention implemented
+- [OK] All requirements met
 
 Output B (Hallucination):
 ```python
@@ -231,10 +231,10 @@ def validate_token(token: str) -> bool:
 ```
 
 **Relevance Score: 0.10**
-- ❌ No Redis usage
-- ❌ No rate limiting logic
-- ❌ Wrong problem (JWT validation)
-- ❌ 0/3 requirements met
+- [FAIL] No Redis usage
+- [FAIL] No rate limiting logic
+- [FAIL] Wrong problem (JWT validation)
+- [FAIL] 0/3 requirements met
 - **FLAGGED AS HALLUCINATION**
 
 ## Conclusion

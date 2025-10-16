@@ -138,7 +138,7 @@ class TestMonitor:
     def create_dashboard(self) -> Table:
         """Create the dashboard table"""
         table = Table(
-            title="🚀 Facilitair Test Monitor Dashboard",
+            title="[START] Facilitair Test Monitor Dashboard",
             box=box.ROUNDED,
             show_header=True,
             header_style="bold magenta",
@@ -161,11 +161,11 @@ class TestMonitor:
 
             # Status indicator
             status_emoji = {
-                "running": "🏃",
-                "completed": "✅",
-                "killed": "💀",
-                "error": "❌"
-            }.get(test.status, "❓")
+                "running": "[RUNNING]",
+                "completed": "[OK]",
+                "killed": "",
+                "error": "[FAIL]"
+            }.get(test.status, "")
 
             status_text = f"{status_emoji} {test.status.upper()}"
 
@@ -208,7 +208,7 @@ class TestMonitor:
         """Create a text progress bar"""
         width = 10
         filled = int(width * percentage / 100)
-        bar = "█" * filled + "░" * (width - filled)
+        bar = "" * filled + "" * (width - filled)
         return f"{bar} {current}/{total}"
 
     def update_test_status(self, bash_id: str, output: str):
@@ -239,10 +239,10 @@ class TestMonitor:
                     # Add legend
                     legend = Text()
                     legend.append("\n\nLegend: ", style="bold")
-                    legend.append("🏃 Running  ", style="green")
-                    legend.append("✅ Completed  ", style="blue")
-                    legend.append("❌ Error  ", style="red")
-                    legend.append("💀 Killed  ", style="yellow")
+                    legend.append("[RUNNING] Running  ", style="green")
+                    legend.append("[OK] Completed  ", style="blue")
+                    legend.append("[FAIL] Error  ", style="red")
+                    legend.append(" Killed  ", style="yellow")
                     legend.append("\n\nPress Ctrl+C to exit", style="dim italic")
 
                     # Combine table and legend
@@ -261,7 +261,7 @@ class TestMonitor:
                     )
 
                     if all_done:
-                        console.print("\n[bold green]✅ All tests completed![/bold green]")
+                        console.print("\n[bold green][OK] All tests completed![/bold green]")
                         break
 
                     time.sleep(refresh_interval)
@@ -272,7 +272,7 @@ class TestMonitor:
 
 def main():
     """Main entry point"""
-    console.print("[bold cyan]🚀 Facilitair Test Monitor[/bold cyan]")
+    console.print("[bold cyan][START] Facilitair Test Monitor[/bold cyan]")
     console.print("[dim]Starting dashboard...[/dim]\n")
 
     # Get test IDs to monitor (from command line or default to recent tests)

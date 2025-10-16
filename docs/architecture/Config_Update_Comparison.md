@@ -18,27 +18,27 @@ coder:
   default_model: anthropic/claude-3-5-sonnet
 ```
 
-### Recommended Configuration ⭐
+### Recommended Configuration [STAR]
 ```yaml
 coder:
   candidate_models:
-    - deepseek-ai/deepseek-v3              # Dec 2024 | Code: 98/100 ⬆️ NEW!
-    - openai/o1                            # Dec 2024 | Code: 96/100 ⬆️ NEW!
-    - alibaba/qwen2.5-coder-32b-instruct   # Nov 2024 | Code: 95/100 ⬆️ IMPROVED!
-    - alibaba/qwq-32b-preview              # Nov 2024 | Code: 94/100 ⬆️ NEW!
-    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100 ✅ KEEP
-    - openai/o1-mini                       # Dec 2024 | Code: 93/100 ⬆️ NEW!
-    - deepseek-ai/deepseek-r1              # Nov 2024 | Code: 93/100 ⬆️ NEW!
-    - openai/gpt-4o                        # May 2024 | Code: 93/100 ✅ KEEP
-  default_model: deepseek-ai/deepseek-v3  # 🔥 NEW DEFAULT - Best code model
+    - deepseek-ai/deepseek-v3              # Dec 2024 | Code: 98/100  NEW!
+    - openai/o1                            # Dec 2024 | Code: 96/100  NEW!
+    - alibaba/qwen2.5-coder-32b-instruct   # Nov 2024 | Code: 95/100  IMPROVED!
+    - alibaba/qwq-32b-preview              # Nov 2024 | Code: 94/100  NEW!
+    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100 [OK] KEEP
+    - openai/o1-mini                       # Dec 2024 | Code: 93/100  NEW!
+    - deepseek-ai/deepseek-r1              # Nov 2024 | Code: 93/100  NEW!
+    - openai/gpt-4o                        # May 2024 | Code: 93/100 [OK] KEEP
+  default_model: deepseek-ai/deepseek-v3  #  NEW DEFAULT - Best code model
 ```
 
 **Key Improvements:**
-- ⬆️ **+4 points** average code score improvement
-- 🆕 **5 new models** from Oct-Dec 2024
-- 🎯 **DeepSeek V3** now default (98/100 vs 94/100)
-- 🧠 **O1 & O1-Mini** add superior reasoning (99/100 & 96/100)
-- 📊 **All models** from last 3 months (vs 6 months prior)
+-  **+4 points** average code score improvement
+-  **5 new models** from Oct-Dec 2024
+- [GOAL] **DeepSeek V3** now default (98/100 vs 94/100)
+- [BRAIN] **O1 & O1-Mini** add superior reasoning (99/100 & 96/100)
+- [CHART] **All models** from last 3 months (vs 6 months prior)
 
 ---
 
@@ -55,26 +55,26 @@ reviewer:
   default_model: openai/gpt-4o
 ```
 
-### Recommended Configuration ⭐
+### Recommended Configuration [STAR]
 ```yaml
 reviewer:
   candidate_models:
-    - openai/o1                            # Dec 2024 | Reasoning: 99/100 ⬆️ NEW!
-    - alibaba/qwq-32b-preview              # Nov 2024 | Reasoning: 96/100 ⬆️ NEW!
-    - openai/o1-mini                       # Dec 2024 | Reasoning: 96/100 ✅ KEEP
-    - deepseek-ai/deepseek-v3              # Dec 2024 | Reasoning: 95/100 ⬆️ NEW!
-    - deepseek-ai/deepseek-r1              # Nov 2024 | Reasoning: 94/100 ⬆️ NEW!
-    - alibaba/qvq-72b-preview              # Dec 2024 | Reasoning: 94/100 ⬆️ NEW!
-    - anthropic/claude-3-5-sonnet          # Oct 2024 | Reasoning: 93/100 ⬆️ UPGRADED
-  default_model: openai/o1  # 🔥 NEW DEFAULT - Best reasoning model
+    - openai/o1                            # Dec 2024 | Reasoning: 99/100  NEW!
+    - alibaba/qwq-32b-preview              # Nov 2024 | Reasoning: 96/100  NEW!
+    - openai/o1-mini                       # Dec 2024 | Reasoning: 96/100 [OK] KEEP
+    - deepseek-ai/deepseek-v3              # Dec 2024 | Reasoning: 95/100  NEW!
+    - deepseek-ai/deepseek-r1              # Nov 2024 | Reasoning: 94/100  NEW!
+    - alibaba/qvq-72b-preview              # Dec 2024 | Reasoning: 94/100  NEW!
+    - anthropic/claude-3-5-sonnet          # Oct 2024 | Reasoning: 93/100  UPGRADED
+  default_model: openai/o1  #  NEW DEFAULT - Best reasoning model
 ```
 
 **Key Improvements:**
-- ⬆️ **+7 points** average reasoning score improvement
-- 🆕 **5 new models** with superior reasoning
-- 🎯 **OpenAI O1** now default (99/100 vs 92/100)
-- 🧠 **All models** 93+ reasoning score (vs 84-92 prior)
-- 🔍 **Better bug detection** with deep reasoning models
+-  **+7 points** average reasoning score improvement
+-  **5 new models** with superior reasoning
+- [GOAL] **OpenAI O1** now default (99/100 vs 92/100)
+- [BRAIN] **All models** 93+ reasoning score (vs 84-92 prior)
+- Reviewer **Better bug detection** with deep reasoning models
 
 ---
 
@@ -91,25 +91,25 @@ architect:
   default_model: openai/gpt-4o
 ```
 
-### Recommended Configuration ⭐
+### Recommended Configuration [STAR]
 ```yaml
 architect:
   candidate_models:
-    - openai/o1                            # Dec 2024 | Reasoning: 99/100 ⬆️ NEW!
-    - google/gemini-2.0-pro-exp            # Dec 2024 | Context: 1M tokens ⬆️ UPGRADED!
-    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100 ⬆️ UPGRADED
-    - meta-llama/llama-3.3-70b-instruct    # Dec 2024 | Code: 90/100 ✅ KEEP
-    - deepseek-ai/deepseek-v3              # Dec 2024 | Code: 98/100 ⬆️ NEW!
-    - openai/gpt-4o                        # May 2024 | Code: 93/100 ✅ KEEP (backup)
-  default_model: openai/o1  # 🔥 NEW DEFAULT - Best for system design
+    - openai/o1                            # Dec 2024 | Reasoning: 99/100  NEW!
+    - google/gemini-2.0-pro-exp            # Dec 2024 | Context: 1M tokens  UPGRADED!
+    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100  UPGRADED
+    - meta-llama/llama-3.3-70b-instruct    # Dec 2024 | Code: 90/100 [OK] KEEP
+    - deepseek-ai/deepseek-v3              # Dec 2024 | Code: 98/100  NEW!
+    - openai/gpt-4o                        # May 2024 | Code: 93/100 [OK] KEEP (backup)
+  default_model: openai/o1  #  NEW DEFAULT - Best for system design
 ```
 
 **Key Improvements:**
-- ⬆️ **Better reasoning** for architecture decisions
-- 🆕 **Gemini 2.0** with 1M token context (vs 200K)
-- 🎯 **O1** excels at system-level thinking
-- 📚 **Larger context** for understanding complex systems
-- 🏗️ **DeepSeek V3** adds code-aware architecture design
+-  **Better reasoning** for architecture decisions
+-  **Gemini 2.0** with 1M token context (vs 200K)
+- [GOAL] **O1** excels at system-level thinking
+- [DOCS] **Larger context** for understanding complex systems
+- Architect **DeepSeek V3** adds code-aware architecture design
 
 ---
 
@@ -126,25 +126,25 @@ documenter:
   default_model: anthropic/claude-3-haiku
 ```
 
-### Recommended Configuration ⭐
+### Recommended Configuration [STAR]
 ```yaml
 documenter:
   candidate_models:
-    - anthropic/claude-3-5-haiku           # Nov 2024 | Code: 88/100 ⬆️ UPGRADED!
-    - microsoft/phi-4                      # Dec 2024 | Code: 89/100 ⬆️ NEW!
-    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100 ⬆️ UPGRADED
-    - google/gemini-1.5-flash              # May 2024 | Code: 86/100 ✅ KEEP
-    - alibaba/qwen2.5-72b-instruct         # Sep 2024 | Code: 89/100 ⬆️ NEW!
-    - meta-llama/llama-3.3-70b-instruct    # Dec 2024 | Code: 90/100 ⬆️ UPGRADED!
-  default_model: anthropic/claude-3-5-haiku  # ✅ UPGRADED VERSION
+    - anthropic/claude-3-5-haiku           # Nov 2024 | Code: 88/100  UPGRADED!
+    - microsoft/phi-4                      # Dec 2024 | Code: 89/100  NEW!
+    - anthropic/claude-3-5-sonnet          # Oct 2024 | Code: 94/100  UPGRADED
+    - google/gemini-1.5-flash              # May 2024 | Code: 86/100 [OK] KEEP
+    - alibaba/qwen2.5-72b-instruct         # Sep 2024 | Code: 89/100  NEW!
+    - meta-llama/llama-3.3-70b-instruct    # Dec 2024 | Code: 90/100  UPGRADED!
+  default_model: anthropic/claude-3-5-haiku  # [OK] UPGRADED VERSION
 ```
 
 **Key Improvements:**
-- ⬆️ **Claude 3.5 Haiku** is newer, better version
-- 🆕 **Phi-4** offers excellent small model performance
-- 🎯 **Llama 3.3** better than 3.1 for documentation
-- 📝 **Higher quality** documentation output
-- ⚡ **Fast + accurate** combination
+-  **Claude 3.5 Haiku** is newer, better version
+-  **Phi-4** offers excellent small model performance
+- [GOAL] **Llama 3.3** better than 3.1 for documentation
+- Documenter **Higher quality** documentation output
+- [FAST] **Fast + accurate** combination
 
 ---
 
@@ -161,25 +161,25 @@ researcher:
   default_model: google/gemini-1.5-pro
 ```
 
-### Recommended Configuration ⭐
+### Recommended Configuration [STAR]
 ```yaml
 researcher:
   candidate_models:
-    - google/gemini-2.0-pro-exp                  # Dec 2024 | Context: 1M ⬆️ UPGRADED!
-    - openai/o1                                  # Dec 2024 | Reasoning: 99 ⬆️ NEW!
-    - anthropic/claude-3-5-sonnet                # Oct 2024 | Code: 94/100 ✅ KEEP
-    - deepseek-ai/deepseek-v3                    # Dec 2024 | Code: 98/100 ⬆️ NEW!
-    - perplexity/llama-3.1-sonar-large-128k-online  # Aug 2024 ✅ KEEP (online)
-    - meta-llama/llama-3.3-70b-instruct          # Dec 2024 | Code: 90/100 ⬆️ NEW!
-  default_model: google/gemini-2.0-pro-exp  # 🔥 UPGRADED - Better research
+    - google/gemini-2.0-pro-exp                  # Dec 2024 | Context: 1M  UPGRADED!
+    - openai/o1                                  # Dec 2024 | Reasoning: 99  NEW!
+    - anthropic/claude-3-5-sonnet                # Oct 2024 | Code: 94/100 [OK] KEEP
+    - deepseek-ai/deepseek-v3                    # Dec 2024 | Code: 98/100  NEW!
+    - perplexity/llama-3.1-sonar-large-128k-online  # Aug 2024 [OK] KEEP (online)
+    - meta-llama/llama-3.3-70b-instruct          # Dec 2024 | Code: 90/100  NEW!
+  default_model: google/gemini-2.0-pro-exp  #  UPGRADED - Better research
 ```
 
 **Key Improvements:**
-- ⬆️ **Gemini 2.0** with 1M context (vs 200K)
-- 🆕 **O1** for deep analysis (99/100 reasoning)
-- 🔍 **Better research** capabilities across board
-- 📊 **More recent models** understand latest tech
-- 🌐 **Keep Perplexity** for online search
+-  **Gemini 2.0** with 1M context (vs 200K)
+-  **O1** for deep analysis (99/100 reasoning)
+- Reviewer **Better research** capabilities across board
+- [CHART] **More recent models** understand latest tech
+- [WEB] **Keep Perplexity** for online search
 
 ---
 
@@ -243,17 +243,17 @@ researcher:
 
 ## Implementation Priority
 
-### High Priority (Do First) 🔥
+### High Priority (Do First) 
 1. Update **Coder Agent** with DeepSeek V3 + O1
 2. Update **Reviewer Agent** with O1 (99/100 reasoning)
 3. Test with sample tasks to validate improvement
 
-### Medium Priority (Week 1-2) ⚡
+### Medium Priority (Week 1-2) [FAST]
 4. Update **Architect Agent** with O1 + Gemini 2.0
 5. Update **Researcher Agent** with Gemini 2.0
 6. Monitor performance metrics
 
-### Low Priority (Week 3-4) 📝
+### Low Priority (Week 3-4) Documenter
 7. Update **Documenter Agent** with Claude 3.5 Haiku
 8. Fine-tune model selection based on task types
 9. Optimize for cost-performance balance

@@ -472,11 +472,11 @@ def demonstrate_granular_selection():
     ]
 
     for example in examples:
-        print(f"\n📝 Task: {example['task']}")
-        print(f"✅ Selected: {example['best_model']}")
-        print(f"💡 Why: {example['reason']}")
+        print(f"\nDocumenter Task: {example['task']}")
+        print(f"[OK] Selected: {example['best_model']}")
+        print(f"[IDEA] Why: {example['reason']}")
 
-    print("\n🎯 KEY INSIGHT:")
+    print("\n[GOAL] KEY INSIGHT:")
     print("   The same agent uses DIFFERENT models based on:")
     print("   - Programming language (Python vs C++ vs Rust)")
     print("   - Framework (FastAPI vs React vs Kubernetes)")

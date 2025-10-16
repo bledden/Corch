@@ -11,107 +11,107 @@ This is a **self-improving multi-agent AI system** for WeaveHacks 2 hackathon th
 ## High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         USER REQUEST                                 │
-│              "Build a REST API for user authentication"              │
-└────────────────────────────┬────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|                         USER REQUEST                                 |
+|              "Build a REST API for user authentication"              |
++----------------------------+----------------------------------------+
                              ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│              COLLABORATIVE ORCHESTRATOR (Main Entry Point)           │
-│  - Receives user request                                             │
-│  - Selects execution strategy (Sequential vs Consensus fallback)     │
-│  - Routes to Sequential Orchestrator OR legacy Consensus             │
-└────────────────────────────┬────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|              COLLABORATIVE ORCHESTRATOR (Main Entry Point)           |
+|  - Receives user request                                             |
+|  - Selects execution strategy (Sequential vs Consensus fallback)     |
+|  - Routes to Sequential Orchestrator OR legacy Consensus             |
++----------------------------+----------------------------------------+
                              ↓
-                  ┌──────────┴──────────┐
-                  │                     │
+                  +----------+----------+
+                  |                     |
          [SEQUENTIAL MODE]    [CONSENSUS MODE - LEGACY]
               (NEW)               (Deprecated)
-                  │                     │
+                  |                     |
                   ↓                     ↓
-┌─────────────────────────────┐  ┌────────────────────┐
-│ Sequential Orchestrator      │  │ Voting/Consensus   │
-│ (Facilitair_v2 architecture) │  │ (Being removed)    │
-└────────────────┬─────────────┘  └────────────────────┘
-                 │
++-----------------------------+  +--------------------+
+| Sequential Orchestrator      |  | Voting/Consensus   |
+| (Facilitair_v2 architecture) |  | (Being removed)    |
++----------------+-------------+  +--------------------+
+                 |
                  ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                    SEQUENTIAL WORKFLOW STAGES                        │
-│                                                                      │
-│  Stage 1: ARCHITECT                                                 │
-│    ├─ Model: Claude Opus 4.1 / GPT-5 Pro                           │
-│    ├─ Input: User request (Markdown)                               │
-│    ├─ Task: Design system architecture                             │
-│    └─ Output: Architecture document (Markdown)                     │
-│                          ↓                                          │
-│  Stage 2: CODER (Implementation)                                   │
-│    ├─ Model: Qwen 2.5 Coder / GPT-5 / DeepSeek V3                 │
-│    ├─ Input: User request + Architecture (Markdown → Code)         │
-│    ├─ Task: Implement the solution                                 │
-│    └─ Output: Implementation code (Code)                           │
-│                          ↓                                          │
-│  Stage 3: REVIEWER                                                  │
-│    ├─ Model: Claude Sonnet 4.5 / GPT-5                            │
-│    ├─ Input: User request + Architecture + Code (Code → JSON)      │
-│    ├─ Task: Review code, find issues                               │
-│    └─ Output: Review feedback (JSON with issues_found flag)        │
-│                          ↓                                          │
-│  Stage 4: REFINER (Iteration Loop)                         ┌───────┐│
-│    ├─ Model: Same as Coder                                 │ Up to ││
-│    ├─ Input: User request + Code + Review (JSON → Code)    │ 3x    ││
-│    ├─ Task: Fix issues from review                         │ Loop  ││
-│    └─ Output: Refined code (Code) ─────────────────────────┘       ││
-│                          ↓ (if no issues)                           │
-│  Stage 5: DOCUMENTER (Final)                                        │
-│    ├─ Model: Llama 3.3 70B / Claude Sonnet                         │
-│    ├─ Input: User request + Architecture + Final code              │
-│    ├─ Task: Create comprehensive documentation                      │
-│    └─ Output: Documentation (Markdown)                              │
-└────────────────────────────┬────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|                    SEQUENTIAL WORKFLOW STAGES                        |
+|                                                                      |
+|  Stage 1: ARCHITECT                                                 |
+|    +- Model: Claude Opus 4.1 / GPT-5 Pro                           |
+|    +- Input: User request (Markdown)                               |
+|    +- Task: Design system architecture                             |
+|    +- Output: Architecture document (Markdown)                     |
+|                          ↓                                          |
+|  Stage 2: CODER (Implementation)                                   |
+|    +- Model: Qwen 2.5 Coder / GPT-5 / DeepSeek V3                 |
+|    +- Input: User request + Architecture (Markdown → Code)         |
+|    +- Task: Implement the solution                                 |
+|    +- Output: Implementation code (Code)                           |
+|                          ↓                                          |
+|  Stage 3: REVIEWER                                                  |
+|    +- Model: Claude Sonnet 4.5 / GPT-5                            |
+|    +- Input: User request + Architecture + Code (Code → JSON)      |
+|    +- Task: Review code, find issues                               |
+|    +- Output: Review feedback (JSON with issues_found flag)        |
+|                          ↓                                          |
+|  Stage 4: REFINER (Iteration Loop)                         +-------+|
+|    +- Model: Same as Coder                                 | Up to ||
+|    +- Input: User request + Code + Review (JSON → Code)    | 3x    ||
+|    +- Task: Fix issues from review                         | Loop  ||
+|    +- Output: Refined code (Code) -------------------------+       ||
+|                          ↓ (if no issues)                           |
+|  Stage 5: DOCUMENTER (Final)                                        |
+|    +- Model: Llama 3.3 70B / Claude Sonnet                         |
+|    +- Input: User request + Architecture + Final code              |
+|    +- Task: Create comprehensive documentation                      |
+|    +- Output: Documentation (Markdown)                              |
++----------------------------+----------------------------------------+
                              ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                    CROSS-CUTTING SYSTEMS                             │
-│                                                                      │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ STRATEGY SELECTOR (Model Selection)                          │  │
-│  │ - Adaptive model selection per agent                         │  │
-│  │ - Thompson Sampling for exploration/exploitation             │  │
-│  │ - Strategies: QUALITY_FIRST, COST_FIRST, BALANCED, SPEED     │  │
-│  │ - Learns which models work best for each task type           │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ W&B WEAVE TRACKING                                            │  │
-│  │ - Tracks every agent execution (@weave.op decorators)        │  │
-│  │ - Records: quality, efficiency, harmony, duration            │  │
-│  │ - Enables learning: which agent combos work best             │  │
-│  │ - Dashboard: wandb.ai/facilitair/weavehacks-collaborative    │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ SPONSOR INTEGRATIONS (Optional)                               │  │
-│  │ - OpenRouter: 200+ models (GPT-5, Claude, Qwen, DeepSeek)   │  │
-│  │ - Tavily: AI-powered web search                              │  │
-│  │ - BrowserBase: Automated browser for web tasks               │  │
-│  │ - Daytona: Isolated dev environments                         │  │
-│  │ - MCP: Inter-agent message passing protocol                  │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ FORMAT CONVERTER                                              │  │
-│  │ - Converts between agent communication formats               │  │
-│  │ - Supports: JSON ↔ XML ↔ Markdown ↔ Code                    │  │
-│  │ - Ensures each agent gets data in preferred format           │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|                    CROSS-CUTTING SYSTEMS                             |
+|                                                                      |
+|  +--------------------------------------------------------------+  |
+|  | STRATEGY SELECTOR (Model Selection)                          |  |
+|  | - Adaptive model selection per agent                         |  |
+|  | - Thompson Sampling for exploration/exploitation             |  |
+|  | - Strategies: QUALITY_FIRST, COST_FIRST, BALANCED, SPEED     |  |
+|  | - Learns which models work best for each task type           |  |
+|  +--------------------------------------------------------------+  |
+|                                                                      |
+|  +--------------------------------------------------------------+  |
+|  | W&B WEAVE TRACKING                                            |  |
+|  | - Tracks every agent execution (@weave.op decorators)        |  |
+|  | - Records: quality, efficiency, harmony, duration            |  |
+|  | - Enables learning: which agent combos work best             |  |
+|  | - Dashboard: wandb.ai/facilitair/weavehacks-collaborative    |  |
+|  +--------------------------------------------------------------+  |
+|                                                                      |
+|  +--------------------------------------------------------------+  |
+|  | SPONSOR INTEGRATIONS (Optional)                               |  |
+|  | - OpenRouter: 200+ models (GPT-5, Claude, Qwen, DeepSeek)   |  |
+|  | - Tavily: AI-powered web search                              |  |
+|  | - BrowserBase: Automated browser for web tasks               |  |
+|  | - Daytona: Isolated dev environments                         |  |
+|  | - MCP: Inter-agent message passing protocol                  |  |
+|  +--------------------------------------------------------------+  |
+|                                                                      |
+|  +--------------------------------------------------------------+  |
+|  | FORMAT CONVERTER                                              |  |
+|  | - Converts between agent communication formats               |  |
+|  | - Supports: JSON ↔ XML ↔ Markdown ↔ Code                    |  |
+|  | - Ensures each agent gets data in preferred format           |  |
+|  +--------------------------------------------------------------+  |
++---------------------------------------------------------------------+
                              ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                         FINAL OUTPUT                                 │
-│  - Complete solution with code + documentation                       │
-│  - Metrics: quality, efficiency, harmony scores                      │
-│  - Stage-by-stage outputs for transparency                           │
-│  - Learning data persisted to W&B Weave                             │
-└─────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------+
+|                         FINAL OUTPUT                                 |
+|  - Complete solution with code + documentation                       |
+|  - Metrics: quality, efficiency, harmony scores                      |
+|  - Stage-by-stage outputs for transparency                           |
+|  - Learning data persisted to W&B Weave                             |
++---------------------------------------------------------------------+
 ```
 
 ---
@@ -422,8 +422,8 @@ Let's trace a real request through the system:
 
 ```
 1. ENTRY: collaborative_orchestrator.py
-   └─ collaborate("Build a Python function for fibonacci...")
-      └─ use_sequential=True → SequentialOrchestrator.execute_workflow()
+   +- collaborate("Build a Python function for fibonacci...")
+      +- use_sequential=True → SequentialOrchestrator.execute_workflow()
 
 2. SEQUENTIAL ORCHESTRATOR STARTS
    context = {
@@ -617,7 +617,7 @@ reviewer_out = reviewer("Build REST API")
 
 # Then vote
 final = majority_vote([architect_out, coder_out, reviewer_out])
-# ❌ No context sharing, just voting
+# [FAIL] No context sharing, just voting
 ```
 
 **Right way (sequential collaboration):**
@@ -626,7 +626,7 @@ final = majority_vote([architect_out, coder_out, reviewer_out])
 arch = architect("Build REST API")
 code = coder("Build REST API", context=arch)  # ← Has architecture
 review = reviewer("Build REST API", context={arch, code})  # ← Has everything
-# ✅ Each agent builds on previous work
+# [OK] Each agent builds on previous work
 ```
 
 ### 2. **Context Preservation**
@@ -683,7 +683,7 @@ Refiner → Receives as JSON (their preference)
 ```
 Reviewer finds issues → Refiner fixes → Reviewer checks again
     ↑                                            ↓
-    └────────── Loop up to 3 times ──────────────┘
+    +---------- Loop up to 3 times --------------+
                           ↓
                    No more issues
                           ↓

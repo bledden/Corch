@@ -116,10 +116,10 @@ Hook into LLM client's streaming API to get tokens as they're generated.
 
 ## Current State
 
-- ✅ Real orchestrator working
-- ✅ Real LLM calls happening
-- ✅ SSE infrastructure complete
-- ❌ No events sent during 4-5 minute wait
-- ❌ Client disconnects before completion
+- [OK] Real orchestrator working
+- [OK] Real LLM calls happening
+- [OK] SSE infrastructure complete
+- [FAIL] No events sent during 4-5 minute wait
+- [FAIL] Client disconnects before completion
 
 The streaming code is correct - we just need to send events DURING execution, not just after.

@@ -353,14 +353,14 @@ IMPROVEMENTS = {
     ],
 
     "Generation 10 Improvements": [
-        "✅ SQL Injection prevented (parameterized queries)",
-        "✅ Comprehensive input validation",
-        "✅ Bcrypt password hashing",
-        "✅ Optimized queries with eager loading",
-        "✅ Proper error handling and logging",
-        "✅ Complete documentation",
-        "✅ Rate limiting and security measures",
-        "✅ Production-ready with monitoring"
+        "[OK] SQL Injection prevented (parameterized queries)",
+        "[OK] Comprehensive input validation",
+        "[OK] Bcrypt password hashing",
+        "[OK] Optimized queries with eager loading",
+        "[OK] Proper error handling and logging",
+        "[OK] Complete documentation",
+        "[OK] Rate limiting and security measures",
+        "[OK] Production-ready with monitoring"
     ],
 
     "Learning Journey": {
@@ -386,20 +386,20 @@ def demonstrate_improvement():
     print("AI CODE GENERATION: BEFORE AND AFTER COLLABORATIVE LEARNING")
     print("=" * 80)
 
-    print("\n🔴 GENERATION 1 (Untrained, Single Agent):")
+    print("\n[RED] GENERATION 1 (Untrained, Single Agent):")
     print("-" * 40)
     print(EXAMPLE_1_GENERATION_1)
 
-    print("\n🟢 GENERATION 10 (Trained, Collaborative Team):")
+    print("\n[GREEN] GENERATION 10 (Trained, Collaborative Team):")
     print("-" * 40)
     print(EXAMPLE_1_GENERATION_10[:1000] + "...")  # Show first part
 
-    print("\n📊 IMPROVEMENT METRICS:")
+    print("\n[CHART] IMPROVEMENT METRICS:")
     print("-" * 40)
     for metric, value in IMPROVEMENTS["Metrics Improvement"].items():
         print(f"  {metric}: {value}")
 
-    print("\n🎯 KEY INSIGHT:")
+    print("\n[GOAL] KEY INSIGHT:")
     print("  Instead of relying on a single AI model that makes the same mistakes,")
     print("  our system uses specialized agents that learn to work together,")
     print("  producing production-ready code that improves with every generation.")

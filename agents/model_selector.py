@@ -342,28 +342,28 @@ def demonstrate_multi_model_learning():
     print("TRUE MULTI-MODEL LEARNING DEMONSTRATION")
     print("="*80)
 
-    print("\n📊 Initial State: No model performance data")
+    print("\n[CHART] Initial State: No model performance data")
     print("   All models have equal chance of selection")
 
-    print("\n🔄 Generation 1-3: EXPLORATION PHASE")
+    print("\n[REFRESH] Generation 1-3: EXPLORATION PHASE")
     print("   Trying each model to gather performance data:")
     print("   - Task 1: GPT-4 → Quality: 0.82")
     print("   - Task 2: Claude-3.5 → Quality: 0.91")
     print("   - Task 3: Qwen-Coder → Quality: 0.88")
 
-    print("\n🎯 Generation 4-10: EXPLOITATION PHASE")
+    print("\n[GOAL] Generation 4-10: EXPLOITATION PHASE")
     print("   Thompson Sampling selects models based on performance:")
     print("   - Coding tasks: Qwen-Coder selected 70% of time")
     print("   - Architecture: GPT-4 selected 65% of time")
     print("   - Documentation: Claude-Haiku selected 80% of time")
 
-    print("\n✅ LEARNED PATTERNS:")
+    print("\n[OK] LEARNED PATTERNS:")
     print("   Architect Agent: GPT-4 > Claude-Opus > Gemini")
     print("   Coder Agent: Qwen-Coder > Claude-3.5 > DeepSeek")
     print("   Reviewer Agent: GPT-4 > DeepSeek-Coder > Mixtral")
     print("   Documenter: Claude-Haiku > Gemini-Flash > GPT-3.5")
 
-    print("\n💡 KEY INSIGHT:")
+    print("\n[IDEA] KEY INSIGHT:")
     print("   System discovers which models are ACTUALLY best for each task,")
     print("   not just assuming one model fits all!")
 

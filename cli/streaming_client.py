@@ -120,7 +120,7 @@ class StreamingDebateClient:
 
         if event_type == "task_started":
             self.status = "running"
-            self.console.print("[bold green]🚀 Task Started[/bold green]")
+            self.console.print("[bold green]Task Started[/bold green]")
 
         elif event_type == "task_progress":
             # Extract planning information
@@ -128,7 +128,7 @@ class StreamingDebateClient:
             self.estimated_time = data.get("estimated_time")
             self.estimated_cost = data.get("estimated_cost")
 
-            plan_text = f"📋 Plan: {self.total_chunks} chunks"
+            plan_text = f"Plan: {self.total_chunks} chunks"
             if self.estimated_time:
                 plan_text += f", ~{self.estimated_time:.1f}s"
             if self.estimated_cost:
@@ -143,22 +143,22 @@ class StreamingDebateClient:
 
             # Map to debate metaphor
             if "architect" in agent_name.lower() or "architecture" in stage.lower():
-                display_agent = "🏗️  Architect"
+                display_agent = "Architect"
                 action = "Analyzing requirements..."
             elif "coder" in agent_name.lower() or "implementation" in stage.lower():
-                display_agent = "💻 Coder"
+                display_agent = "Coder"
                 action = "Writing implementation..."
             elif "review" in agent_name.lower() or "review" in stage.lower():
-                display_agent = "🔍 Reviewer"
+                display_agent = "Reviewer"
                 action = "Analyzing code quality..."
             elif "refine" in agent_name.lower() or "refinement" in stage.lower():
-                display_agent = "✨ Refiner"
+                display_agent = "Refiner"
                 action = "Improving solution..."
             elif "doc" in agent_name.lower() or "documentation" in stage.lower():
-                display_agent = "📝 Documenter"
+                display_agent = "Documenter"
                 action = "Creating documentation..."
             else:
-                display_agent = f"🤖 {agent_name}"
+                display_agent = f"{agent_name}"
                 action = data.get("description", "Processing...")
 
             self.current_agent = display_agent
@@ -179,21 +179,21 @@ class StreamingDebateClient:
 
         elif event_type == "chunk_completed":
             chunk_num = data.get("chunk_number", self.chunk_count)
-            self.console.print(f"[green]✅ Chunk {chunk_num} complete[/green]")
+            self.console.print(f"[green]Chunk {chunk_num} complete[/green]")
 
         elif event_type == "task_completed":
             self.status = "completed"
             self.final_result = data.get("result", "")
-            self.console.print("[bold green]✅ Task Completed![/bold green]")
+            self.console.print("[bold green]Task Completed![/bold green]")
 
         elif event_type == "task_error":
             self.status = "error"
             self.error_message = data.get("error", "Unknown error")
-            self.console.print(f"[bold red]❌ Error: {self.error_message}[/bold red]")
+            self.console.print(f"[bold red]Error: {self.error_message}[/bold red]")
 
         elif event_type == "system_message":
             msg = data.get("message", "")
-            self.console.print(f"[dim italic]ℹ️  {msg}[/dim italic]")
+            self.console.print(f"[dim italic]{msg}[/dim italic]")
 
         elif event_type == "heartbeat":
             # Silent heartbeat, just keep connection alive
@@ -212,7 +212,7 @@ class StreamingDebateClient:
 
         # Header: Task info
         header_text = Text()
-        header_text.append("🎯 Task: ", style="bold cyan")
+        header_text.append("Task: ", style="bold cyan")
         header_text.append(self.task_description[:80], style="white")
         if len(self.task_description) > 80:
             header_text.append("...", style="dim")
@@ -242,16 +242,16 @@ class StreamingDebateClient:
         # Footer: Status
         footer_text = Text()
         if self.status == "running":
-            footer_text.append("⚡ Status: ", style="bold yellow")
+            footer_text.append("Status: ", style="bold yellow")
             footer_text.append("STREAMING", style="bold yellow")
         elif self.status == "completed":
-            footer_text.append("✅ Status: ", style="bold green")
+            footer_text.append("Status: ", style="bold green")
             footer_text.append("COMPLETED", style="bold green")
         elif self.status == "error":
-            footer_text.append("❌ Status: ", style="bold red")
+            footer_text.append("Status: ", style="bold red")
             footer_text.append(f"ERROR - {self.error_message}", style="bold red")
         else:
-            footer_text.append("⏳ Status: ", style="bold blue")
+            footer_text.append("Status: ", style="bold blue")
             footer_text.append(self.status.upper(), style="bold blue")
 
         if self.total_chunks:
@@ -259,7 +259,7 @@ class StreamingDebateClient:
 
         layout["footer"].update(Panel(footer_text, border_style="cyan"))
 
-        return Panel(layout, title="🚀 Facilitair Streaming Debate", border_style="bright_blue")
+        return Panel(layout, title="Facilitair Streaming Debate", border_style="bright_blue")
 
     async def stream_task(self, task: str, context: Optional[Dict[str, Any]] = None, live_ui: bool = True):
         """Main method: Create stream and consume events"""
@@ -289,7 +289,7 @@ class StreamingDebateClient:
 
         # Print final result
         if self.final_result:
-            self.console.print("\n[bold green]═══ Final Result ═══[/bold green]")
+            self.console.print("\n[bold green]=== Final Result ===[/bold green]")
             self.console.print(self.final_result)
 
         return self.final_result

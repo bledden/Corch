@@ -20,7 +20,7 @@ async def test_llm_with_weave():
         # Initialize Weave
         print("\n1. Initializing Weave...")
         weave.init("facilitair/llm-weave-test")
-        print("✅ Weave initialized")
+        print("[OK] Weave initialized")
 
         # Configure LiteLLM
         litellm.api_key = os.getenv("OPENROUTER_API_KEY")
@@ -41,15 +41,15 @@ async def test_llm_with_weave():
         print("\n2. Calling LLM with @weave.op() decorator...")
         result = await call_llm_with_weave("Write a function to add two numbers")
 
-        print(f"✅ LLM call successful!")
+        print(f"[OK] LLM call successful!")
         print(f"Response preview: {result[:150]}...")
 
         print("\n" + "=" * 60)
-        print("✅ Test 3 PASSED: LLM with Weave works!")
+        print("[OK] Test 3 PASSED: LLM with Weave works!")
         return True
 
     except Exception as e:
-        print(f"\n❌ Test 3 FAILED: {e}")
+        print(f"\n[FAIL] Test 3 FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False

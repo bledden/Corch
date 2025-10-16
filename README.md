@@ -21,8 +21,8 @@ Built for WeaveHacks 2 using W&B Weave, OpenRouter, and 200+ LLMs.
 
 | Category | Sequential | Baseline | Advantage |
 |----------|-----------|----------|-----------|
-| **Security-Critical** | 0.763 | 0.534 | **+0.228** ⭐ |
-| **Complex Algorithms** | 0.720 | 0.490 | **+0.230** ⭐ |
+| **Security-Critical** | 0.763 | 0.534 | **+0.228** [STAR] |
+| **Complex Algorithms** | 0.720 | 0.490 | **+0.230** [STAR] |
 | **Data Validation** | 0.762 | 0.550 | **+0.212** |
 | **Production Features** | 0.676 | 0.497 | **+0.179** |
 | **Error Handling** | 0.710 | 0.582 | **+0.128** |

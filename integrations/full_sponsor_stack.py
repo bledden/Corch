@@ -52,9 +52,9 @@ class WeaveTracking:
                     weave.init(project)
 
                 self.initialized = True
-                print("✅ W&B Weave tracking initialized")
+                print("[OK] W&B Weave tracking initialized")
             except Exception as e:
-                print(f"⚠️ Weave init failed: {e}")
+                print(f"[WARNING] Weave init failed: {e}")
 
     def track_agent_execution(self, agent_id: str, task: str, result: str, metrics: Dict):
         """Track agent execution with Weave"""
@@ -112,9 +112,9 @@ class TavilySearch:
         self.client = None
         if TAVILY_AVAILABLE and os.getenv("TAVILY_API_KEY"):
             self.client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
-            print("✅ Tavily search initialized")
+            print("[OK] Tavily search initialized")
         else:
-            print("⚠️ Tavily not configured - using mock search")
+            print("[WARNING] Tavily not configured - using mock search")
 
     async def search(self, query: str, max_results: int = 5) -> List[Dict]:
         """Perform AI-powered search with Tavily"""
@@ -166,9 +166,9 @@ class BrowserBaseAutomation:
         self.session_id = None
 
         if self.api_key:
-            print("✅ BrowserBase configured")
+            print("[OK] BrowserBase configured")
         else:
-            print("⚠️ BrowserBase not configured - using mock automation")
+            print("[WARNING] BrowserBase not configured - using mock automation")
 
     async def create_session(self) -> str:
         """Create a new browser session"""
@@ -235,9 +235,9 @@ class OpenRouterModels:
         self.api_url = "https://openrouter.ai/api/v1"
 
         if self.api_key:
-            print("✅ OpenRouter configured for open-source models")
+            print("[OK] OpenRouter configured for open-source models")
         else:
-            print("⚠️ OpenRouter not configured - using fallback models")
+            print("[WARNING] OpenRouter not configured - using fallback models")
 
         # Best open-source models (October 2025)
         self.models = {
@@ -291,9 +291,9 @@ class MastraWorkflows:
         self.api_key = os.getenv("MASTRA_API_KEY")
 
         if self.api_key:
-            print("✅ Mastra workflows configured")
+            print("[OK] Mastra workflows configured")
         else:
-            print("⚠️ Mastra not configured - using basic orchestration")
+            print("[WARNING] Mastra not configured - using basic orchestration")
 
     async def create_workflow(self, name: str, steps: List[Dict]) -> str:
         """Create a Mastra workflow"""
@@ -345,9 +345,9 @@ class ServerlessRL:
         self.models = {}
 
         if self.api_key:
-            print("✅ Serverless RL configured")
+            print("[OK] Serverless RL configured")
         else:
-            print("⚠️ Serverless RL not configured - using local simulation")
+            print("[WARNING] Serverless RL not configured - using local simulation")
 
     async def train_policy(self,
                            agent_id: str,
@@ -410,11 +410,11 @@ class GoogleCloudIntegration:
         self.credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
         if self.project_id and self.credentials:
-            print("✅ Google Cloud configured")
+            print("[OK] Google Cloud configured")
             # Initialize specific services as needed
             self.init_services()
         else:
-            print("⚠️ Google Cloud not configured - using mock services")
+            print("[WARNING] Google Cloud not configured - using mock services")
 
     def init_services(self):
         """Initialize GCP services"""
@@ -466,9 +466,9 @@ class AGUI:
         self.dashboards = {}
 
         if self.api_key:
-            print("✅ AG-UI configured for agent visualization")
+            print("[OK] AG-UI configured for agent visualization")
         else:
-            print("⚠️ AG-UI not configured - using text output")
+            print("[WARNING] AG-UI not configured - using text output")
 
     async def create_dashboard(self, agent_id: str) -> str:
         """Create AG-UI dashboard for agent"""
@@ -516,7 +516,7 @@ class FullSponsorStack:
 
     def __init__(self):
         print("\n" + "="*60)
-        print("🚀 Initializing Full Sponsor Stack for WeaveHacks 2")
+        print("[START] Initializing Full Sponsor Stack for WeaveHacks 2")
         print("="*60 + "\n")
 
         # Initialize all integrations
@@ -540,7 +540,7 @@ class FullSponsorStack:
         self.mcp = MCPIntegration()
         self.copilotkit = CopilotKitIntegration()
 
-        print("\n✅ All sponsor integrations initialized!")
+        print("\n[OK] All sponsor integrations initialized!")
         print("="*60 + "\n")
 
     async def execute_with_full_stack(self, task: str, agent_id: str) -> Dict:

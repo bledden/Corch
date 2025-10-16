@@ -174,7 +174,7 @@ class FallbackManager:
         if config_mode:
             # Use configured mode without prompting
             self.fallback_mode = FallbackMode(config_mode)
-            console.print(f"[green]✓[/green] Using configured fallback mode: [bold]{config_mode}[/bold]")
+            console.print(f"[green][OK][/green] Using configured fallback mode: [bold]{config_mode}[/bold]")
             return self.fallback_mode
 
         # No config found, show interactive prompt
@@ -211,7 +211,7 @@ class FallbackManager:
 
         # Suggest saving to config
         if self.fallback_mode != FallbackMode.INTERACTIVE:
-            console.print(f"\n[yellow]💡 Tip:[/yellow] Save this preference by adding to config.yaml:")
+            console.print(f"\n[yellow][IDEA] Tip:[/yellow] Save this preference by adding to config.yaml:")
             console.print(f"[dim]fallback:")
             console.print(f"  mode: \"{self.fallback_mode.value}\"[/dim]\n")
 
@@ -236,7 +236,7 @@ class FallbackManager:
 
     def _handle_strict_mode(self, context: FallbackContext) -> Optional[str]:
         """Strict mode: fail immediately"""
-        console.print(f"\n[red]❌ Model failed:[/red] {context.failed_model}")
+        console.print(f"\n[red][FAIL] Model failed:[/red] {context.failed_model}")
         console.print(f"[red]Error:[/red] {context.error_message}")
         console.print(f"[yellow]Strict mode enabled - no fallback attempted[/yellow]\n")
         return None
@@ -251,7 +251,7 @@ class FallbackManager:
 
         if not failed_model_info:
             # Unknown model - just try the next candidate in the list
-            console.print(f"[yellow]⚠️  Model failed:[/yellow] {context.failed_model} (unknown model)")
+            console.print(f"[yellow][WARNING]  Model failed:[/yellow] {context.failed_model} (unknown model)")
 
             # Find the next available candidate after the failed one
             next_model = None
@@ -265,14 +265,14 @@ class FallbackManager:
 
             if next_model:
                 next_info = self.model_catalog.get(next_model)
-                console.print(f"[green]🔄 Auto-fallback:[/green] Trying {next_model}")
+                console.print(f"[green][REFRESH] Auto-fallback:[/green] Trying {next_model}")
                 if next_info:
                     console.print(f"[dim]   {next_info.description}[/dim]")
                     console.print(f"[dim]   Cost: ${next_info.cost_per_million}/M tokens[/dim]\n")
                 else:
                     console.print(f"[dim]   (Model not in catalog)[/dim]\n")
             else:
-                console.print(f"[red]❌ No more fallback models available[/red]\n")
+                console.print(f"[red][FAIL] No more fallback models available[/red]\n")
 
             return next_model
 
@@ -285,13 +285,13 @@ class FallbackManager:
 
         if next_model:
             next_info = self.model_catalog.get(next_model)
-            console.print(f"\n[yellow]⚠️  Model failed:[/yellow] {context.failed_model}")
-            console.print(f"[green]🔄 Auto-fallback:[/green] Trying {next_model}")
+            console.print(f"\n[yellow][WARNING]  Model failed:[/yellow] {context.failed_model}")
+            console.print(f"[green][REFRESH] Auto-fallback:[/green] Trying {next_model}")
             if next_info:
                 console.print(f"[dim]   {next_info.description}[/dim]")
                 console.print(f"[dim]   Cost: ${next_info.cost_per_million}/M tokens[/dim]\n")
         else:
-            console.print(f"[red]❌ No suitable fallback found[/red]\n")
+            console.print(f"[red][FAIL] No suitable fallback found[/red]\n")
 
         return next_model
 
@@ -299,7 +299,7 @@ class FallbackManager:
         """Interactive mode: prompt user with options"""
         console.print("\n")
         console.print(Panel.fit(
-            f"[bold red]❌ Model Failure[/bold red]\n\n"
+            f"[bold red][FAIL] Model Failure[/bold red]\n\n"
             f"[bold]Agent:[/bold] {context.agent_type}\n"
             f"[bold]Model:[/bold] {context.failed_model}\n"
             f"[bold]Error:[/bold] {context.error_type}\n"
@@ -316,7 +316,7 @@ class FallbackManager:
             return None
 
         # Display options in a table
-        table = Table(title="🔄 Fallback Options", show_header=True, header_style="bold cyan")
+        table = Table(title="[REFRESH] Fallback Options", show_header=True, header_style="bold cyan")
         table.add_column("#", style="cyan", width=3)
         table.add_column("Model", style="white")
         table.add_column("Tier", style="yellow")
@@ -324,7 +324,7 @@ class FallbackManager:
         table.add_column("Description", style="dim")
 
         for i, (model_id, model_info) in enumerate(options.items(), 1):
-            tier_emoji = "⭐" if model_info.tier == ModelTier.TIER_1 else "💎" if model_info.tier == ModelTier.TIER_2 else "💰"
+            tier_emoji = "[STAR]" if model_info.tier == ModelTier.TIER_1 else "[PREMIUM]" if model_info.tier == ModelTier.TIER_2 else "[COST]"
             table.add_row(
                 str(i),
                 model_id,
@@ -358,13 +358,13 @@ class FallbackManager:
         choice_lower = choice.lower()
 
         if choice_lower == "s":
-            console.print("[yellow]⏭️  Skipping this step[/yellow]\n")
+            console.print("[yellow]⏭  Skipping this step[/yellow]\n")
             return "__SKIP__"  # Special token to skip
         elif choice_lower == "a":
-            console.print("[red]🛑 Aborting task[/red]\n")
+            console.print("[red][STOP] Aborting task[/red]\n")
             return None
         elif choice_lower == "c":
-            console.print("[green]✓ Switched to Auto mode for rest of session[/green]\n")
+            console.print("[green][OK] Switched to Auto mode for rest of session[/green]\n")
             self.fallback_mode = FallbackMode.AUTO
             return self._handle_auto_mode(context)
         else:
@@ -373,12 +373,12 @@ class FallbackManager:
             selected_model = list(options.keys())[model_index]
             selected_info = options[selected_model]
 
-            console.print(f"[green]✓ Selected:[/green] {selected_model}")
+            console.print(f"[green][OK] Selected:[/green] {selected_model}")
             console.print(f"[dim]  {selected_info.description}[/dim]\n")
 
             # Suggest saving preference
             if context.attempt_number == 1:  # First failure
-                console.print("[yellow]💡 Tip:[/yellow] To avoid these prompts, configure fallback in config.yaml")
+                console.print("[yellow][IDEA] Tip:[/yellow] To avoid these prompts, configure fallback in config.yaml")
                 console.print(f"[dim]See: {self.config_path}[/dim]\n")
 
             return selected_model

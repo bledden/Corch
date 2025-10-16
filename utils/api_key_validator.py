@@ -132,7 +132,7 @@ class APIKeyValidator:
     def print_results(self, results: List[KeyValidationResult]) -> None:
         """Print validation results in a readable format"""
         print("\n" + "="*60)
-        print("🔑 API Key Validation Results")
+        print(" API Key Validation Results")
         print("="*60)
 
         required_valid = []
@@ -153,27 +153,27 @@ class APIKeyValidator:
                     optional_invalid.append(result)
 
         # Print required keys
-        print("\n✅ Required Keys:")
+        print("\n[OK] Required Keys:")
         if required_valid:
             for result in required_valid:
-                print(f"   ✓ {result.key_name}")
+                print(f"   [OK] {result.key_name}")
         else:
             print("   (none)")
 
         if required_invalid:
-            print("\n❌ Missing/Invalid Required Keys:")
+            print("\n[FAIL] Missing/Invalid Required Keys:")
             for result in required_invalid:
-                print(f"   ✗ {result.key_name}: {result.error_message}")
+                print(f"   [X] {result.key_name}: {result.error_message}")
 
         # Print optional keys
-        print("\n📋 Optional Keys:")
+        print("\n[LIST] Optional Keys:")
         if optional_valid:
             for result in optional_valid:
-                print(f"   ✓ {result.key_name}")
+                print(f"   [OK] {result.key_name}")
 
         if optional_invalid:
             for result in optional_invalid:
-                print(f"   ⚠ {result.key_name}: {result.error_message}")
+                print(f"    {result.key_name}: {result.error_message}")
 
         print("\n" + "="*60)
 
@@ -189,11 +189,11 @@ def validate_on_startup() -> bool:
     validator.print_results(results)
 
     if not all_valid:
-        print("\n❌ VALIDATION FAILED: Please fix the above errors before continuing")
-        print("💡 Tip: Check your .env file and ensure all required API keys are set correctly\n")
+        print("\n[FAIL] VALIDATION FAILED: Please fix the above errors before continuing")
+        print("[IDEA] Tip: Check your .env file and ensure all required API keys are set correctly\n")
         return False
 
-    print("\n✅ All required API keys are valid! Starting application...\n")
+    print("\n[OK] All required API keys are valid! Starting application...\n")
     return True
 
 

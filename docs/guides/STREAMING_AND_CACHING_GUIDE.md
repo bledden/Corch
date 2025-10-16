@@ -40,27 +40,27 @@ python3 cli.py collaborate "Write a factorial function" --stream
 ### Example Output
 
 ```
-┌─ Collaborative Session ────────────────────────────┐
-│ Task: Write a factorial function                   │
-│ Strategy: BALANCED                                  │
-│ Elapsed: [00:00.50]                                │
-└────────────────────────────────────────────────────┘
++- Collaborative Session ----------------------------+
+| Task: Write a factorial function                   |
+| Strategy: BALANCED                                  |
+| Elapsed: [00:00.50]                                |
++----------------------------------------------------+
 
-┌─ Agent Status ─────────┐  ┌─ Live Debate ───────────────┐
-│ [ARCH]  Architect: done    │  │ [00:00.10] [ARCH]  Architect:  │
-│ [CODE] Coder: working      │  │   Analyzing requirements... │
-│ [REVW] Reviewer: idle      │  │                             │
-│ [REFN] Refiner: idle       │  │ [00:00.50] > Architect:    │
-│ [DOCS] Documenter: idle    │  │   This needs a recursive... │
-└────────────────────────┘  │                             │
-                            │ [00:00.80] [CODE] Coder:       │
-                            │   Implementing factorial... │
-                            └─────────────────────────────┘
++- Agent Status ---------+  +- Live Debate ---------------+
+| [ARCH]  Architect: done    |  | [00:00.10] [ARCH]  Architect:  |
+| [CODE] Coder: working      |  |   Analyzing requirements... |
+| [REVW] Reviewer: idle      |  |                             |
+| [REFN] Refiner: idle       |  | [00:00.50] > Architect:    |
+| [DOCS] Documenter: idle    |  |   This needs a recursive... |
++------------------------+  |                             |
+                            | [00:00.80] [CODE] Coder:       |
+                            |   Implementing factorial... |
+                            +-----------------------------+
 
-┌─ Latest Synthesis ─────────────────────────────────┐
-│ Sequential workflow stage 1 completed successfully  │
-│ Architect designed recursive factorial approach    │
-└────────────────────────────────────────────────────┘
++- Latest Synthesis ---------------------------------+
+| Sequential workflow stage 1 completed successfully  |
+| Architect designed recursive factorial approach    |
++----------------------------------------------------+
 ```
 
 ### Implementation Details
@@ -333,62 +333,62 @@ python3 cached_orchestrator.py
 ### Streaming Architecture
 
 ```
-┌──────────────────────────────────────┐
-│       CLI (Rich Library)             │
-│  - Live display                      │
-│  - Agent status panel                │
-│  - Debate log panel                  │
-│  - Synthesis panel                   │
-└──────────────┬───────────────────────┘
-               │ Events
-┌──────────────▼───────────────────────┐
-│  CLIDebateInterface                  │
-│  - stream_debate()                   │
-│  - Event handling                    │
-└──────────────┬───────────────────────┘
-               │ Generator
-┌──────────────▼───────────────────────┐
-│  stream_collaborative_debate()       │
-│  - Yields DebateEvent objects        │
-│  - Integrates with orchestrator      │
-└──────────────┬───────────────────────┘
-               │
-┌──────────────▼───────────────────────┐
-│  CollaborativeOrchestrator           │
-│  - Sequential 5-stage pipeline       │
-│  - Architect → Coder → Reviewer →... │
-└──────────────────────────────────────┘
++--------------------------------------+
+|       CLI (Rich Library)             |
+|  - Live display                      |
+|  - Agent status panel                |
+|  - Debate log panel                  |
+|  - Synthesis panel                   |
++--------------+-----------------------+
+               | Events
++--------------v-----------------------+
+|  CLIDebateInterface                  |
+|  - stream_debate()                   |
+|  - Event handling                    |
++--------------+-----------------------+
+               | Generator
++--------------v-----------------------+
+|  stream_collaborative_debate()       |
+|  - Yields DebateEvent objects        |
+|  - Integrates with orchestrator      |
++--------------+-----------------------+
+               |
++--------------v-----------------------+
+|  CollaborativeOrchestrator           |
+|  - Sequential 5-stage pipeline       |
+|  - Architect → Coder → Reviewer →... |
++--------------------------------------+
 ```
 
 ### Caching Architecture
 
 ```
-┌──────────────────────────────────────┐
-│   User Request                       │
-│   - Task: "Build REST API"           │
-│   - Context: {language, frameworks}  │
-└──────────────┬───────────────────────┘
-               │
-┌──────────────▼───────────────────────┐
-│  CachedStreamingOrchestrator         │
-│  1. Create embedding                 │
-│  2. Check cache                      │
-└──────────────┬───────────────────────┘
-               │
-        ┌──────┴──────┐
-        │             │
++--------------------------------------+
+|   User Request                       |
+|   - Task: "Build REST API"           |
+|   - Context: {language, frameworks}  |
++--------------+-----------------------+
+               |
++--------------v-----------------------+
+|  CachedStreamingOrchestrator         |
+|  1. Create embedding                 |
+|  2. Check cache                      |
++--------------+-----------------------+
+               |
+        +------+------+
+        |             |
     Cache Hit    Cache Miss
-        │             │
-        ▼             ▼
-┌─────────────┐  ┌──────────────────┐
-│ Return      │  │ Run              │
-│ Cached      │  │ Collaboration    │
-│ Result      │  │                  │
-└─────────────┘  └────────┬─────────┘
-                          │
-                ┌─────────▼──────────┐
-                │ Cache Result       │
-                └────────────────────┘
+        |             |
+        v             v
++-------------+  +------------------+
+| Return      |  | Run              |
+| Cached      |  | Collaboration    |
+| Result      |  |                  |
++-------------+  +--------+---------+
+                          |
+                +---------v----------+
+                | Cache Result       |
+                +--------------------+
 ```
 
 ### Storage Schema

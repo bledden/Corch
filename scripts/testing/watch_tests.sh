@@ -32,9 +32,9 @@ get_test_info() {
 # Clear screen and show header
 clear_and_header() {
     clear
-    echo -e "${CYAN}${BOLD}╔═══════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}${BOLD}║           🚀 Facilitair Test Monitor Dashboard 🚀             ║${NC}"
-    echo -e "${CYAN}${BOLD}╚═══════════════════════════════════════════════════════════════╝${NC}"
+    echo -e "${CYAN}${BOLD}+===============================================================+${NC}"
+    echo -e "${CYAN}${BOLD}|           Facilitair Test Monitor Dashboard                  |${NC}"
+    echo -e "${CYAN}${BOLD}+===============================================================+${NC}"
     echo ""
     echo -e "${BOLD}Monitoring ${#TESTS[@]} tests${NC} | Press Ctrl+C to exit"
     echo ""
@@ -45,17 +45,17 @@ while true; do
     clear_and_header
 
     echo -e "${BOLD}Test ID${NC}     ${BOLD}Status${NC}      ${BOLD}Progress${NC}              ${BOLD}Results${NC}"
-    echo "────────────────────────────────────────────────────────────────"
+    echo "----------------------------------------------------------------"
 
     for test_id in "${TESTS[@]}"; do
         # Check if process exists (simplified - would need actual implementation)
         if ps aux | grep -q "[p]ython.*${test_id}"; then
-            status="${GREEN}● RUNNING${NC}"
-            progress="░░░░░░░░░░"  # Would parse from output
+            status="${GREEN}* RUNNING${NC}"
+            progress="[..........]"  # Would parse from output
             results="Pending..."
         else
-            status="${YELLOW}○ UNKNOWN${NC}"
-            progress="──────────"
+            status="${YELLOW}o UNKNOWN${NC}"
+            progress="----------"
             results="N/A"
         fi
 
@@ -63,7 +63,7 @@ while true; do
     done
 
     echo ""
-    echo "────────────────────────────────────────────────────────────────"
+    echo "----------------------------------------------------------------"
     echo -e "${BOLD}Active Tests:${NC}"
 
     # Show running Python test processes

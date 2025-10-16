@@ -4,7 +4,7 @@
 # This tests the streaming infrastructure end-to-end
 
 echo "=============================================="
-echo "🧪 Facilitair Streaming Quick Test"
+echo "Facilitair Streaming Quick Test"
 echo "=============================================="
 echo ""
 
@@ -26,21 +26,21 @@ sleep 8
 # Step 3: Check if server started
 echo "Step 3: Verifying server is running..."
 if ! lsof -i :8000 > /dev/null 2>&1; then
-    echo "   ❌ Server failed to start!"
+    echo "   [FAIL] Server failed to start!"
     echo "   Check logs: tail -f /tmp/facilitair_streaming_test.log"
     exit 1
 fi
-echo "   ✅ Server is running on port 8000"
+echo "   [OK] Server is running on port 8000"
 
 # Step 4: Check for streaming endpoints
 echo "Step 4: Checking for streaming endpoints..."
 sleep 2
 if curl -s http://localhost:8000/openapi.json | grep -q "/api/stream/task"; then
-    echo "   ✅ Streaming endpoints found!"
+    echo "   [OK] Streaming endpoints found!"
     echo "   - POST /api/stream/task"
     echo "   - GET /api/stream/events/{stream_id}"
 else
-    echo "   ❌ Streaming endpoints NOT found!"
+    echo "   [FAIL] Streaming endpoints NOT found!"
     echo "   The server may not have the new code."
     echo "   Check logs: tail -f /tmp/facilitair_streaming_test.log"
     kill $SERVER_PID 2>/dev/null
@@ -62,23 +62,23 @@ CLI_EXIT=$?
 
 echo ""
 echo "=============================================="
-echo "📊 Test Results"
+echo "Test Results"
 echo "=============================================="
 
 if [ $CLI_EXIT -eq 0 ]; then
-    echo "✅ CLI client completed successfully"
+    echo "[OK] CLI client completed successfully"
 elif [ $CLI_EXIT -eq 124 ]; then
-    echo "⏱️  CLI client timed out (60s limit)"
+    echo "[TIMEOUT] CLI client timed out (60s limit)"
 else
-    echo "❌ CLI client failed with exit code: $CLI_EXIT"
+    echo "[FAIL] CLI client failed with exit code: $CLI_EXIT"
 fi
 
 echo ""
-echo "📝 Logs:"
+echo "Logs:"
 echo "   Server: /tmp/facilitair_streaming_test.log"
 echo "   CLI Output: /tmp/cli_output.log"
 echo ""
-echo "🔧 Server PID: $SERVER_PID"
+echo "Server PID: $SERVER_PID"
 echo "   To stop: kill $SERVER_PID"
 echo "   Or run: pkill -f 'uvicorn api:app'"
 echo ""

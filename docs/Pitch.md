@@ -1,4 +1,4 @@
-# 🚀 Self-Improving AI Code Generation System
+# [START] Self-Improving AI Code Generation System
 ## WeaveHacks 2 Pitch - July 12-13, 2025
 
 ### The Problem with Current AI Code Generation
@@ -10,10 +10,10 @@
 - **No Collaboration**: Models work in isolation, missing collective intelligence
 
 **Result**:
-- 🐛 Buggy code that "looks right" but fails in production
-- 🔒 Security vulnerabilities missed by single-perspective generation
-- 📚 Poor or missing documentation
-- 🔄 Same mistakes repeated over and over
+- [BUG] Buggy code that "looks right" but fails in production
+- [SECURE] Security vulnerabilities missed by single-perspective generation
+- [DOCS] Poor or missing documentation
+- [REFRESH] Same mistakes repeated over and over
 
 ### Our Solution: Collaborative Code Generation That Learns
 
@@ -22,7 +22,7 @@
 ```
 User Request → 5 Specialized Agents → Intelligent Consensus → Quality Code
                         ↑                                              ↓
-                    Learning Loop ← Track Results in W&B Weave ←──────┘
+                    Learning Loop ← Track Results in W&B Weave ←------+
 ```
 
 ### How It Makes Code Generation Better
@@ -61,10 +61,10 @@ def login(username, password):
     if user.password == password:  # Plain text comparison!
         return {"token": "12345"}
 ```
-❌ SQL Injection vulnerable
-❌ Plain text passwords
-❌ No input validation
-❌ Hardcoded token
+[FAIL] SQL Injection vulnerable
+[FAIL] Plain text passwords
+[FAIL] No input validation
+[FAIL] Hardcoded token
 
 **Generation 10 (After Learning)**
 ```python
@@ -120,13 +120,13 @@ async def login(request: LoginRequest, db: Database = Depends(get_db)):
 
     return TokenResponse(access_token=token, token_type="bearer")
 ```
-✅ Input validation with Pydantic
-✅ Parameterized queries (no SQL injection)
-✅ Bcrypt password hashing
-✅ Proper JWT tokens
-✅ Security best practices
-✅ Comprehensive documentation
-✅ Error handling
+[OK] Input validation with Pydantic
+[OK] Parameterized queries (no SQL injection)
+[OK] Bcrypt password hashing
+[OK] Proper JWT tokens
+[OK] Security best practices
+[OK] Comprehensive documentation
+[OK] Error handling
 
 ### The Magic: Learning in Action
 
@@ -146,10 +146,10 @@ async def login(request: LoginRequest, db: Database = Depends(get_db)):
 ### Business Value
 
 **For Development Teams:**
-- 🎯 **70% fewer security vulnerabilities** in generated code
-- 📈 **3x faster code reviews** with pre-reviewed generation
-- 📚 **100% documentation coverage** automatic
-- 🔄 **Continuous improvement** - gets better over time
+- [GOAL] **70% fewer security vulnerabilities** in generated code
+- [UP] **3x faster code reviews** with pre-reviewed generation
+- [DOCS] **100% documentation coverage** automatic
+- [REFRESH] **Continuous improvement** - gets better over time
 
 **For the Industry:**
 - Move from "AI that writes code" to "AI that writes good code"

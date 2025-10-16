@@ -154,7 +154,7 @@ async def run_task(orchestrator, task, progress, task_progress):
 
 async def main():
     console.print("\n[bold cyan]" + "="*80 + "[/bold cyan]")
-    console.print("[bold cyan]🔬 10-Task Real Evaluation - Open Source vs Closed Source[/bold cyan]")
+    console.print("[bold cyan] 10-Task Real Evaluation - Open Source vs Closed Source[/bold cyan]")
     console.print("[bold cyan]" + "="*80 + "[/bold cyan]\n")
 
     # Load config
@@ -166,10 +166,10 @@ async def main():
     weave.init(f"facilitair/10-task-real-eval-{run_id}")
 
     # Initialize orchestrator
-    console.print("[cyan]🔧 Initializing sequential orchestrator...")
+    console.print("[cyan] Initializing sequential orchestrator...")
     orchestrator = SequentialCollaborativeOrchestrator(config)
 
-    console.print("[green]✅ Sequential collaboration enabled (Facilitair_v2 architecture)\n")
+    console.print("[green][OK] Sequential collaboration enabled (Facilitair_v2 architecture)\n")
 
     # Show task breakdown
     open_source_count = sum(1 for t in EVAL_TASKS if t['model_type'] == 'open_source')
@@ -204,11 +204,11 @@ async def main():
             progress.remove_task(task_progress)
 
             # Show immediate result
-            status = "✅" if result.get('success') else "❌"
+            status = "[OK]" if result.get('success') else "[FAIL]"
             console.print(f"{status} Task {task['id']} ({task['category']}): {result.get('duration_seconds', 0):.2f}s")
 
     console.print("\n[bold cyan]" + "="*80)
-    console.print("📊 RESULTS")
+    console.print("[CHART] RESULTS")
     console.print("="*80 + "[/bold cyan]\n")
 
     # Analyze results
@@ -265,7 +265,7 @@ async def main():
     detail_table.add_column("Duration", style="blue")
 
     for r in results:
-        status = "✅ Success" if r.get('success') else f"❌ Failed"
+        status = "[OK] Success" if r.get('success') else f"[FAIL] Failed"
         if 'error' in r:
             status += f" ({r['error'][:30]}...)"
 
@@ -279,7 +279,7 @@ async def main():
 
     console.print(detail_table)
 
-    console.print(f"\n[bold green]✅ Evaluation Complete![/bold green]")
+    console.print(f"\n[bold green][OK] Evaluation Complete![/bold green]")
     console.print(f"Results logged to Weave: https://wandb.ai/facilitair/10-task-real-eval-{run_id}/weave\n")
 
     return results

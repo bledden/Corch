@@ -29,7 +29,7 @@ async def showcase_sponsor_tech():
 
     console.print("\n" + "="*70)
     console.print(Panel.fit(
-        "[bold cyan]🚀 WeaveHacks 2 - Full Sponsor Stack Showcase[/bold cyan]\n"
+        "[bold cyan][START] WeaveHacks 2 - Full Sponsor Stack Showcase[/bold cyan]\n"
         "[yellow]Demonstrating ALL sponsor technologies working together[/yellow]",
         border_style="cyan"
     ))
@@ -51,21 +51,21 @@ async def showcase_sponsor_tech():
     console.print(f"[bold]Demo Task:[/bold] {demo_task}\n")
 
     # Show sponsor table
-    sponsor_table = Table(title="🏆 Sponsor Technologies in Action", show_header=True)
+    sponsor_table = Table(title="[ACHIEVEMENT] Sponsor Technologies in Action", show_header=True)
     sponsor_table.add_column("Technology", style="cyan", width=20)
     sponsor_table.add_column("Purpose", style="green", width=30)
     sponsor_table.add_column("Status", style="yellow", width=15)
 
     sponsors = [
-        ("W&B Weave", "Tracking & Learning", "✅ Ready"),
-        ("Tavily", "AI Web Search", "✅ Ready"),
-        ("BrowserBase", "Web Automation", "✅ Ready"),
-        ("OpenRouter", "Open-Source LLMs", "✅ Ready"),
-        ("Mastra", "Workflow Orchestration", "✅ Ready"),
-        ("Serverless RL", "Reinforcement Learning", "✅ Ready"),
-        ("Google Cloud", "Cloud Infrastructure", "✅ Ready"),
-        ("AG-UI", "Agent Visualization", "✅ Ready"),
-        ("Daytona", "Isolated Environments", "✅ Ready"),
+        ("W&B Weave", "Tracking & Learning", "[OK] Ready"),
+        ("Tavily", "AI Web Search", "[OK] Ready"),
+        ("BrowserBase", "Web Automation", "[OK] Ready"),
+        ("OpenRouter", "Open-Source LLMs", "[OK] Ready"),
+        ("Mastra", "Workflow Orchestration", "[OK] Ready"),
+        ("Serverless RL", "Reinforcement Learning", "[OK] Ready"),
+        ("Google Cloud", "Cloud Infrastructure", "[OK] Ready"),
+        ("AG-UI", "Agent Visualization", "[OK] Ready"),
+        ("Daytona", "Isolated Environments", "[OK] Ready"),
     ]
 
     for tech, purpose, status in sponsors:
@@ -94,7 +94,7 @@ async def showcase_sponsor_tech():
                 total=None
             )
             await asyncio.sleep(0.5)
-            progress.update(task1, completed=100, description=f"[green]✅ Daytona workspace created")
+            progress.update(task1, completed=100, description=f"[green][OK] Daytona workspace created")
 
             # Step 2: Tavily Search
             task2 = progress.add_task(
@@ -102,7 +102,7 @@ async def showcase_sponsor_tech():
                 total=None
             )
             await asyncio.sleep(0.5)
-            progress.update(task2, completed=100, description=f"[green]✅ Found 5 relevant resources")
+            progress.update(task2, completed=100, description=f"[green][OK] Found 5 relevant resources")
 
             # Step 3: OpenRouter Model
             task3 = progress.add_task(
@@ -110,7 +110,7 @@ async def showcase_sponsor_tech():
                 total=None
             )
             await asyncio.sleep(0.5)
-            progress.update(task3, completed=100, description=f"[green]✅ Generated code solution")
+            progress.update(task3, completed=100, description=f"[green][OK] Generated code solution")
 
             # Step 4: BrowserBase
             if agent_id == "researcher":
@@ -119,7 +119,7 @@ async def showcase_sponsor_tech():
                     total=None
                 )
                 await asyncio.sleep(0.5)
-                progress.update(task4, completed=100, description=f"[green]✅ Extracted API docs")
+                progress.update(task4, completed=100, description=f"[green][OK] Extracted API docs")
 
             # Step 5: W&B Weave Tracking
             task5 = progress.add_task(
@@ -127,7 +127,7 @@ async def showcase_sponsor_tech():
                 total=None
             )
             await asyncio.sleep(0.3)
-            progress.update(task5, completed=100, description=f"[green]✅ Metrics logged to Weave")
+            progress.update(task5, completed=100, description=f"[green][OK] Metrics logged to Weave")
 
         # Execute with full stack
         result = await stack.execute_with_full_stack(demo_task, agent_id)
@@ -135,7 +135,7 @@ async def showcase_sponsor_tech():
 
     # Show integration results
     console.print("\n" + "="*70)
-    console.print(Panel.fit("[bold green]✨ Integration Results[/bold green]", border_style="green"))
+    console.print(Panel.fit("[bold green]Refiner Integration Results[/bold green]", border_style="green"))
 
     # Create results table
     results_table = Table(show_header=True)
@@ -144,18 +144,18 @@ async def showcase_sponsor_tech():
 
     if results.get("architect"):
         r = results["architect"]
-        results_table.add_row("Daytona Workspace", f"✅ {r.get('workspace', 'N/A')}")
-        results_table.add_row("Tavily Search", f"✅ Found {len(r.get('search', []))} results")
-        results_table.add_row("OpenRouter Response", "✅ Generated solution")
-        results_table.add_row("Mastra Workflow", f"✅ {r.get('workflow', 'N/A')}")
-        results_table.add_row("Serverless RL Action", f"✅ Action: {r.get('rl_action', 'N/A')}")
-        results_table.add_row("AG-UI Dashboard", f"✅ {r.get('dashboard', 'N/A')}")
-        results_table.add_row("GCP Firestore", f"✅ Doc: {r.get('firestore_doc', 'N/A')}")
+        results_table.add_row("Daytona Workspace", f"[OK] {r.get('workspace', 'N/A')}")
+        results_table.add_row("Tavily Search", f"[OK] Found {len(r.get('search', []))} results")
+        results_table.add_row("OpenRouter Response", "[OK] Generated solution")
+        results_table.add_row("Mastra Workflow", f"[OK] {r.get('workflow', 'N/A')}")
+        results_table.add_row("Serverless RL Action", f"[OK] Action: {r.get('rl_action', 'N/A')}")
+        results_table.add_row("AG-UI Dashboard", f"[OK] {r.get('dashboard', 'N/A')}")
+        results_table.add_row("GCP Firestore", f"[OK] Doc: {r.get('firestore_doc', 'N/A')}")
 
     console.print(results_table)
 
     # Show learning progress (simulated)
-    console.print("\n[bold cyan]📈 Learning Progress (via W&B Weave)[/bold cyan]")
+    console.print("\n[bold cyan][UP] Learning Progress (via W&B Weave)[/bold cyan]")
 
     learning_table = Table(show_header=True)
     learning_table.add_column("Generation", style="cyan")
@@ -177,7 +177,7 @@ async def showcase_sponsor_tech():
     # Final summary
     console.print("\n" + "="*70)
     console.print(Panel.fit(
-        "[bold green]✅ ALL SPONSOR TECHNOLOGIES INTEGRATED![/bold green]\n\n"
+        "[bold green][OK] ALL SPONSOR TECHNOLOGIES INTEGRATED![/bold green]\n\n"
         "• [cyan]W&B Weave[/cyan] - Tracking every decision and learning\n"
         "• [cyan]Tavily[/cyan] - Providing real-time web intelligence\n"
         "• [cyan]BrowserBase[/cyan] - Automating web interactions\n"
@@ -187,12 +187,12 @@ async def showcase_sponsor_tech():
         "• [cyan]Google Cloud[/cyan] - Scalable cloud infrastructure\n"
         "• [cyan]AG-UI[/cyan] - Beautiful agent visualizations\n"
         "• [cyan]Daytona[/cyan] - Isolated, secure environments\n\n"
-        "[yellow]Ready to win WeaveHacks 2! 🚀[/yellow]",
+        "[yellow]Ready to win WeaveHacks 2! [START][/yellow]",
         border_style="green"
     ))
 
     # Show how to access dashboards
-    console.print("\n[bold]📊 Live Dashboards:[/bold]")
+    console.print("\n[bold][CHART] Live Dashboards:[/bold]")
     console.print("• W&B Weave: https://wandb.ai/[entity]/weavehacks-collaborative")
     console.print("• AG-UI: https://agui.dev/dashboard/[agent-id]")
     console.print("• Mastra Workflows: https://mastra.dev/workflows/[workflow-id]")

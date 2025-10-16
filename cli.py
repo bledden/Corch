@@ -156,7 +156,7 @@ class FacilitairCLI:
             console.print(JSON(json.dumps(result, indent=2)))
         elif format == "markdown":
             console.print(f"# Task: {result['task']}\n")
-            console.print(f"**Status**: {'✅ Success' if result['success'] else '❌ Failed'}\n")
+            console.print(f"**Status**: {'Success' if result['success'] else 'Failed'}\n")
             console.print(f"**Agents**: {', '.join(result['agents_used'])}\n")
             console.print(f"**Duration**: {result['duration']}\n")
             console.print(f"\n## Output\n\n{result['output']}")
@@ -164,7 +164,7 @@ class FacilitairCLI:
             # Display header
             console.print(Panel.fit(
                 f"[bold cyan]Task:[/bold cyan] {result['task']}\n"
-                f"[bold green]Status:[/bold green] {'✅ Success' if result['success'] else '❌ Failed'}\n"
+                f"[bold green]Status:[/bold green] {'Success' if result['success'] else 'Failed'}\n"
                 f"[bold yellow]Duration:[/bold yellow] {result['duration']}",
                 border_style="cyan",
                 title="[bold]Facilitair Result[/bold]"
@@ -227,13 +227,13 @@ def collaborate(ctx, task, format, save, sequential, stream):
     validation = validate_api_keys()
 
     if not validation.get('all_valid'):
-        console.print("[red]❌ API key validation failed![/red]")
+        console.print("[red]API key validation failed![/red]")
         for key, status in validation.get('results', {}).items():
             if not status.get('valid'):
-                console.print(f"  [red]✗[/red] {key}: {status.get('message')}")
+                console.print(f"  [red]X[/red] {key}: {status.get('message')}")
         sys.exit(1)
 
-    console.print("[green]✅ API keys validated[/green]\n")
+    console.print("[green]API keys validated[/green]\n")
 
     cli_obj = ctx.obj['cli']
     cli_obj.config['use_sequential'] = sequential
@@ -282,10 +282,10 @@ def evaluate(ctx, tasks, compare_baseline):
         )
 
         if result.returncode == 0:
-            console.print("[green]✅ Evaluation completed successfully![/green]")
+            console.print("[green]Evaluation completed successfully![/green]")
             console.print(result.stdout)
         else:
-            console.print("[red]❌ Evaluation failed![/red]")
+            console.print("[red]Evaluation failed![/red]")
             console.print(result.stderr)
             sys.exit(1)
     else:
@@ -299,10 +299,10 @@ def evaluate(ctx, tasks, compare_baseline):
         )
 
         if result.returncode == 0:
-            console.print("[green]✅ Evaluation completed successfully![/green]")
+            console.print("[green]Evaluation completed successfully![/green]")
             console.print(result.stdout)
         else:
-            console.print("[red]❌ Evaluation failed![/red]")
+            console.print("[red]Evaluation failed![/red]")
             console.print(result.stderr)
             sys.exit(1)
 
@@ -350,7 +350,7 @@ def health():
     health_table.add_column("Message", style="white")
 
     for key, status in validation.get('results', {}).items():
-        status_icon = "✅" if status.get('valid') else "❌"
+        status_icon = "OK" if status.get('valid') else "FAIL"
         health_table.add_row(
             key,
             status_icon,
@@ -360,9 +360,9 @@ def health():
     console.print(health_table)
 
     if validation.get('all_valid'):
-        console.print("\n[bold green]✅ All systems operational[/bold green]")
+        console.print("\n[bold green]All systems operational[/bold green]")
     else:
-        console.print("\n[bold red]❌ Some systems not operational[/bold red]")
+        console.print("\n[bold red]Some systems not operational[/bold red]")
         sys.exit(1)
 
 
@@ -389,7 +389,7 @@ def init(output):
     with open(output, 'w') as f:
         json.dump(config, f, indent=2)
 
-    console.print(f"[green]✅ Configuration file created: {output}[/green]")
+    console.print(f"[green]Configuration file created: {output}[/green]")
     console.print("\nEdit this file to customize your Facilitair settings.")
 
 

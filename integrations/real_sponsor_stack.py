@@ -24,7 +24,7 @@ try:
     WEAVE_AVAILABLE = True
 except ImportError:
     WEAVE_AVAILABLE = False
-    print("⚠️ W&B Weave not installed - pip install weave")
+    print("[WARNING] W&B Weave not installed - pip install weave")
 
 
 class WeaveTracking:
@@ -41,9 +41,9 @@ class WeaveTracking:
                     project_name=os.getenv("WANDB_PROJECT", "weavehacks-collaborative")
                 )
                 self.initialized = True
-                print("✅ W&B Weave tracking initialized")
+                print("[OK] W&B Weave tracking initialized")
             except Exception as e:
-                print(f"⚠️ Weave init failed: {e}")
+                print(f"[WARNING] Weave init failed: {e}")
 
     @weave.op()
     def track_agent_execution(self, agent_id: str, task: str, result: str, metrics: Dict) -> Dict:
@@ -94,7 +94,7 @@ except ImportError:
         TAVILY_AVAILABLE = True
     except ImportError:
         TAVILY_AVAILABLE = False
-        print("⚠️ Tavily not installed - pip install tavily-python")
+        print("[WARNING] Tavily not installed - pip install tavily-python")
 
 
 class TavilySearch:
@@ -110,14 +110,14 @@ class TavilySearch:
                 # Try async client first (preferred)
                 try:
                     self.async_client = AsyncTavilyClient(api_key=api_key)
-                    print("✅ Tavily async client initialized")
+                    print("[OK] Tavily async client initialized")
                 except (ImportError, AttributeError):
                     # Fallback to sync client if async not available
                     from tavily import TavilyClient
                     self.client = TavilyClient(api_key=api_key)
-                    print("✅ Tavily sync client initialized")
+                    print("[OK] Tavily sync client initialized")
             except Exception as e:
-                print(f"⚠️ Tavily init failed: {e}")
+                print(f"[WARNING] Tavily init failed: {e}")
 
     async def search(self, query: str, max_results: int = 5, search_depth: str = "advanced") -> List[Dict]:
         """Perform real Tavily search with proper API calls"""
@@ -231,7 +231,7 @@ try:
     PLAYWRIGHT_AVAILABLE = True
 except ImportError:
     PLAYWRIGHT_AVAILABLE = False
-    print("⚠️ Playwright not installed - pip install playwright")
+    print("[WARNING] Playwright not installed - pip install playwright")
 
 try:
     import browserbase
@@ -262,11 +262,11 @@ class BrowserBaseAutomation:
         if self.is_configured:
             if BROWSERBASE_SDK_AVAILABLE:
                 self.bb_client = Browserbase(api_key=self.api_key)
-                print("✅ BrowserBase SDK initialized")
+                print("[OK] BrowserBase SDK initialized")
             else:
-                print("✅ BrowserBase API configured (using direct API)")
+                print("[OK] BrowserBase API configured (using direct API)")
         else:
-            print("⚠️ BrowserBase not configured or Playwright not installed")
+            print("[WARNING] BrowserBase not configured or Playwright not installed")
 
     async def create_session(self) -> Optional[str]:
         """Create a real BrowserBase session"""
@@ -414,9 +414,9 @@ class OpenRouterModels:
         )
 
         if self.is_configured:
-            print("✅ OpenRouter configured with real API key")
+            print("[OK] OpenRouter configured with real API key")
         else:
-            print("⚠️ OpenRouter not configured")
+            print("[WARNING] OpenRouter not configured")
 
         # Production model selection (verified to exist on OpenRouter)
         self.models = {
@@ -514,7 +514,7 @@ try:
     GCP_AVAILABLE = True
 except ImportError:
     GCP_AVAILABLE = False
-    print("⚠️ GCP libraries not fully installed")
+    print("[WARNING] GCP libraries not fully installed")
 
 
 class GoogleCloudIntegration:
@@ -556,12 +556,12 @@ class GoogleCloudIntegration:
                 )
 
                 self.is_configured = True
-                print(f"✅ Google Cloud configured for project: {self.project_id}")
+                print(f"[OK] Google Cloud configured for project: {self.project_id}")
 
             except Exception as e:
-                print(f"⚠️ GCP initialization failed: {e}")
+                print(f"[WARNING] GCP initialization failed: {e}")
         else:
-            print("⚠️ Google Cloud not configured")
+            print("[WARNING] Google Cloud not configured")
 
     async def store_in_firestore(self, collection: str, document: Dict) -> Optional[str]:
         """Store document in Firestore - REAL implementation"""
@@ -662,9 +662,9 @@ class DaytonaIntegration:
         )
 
         if self.is_configured:
-            print(f"✅ Daytona configured at {self.api_url}")
+            print(f"[OK] Daytona configured at {self.api_url}")
         else:
-            print("⚠️ Daytona not configured - would need API key")
+            print("[WARNING] Daytona not configured - would need API key")
 
     async def create_workspace(self, name: str, config: Dict) -> Optional[str]:
         """Create a real Daytona workspace via API"""
@@ -716,7 +716,7 @@ class RealSponsorStack:
 
     def __init__(self):
         print("\n" + "="*60)
-        print("🚀 Initializing PRODUCTION Sponsor Stack")
+        print("[START] Initializing PRODUCTION Sponsor Stack")
         print("="*60 + "\n")
 
         # Initialize real integrations only
@@ -727,7 +727,7 @@ class RealSponsorStack:
         self.gcp = GoogleCloudIntegration()
         self.daytona = DaytonaIntegration()
 
-        print("\n✅ Production stack initialized with REAL integrations only")
+        print("\n[OK] Production stack initialized with REAL integrations only")
         print("="*60 + "\n")
 
     async def execute_with_real_sponsors(self, task: str, agent_id: str) -> Dict:
@@ -814,19 +814,19 @@ async def demo_real_stack():
     print(f"Integrations Used: {', '.join(result['integrations_used'])}")
 
     if "tavily_search" in result:
-        print(f"\n✅ Tavily: Found {len(result['tavily_search'])} results")
+        print(f"\n[OK] Tavily: Found {len(result['tavily_search'])} results")
 
     if "openrouter_response" in result:
-        print(f"✅ OpenRouter: Generated response (cost: ${result.get('openrouter_cost', 0):.4f})")
+        print(f"[OK] OpenRouter: Generated response (cost: ${result.get('openrouter_cost', 0):.4f})")
 
     if result.get("weave_tracked"):
-        print("✅ W&B Weave: Execution tracked")
+        print("[OK] W&B Weave: Execution tracked")
 
     if "firestore_doc_id" in result:
-        print(f"✅ Firestore: Stored as {result['firestore_doc_id']}")
+        print(f"[OK] Firestore: Stored as {result['firestore_doc_id']}")
 
     if "daytona_workspace" in result:
-        print(f"✅ Daytona: Workspace {result['daytona_workspace']}")
+        print(f"[OK] Daytona: Workspace {result['daytona_workspace']}")
 
 
 if __name__ == "__main__":

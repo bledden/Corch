@@ -76,13 +76,13 @@ If you restart VS Code or your terminal, all these background processes will be 
 
 **DON'T** use background mode:
 ```python
-# ❌ Bad - leaves zombie process
+# [FAIL] Bad - leaves zombie process
 Bash(command="python3 -m uvicorn api:app", run_in_background=True)
 ```
 
 **DO** run in foreground or provide cleanup:
 ```python
-# ✅ Good - you control when to kill it
+# [OK] Good - you control when to kill it
 # Run manually: python3 -m uvicorn api:app --reload
 ```
 
@@ -103,10 +103,10 @@ KillShell(shell_id="test_id")
 
 **DON'T** use background mode:
 ```python
-# ❌ Unnecessary
+# [FAIL] Unnecessary
 Bash(command="ls -la", run_in_background=True)
 
-# ✅ Just run normally
+# [OK] Just run normally
 Bash(command="ls -la")
 ```
 
@@ -156,11 +156,11 @@ NOT through background processes. So it's 100% safe to kill all of them.
 > "Can we be sure we are closing those properly once that session has ended? Or do they need to stay open for the user to maintain context?"
 
 **Answer:**
-- ❌ They do NOT need to stay open for context
-- ✅ They should be closed when no longer needed
-- ⚠️ I should have been more diligent about cleanup
-- ✅ Going forward: Kill long-running background tasks explicitly
-- ✅ For the user: Safe to kill all of them right now
+- [FAIL] They do NOT need to stay open for context
+- [OK] They should be closed when no longer needed
+- [WARNING] I should have been more diligent about cleanup
+- [OK] Going forward: Kill long-running background tasks explicitly
+- [OK] For the user: Safe to kill all of them right now
 
 The accumulation happened because:
 1. Multiple previous sessions
@@ -168,4 +168,4 @@ The accumulation happened because:
 3. I didn't explicitly kill them with `KillShell`
 4. Each Claude Code session persists its background shells
 
-This is a good lesson in cleanup hygiene! 🧹
+This is a good lesson in cleanup hygiene! 

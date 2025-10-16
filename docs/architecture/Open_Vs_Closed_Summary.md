@@ -4,7 +4,7 @@
 
 **Game-Changing Discovery**: Open-source models have reached parity with proprietary models for many tasks. **Qwen 2.5 Coder matches GPT-4o performance** while being completely free. This changes everything.
 
-## 🎯 The Big Picture
+## [GOAL] The Big Picture
 
 ### Closed-Source Leaders (Based on Evals)
 1. **Claude Sonnet 4.5** - 77.2% SWE-bench (best coding model, Sept 2025)
@@ -20,7 +20,7 @@
 4. **Llama 3.3 70B** - Meta's latest, 405B performance at 70B size
 5. **IBM Granite 3.x** - Outperforms models 2x its size
 
-## 📊 Head-to-Head Comparisons
+## [CHART] Head-to-Head Comparisons
 
 ### SWE-bench (Real-World Coding)
 ```
@@ -46,7 +46,7 @@ Claude Sonnet 4.5:     High performance, moderate cost
 GPT-5:                 Highest performance, highest cost
 ```
 
-## 🚨 Surprising Findings
+##  Surprising Findings
 
 ### Open-Source Victories
 1. **Qwen 2.5 Coder = GPT-4o performance** (confirmed by benchmarks)
@@ -60,7 +60,7 @@ GPT-5:                 Highest performance, highest cost
 3. **GPT-5 not always best** - Claude 4.5 better for bug catching
 4. **Context windows matter** - Gemini 2.5's 2M tokens game-changing
 
-## 💰 The Economics
+## [COST] The Economics
 
 ### When to Use Closed-Source
 - **Critical production code** where 5-10% matters
@@ -75,7 +75,7 @@ GPT-5:                 Highest performance, highest cost
 - **Custom fine-tuning** needed
 - **Edge deployment** required
 
-## 🎮 Optimal Strategy for WeaveHacks
+##  Optimal Strategy for WeaveHacks
 
 ### Recommended Hybrid Approach
 ```yaml
@@ -97,7 +97,7 @@ premium_fallbacks:
 - **100%** savings on routine tasks
 - Pay only for complex/critical tasks
 
-## 🏁 Key Takeaways
+##  Key Takeaways
 
 1. **Open-source has arrived** - Qwen 2.5 matching GPT-4o is a watershed moment
 2. **Hybrid is optimal** - Use open for most, closed for critical
@@ -105,7 +105,7 @@ premium_fallbacks:
 4. **Specialization matters** - Codestral for languages, Granite for enterprise
 5. **The gap is closing fast** - 42% → 77% SWE-bench is massive progress
 
-## 📈 Trend Analysis
+## [UP] Trend Analysis
 
 ### What Changed in 2025
 - Open models went from "good enough" to "genuinely competitive"
@@ -119,7 +119,7 @@ premium_fallbacks:
 - Edge deployment will become standard
 - Hybrid architectures (MoE) will dominate
 
-## 🏆 Final Recommendations
+## [ACHIEVEMENT] Final Recommendations
 
 ### For WeaveHacks 2
 1. **Lead with open-source** - Shows innovation and cost awareness

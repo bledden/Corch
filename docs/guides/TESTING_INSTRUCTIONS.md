@@ -2,7 +2,7 @@
 
 ## Current Status
 
-✅ **Complete Implementation** - All code has been written and is ready to test:
+[OK] **Complete Implementation** - All code has been written and is ready to test:
 - CLI Streaming Client: `cli/streaming_client.py`
 - SSE Handler: `backend/streaming/sse_handler.py`
 - Streaming Router: `backend/routers/streaming.py`
@@ -93,24 +93,24 @@ Stream created: <uuid>
 
 3. **Streaming Events**:
 ```
-🚀 Task Started
-📋 Plan: 4 chunks, ~60.0s, ~$0.08
-🏗️  Architect: Analyzing requirements... (1/4)
-✅ Chunk 1 complete
-💻 Coder: Writing implementation... (2/4)
-✅ Chunk 2 complete
-🔍 Reviewer: Analyzing code quality... (3/4)
-✅ Chunk 3 complete
-📝 Documenter: Creating documentation... (4/4)
-✅ Chunk 4 complete
-✅ Task Completed!
+[START] Task Started
+[LIST] Plan: 4 chunks, ~60.0s, ~$0.08
+Architect  Architect: Analyzing requirements... (1/4)
+[OK] Chunk 1 complete
+Coder Coder: Writing implementation... (2/4)
+[OK] Chunk 2 complete
+Reviewer Reviewer: Analyzing code quality... (3/4)
+[OK] Chunk 3 complete
+Documenter Documenter: Creating documentation... (4/4)
+[OK] Chunk 4 complete
+[OK] Task Completed!
 ```
 
 4. **Final Result** displayed at the end
 
 ## What to Look For
 
-### ✅ Success Indicators
+### [OK] Success Indicators
 
 - CLI connects without errors
 - Events stream in real-time
@@ -119,7 +119,7 @@ Stream created: <uuid>
 - Progress tracking works
 - Final result displays
 
-### ❌ Potential Issues
+### [FAIL] Potential Issues
 
 **"HTTP 404: Not Found"**:
 - Streaming endpoints didn't load
@@ -174,11 +174,11 @@ Once validated, we can integrate real LLM streaming tokens.
 
 If the test works:
 
-1. ✅ Mark streaming infrastructure as validated
-2. 🔄 Integrate real LLM token streaming
-3. 🔄 Connect to actual orchestrator stages
-4. 🔄 Add semantic caching
-5. 🔄 Build React web UI
+1. [OK] Mark streaming infrastructure as validated
+2. [REFRESH] Integrate real LLM token streaming
+3. [REFRESH] Connect to actual orchestrator stages
+4. [REFRESH] Add semantic caching
+5. [REFRESH] Build React web UI
 
 If the test fails:
 1. Check error messages
@@ -195,7 +195,7 @@ Alternatively, run this automated test script:
 
 # test_streaming.sh
 
-echo "🧪 Testing Facilitair Streaming Implementation"
+echo " Testing Facilitair Streaming Implementation"
 echo "=============================================="
 echo ""
 
@@ -213,19 +213,19 @@ sleep 5
 
 # Check if server started
 if ! lsof -i :8000 > /dev/null; then
-    echo "❌ Server failed to start!"
+    echo "[FAIL] Server failed to start!"
     cat /tmp/facilitair_server.log
     exit 1
 fi
 
-echo "✅ Server started (PID: $SERVER_PID)"
+echo "[OK] Server started (PID: $SERVER_PID)"
 
 # Check endpoints
 echo "Step 3: Checking streaming endpoints..."
 if curl -s http://localhost:8000/openapi.json | grep -q "/api/stream/task"; then
-    echo "✅ Streaming endpoints found!"
+    echo "[OK] Streaming endpoints found!"
 else
-    echo "❌ Streaming endpoints NOT found!"
+    echo "[FAIL] Streaming endpoints NOT found!"
     kill $SERVER_PID
     exit 1
 fi
@@ -236,7 +236,7 @@ export FAC_API_KEY="test-key"
 timeout 30 python3 cli/streaming_client.py "Write a hello world function" || true
 
 echo ""
-echo "✅ Test complete!"
+echo "[OK] Test complete!"
 echo "Server is still running at PID $SERVER_PID"
 echo "Kill it with: kill $SERVER_PID"
 ```

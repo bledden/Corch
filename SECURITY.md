@@ -5,9 +5,9 @@
 All API keys have been removed from this repository as of the security commit on 2025-10-12.
 
 ### Keys That Were Exposed (Now Removed):
-- ✅ WANDB_API_KEY - Replaced with placeholder
-- ✅ OPENROUTER_API_KEY - Replaced with placeholder  
-- ✅ TAVILY_API_KEY - Replaced with placeholder
+- [OK] WANDB_API_KEY - Replaced with placeholder
+- [OK] OPENROUTER_API_KEY - Replaced with placeholder  
+- [OK] TAVILY_API_KEY - Replaced with placeholder
 
 ### Action Required:
 If you cloned this repository before the security fix:
@@ -34,7 +34,7 @@ cp .env.example .env
 ```
 
 ### Git History:
-⚠️ **WARNING**: Keys may still exist in git history. Consider:
+[WARNING] **WARNING**: Keys may still exist in git history. Consider:
 - Using `git filter-branch` or `BFG Repo-Cleaner` to remove from history
 - Or treat all exposed keys as compromised and regenerate
 

@@ -19,15 +19,15 @@ async def test_tavily_with_weave():
         # Initialize Weave
         print("\n1. Initializing Weave...")
         weave.init("facilitair/tavily-weave-test")
-        print("✅ Weave initialized")
+        print("[OK] Weave initialized")
 
         # Check for Tavily API key
         tavily_key = os.getenv("TAVILY_API_KEY")
         if not tavily_key or tavily_key.startswith("tvly-"):
             print(f"\n2. Checking Tavily API key...")
-            print(f"✅ Tavily API key found: {tavily_key[:15]}...")
+            print(f"[OK] Tavily API key found: {tavily_key[:15]}...")
         else:
-            print("⚠️  Tavily API key not found or invalid")
+            print("[WARNING]  Tavily API key not found or invalid")
             return False
 
         # Test Tavily search WITH @weave.op() decorator
@@ -49,7 +49,7 @@ async def test_tavily_with_weave():
         print("\n4. Executing web search with @weave.op() decorator...")
         result = await search_with_weave("What is the latest Python version released in 2024?")
 
-        print(f"✅ Web search successful!")
+        print(f"[OK] Web search successful!")
         print(f"Search executed: {result.get('search_executed', False)}")
         print(f"Search method: {result.get('search_method', 'N/A')}")
         print(f"Results count: {len(result.get('results', []))}")
@@ -57,11 +57,11 @@ async def test_tavily_with_weave():
             print(f"First result preview: {result['results'][0][:100]}...")
 
         print("\n" + "=" * 60)
-        print("✅ Test 6 PASSED: Tavily with Weave works!")
+        print("[OK] Test 6 PASSED: Tavily with Weave works!")
         return True
 
     except Exception as e:
-        print(f"\n❌ Test 6 FAILED: {e}")
+        print(f"\n[FAIL] Test 6 FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False

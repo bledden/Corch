@@ -279,7 +279,7 @@ async def run_comprehensive_evaluation(batch_size: int = 5):
     """Run comprehensive evaluation with 100 tasks"""
 
     console.print("\n" + "="*70)
-    console.print("[bold cyan]🚀 WeaveHacks Comprehensive Evaluation Suite[/bold cyan]")
+    console.print("[bold cyan][START] WeaveHacks Comprehensive Evaluation Suite[/bold cyan]")
     console.print("="*70 + "\n")
 
     # Initialize Weave tracking
@@ -288,7 +288,7 @@ async def run_comprehensive_evaluation(batch_size: int = 5):
 
     # Generate all tasks
     all_tasks = generate_all_tasks()
-    console.print(f"📋 Generated {len(all_tasks)} evaluation tasks")
+    console.print(f"[LIST] Generated {len(all_tasks)} evaluation tasks")
 
     # Show category breakdown
     category_counts = {}
@@ -312,7 +312,7 @@ async def run_comprehensive_evaluation(batch_size: int = 5):
     console.print()
 
     # Initialize orchestrator
-    console.print("🔧 Initializing collaborative orchestrator...")
+    console.print(" Initializing collaborative orchestrator...")
     orchestrator = CollaborativeOrchestrator(
         use_sponsors=True,
         user_strategy=Strategy.BALANCED
@@ -355,7 +355,7 @@ async def run_comprehensive_evaluation(batch_size: int = 5):
     with open(results_file, 'w') as f:
         json.dump(results, f, indent=2)
 
-    console.print(f"\n✅ Saved detailed results to: [cyan]{results_file}[/cyan]")
+    console.print(f"\n[OK] Saved detailed results to: [cyan]{results_file}[/cyan]")
 
     return results, run_id
 
@@ -437,27 +437,27 @@ def print_results_dashboard(results: List[Dict[str, Any]], stats: Dict[str, Any]
     """Print beautiful results dashboard"""
 
     console.print("\n" + "="*70)
-    console.print("[bold green]📊 EVALUATION RESULTS DASHBOARD[/bold green]")
+    console.print("[bold green][CHART] EVALUATION RESULTS DASHBOARD[/bold green]")
     console.print("="*70 + "\n")
 
     # Summary panel
     summary = stats["summary"]
     summary_text = f"""
 [bold cyan]Overall Performance[/bold cyan]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Total Tasks:         {summary['total_tasks']}
 Successful:          {summary['successful_tasks']} ([green]{summary['success_rate']:.1f}%[/green])
 Failed:              {summary['failed_tasks']}
 
 [bold cyan]Quality Metrics[/bold cyan]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Overall Score:       {summary['avg_overall_score']:.2f} / 1.00
 Quality Score:       {summary['avg_quality_score']:.2f} / 1.00
 Efficiency Score:    {summary['avg_efficiency_score']:.2f} / 1.00
 Harmony Score:       {summary['avg_harmony_score']:.2f} / 1.00
 
 [bold cyan]Performance[/bold cyan]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Avg Duration:        {summary['avg_duration_seconds']:.2f}s
 Total Time:          {summary['total_duration_seconds'] / 60:.1f} minutes
 Fastest Task:        {summary['min_duration']:.2f}s
@@ -466,7 +466,7 @@ Slowest Task:        {summary['max_duration']:.2f}s
     console.print(Panel(summary_text, title="Summary", border_style="green"))
 
     # Category breakdown table
-    console.print("\n[bold cyan]📂 Performance by Category[/bold cyan]\n")
+    console.print("\n[bold cyan] Performance by Category[/bold cyan]\n")
     cat_table = Table()
     cat_table.add_column("Category", style="cyan")
     cat_table.add_column("Tasks", justify="right")
@@ -487,7 +487,7 @@ Slowest Task:        {summary['max_duration']:.2f}s
     console.print(cat_table)
 
     # Agent usage table
-    console.print("\n[bold cyan]🤖 Agent Usage Statistics[/bold cyan]\n")
+    console.print("\n[bold cyan]Agent Agent Usage Statistics[/bold cyan]\n")
     agent_table = Table()
     agent_table.add_column("Agent", style="cyan")
     agent_table.add_column("Times Used", justify="right", style="magenta")
@@ -501,7 +501,7 @@ Slowest Task:        {summary['max_duration']:.2f}s
     console.print(agent_table)
 
     # Consensus methods table
-    console.print("\n[bold cyan]🤝 Consensus Method Usage[/bold cyan]\n")
+    console.print("\n[bold cyan][PARTNERSHIP] Consensus Method Usage[/bold cyan]\n")
     consensus_table = Table()
     consensus_table.add_column("Method", style="cyan")
     consensus_table.add_column("Times Used", justify="right", style="magenta")
@@ -516,7 +516,7 @@ Slowest Task:        {summary['max_duration']:.2f}s
 
     # W&B Weave link
     console.print("\n" + "="*70)
-    console.print(f"[bold cyan]📈 View detailed traces in W&B Weave:[/bold cyan]")
+    console.print(f"[bold cyan][UP] View detailed traces in W&B Weave:[/bold cyan]")
     console.print(f"[link]https://wandb.ai/facilitair/weavehacks-eval-{run_id}/weave[/link]")
     console.print("="*70 + "\n")
 
@@ -532,24 +532,24 @@ async def main():
         results, run_id = await run_comprehensive_evaluation(batch_size=5)
 
         # Generate statistics
-        console.print("\n📊 Generating statistics...")
+        console.print("\n[CHART] Generating statistics...")
         stats = generate_statistics(results)
 
         # Save statistics
         stats_file = f"evaluation_stats_{run_id}.json"
         with open(stats_file, 'w') as f:
             json.dump(stats, f, indent=2)
-        console.print(f"✅ Saved statistics to: [cyan]{stats_file}[/cyan]")
+        console.print(f"[OK] Saved statistics to: [cyan]{stats_file}[/cyan]")
 
         # Print results dashboard
         print_results_dashboard(results, stats, run_id)
 
-        console.print("\n[bold green]✨ Evaluation complete! Results are ready for presentation.[/bold green]\n")
+        console.print("\n[bold green]Refiner Evaluation complete! Results are ready for presentation.[/bold green]\n")
 
     except KeyboardInterrupt:
-        console.print("\n\n[yellow]⚠️  Evaluation interrupted by user[/yellow]")
+        console.print("\n\n[yellow][WARNING]  Evaluation interrupted by user[/yellow]")
     except Exception as e:
-        console.print(f"\n\n[red]❌ Error during evaluation: {e}[/red]")
+        console.print(f"\n\n[red][FAIL] Error during evaluation: {e}[/red]")
         raise
 
 if __name__ == "__main__":

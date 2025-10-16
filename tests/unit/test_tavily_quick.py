@@ -8,32 +8,32 @@ def test_tavily():
     api_key = os.getenv("TAVILY_API_KEY")
 
     if not api_key:
-        print("❌ TAVILY_API_KEY not set!")
+        print("[FAIL] TAVILY_API_KEY not set!")
         print("Set with: export TAVILY_API_KEY='tvly-your-key'")
         return False
 
-    print(f"✅ TAVILY_API_KEY found: {api_key[:10]}...")
+    print(f"[OK] TAVILY_API_KEY found: {api_key[:10]}...")
 
     try:
         client = TavilyClient(api_key=api_key)
 
         # Quick test search
-        print("\n🔍 Testing Tavily search...")
+        print("\nReviewer Testing Tavily search...")
         result = client.search("WeaveHacks 2 AI collaboration", max_results=2)
 
-        print(f"✅ Tavily search successful! Found {len(result.get('results', []))} results")
+        print(f"[OK] Tavily search successful! Found {len(result.get('results', []))} results")
 
         if result.get('results'):
-            print(f"\n📄 First result:")
+            print(f"\n First result:")
             print(f"   Title: {result['results'][0].get('title', 'N/A')}")
             print(f"   URL: {result['results'][0].get('url', 'N/A')}")
             print(f"   Content: {result['results'][0].get('content', 'N/A')[:100]}...")
 
-        print("\n✅ TAVILY INTEGRATION WORKING!")
+        print("\n[OK] TAVILY INTEGRATION WORKING!")
         return True
 
     except Exception as e:
-        print(f"❌ Tavily error: {e}")
+        print(f"[FAIL] Tavily error: {e}")
         return False
 
 if __name__ == "__main__":

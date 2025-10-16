@@ -1247,7 +1247,7 @@ def generate_summary_report(categories: Dict, code_models: List[Dict]) -> str:
         current_date = datetime(2025, 10, 11)  # Today's date
         model_date = datetime.strptime(model_info["date"], "%Y-%m-%d")
         is_available = model_date <= current_date
-        status = "✅ Available" if is_available else "🔜 Coming Soon"
+        status = "[OK] Available" if is_available else " Coming Soon"
 
         report.append(f"\n### {i}. {model_info['model']}")
         report.append(f"**Status:** {status} | **Release Date:** {model_info['date']}")

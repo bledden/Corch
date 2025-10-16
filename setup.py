@@ -57,13 +57,13 @@ def check_environment():
     for key, description in required_keys.items():
         value = os.getenv(key)
         if value and value != f"your_{key.lower()}_here":
-            status = "✅ Set"
+            status = "[OK] Set"
             style = "green"
         elif key in optional_keys:
-            status = "⚠️  Optional"
+            status = "[WARNING]  Optional"
             style = "yellow"
         else:
-            status = "❌ Missing"
+            status = "[FAIL] Missing"
             style = "red"
             missing_keys.append(key)
 
@@ -120,11 +120,11 @@ def initialize_weave():
         else:
             weave.init(project_name)
 
-        console.print(f"[green]✅ Weave initialized with project: {project_name}[/green]")
+        console.print(f"[green][OK] Weave initialized with project: {project_name}[/green]")
 
         # Test logging
         weave.log({"setup": "initialized", "test": True})
-        console.print("[green]✅ Test log successful[/green]")
+        console.print("[green][OK] Test log successful[/green]")
 
         return True
 
@@ -165,10 +165,10 @@ def verify_dependencies():
                     module = getattr(module, part)
             else:
                 __import__(package)
-            console.print(f"✅ {name} installed")
+            console.print(f"[OK] {name} installed")
         except ImportError:
             missing_required.append((package, name))
-            console.print(f"❌ {name} missing")
+            console.print(f"[FAIL] {name} missing")
 
     # Check optional packages
     for package, name in optional_packages:
@@ -180,10 +180,10 @@ def verify_dependencies():
                     module = getattr(module, part)
             else:
                 __import__(package)
-            console.print(f"✅ {name} installed (optional)")
+            console.print(f"[OK] {name} installed (optional)")
         except ImportError:
             missing_optional.append((package, name))
-            console.print(f"⚠️  {name} not installed (optional)")
+            console.print(f"[WARNING]  {name} not installed (optional)")
 
     if missing_required:
         console.print("\n[red]Missing required packages![/red]")
@@ -223,7 +223,7 @@ def main():
         weave_ok = initialize_weave()
 
         if weave_ok:
-            console.print("\n[bold green]✅ Setup Complete![/bold green]")
+            console.print("\n[bold green][OK] Setup Complete![/bold green]")
             console.print("\nYou can now run:")
             console.print("  [cyan]python train.py[/cyan] - Train the collaborative system")
             console.print("  [cyan]python execute.py[/cyan] - Run tasks with the trained system")

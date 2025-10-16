@@ -17,13 +17,13 @@ console = Console()
 
 def check_environment():
     """Check and setup environment variables"""
-    console.print(Panel.fit("[bold cyan]🔧 Checking Environment Setup[/bold cyan]", border_style="cyan"))
+    console.print(Panel.fit("[bold cyan] Checking Environment Setup[/bold cyan]", border_style="cyan"))
 
     # Load .env if exists
     env_loaded = load_dotenv()
 
     if not env_loaded:
-        console.print("[yellow]⚠️  No .env file found. Creating from template...[/yellow]")
+        console.print("[yellow][WARNING]  No .env file found. Creating from template...[/yellow]")
         # Create .env file with instructions
         with open('.env', 'w') as f:
             f.write("""# W&B Configuration (REQUIRED for tracking)
@@ -52,7 +52,7 @@ DEFAULT_STRATEGY=BALANCED
 DEMO_GENERATIONS=5
 DEMO_TASKS_PER_TYPE=3
 """)
-        console.print("[green]✅ Created .env file. Please add your API keys![/green]")
+        console.print("[green][OK] Created .env file. Please add your API keys![/green]")
         console.print("\n[bold red]Action Required:[/bold red]")
         console.print("1. Edit .env file and add your API keys")
         console.print("2. At minimum, add WANDB_API_KEY for W&B Weave tracking")
@@ -86,17 +86,17 @@ def check_api_keys():
         if key and key not in [f"your_{env_var.lower()}_here", "demo_mode_no_key_required",
                                "demo_mode_anthropic", "demo_mode_google", "demo_mode_openrouter",
                                "will_use_from_environment"]:
-            status = "[green]✅ Connected[/green]"
+            status = "[green][OK] Connected[/green]"
             if service != "W&B Weave":
                 available_llms.append(service)
         elif env_var == "OPENAI_API_KEY" and os.getenv(env_var):
             # Special check for OpenAI from environment
-            status = "[green]✅ Connected[/green]"
+            status = "[green][OK] Connected[/green]"
             available_llms.append(service)
         elif key and "demo_mode" in key:
-            status = "[yellow]⚠️ Demo mode[/yellow]"
+            status = "[yellow][WARNING] Demo mode[/yellow]"
         else:
-            status = "[red]❌ Missing[/red]"
+            status = "[red][FAIL] Missing[/red]"
 
         table.add_row(service, status, notes)
 
@@ -108,14 +108,14 @@ def check_api_keys():
     demo_mode = wandb_key == "demo_mode_no_key_required"
 
     if demo_mode:
-        console.print("\n[bold yellow]⚠️  Running in demo mode without W&B tracking[/bold yellow]")
+        console.print("\n[bold yellow][WARNING]  Running in demo mode without W&B tracking[/bold yellow]")
         console.print("The demo will use simulated metrics.")
     elif not has_wandb:
-        console.print("\n[bold red]⚠️  Warning: W&B API key not configured![/bold red]")
+        console.print("\n[bold red][WARNING]  Warning: W&B API key not configured![/bold red]")
         console.print("The demo will run but without tracking metrics.")
 
     if not available_llms:
-        console.print("\n[bold yellow]⚠️  No LLM API keys configured![/bold yellow]")
+        console.print("\n[bold yellow][WARNING]  No LLM API keys configured![/bold yellow]")
         console.print("The demo will run in simulation mode.")
         return False, has_wandb
 
@@ -139,14 +139,14 @@ def test_wandb_connection():
         result = test_op(21)
 
         if result == 42:
-            console.print("[green]✅ W&B Weave connection successful![/green]")
+            console.print("[green][OK] W&B Weave connection successful![/green]")
             return True
         else:
-            console.print("[red]❌ W&B Weave test failed[/red]")
+            console.print("[red][FAIL] W&B Weave test failed[/red]")
             return False
 
     except Exception as e:
-        console.print(f"[red]❌ W&B Weave error: {e}[/red]")
+        console.print(f"[red][FAIL] W&B Weave error: {e}[/red]")
         return False
 
 
@@ -180,14 +180,14 @@ async def test_llm_connection():
         )
 
         if response.content and not response.error:
-            console.print(f"[green]✅ LLM responded: {response.content[:50]}...[/green]")
+            console.print(f"[green][OK] LLM responded: {response.content[:50]}...[/green]")
             return True
         else:
-            console.print(f"[yellow]⚠️  LLM simulation mode active[/yellow]")
+            console.print(f"[yellow][WARNING]  LLM simulation mode active[/yellow]")
             return False
 
     except ImportError as e:
-        console.print(f"[yellow]⚠️  LLM client not found: {e}[/yellow]")
+        console.print(f"[yellow][WARNING]  LLM client not found: {e}[/yellow]")
         console.print("Creating basic LLM client for testing...")
 
         # Test OpenAI API directly if available
@@ -201,16 +201,16 @@ async def test_llm_connection():
                     max_tokens=20
                 )
                 content = response.choices[0].message.content
-                console.print(f"[green]✅ OpenAI API works: {content}[/green]")
+                console.print(f"[green][OK] OpenAI API works: {content}[/green]")
                 return True
             except Exception as e2:
-                console.print(f"[yellow]⚠️  OpenAI test failed: {e2}[/yellow]")
+                console.print(f"[yellow][WARNING]  OpenAI test failed: {e2}[/yellow]")
 
         console.print("Will use simulation mode for demo")
         return False
 
     except Exception as e:
-        console.print(f"[yellow]⚠️  LLM test failed: {e}[/yellow]")
+        console.print(f"[yellow][WARNING]  LLM test failed: {e}[/yellow]")
         console.print("Will use simulation mode for demo")
         return False
 
@@ -244,18 +244,18 @@ def check_dependencies():
             missing.append(module)
 
     if missing:
-        console.print(f"[red]❌ Missing dependencies: {', '.join(missing)}[/red]")
+        console.print(f"[red][FAIL] Missing dependencies: {', '.join(missing)}[/red]")
         console.print("\n[bold]Run:[/bold] pip install -r requirements.txt")
         return False
 
-    console.print("[green]✅ All dependencies installed[/green]")
+    console.print("[green][OK] All dependencies installed[/green]")
     return True
 
 
 async def main():
     """Main setup and test flow"""
     console.print(Panel.fit(
-        "[bold cyan]🚀 WeaveHacks Collaborative Orchestrator Setup[/bold cyan]",
+        "[bold cyan][START] WeaveHacks Collaborative Orchestrator Setup[/bold cyan]",
         border_style="cyan"
     ))
 
@@ -293,15 +293,15 @@ async def main():
     status_table.add_column("Component", style="cyan", width=30)
     status_table.add_column("Status", width=20)
 
-    status_table.add_row("Dependencies", "[green]✅ Ready[/green]")
-    status_table.add_row("Environment", "[green]✅ Configured[/green]")
+    status_table.add_row("Dependencies", "[green][OK] Ready[/green]")
+    status_table.add_row("Environment", "[green][OK] Configured[/green]")
     status_table.add_row(
         "W&B Weave",
-        "[green]✅ Connected[/green]" if wandb_ok else "[yellow]⚠️  Not configured[/yellow]"
+        "[green][OK] Connected[/green]" if wandb_ok else "[yellow][WARNING]  Not configured[/yellow]"
     )
     status_table.add_row(
         "LLM APIs",
-        "[green]✅ Connected[/green]" if llm_ok else "[yellow]⚠️  Simulation mode[/yellow]"
+        "[green][OK] Connected[/green]" if llm_ok else "[yellow][WARNING]  Simulation mode[/yellow]"
     )
 
     console.print(status_table)
@@ -310,7 +310,7 @@ async def main():
     console.print("\n[bold]Next Steps:[/bold]")
 
     if wandb_ok and llm_ok:
-        console.print("[green]✨ Everything is ready! You can now run:[/green]")
+        console.print("[green]Refiner Everything is ready! You can now run:[/green]")
         console.print("   python demo.py                    # Basic demo")
         console.print("   python demo_with_strategy.py      # Interactive strategy demo")
     elif not wandb_ok:
@@ -320,7 +320,7 @@ async def main():
         console.print("[yellow]1. Add LLM API keys to .env for real execution[/yellow]")
         console.print("[yellow]2. Demo will run in simulation mode[/yellow]")
 
-    console.print("\n[bold cyan]Ready to showcase at WeaveHacks 2! 🎉[/bold cyan]")
+    console.print("\n[bold cyan]Ready to showcase at WeaveHacks 2! [SUCCESS][/bold cyan]")
 
 
 if __name__ == "__main__":

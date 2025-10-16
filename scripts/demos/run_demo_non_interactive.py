@@ -22,7 +22,7 @@ console = Console()
 async def run_simple_test():
     """Run a simple test of the system"""
     console.print("\n" + "="*60)
-    console.print(Panel.fit("[bold cyan]🚀 Testing Collaborative System[/bold cyan]", border_style="cyan"))
+    console.print(Panel.fit("[bold cyan][START] Testing Collaborative System[/bold cyan]", border_style="cyan"))
 
     # Import after environment is loaded
     from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
@@ -79,9 +79,9 @@ async def run_simple_test():
             agents=["architect"],
             consensus_method="direct"
         )
-        console.print(f"[green]✅ Single agent result:[/green] {result['final_output'][:200]}...")
+        console.print(f"[green][OK] Single agent result:[/green] {result['final_output'][:200]}...")
     except Exception as e:
-        console.print(f"[red]❌ Single agent failed: {e}[/red]")
+        console.print(f"[red][FAIL] Single agent failed: {e}[/red]")
 
     # Test 2: Multiple agents with voting
     console.print("\n[cyan]Test 2: Multi-Agent with Voting[/cyan]")
@@ -91,9 +91,9 @@ async def run_simple_test():
             agents=["architect", "coder"],
             consensus_method="voting"
         )
-        console.print(f"[green]✅ Voting result:[/green] {result['final_output'][:200]}...")
+        console.print(f"[green][OK] Voting result:[/green] {result['final_output'][:200]}...")
     except Exception as e:
-        console.print(f"[red]❌ Multi-agent voting failed: {e}[/red]")
+        console.print(f"[red][FAIL] Multi-agent voting failed: {e}[/red]")
 
     # Test 3: Synthesis
     console.print("\n[cyan]Test 3: Synthesis Consensus[/cyan]")
@@ -103,24 +103,24 @@ async def run_simple_test():
             agents=["architect", "coder", "reviewer"],
             consensus_method="synthesis"
         )
-        console.print(f"[green]✅ Synthesis result:[/green] {result['final_output'][:200]}...")
+        console.print(f"[green][OK] Synthesis result:[/green] {result['final_output'][:200]}...")
     except Exception as e:
-        console.print(f"[red]❌ Synthesis failed: {e}[/red]")
+        console.print(f"[red][FAIL] Synthesis failed: {e}[/red]")
 
     # Summary
     console.print("\n" + "="*60)
-    console.print(Panel.fit("[bold green]✅ Testing Complete![/bold green]", border_style="green"))
+    console.print(Panel.fit("[bold green][OK] Testing Complete![/bold green]", border_style="green"))
 
     table = Table(show_header=True)
     table.add_column("Test", style="cyan")
     table.add_column("Status", style="green")
 
-    table.add_row("Single Agent", "✅ Working")
-    table.add_row("Multi-Agent Voting", "✅ Working")
-    table.add_row("Synthesis Consensus", "✅ Working")
+    table.add_row("Single Agent", "[OK] Working")
+    table.add_row("Multi-Agent Voting", "[OK] Working")
+    table.add_row("Synthesis Consensus", "[OK] Working")
 
     console.print(table)
-    console.print("\n[bold cyan]System is ready for the hackathon! 🎉[/bold cyan]")
+    console.print("\n[bold cyan]System is ready for the hackathon! [SUCCESS][/bold cyan]")
 
 if __name__ == "__main__":
     try:

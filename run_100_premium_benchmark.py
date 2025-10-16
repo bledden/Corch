@@ -159,7 +159,7 @@ async def run_task(orchestrator: CollaborativeOrchestrator, task: str, task_id: 
             "model": "premium-ensemble"
         }
     except Exception as e:
-        console.print(f"[red]❌ Task {task_id} failed: {str(e)}[/red]")
+        console.print(f"[red][FAIL] Task {task_id} failed: {str(e)}[/red]")
         return {
             "task_id": task_id,
             "task": task,
@@ -172,7 +172,7 @@ async def run_task(orchestrator: CollaborativeOrchestrator, task: str, task_id: 
 
 async def main():
     console.print("[bold cyan]" + "="*80)
-    console.print("🏆 100-Task Premium Benchmark - SWE-bench Verified")
+    console.print("[ACHIEVEMENT] 100-Task Premium Benchmark - SWE-bench Verified")
     console.print("="*80 + "[/bold cyan]\n")
 
     console.print("[yellow]Models:[/yellow]")
@@ -190,7 +190,7 @@ async def main():
         config = yaml.safe_load(f)
 
     # Initialize orchestrators
-    console.print("🔧 Initializing orchestrators...\n")
+    console.print(" Initializing orchestrators...\n")
 
     sequential_orchestrator = SequentialOrchestrator(
         config_path='config/config_premium.yaml'
@@ -249,7 +249,7 @@ async def main():
 
     # Display results
     console.print("\n[bold green]" + "="*80)
-    console.print("📊 RESULTS")
+    console.print("[CHART] RESULTS")
     console.print("="*80 + "[/bold green]\n")
 
     results_table = Table(show_header=True, header_style="bold magenta")
@@ -299,8 +299,8 @@ async def main():
     with open(output_file, 'w') as f:
         json.dump(final_data, f, indent=2)
 
-    console.print(f"[green]✅ Results saved to {output_file}[/green]\n")
-    console.print(f"[cyan]🔗 View on Weave: https://wandb.ai/facilitair/premium-100-task-{run_id}/weave[/cyan]\n")
+    console.print(f"[green][OK] Results saved to {output_file}[/green]\n")
+    console.print(f"[cyan][LINK] View on Weave: https://wandb.ai/facilitair/premium-100-task-{run_id}/weave[/cyan]\n")
 
 if __name__ == "__main__":
     asyncio.run(main())

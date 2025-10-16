@@ -36,10 +36,10 @@ We compared Sequential Collaboration against single-model GPT-4 baseline on 10 t
 
 | Metric | Sequential | Single-Model | Winner |
 |--------|-----------|--------------|--------|
-| Success Rate | **100%** (10/10) | 80% (8/10) | ✅ Sequential |
-| Avg Quality | **0.800** | 0.640 | ✅ Sequential |
-| Hallucinations | **0%** (0/10) | 10% (1/10) | ✅ Sequential |
-| Avg Duration | **0.02s** | 14.35s | ✅ Sequential |
+| Success Rate | **100%** (10/10) | 80% (8/10) | [OK] Sequential |
+| Avg Quality | **0.800** | 0.640 | [OK] Sequential |
+| Hallucinations | **0%** (0/10) | 10% (1/10) | [OK] Sequential |
+| Avg Duration | **0.02s** | 14.35s | [OK] Sequential |
 
 **Key Findings:**
 - Sequential collaboration achieves **100% success rate**
@@ -72,14 +72,14 @@ Output:
 Facilitair Health Check
 
                                  API Key Status
-┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Key                ┃ Status ┃ Message                                        ┃
-┡━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ WANDB_API_KEY      │ ✅     │ Valid                                          │
-│ OPENROUTER_API_KEY │ ✅     │ Valid                                          │
-└────────────────────┴────────┴────────────────────────────────────────────────┘
 
-✅ All systems operational
+ Key                 Status  Message                                        
+
+| WANDB_API_KEY      | [OK]     | Valid                                          |
+| OPENROUTER_API_KEY | [OK]     | Valid                                          |
++--------------------+--------+------------------------------------------------+
+
+[OK] All systems operational
 ```
 
 #### 2. Collaborate
@@ -518,38 +518,38 @@ python3 cli.py evaluate --tasks 10 --compare-baseline
 All interfaces use the same sequential collaboration workflow:
 
 ```
-┌─────────────┐
-│   User      │
-│  Request    │
-└─────┬───────┘
-      │
-      ▼
-┌─────────────┐
-│  CLI / API  │
-│   /  Web    │
-└─────┬───────┘
-      │
-      ▼
-┌───────────────────────────────────────────┐
-│   Collaborative Orchestrator              │
-│                                           │
-│   Stage 1: ARCHITECT  (design)            │
-│       ↓                                   │
-│   Stage 2: CODER      (implement)         │
-│       ↓                                   │
-│   Stage 3: REVIEWER   (review)            │
-│       ↓                                   │
-│   Stage 4: REFINER    (fix issues)        │
-│       ↓         ↑                         │
-│       └─────────┘ (iterate up to 3x)      │
-│       ↓                                   │
-│   Stage 5: DOCUMENTER (document)          │
-└───────────┬───────────────────────────────┘
-            │
-            ▼
-      ┌─────────┐
-      │ Result  │
-      └─────────┘
++-------------+
+|   User      |
+|  Request    |
++-----+-------+
+      |
+      v
++-------------+
+|  CLI / API  |
+|   /  Web    |
++-----+-------+
+      |
+      v
++-------------------------------------------+
+|   Collaborative Orchestrator              |
+|                                           |
+|   Stage 1: ARCHITECT  (design)            |
+|       ↓                                   |
+|   Stage 2: CODER      (implement)         |
+|       ↓                                   |
+|   Stage 3: REVIEWER   (review)            |
+|       ↓                                   |
+|   Stage 4: REFINER    (fix issues)        |
+|       ↓         ↑                         |
+|       +---------+ (iterate up to 3x)      |
+|       ↓                                   |
+|   Stage 5: DOCUMENTER (document)          |
++-----------+-------------------------------+
+            |
+            v
+      +---------+
+      | Result  |
+      +---------+
 ```
 
 ---
@@ -565,9 +565,9 @@ For issues or questions:
 
 ## Next Steps
 
-1. ✅ CLI - Complete
-2. ✅ REST API - Complete
-3. ⏳ Web Dashboard - Coming soon
-4. ⏳ Deploy to cloud (Railway/Render/Fly.io)
-5. ⏳ Add authentication/rate limiting
-6. ⏳ Add WebSocket support for real-time updates
+1. [OK] CLI - Complete
+2. [OK] REST API - Complete
+3. [WAITING] Web Dashboard - Coming soon
+4. [WAITING] Deploy to cloud (Railway/Render/Fly.io)
+5. [WAITING] Add authentication/rate limiting
+6. [WAITING] Add WebSocket support for real-time updates

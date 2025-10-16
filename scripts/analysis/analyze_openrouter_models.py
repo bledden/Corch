@@ -366,18 +366,18 @@ def analyze_all_models():
     # Categorize by date
     categorized = categorize_models_by_date(OPENROUTER_MODELS)
 
-    print("\n📅 MODELS BY RELEASE DATE:")
+    print("\n MODELS BY RELEASE DATE:")
     print("-"*40)
 
-    print(f"\n🔥 LATEST (Last 30 days): {len(categorized['latest'])} models")
+    print(f"\n LATEST (Last 30 days): {len(categorized['latest'])} models")
     for model, date in categorized['latest'][:10]:  # Show top 10
         print(f"  • {model} ({date})")
 
-    print(f"\n📍 RECENT (Last 90 days): {len(categorized['recent'])} models")
+    print(f"\n RECENT (Last 90 days): {len(categorized['recent'])} models")
     for model, date in categorized['recent'][:5]:  # Show top 5
         print(f"  • {model} ({date})")
 
-    print(f"\n⭐ ESTABLISHED (3-6 months): {len(categorized['established'])} models")
+    print(f"\n[STAR] ESTABLISHED (3-6 months): {len(categorized['established'])} models")
     for model, date in categorized['established'][:3]:  # Show top 3
         print(f"  • {model} ({date})")
 
@@ -386,7 +386,7 @@ def analyze_all_models():
     latest_in_family = find_latest_in_each_family(families)
 
     print("\n"+"="*80)
-    print("🏆 LATEST MODEL IN EACH FAMILY:")
+    print("[ACHIEVEMENT] LATEST MODEL IN EACH FAMILY:")
     print("-"*40)
 
     # Sort by provider
@@ -397,7 +397,7 @@ def analyze_all_models():
 
     # Recommendations for code generation
     print("\n"+"="*80)
-    print("💡 RECOMMENDED MODELS FOR CODE GENERATION (Based on recency):")
+    print("[IDEA] RECOMMENDED MODELS FOR CODE GENERATION (Based on recency):")
     print("-"*40)
 
     code_focused_latest = [
@@ -417,7 +417,7 @@ if __name__ == "__main__":
 
     # Print summary statistics
     print("\n"+"="*80)
-    print("📊 SUMMARY STATISTICS:")
+    print("[CHART] SUMMARY STATISTICS:")
     print("-"*40)
     print(f"Total models analyzed: {len(OPENROUTER_MODELS)}")
     print(f"Models with identifiable dates: {len(categorized['latest']) + len(categorized['recent']) + len(categorized['established']) + len(categorized['older'])}")

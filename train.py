@@ -134,11 +134,11 @@ class CollaborativeTrainer:
 [yellow]Cost Reduction:[/yellow] {report['improvements']['cost_reduction']:.1f}%
         """
 
-        console.print(Panel(improvements_text, title="🎯 Learning Progress", border_style="green"))
+        console.print(Panel(improvements_text, title="[GOAL] Learning Progress", border_style="green"))
 
         # Show discovered optimal teams
         if report['best_teams']:
-            team_table = Table(title="🏆 Discovered Optimal Teams", show_header=True)
+            team_table = Table(title="[ACHIEVEMENT] Discovered Optimal Teams", show_header=True)
             team_table.add_column("Task Type", style="cyan")
             team_table.add_column("Best Agents", style="green")
             team_table.add_column("Consensus", style="yellow")
@@ -156,7 +156,7 @@ class CollaborativeTrainer:
 
         # Show agent expertise discovery
         if report['agent_expertise']:
-            expertise_table = Table(title="🧠 Discovered Agent Expertise", show_header=True)
+            expertise_table = Table(title="[BRAIN] Discovered Agent Expertise", show_header=True)
             expertise_table.add_column("Agent", style="cyan")
             expertise_table.add_column("Best At", style="green")
             expertise_table.add_column("Performance", style="yellow")
@@ -204,7 +204,7 @@ def train(generations, fast, verbose):
         ) as progress:
 
             for gen in range(generations):
-                console.print(f"\n[bold blue]═══ Generation {gen + 1}/{generations} ═══[/bold blue]\n")
+                console.print(f"\n[bold blue]=== Generation {gen + 1}/{generations} ===[/bold blue]\n")
 
                 # Train one generation
                 results = await trainer.train_generation(gen, progress)
@@ -218,23 +218,23 @@ def train(generations, fast, verbose):
                     trainer.display_learning_progress()
 
         # Final report
-        console.print("\n[bold green]═══ Training Complete! ═══[/bold green]\n")
+        console.print("\n[bold green]=== Training Complete! ===[/bold green]\n")
 
         final_report = trainer.orchestrator.get_collaboration_report()
 
         if "improvements" in final_report:
             console.print(Panel(
-                f"[green]✨ Achieved {final_report['improvements']['quality']:.1f}% quality improvement![/green]\n"
-                f"[yellow]💰 Reduced costs by {final_report['improvements']['cost_reduction']:.1f}%[/yellow]\n"
-                f"[cyan]🤝 Improved collaboration harmony by {final_report['improvements']['harmony']:.1f}%[/cyan]",
-                title="🎉 Final Results",
+                f"[green]Refiner Achieved {final_report['improvements']['quality']:.1f}% quality improvement![/green]\n"
+                f"[yellow][COST] Reduced costs by {final_report['improvements']['cost_reduction']:.1f}%[/yellow]\n"
+                f"[cyan][PARTNERSHIP] Improved collaboration harmony by {final_report['improvements']['harmony']:.1f}%[/cyan]",
+                title="[SUCCESS] Final Results",
                 border_style="green"
             ))
 
         # Save the trained model
         console.print("\n[yellow]Saving trained orchestrator...[/yellow]")
         # In a real implementation, we'd pickle or save the orchestrator state
-        console.print("[green]✓ Orchestrator saved![/green]")
+        console.print("[green][OK] Orchestrator saved![/green]")
 
     # Run the training
     asyncio.run(run_training())

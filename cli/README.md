@@ -11,11 +11,11 @@ This CLI client connects to Facilitair's streaming API endpoints and displays ag
 - **Live SSE Streaming**: Connects to `/api/stream/events/{stream_id}` for real-time updates
 - **Rich Terminal UI**: Beautiful terminal interface with progress indicators
 - **Agent Visualization**: Maps backend events to friendly agent metaphors:
-  - 🏗️ Architect - Designs system architecture
-  - 💻 Coder - Implements the solution
-  - 🔍 Reviewer - Analyzes code quality
-  - ✨ Refiner - Improves the implementation
-  - 📝 Documenter - Creates documentation
+  - Architect Architect - Designs system architecture
+  - Coder Coder - Implements the solution
+  - Reviewer Reviewer - Analyzes code quality
+  - Refiner Refiner - Improves the implementation
+  - Documenter Documenter - Creates documentation
 
 ## Installation
 
@@ -73,16 +73,16 @@ The client maps backend events to a debate metaphor:
 
 | Backend Event | CLI Display |
 |--------------|-------------|
-| `chunk_started` (architecture stage) | 🏗️ Architect: Analyzing requirements... |
-| `chunk_started` (implementation stage) | 💻 Coder: Writing implementation... |
-| `chunk_started` (review stage) | 🔍 Reviewer: Analyzing code quality... |
+| `chunk_started` (architecture stage) | Architect Architect: Analyzing requirements... |
+| `chunk_started` (implementation stage) | Coder Coder: Writing implementation... |
+| `chunk_started` (review stage) | Reviewer Reviewer: Analyzing code quality... |
 | `token_stream` | Appends tokens to current agent's output |
-| `chunk_completed` | ✅ Chunk X complete |
-| `task_completed` | ✅ Task Completed! |
+| `chunk_completed` | [OK] Chunk X complete |
+| `task_completed` | [OK] Task Completed! |
 
 ## Implementation Status
 
-### ✅ Completed
+### [OK] Completed
 
 - [x] SSE client implementation with proper event parsing
 - [x] Rich terminal UI with live dashboard
@@ -91,7 +91,7 @@ The client maps backend events to a debate metaphor:
 - [x] Error handling and graceful shutdown
 - [x] Executable script with CLI args
 
-### ⏳ Pending (Backend Requirements)
+### [WAITING] Pending (Backend Requirements)
 
 The following backend components need to be implemented before this client can be tested:
 
@@ -115,8 +115,8 @@ The following backend components need to be implemented before this client can b
 
 ```
 cli/
-├── streaming_client.py    # Main CLI client
-└── README.md             # This file
++-- streaming_client.py    # Main CLI client
++-- README.md             # This file
 ```
 
 ### Testing
@@ -135,31 +135,31 @@ python cli/streaming_client.py "Write a function to sort a list"
 ## Architecture
 
 ```
-┌─────────────┐                ┌─────────────┐
-│             │  POST /stream  │             │
-│   CLI       ├───────────────>│   Backend   │
-│   Client    │  (create)      │   API       │
-│             │                │             │
-│             │<───────────────┤             │
-│             │  stream_id     │             │
-└──────┬──────┘                └──────┬──────┘
-       │                              │
-       │  GET /stream/events/{id}     │
-       │  (SSE connection)             │
-       │<─────────────────────────────┤
-       │                              │
-       │  event: task_started         │
-       │  data: {...}                 │
-       │<─────────────────────────────┤
-       │                              │
-       │  event: token_stream         │
-       │  data: {"tokens": "..."}     │
-       │<─────────────────────────────┤
-       │                              │
-       │  event: task_completed       │
-       │  data: {"result": "..."}     │
-       │<─────────────────────────────┤
-       │                              │
++-------------+                +-------------+
+|             |  POST /stream  |             |
+|   CLI       +--------------->|   Backend   |
+|   Client    |  (create)      |   API       |
+|             |                |             |
+|             |<---------------+             |
+|             |  stream_id     |             |
++------+------+                +------+------+
+       |                              |
+       |  GET /stream/events/{id}     |
+       |  (SSE connection)             |
+       |<-----------------------------+
+       |                              |
+       |  event: task_started         |
+       |  data: {...}                 |
+       |<-----------------------------+
+       |                              |
+       |  event: token_stream         |
+       |  data: {"tokens": "..."}     |
+       |<-----------------------------+
+       |                              |
+       |  event: task_completed       |
+       |  data: {"result": "..."}     |
+       |<-----------------------------+
+       |                              |
 ```
 
 ## Next Steps

@@ -496,14 +496,14 @@ async def run_smoke_test():
     # Smoke test validation
     console.print("\n[bold yellow]Smoke Test Validation:[/bold yellow]")
     if metrics['sequential']['total_successes'] >= 7:  # At least 70% pass rate
-        console.print("[green]✓ PASS: Sequential method performing well (>= 70% pass rate)[/green]")
+        console.print("[green][OK] PASS: Sequential method performing well (>= 70% pass rate)[/green]")
     else:
-        console.print("[red]✗ FAIL: Sequential method below 70% pass rate[/red]")
+        console.print("[red][X] FAIL: Sequential method below 70% pass rate[/red]")
 
     if total_searches >= 3:  # At least 3 web searches executed (out of 5 web-search tasks * 2 methods = 10)
-        console.print(f"[green]✓ PASS: Web search integration working ({total_searches} searches executed)[/green]")
+        console.print(f"[green][OK] PASS: Web search integration working ({total_searches} searches executed)[/green]")
     else:
-        console.print(f"[yellow]⚠ WARNING: Web search may not be triggering ({total_searches} searches executed)[/yellow]")
+        console.print(f"[yellow] WARNING: Web search may not be triggering ({total_searches} searches executed)[/yellow]")
 
     console.print("\n[bold cyan]Smoke test complete! Ready for full 500-task benchmark.[/bold cyan]\n")
 

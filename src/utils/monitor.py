@@ -151,7 +151,7 @@ class TestDashboard:
             # Progress bar
             pct = (test.current_task / test.total_tasks * 100) if test.total_tasks > 0 else 0
             filled = int(20 * pct / 100)
-            bar = "█" * filled + "░" * (20 - filled)
+            bar = "" * filled + "" * (20 - filled)
 
             if pct >= 90:
                 bar_color = "green"
@@ -187,7 +187,7 @@ class TestDashboard:
             else:
                 time_str = f"{int(time_ago/60)}m"
 
-            status_emoji = {"running": "🏃", "completed": "✅", "error": "❌"}.get(test.status, "❓")
+            status_emoji = {"running": "[RUNNING]", "completed": "[OK]", "error": "[FAIL]"}.get(test.status, "")
             status_text = f"{status_emoji} {test.status.upper()}\n[dim]({time_str} ago)[/dim]"
 
             table.add_row(
@@ -209,9 +209,9 @@ class TestDashboard:
         # Add footer legend
         footer = Text()
         footer.append("\n Legend: ", style="bold")
-        footer.append("🏃 Running  ", style="green")
-        footer.append("✅ Completed  ", style="blue")
-        footer.append("❌ Error", style="red")
+        footer.append("[RUNNING] Running  ", style="green")
+        footer.append("[OK] Completed  ", style="blue")
+        footer.append("[FAIL] Error", style="red")
         footer.append("\n\n Press Ctrl+C to exit", style="dim italic")
 
         # Combine
@@ -219,7 +219,7 @@ class TestDashboard:
 
         return Panel(
             table,
-            title="[bold cyan]🚀 Facilitair Test Monitor Dashboard[/bold cyan]",
+            title="[bold cyan][START] Facilitair Test Monitor Dashboard[/bold cyan]",
             subtitle=f"[dim]{datetime.now().strftime('%H:%M:%S')} | Monitoring {len(self.bash_ids)} test(s)[/dim]",
             border_style="cyan",
             padding=(1, 2)
@@ -227,7 +227,7 @@ class TestDashboard:
 
     def run(self, refresh_interval: float = 2.0):
         """Run the live dashboard"""
-        console.print("[bold cyan]🚀 Facilitair Test Monitor[/bold cyan]")
+        console.print("[bold cyan][START] Facilitair Test Monitor[/bold cyan]")
         console.print(f"[dim]Monitoring: {', '.join(self.bash_ids)}[/dim]\n")
 
         with Live(self.create_layout(), refresh_per_second=0.5, console=console) as live:
@@ -248,11 +248,11 @@ class TestDashboard:
                     time.sleep(refresh_interval)
 
             except KeyboardInterrupt:
-                console.print("\n[yellow]⚠️  Monitor stopped by user[/yellow]")
+                console.print("\n[yellow][WARNING]  Monitor stopped by user[/yellow]")
                 return
 
         # Print final summary
-        console.print("\n[bold green]✅ All tests completed![/bold green]\n")
+        console.print("\n[bold green][OK] All tests completed![/bold green]\n")
         self.print_summary()
 
     def print_summary(self):

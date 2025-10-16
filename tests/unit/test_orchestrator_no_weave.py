@@ -34,15 +34,15 @@ async def test_orchestrator_no_weave():
             max_tokens=200
         )
 
-        print(f"✅ LLMClient call successful!")
+        print(f"[OK] LLMClient call successful!")
         print(f"Response preview: {response.content[:100]}...")
 
         print("\n" + "=" * 60)
-        print("✅ Test 4 PASSED: LLMClient works without weave.init!")
+        print("[OK] Test 4 PASSED: LLMClient works without weave.init!")
         return True
 
     except Exception as e:
-        print(f"\n❌ Test 4 FAILED: {e}")
+        print(f"\n[FAIL] Test 4 FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False

@@ -52,15 +52,15 @@ async def test_multiple_failures():
     # Try to execute a simple task
     task = "Create a function to add two numbers"
 
-    print(f"\n🚀 Executing task: {task}")
-    print("⚠️  This will require multiple fallback attempts\n")
+    print(f"\n[START] Executing task: {task}")
+    print("[WARNING]  This will require multiple fallback attempts\n")
 
     try:
         result = await orchestrator.execute_agent_task("coder", task)
-        print(f"\n✅ SUCCESS after multiple retries!")
+        print(f"\n[OK] SUCCESS after multiple retries!")
         print(f"Result: {result[:200]}...\n")
     except Exception as e:
-        print(f"\n❌ FAILED after all attempts: {e}\n")
+        print(f"\n[FAIL] FAILED after all attempts: {e}\n")
 
     print("=" * 80)
     print("TEST 2 COMPLETE")

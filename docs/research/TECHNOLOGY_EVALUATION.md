@@ -30,13 +30,13 @@ optimizer = dspy.BootstrapFewShot(metric=code_quality)
 optimized_generator = optimizer.compile(CodeGenerator(), trainset=examples)
 ```
 
-### **Verdict: ❌ NO - Not for this week**
+### **Verdict: [FAIL] NO - Not for this week**
 
 **Why:**
-- ⏱️ **Time**: Requires training data collection and optimization runs (days)
-- 🎯 **Current Pain**: You don't have prompt quality issues - your baseline is 100%!
-- 💰 **Cost**: Optimization requires hundreds of LLM calls
-- 🔧 **Complexity**: Another abstraction layer on top of your working system
+- [TIME] **Time**: Requires training data collection and optimization runs (days)
+- [GOAL] **Current Pain**: You don't have prompt quality issues - your baseline is 100%!
+- [COST] **Cost**: Optimization requires hundreds of LLM calls
+-  **Complexity**: Another abstraction layer on top of your working system
 
 **When to Consider**: If you're seeing systematic prompt failures or need to optimize for specific edge cases after v1.0 ships.
 
@@ -66,17 +66,17 @@ results = client.query.get("CodeExample", ["code"]).with_near_text({
 }).do()
 ```
 
-### **Verdict: ⚠️ MAYBE - Only if adding RAG**
+### **Verdict: [WARNING] MAYBE - Only if adding RAG**
 
 **Pros:**
-- ✅ **Caching**: Store high-quality solutions for similar tasks
-- ✅ **Learning**: System improves over time with examples
-- ✅ **Cost Reduction**: Retrieve solutions instead of regenerating
+- [OK] **Caching**: Store high-quality solutions for similar tasks
+- [OK] **Learning**: System improves over time with examples
+- [OK] **Cost Reduction**: Retrieve solutions instead of regenerating
 
 **Cons:**
-- ⏱️ **Time**: 2-3 days to integrate properly
-- 🏗️ **Infrastructure**: Requires running Weaviate server
-- 📊 **Data**: Needs initial corpus of quality examples
+- [TIME] **Time**: 2-3 days to integrate properly
+- Architect **Infrastructure**: Requires running Weaviate server
+- [CHART] **Data**: Needs initial corpus of quality examples
 
 **Use Case for You:**
 ```python
@@ -101,13 +101,13 @@ Systems programming language (fast, memory-safe).
 ### Potential Value
 Rewrite performance-critical components in Rust for speed.
 
-### **Verdict: ❌ HELL NO - Not for this week (or month)**
+### **Verdict: [FAIL] HELL NO - Not for this week (or month)**
 
 **Why:**
-- ⏱️ **Time**: Weeks to rewrite even small components
-- 🎯 **Bottleneck**: Your bottleneck is LLM API calls (seconds), not Python code (milliseconds)
-- 🔧 **Complexity**: Adds build complexity, deployment complexity
-- 📊 **Impact**: Would save <1% of total runtime
+- [TIME] **Time**: Weeks to rewrite even small components
+- [GOAL] **Bottleneck**: Your bottleneck is LLM API calls (seconds), not Python code (milliseconds)
+-  **Complexity**: Adds build complexity, deployment complexity
+- [CHART] **Impact**: Would save <1% of total runtime
 
 **Math:**
 - Python overhead: ~10ms per task
@@ -147,17 +147,17 @@ patterns = session.run("""
 """)
 ```
 
-### **Verdict: ⚠️ MAYBE - Only for analytics/observability**
+### **Verdict: [WARNING] MAYBE - Only for analytics/observability**
 
 **Pros:**
-- ✅ **Observability**: Visualize agent collaboration patterns
-- ✅ **Debugging**: Track which agent pairs find most issues
-- ✅ **Optimization**: Identify bottlenecks in workflow
+- [OK] **Observability**: Visualize agent collaboration patterns
+- [OK] **Debugging**: Track which agent pairs find most issues
+- [OK] **Optimization**: Identify bottlenecks in workflow
 
 **Cons:**
-- ⏱️ **Time**: 3-4 days to integrate
-- 🏗️ **Infrastructure**: Another service to run
-- 🎯 **Priority**: Not blocking v1.0 launch
+- [TIME] **Time**: 3-4 days to integrate
+- Architect **Infrastructure**: Another service to run
+- [GOAL] **Priority**: Not blocking v1.0 launch
 
 **Use Case for You:**
 Track collaboration patterns to optimize agent selection:
@@ -218,13 +218,13 @@ else:
     return result
 ```
 
-### **Verdict: ✅ YES - Easy win for v1.0**
+### **Verdict: [OK] YES - Easy win for v1.0**
 
 **Why:**
-- ⏱️ **Time**: 2-3 hours to implement
-- 💰 **Cost Savings**: Dramatic for repeated similar tasks
-- 🎯 **Impact**: Users see instant responses for similar queries
-- 🔧 **Complexity**: Minimal - just pip install sentence-transformers
+- [TIME] **Time**: 2-3 hours to implement
+- [COST] **Cost Savings**: Dramatic for repeated similar tasks
+- [GOAL] **Impact**: Users see instant responses for similar queries
+-  **Complexity**: Minimal - just pip install sentence-transformers
 
 **Implementation Plan:**
 ```python
@@ -271,12 +271,12 @@ if any(ent[1] == "PRODUCT" for ent in entities):
     enable_web_search = True
 ```
 
-### **Verdict: ❌ NO - LLMs do this better**
+### **Verdict: [FAIL] NO - LLMs do this better**
 
 **Why:**
-- 🎯 **Redundant**: Your LLMs already understand intent perfectly
-- 🐌 **Slower**: Adding spaCy processing before LLM adds latency
-- 💰 **Cost**: LLMs are already reading the task anyway
+- [GOAL] **Redundant**: Your LLMs already understand intent perfectly
+-  **Slower**: Adding spaCy processing before LLM adds latency
+- [COST] **Cost**: LLMs are already reading the task anyway
 
 **Exception**: If you need to process tasks BEFORE sending to LLM for routing decisions. But your current routing seems to work fine.
 
@@ -289,13 +289,13 @@ if any(ent[1] == "PRODUCT" for ent in entities):
 - **Java**: Enterprise integration, JVM ecosystem
 - **TypeScript**: Full-stack web app
 
-### **Verdict: ❌ NO - Stick with Python**
+### **Verdict: [FAIL] NO - Stick with Python**
 
 **Why Python is Perfect for This:**
-- ✅ **LLM Ecosystem**: Best libraries (LiteLLM, LangChain, etc.)
-- ✅ **Async**: Python's asyncio is excellent for I/O-bound LLM calls
-- ✅ **Development Speed**: Ship features faster
-- ✅ **Your Team Knows It**: No learning curve
+- [OK] **LLM Ecosystem**: Best libraries (LiteLLM, LangChain, etc.)
+- [OK] **Async**: Python's asyncio is excellent for I/O-bound LLM calls
+- [OK] **Development Speed**: Ship features faster
+- [OK] **Your Team Knows It**: No learning curve
 
 **When to Consider Other Languages:**
 - Go: If you need >10k requests/second (you don't)
@@ -326,7 +326,7 @@ while True:
     r.set(f"result:{task['id']}", result)
 ```
 
-### **Verdict: ⚠️ MAYBE - Only if building API service**
+### **Verdict: [WARNING] MAYBE - Only if building API service**
 
 **Use Cases:**
 1. **Long-running tasks**: User submits, gets result later
@@ -336,8 +336,8 @@ while True:
 **Decision Tree:**
 ```
 Are you building a web API?
-├─ Yes → Use Redis queue (1 day integration)
-└─ No (CLI tool) → Skip
++- Yes → Use Redis queue (1 day integration)
++- No (CLI tool) → Skip
 ```
 
 **For You:** If Facilitair v2 becomes a hosted service, add this. For now, probably not needed.
@@ -370,13 +370,13 @@ async def websocket_endpoint(websocket: WebSocket):
         })
 ```
 
-### **Verdict: ✅ YES - Perfect for streaming consensus UI**
+### **Verdict: [OK] YES - Perfect for streaming consensus UI**
 
 **Why:**
-- 🎯 **Aligns with Vision**: Enables your "streaming consensus" UX
-- 👀 **User Experience**: Users see agents collaborating in real-time
-- ⏱️ **Time**: 1-2 days for basic WebSocket implementation
-- 💡 **Differentiation**: Competitors don't have this
+- [GOAL] **Aligns with Vision**: Enables your "streaming consensus" UX
+-  **User Experience**: Users see agents collaborating in real-time
+- [TIME] **Time**: 1-2 days for basic WebSocket implementation
+- [IDEA] **Differentiation**: Competitors don't have this
 
 **Implementation:**
 ```python
@@ -400,26 +400,26 @@ async def stream_collaborate(self, task):
 
 **UI Mockup:**
 ```
-┌─────────────────────────────────────────┐
-│ Facilitair - Collaborative Code Gen     │
-├─────────────────────────────────────────┤
-│ 🏗️  Architect | ✅ Complete             │
-│ Designed MVC architecture with...       │
-├─────────────────────────────────────────┤
-│ 💻 Coder | ⏳ Generating...              │
-│ class UserController:                   │
-│     def __init__(self, db):█            │
-├─────────────────────────────────────────┤
-│ 🔍 Reviewer | ⏸️  Waiting...             │
-│                                          │
-└─────────────────────────────────────────┘
++-----------------------------------------+
+| Facilitair - Collaborative Code Gen     |
++-----------------------------------------+
+| Architect  Architect | [OK] Complete             |
+| Designed MVC architecture with...       |
++-----------------------------------------+
+| Coder Coder | [WAITING] Generating...              |
+| class UserController:                   |
+|     def __init__(self, db):            |
++-----------------------------------------+
+| Reviewer Reviewer | ⏸  Waiting...             |
+|                                          |
++-----------------------------------------+
 ```
 
 ---
 
 ## FINAL RECOMMENDATIONS
 
-### ✅ ADD THIS WEEK (High ROI, Low Effort)
+### [OK] ADD THIS WEEK (High ROI, Low Effort)
 
 **1. Semantic Caching (2-3 hours)**
 ```bash
@@ -442,7 +442,7 @@ pip install fastapi websockets
 # This is your differentiator!
 ```
 
-### ⏳ ADD IN V1.1 (Post-Launch)
+### [WAITING] ADD IN V1.1 (Post-Launch)
 
 **4. Redis Queue (2-3 days)**
 - Only if building hosted API service
@@ -454,13 +454,13 @@ pip install fastapi websockets
 - Build up quality example corpus
 - Improves over time
 
-### ❌ SKIP (Premature Optimization)
+### [FAIL] SKIP (Premature Optimization)
 
-- ❌ DSPy (not needed with 100% baseline)
-- ❌ Rust (bottleneck is API calls, not code)
-- ❌ Graph DB (nice-to-have for analytics)
-- ❌ spaCy/NLTK (LLMs do this better)
-- ❌ Alternative languages (Python is perfect)
+- [FAIL] DSPy (not needed with 100% baseline)
+- [FAIL] Rust (bottleneck is API calls, not code)
+- [FAIL] Graph DB (nice-to-have for analytics)
+- [FAIL] spaCy/NLTK (LLMs do this better)
+- [FAIL] Alternative languages (Python is perfect)
 
 ---
 
@@ -471,14 +471,14 @@ User
   ↓
 FastAPI + WebSockets
   ↓
-┌─────────────────────────────────┐
-│ Sequential Orchestrator         │
-│ (with streaming support)        │
-├─────────────────────────────────┤
-│ LLM Client                      │
-│ ├─ Semantic Cache (NEW!)        │
-│ └─ OpenRouter/LiteLLM           │
-└─────────────────────────────────┘
++---------------------------------+
+| Sequential Orchestrator         |
+| (with streaming support)        |
++---------------------------------+
+| LLM Client                      |
+| +- Semantic Cache (NEW!)        |
+| +- OpenRouter/LiteLLM           |
++---------------------------------+
   ↓
 Stream responses back via WebSocket
   ↓
@@ -543,9 +543,9 @@ class StreamingDebateOrchestrator:
 ```
 
 **This gives you:**
-- ✅ Streaming consensus (your vision!)
-- ✅ Shippable this week
-- ✅ Unique differentiator
-- ✅ Actually improves quality
+- [OK] Streaming consensus (your vision!)
+- [OK] Shippable this week
+- [OK] Unique differentiator
+- [OK] Actually improves quality
 
 Want me to build this?

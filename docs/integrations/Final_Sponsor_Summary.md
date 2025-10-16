@@ -1,8 +1,8 @@
 # WeaveHacks 2 - Actual Sponsor Usage
 
-## ✅ ACTUALLY USED (PRIMARY)
+## [OK] ACTUALLY USED (PRIMARY)
 
-### **Weights & Biases (W&B Weave)** ⭐⭐⭐
+### **Weights & Biases (W&B Weave)** [STAR][STAR][STAR]
 **Status:** EXTENSIVELY INTEGRATED - Our primary sponsor integration
 
 **What We Built:**
@@ -22,7 +22,7 @@
 
 ---
 
-## 🟡 CODE READY, NOT ACTIVELY RUNNING
+## [YELLOW] CODE READY, NOT ACTIVELY RUNNING
 
 ### **Tavily** (Actual Sponsor)
 **Status:** Integration code exists, needs API key
@@ -65,7 +65,7 @@ export DAYTONA_API_KEY="your-key"
 
 ---
 
-## ❌ NOT WEAVEHACKS SPONSORS (But We Used Them)
+## [FAIL] NOT WEAVEHACKS SPONSORS (But We Used Them)
 
 ### OpenRouter
 **Status:** Used extensively but NOT a WeaveHacks sponsor
@@ -79,16 +79,16 @@ export DAYTONA_API_KEY="your-key"
 
 ---
 
-## 🎯 RECOMMENDATION FOR SUBMISSION (8 minutes left)
+## [GOAL] RECOMMENDATION FOR SUBMISSION (8 minutes left)
 
 ### **Claim:**
-1. ✅ **W&B Weave** - EXTENSIVELY INTEGRATED (our star integration)
-2. 🟡 **Tavily** - Code ready, mention in "Future Plans"
-3. 🟡 **Daytona** - Code ready, mention in "Future Plans"
+1. [OK] **W&B Weave** - EXTENSIVELY INTEGRATED (our star integration)
+2. [YELLOW] **Tavily** - Code ready, mention in "Future Plans"
+3. [YELLOW] **Daytona** - Code ready, mention in "Future Plans"
 
 ### **DON'T Claim as WeaveHacks Sponsors:**
-- ❌ OpenRouter (not a sponsor)
-- ❌ FastAPI (not a sponsor)
+- [FAIL] OpenRouter (not a sponsor)
+- [FAIL] FastAPI (not a sponsor)
 
 ### **Submission Strategy:**
 Focus heavily on **W&B Weave** as our primary integration:
@@ -104,7 +104,7 @@ Focus heavily on **W&B Weave** as our primary integration:
 
 ---
 
-## 📊 Time Analysis (8 minutes remaining)
+## [CHART] Time Analysis (8 minutes remaining)
 
 ### Tavily Activation (5 mins):
 1. Get API key (2 mins)
@@ -122,7 +122,7 @@ Focus heavily on **W&B Weave** as our primary integration:
 
 ---
 
-## ✅ FINAL RECOMMENDATION
+## [OK] FINAL RECOMMENDATION
 
 **DO:** Submit now with W&B Weave as primary sponsor
 **DON'T:** Rush Tavily/Daytona activation - too risky with 8 minutes
@@ -131,6 +131,6 @@ Focus heavily on **W&B Weave** as our primary integration:
 "Built sequential AI collaboration with extensive W&B Weave integration for complete observability. Achieved 100% success rate vs 90% baseline. Integration-ready code for Tavily and Daytona sponsors awaiting activation."
 
 **Value Proposition:**
-- W&B Weave: PRODUCTION READY ✅
-- Tavily/Daytona: INTEGRATION COMPLETE, 5-20 min activation 🟡
-- Strong foundation beats rushed integration ✅
+- W&B Weave: PRODUCTION READY [OK]
+- Tavily/Daytona: INTEGRATION COMPLETE, 5-20 min activation [YELLOW]
+- Strong foundation beats rushed integration [OK]

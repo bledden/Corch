@@ -20,7 +20,7 @@ console = Console()
 
 def display_strategy_info():
     """Display information about available strategies"""
-    table = Table(title="🎯 Model Selection Strategies", show_header=True)
+    table = Table(title="[GOAL] Model Selection Strategies", show_header=True)
     table.add_column("Strategy", style="cyan", width=20)
     table.add_column("Description", style="white", width=40)
     table.add_column("Best For", style="green", width=30)
@@ -41,7 +41,7 @@ def display_strategy_info():
 
 def display_model_comparison():
     """Show comparison between closed and open source models"""
-    console.print("\n📊 [bold cyan]Model Performance Comparison[/bold cyan]")
+    console.print("\n[CHART] [bold cyan]Model Performance Comparison[/bold cyan]")
 
     table = Table(show_header=True)
     table.add_column("Model", style="cyan", width=35)
@@ -65,8 +65,8 @@ def display_model_comparison():
 
 async def run_demo_task(orchestrator, task, strategy_name):
     """Run a single demo task with progress display"""
-    console.print(f"\n📝 Task: [yellow]{task}[/yellow]")
-    console.print(f"🎯 Strategy: [cyan]{strategy_name}[/cyan]")
+    console.print(f"\nDocumenter Task: [yellow]{task}[/yellow]")
+    console.print(f"[GOAL] Strategy: [cyan]{strategy_name}[/cyan]")
 
     with Progress(
         SpinnerColumn(),
@@ -81,11 +81,11 @@ async def run_demo_task(orchestrator, task, strategy_name):
         progress.stop()
 
     # Display results
-    console.print("\n✅ [bold green]Collaboration Complete![/bold green]")
+    console.print("\n[OK] [bold green]Collaboration Complete![/bold green]")
 
     # Show which models were used
     strategy_summary = orchestrator.get_strategy_summary()
-    console.print(f"\n📊 Models Used (based on {strategy_name} strategy):")
+    console.print(f"\n[CHART] Models Used (based on {strategy_name} strategy):")
     console.print(f"   Total Cost: ${strategy_summary['total_cost']:.2f}")
     console.print(f"   Remaining Budget: ${strategy_summary['remaining_daily_budget']:.2f}")
 
@@ -108,7 +108,7 @@ async def run_demo_task(orchestrator, task, strategy_name):
 async def main():
     """Main demo with interactive strategy selection"""
     console.print(Panel.fit(
-        "[bold cyan]🚀 WeaveHacks Collaborative Orchestrator Demo[/bold cyan]\n" +
+        "[bold cyan][START] WeaveHacks Collaborative Orchestrator Demo[/bold cyan]\n" +
         "[white]with User-Controlled Model Selection Strategy[/white]",
         border_style="cyan"
     ))
@@ -140,11 +140,11 @@ async def main():
     strategy, strategy_name = strategy_map[choice]
 
     # Initialize Weave
-    console.print("\n🔧 Initializing W&B Weave tracking...")
+    console.print("\n Initializing W&B Weave tracking...")
     weave.init('weavehacks-collaborative-demo')
 
     # Create orchestrator with selected strategy
-    console.print(f"\n🎯 Creating orchestrator with {strategy_name} strategy...")
+    console.print(f"\n[GOAL] Creating orchestrator with {strategy_name} strategy...")
     orchestrator = CollaborativeOrchestrator(user_strategy=strategy)
 
     # Demo tasks
@@ -169,7 +169,7 @@ async def main():
                 new_choice = IntPrompt.ask("New strategy (1-5)", choices=["1", "2", "3", "4", "5"])
                 strategy, strategy_name = strategy_map[new_choice]
                 orchestrator.set_user_strategy(strategy)
-                console.print(f"✅ Strategy changed to: {strategy_name}")
+                console.print(f"[OK] Strategy changed to: {strategy_name}")
 
     # Final summary
     console.print("\n" + "=" * 50)
@@ -190,11 +190,11 @@ async def main():
         # Estimate what it would have cost with premium models
         premium_estimate = final_summary['task_count'] * 15.0  # Rough estimate
         savings = premium_estimate - final_summary['total_cost']
-        console.print(f"\n💰 [bold green]Estimated Savings: ${savings:.2f}[/bold green]")
+        console.print(f"\n[COST] [bold green]Estimated Savings: ${savings:.2f}[/bold green]")
         console.print(f"   (vs using premium models exclusively)")
 
-    console.print("\n🎉 Thank you for trying the demo!")
-    console.print("📊 Check W&B for detailed metrics: https://wandb.ai/weavehacks-collaborative")
+    console.print("\n[SUCCESS] Thank you for trying the demo!")
+    console.print("[CHART] Check W&B for detailed metrics: https://wandb.ai/weavehacks-collaborative")
 
 
 if __name__ == "__main__":

@@ -2,10 +2,10 @@
 OPENROUTER MODEL ANALYSIS - Release Dates & Versions
 ================================================================================
 
-📅 MODELS BY RELEASE DATE:
+ MODELS BY RELEASE DATE:
 ----------------------------------------
 
-🔥 LATEST (Last 30 days): 12 models
+ LATEST (Last 30 days): 12 models
   • alibaba/qvq-72b-preview (2024-12-24)
   • google/gemini-2.0-flash-thinking-exp-1219:free (2024-12-19)
   • openai/o1 (2024-12-17)
@@ -17,20 +17,20 @@ OPENROUTER MODEL ANALYSIS - Release Dates & Versions
   • google/gemini-exp-1206:free (2024-12-06)
   • google/gemini-2.0-flash-exp:free (2024-12-01)
 
-📍 RECENT (Last 90 days): 16 models
+ RECENT (Last 90 days): 16 models
   • alibaba/qwq-32b-preview (2024-11-28)
   • google/gemini-exp-1121:free (2024-11-21)
   • openai/gpt-4o-2024-11-20 (2024-11-20)
   • deepseek/deepseek-r1 (2024-11-20)
   • deepseek/deepseek-r1-distill-qwen-32b (2024-11-20)
 
-⭐ ESTABLISHED (3-6 months): 10 models
+[STAR] ESTABLISHED (3-6 months): 10 models
   • meta-llama/llama-3.2-1b-instruct (2024-10-01)
   • meta-llama/llama-3.2-3b-instruct (2024-10-01)
   • meta-llama/llama-3.2-11b-vision-instruct (2024-10-01)
 
 ================================================================================
-🏆 LATEST MODEL IN EACH FAMILY:
+[ACHIEVEMENT] LATEST MODEL IN EACH FAMILY:
 ----------------------------------------
   alibaba/o1: alibaba/marco-o1 (2024-12-17)
   alibaba/qwen-family: alibaba/qvq-72b-preview (2024-12-24)
@@ -58,7 +58,7 @@ OPENROUTER MODEL ANALYSIS - Release Dates & Versions
   x-ai/grok: x-ai/grok-2-1212 (2024-12-12)
 
 ================================================================================
-💡 RECOMMENDED MODELS FOR CODE GENERATION (Based on recency):
+[IDEA] RECOMMENDED MODELS FOR CODE GENERATION (Based on recency):
 ----------------------------------------
 
 Top Code Generation Models (Latest):
@@ -68,7 +68,7 @@ Top Code Generation Models (Latest):
   • alibaba/marco-o1 (2024-12-17)
 
 ================================================================================
-📊 SUMMARY STATISTICS:
+[CHART] SUMMARY STATISTICS:
 ----------------------------------------
 Total models analyzed: 110
 Models with identifiable dates: 56

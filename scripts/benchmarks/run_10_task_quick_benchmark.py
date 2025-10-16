@@ -334,13 +334,13 @@ async def run_quick_benchmark():
 
     # Summary
     if metrics['sequential']['pass@1'] > metrics['baseline']['pass@1']:
-        console.print("\n[bold green]✅ Sequential orchestration outperforms baseline![/bold green]")
+        console.print("\n[bold green][OK] Sequential orchestration outperforms baseline![/bold green]")
         console.print("[green]Ready to proceed with full 500-task benchmark.[/green]")
     elif metrics['sequential']['pass@1'] == metrics['baseline']['pass@1']:
-        console.print("\n[bold yellow]⚠️  Sequential and baseline have equal performance[/bold yellow]")
+        console.print("\n[bold yellow][WARNING]  Sequential and baseline have equal performance[/bold yellow]")
         console.print("[yellow]Consider investigating before full benchmark.[/yellow]")
     else:
-        console.print("\n[bold red]⚠️  Baseline outperforms sequential[/bold red]")
+        console.print("\n[bold red][WARNING]  Baseline outperforms sequential[/bold red]")
         console.print("[red]Review orchestration configuration before proceeding.[/red]")
 
     return metrics

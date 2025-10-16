@@ -213,7 +213,7 @@ async def run_comparison_evaluation():
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     console.print("\n" + "=" * 80)
-    console.print("🔬 Sequential Collaboration vs Single-Model Baseline Evaluation")
+    console.print(" Sequential Collaboration vs Single-Model Baseline Evaluation")
     console.print("=" * 80)
     console.print()
 
@@ -221,7 +221,7 @@ async def run_comparison_evaluation():
     weave.init(f"facilitair/sequential-vs-baseline-{run_id}")
 
     # Initialize orchestrator (sequential only)
-    console.print("🔧 Initializing sequential orchestrator...")
+    console.print(" Initializing sequential orchestrator...")
     orchestrator = CollaborativeOrchestrator(
         use_sequential=True,
         use_sponsors=False,
@@ -230,7 +230,7 @@ async def run_comparison_evaluation():
 
     llm_client = orchestrator.llm_orchestrator
 
-    console.print(f"📋 Running {len(ALL_TASKS)} tasks with both methods...")
+    console.print(f"[LIST] Running {len(ALL_TASKS)} tasks with both methods...")
     console.print()
 
     sequential_results = []
@@ -264,7 +264,7 @@ async def run_comparison_evaluation():
 
     # Calculate statistics
     console.print("\n" + "=" * 80)
-    console.print("📊 RESULTS COMPARISON")
+    console.print("[CHART] RESULTS COMPARISON")
     console.print("=" * 80)
     console.print()
 
@@ -293,35 +293,35 @@ async def run_comparison_evaluation():
         "Success Rate",
         f"{seq_success}/{len(sequential_results)} ({seq_success/len(sequential_results)*100:.1f}%)",
         f"{base_success}/{len(baseline_results)} ({base_success/len(baseline_results)*100:.1f}%)",
-        "🏆 Sequential" if seq_success > base_success else "🏆 Baseline"
+        "[ACHIEVEMENT] Sequential" if seq_success > base_success else "[ACHIEVEMENT] Baseline"
     )
 
     table.add_row(
         "Avg Quality Score",
         f"{seq_avg_quality:.3f}",
         f"{base_avg_quality:.3f}",
-        "🏆 Sequential" if seq_avg_quality > base_avg_quality else "🏆 Baseline"
+        "[ACHIEVEMENT] Sequential" if seq_avg_quality > base_avg_quality else "[ACHIEVEMENT] Baseline"
     )
 
     table.add_row(
         "Hallucinations Detected",
         f"{seq_hallucinations} ({seq_hallucinations/len(sequential_results)*100:.1f}%)",
         f"{base_hallucinations} ({base_hallucinations/len(baseline_results)*100:.1f}%)",
-        "🏆 Sequential" if seq_hallucinations < base_hallucinations else "🏆 Baseline"
+        "[ACHIEVEMENT] Sequential" if seq_hallucinations < base_hallucinations else "[ACHIEVEMENT] Baseline"
     )
 
     table.add_row(
         "Avg Hallucination Score",
         f"{seq_avg_hallucination_score:.3f}",
         f"{base_avg_hallucination_score:.3f}",
-        "🏆 Sequential" if seq_avg_hallucination_score < base_avg_hallucination_score else "🏆 Baseline"
+        "[ACHIEVEMENT] Sequential" if seq_avg_hallucination_score < base_avg_hallucination_score else "[ACHIEVEMENT] Baseline"
     )
 
     table.add_row(
         "Avg Duration (sec)",
         f"{seq_avg_duration:.2f}",
         f"{base_avg_duration:.2f}",
-        "🏆 Baseline" if base_avg_duration < seq_avg_duration else "🏆 Sequential"
+        "[ACHIEVEMENT] Baseline" if base_avg_duration < seq_avg_duration else "[ACHIEVEMENT] Sequential"
     )
 
     console.print(table)
@@ -359,10 +359,10 @@ async def run_comparison_evaluation():
     with open(results_file, 'w') as f:
         json.dump(comparison_data, f, indent=2)
 
-    console.print(f"💾 Results saved to: {results_file}")
+    console.print(f"[MEMORY] Results saved to: {results_file}")
     console.print()
     console.print("=" * 80)
-    console.print("✅ Evaluation Complete!")
+    console.print("[OK] Evaluation Complete!")
     console.print("=" * 80)
 
     return comparison_data

@@ -9,20 +9,20 @@ async def test_tavily():
     api_key = os.getenv("TAVILY_API_KEY")
     
     if not api_key:
-        print("❌ TAVILY_API_KEY not set!")
+        print("[FAIL] TAVILY_API_KEY not set!")
         print("Get your key from: https://tavily.com")
         return False
     
-    print(f"✅ TAVILY_API_KEY found: {api_key[:10]}...")
+    print(f"[OK] TAVILY_API_KEY found: {api_key[:10]}...")
     
     try:
         client = TavilyClient(api_key=api_key)
         
         # Quick test search
-        print("\n🔍 Testing Tavily search...")
+        print("\nReviewer Testing Tavily search...")
         result = client.search("Python sequential collaboration best practices", max_results=2)
         
-        print(f"✅ Search successful! Found {len(result.get('results', []))} results")
+        print(f"[OK] Search successful! Found {len(result.get('results', []))} results")
         
         if result.get('results'):
             print(f"\nFirst result: {result['results'][0].get('title', 'N/A')}")
@@ -31,7 +31,7 @@ async def test_tavily():
         return True
         
     except Exception as e:
-        print(f"❌ Tavily error: {e}")
+        print(f"[FAIL] Tavily error: {e}")
         return False
 
 if __name__ == "__main__":

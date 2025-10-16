@@ -55,14 +55,14 @@ QUICK_TASKS = [
 ]
 
 async def main():
-    console.print("\n[bold cyan]🧪 Quick Evaluation Test (5 tasks)[/bold cyan]\n")
+    console.print("\n[bold cyan] Quick Evaluation Test (5 tasks)[/bold cyan]\n")
 
     # Init weave
     run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     weave.init(f"facilitair/weavehacks-quick-test-{run_id}")
 
     # Init orchestrator
-    console.print("🔧 Initializing orchestrator...")
+    console.print(" Initializing orchestrator...")
     orchestrator = CollaborativeOrchestrator(
         use_sponsors=True,
         user_strategy=Strategy.BALANCED
@@ -81,7 +81,7 @@ async def main():
         for task in QUICK_TASKS:
             result = await run_single_evaluation(orchestrator, task, progress, task_progress)
             results.append(result)
-            console.print(f"✓ Task {task['id']}: {'✅ Success' if result['success'] else '❌ Failed'}")
+            console.print(f"[OK] Task {task['id']}: {'[OK] Success' if result['success'] else '[FAIL] Failed'}")
 
     # Save results
     with open(f'quick_test_results_{run_id}.json', 'w') as f:
@@ -93,7 +93,7 @@ async def main():
     # Print dashboard
     print_results_dashboard(results, stats, run_id)
 
-    console.print(f"\n[bold green]✅ Test complete! View traces at:[/bold green]")
+    console.print(f"\n[bold green][OK] Test complete! View traces at:[/bold green]")
     console.print(f"https://wandb.ai/facilitair/weavehacks-quick-test-{run_id}/weave\n")
 
 if __name__ == "__main__":

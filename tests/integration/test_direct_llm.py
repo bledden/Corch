@@ -30,13 +30,13 @@ async def test_direct_llm_call():
         content = response.choices[0].message.content
         tokens = response.usage.total_tokens
 
-        print(f"\n✅ SUCCESS!")
+        print(f"\n[OK] SUCCESS!")
         print(f"Tokens used: {tokens}")
         print(f"Response preview: {content[:200]}...")
         return True
 
     except Exception as e:
-        print(f"\n❌ FAILED: {e}")
+        print(f"\n[FAIL] FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False

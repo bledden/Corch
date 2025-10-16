@@ -56,60 +56,60 @@ RENAME_MAP.json will track:
 ### Current Structure Issues:
 ```
 weavehacks-collaborative/
-├── Many files in root (cluttered)
-├── agents/ (good)
-├── integrations/ (good)
-├── tests/ (good)
-├── utils/ (good)
-└── Lots of .md files in root (should be docs/)
++-- Many files in root (cluttered)
++-- agents/ (good)
++-- integrations/ (good)
++-- tests/ (good)
++-- utils/ (good)
++-- Lots of .md files in root (should be docs/)
 ```
 
 ### Target Structure:
 ```
 facilitair/
-├── src/
-│   ├── core/
-│   │   ├── orchestrator.py (was: collaborative_orchestrator.py)
-│   │   ├── sequential.py (was: sequential_orchestrator.py)
-│   │   └── workflow.py (new: workflow definitions)
-│   ├── agents/
-│   │   ├── client.py (was: llm_client.py)
-│   │   ├── selector.py (was: strategy_selector.py)
-│   │   └── profiles.py (new: agent configurations)
-│   ├── api/
-│   │   ├── server.py (was: api.py)
-│   │   ├── routes/ (new: endpoint modules)
-│   │   └── models.py (new: request/response models)
-│   ├── cli/
-│   │   ├── commands.py (was: cli.py)
-│   │   └── utils.py (new: CLI helpers)
-│   ├── evaluation/
-│   │   ├── runner.py (was: run_sequential_vs_baseline_eval.py)
-│   │   ├── tasks.py (new: task definitions)
-│   │   └── metrics.py (new: scoring logic)
-│   └── utils/
-│       ├── validators.py (was: api_key_validator.py)
-│       └── config.py (new: configuration management)
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   └── fixtures/
-├── docs/
-│   ├── README.md (main)
-│   ├── api/ (API documentation)
-│   ├── architecture/ (design docs)
-│   └── guides/ (user guides)
-├── config/
-│   ├── model_strategy.yaml
-│   └── agents.yaml
-├── scripts/
-│   ├── setup.sh
-│   └── evaluate.sh
-├── .github/
-│   └── workflows/ (CI/CD)
-├── requirements.txt
-├── setup.py
-└── pyproject.toml
++-- src/
+|   +-- core/
+|   |   +-- orchestrator.py (was: collaborative_orchestrator.py)
+|   |   +-- sequential.py (was: sequential_orchestrator.py)
+|   |   +-- workflow.py (new: workflow definitions)
+|   +-- agents/
+|   |   +-- client.py (was: llm_client.py)
+|   |   +-- selector.py (was: strategy_selector.py)
+|   |   +-- profiles.py (new: agent configurations)
+|   +-- api/
+|   |   +-- server.py (was: api.py)
+|   |   +-- routes/ (new: endpoint modules)
+|   |   +-- models.py (new: request/response models)
+|   +-- cli/
+|   |   +-- commands.py (was: cli.py)
+|   |   +-- utils.py (new: CLI helpers)
+|   +-- evaluation/
+|   |   +-- runner.py (was: run_sequential_vs_baseline_eval.py)
+|   |   +-- tasks.py (new: task definitions)
+|   |   +-- metrics.py (new: scoring logic)
+|   +-- utils/
+|       +-- validators.py (was: api_key_validator.py)
+|       +-- config.py (new: configuration management)
++-- tests/
+|   +-- unit/
+|   +-- integration/
+|   +-- fixtures/
++-- docs/
+|   +-- README.md (main)
+|   +-- api/ (API documentation)
+|   +-- architecture/ (design docs)
+|   +-- guides/ (user guides)
++-- config/
+|   +-- model_strategy.yaml
+|   +-- agents.yaml
++-- scripts/
+|   +-- setup.sh
+|   +-- evaluate.sh
++-- .github/
+|   +-- workflows/ (CI/CD)
++-- requirements.txt
++-- setup.py
++-- pyproject.toml
 ```
 
 ### File Move Tracking:
@@ -133,7 +133,7 @@ facilitair/
 ## Phase 5: Documentation Organization
 
 ### Current Docs (Root Directory Clutter):
-- README.md ✅ (keep in root)
+- README.md [OK] (keep in root)
 - ARCHITECTURE_EXPLANATION.md → docs/architecture/overview.md
 - INTERFACES_README.md → docs/guides/interfaces.md
 - SEQUENTIAL_COLLABORATION_DESIGN.md → docs/architecture/sequential.md
@@ -147,30 +147,30 @@ facilitair/
 ### Target Docs Structure:
 ```
 docs/
-├── README.md (index, links to all docs)
-├── guides/
-│   ├── quickstart.md
-│   ├── cli.md
-│   ├── api.md
-│   └── evaluation.md
-├── architecture/
-│   ├── overview.md
-│   ├── sequential.md
-│   ├── agents.md
-│   └── workflow.md
-├── api/
-│   ├── endpoints.md
-│   ├── models.md
-│   └── authentication.md
-├── integrations/
-│   ├── weave.md
-│   ├── openrouter.md
-│   └── sponsors.md
-├── project/
-│   ├── submission.md
-│   ├── sponsors.md
-│   └── status/
-└── security.md
++-- README.md (index, links to all docs)
++-- guides/
+|   +-- quickstart.md
+|   +-- cli.md
+|   +-- api.md
+|   +-- evaluation.md
++-- architecture/
+|   +-- overview.md
+|   +-- sequential.md
+|   +-- agents.md
+|   +-- workflow.md
++-- api/
+|   +-- endpoints.md
+|   +-- models.md
+|   +-- authentication.md
++-- integrations/
+|   +-- weave.md
+|   +-- openrouter.md
+|   +-- sponsors.md
++-- project/
+|   +-- submission.md
+|   +-- sponsors.md
+|   +-- status/
++-- security.md
 ```
 
 ---
@@ -208,7 +208,7 @@ from src.core.orchestrator import Orchestrator
 
 ## Execution Order:
 
-1. **Phase 1**: Kill processes, create context files ✅
+1. **Phase 1**: Kill processes, create context files [OK]
 2. **Phase 2**: Rename variables/functions (no file moves yet)
 3. **Phase 3**: Remove excessive comments
 4. **Phase 4**: Move files (track in MOVE_CONTEXT.json)

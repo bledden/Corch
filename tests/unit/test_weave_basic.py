@@ -18,7 +18,7 @@ async def test_weave_basic():
         # Initialize Weave
         print("\n1. Initializing Weave...")
         weave.init("facilitair/weave-basic-test")
-        print("✅ Weave initialized successfully")
+        print("[OK] Weave initialized successfully")
 
         # Test basic weave.op decorator
         @weave.op()
@@ -27,7 +27,7 @@ async def test_weave_basic():
 
         print("\n2. Testing sync function with @weave.op()...")
         result = simple_sync_function(5)
-        print(f"✅ Sync function result: {result}")
+        print(f"[OK] Sync function result: {result}")
 
         # Test async weave.op decorator
         @weave.op()
@@ -37,14 +37,14 @@ async def test_weave_basic():
 
         print("\n3. Testing async function with @weave.op()...")
         result = await simple_async_function(5)
-        print(f"✅ Async function result: {result}")
+        print(f"[OK] Async function result: {result}")
 
         print("\n" + "=" * 60)
-        print("✅ Test 2 PASSED: Weave connection works!")
+        print("[OK] Test 2 PASSED: Weave connection works!")
         return True
 
     except Exception as e:
-        print(f"\n❌ Test 2 FAILED: {e}")
+        print(f"\n[FAIL] Test 2 FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False

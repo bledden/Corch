@@ -554,183 +554,183 @@
 ## Complete Request Flow Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         USER REQUEST ENTRY                          │
-│  (CLI, API, or Direct Function Call)                                │
-└────────────────────────────────┬────────────────────────────────────┘
-                                 │
-                    ┌────────────▼────────────┐
-                    │   TASK CLASSIFICATION   │
-                    │  (WebSearchRouter)      │
-                    │                         │
-                    │  - detect_needs_web     │
-                    │    _search()            │
-                    │  - Returns: (bool,      │
-                    │    patterns, conf)      │
-                    └──────────┬──────────────┘
-                               │
-                ┌──────────────┴──────────────┐
-                │                             │
-     ┌──────────▼─────────┐        ┌─────────▼──────────┐
-     │  SELF-CONTAINED    │        │  WEB SEARCH        │
-     │  confidence < 0.5  │        │  confidence >= 0.5 │
-     └──────────┬─────────┘        └─────────┬──────────┘
-                │                            │
-                │                   ┌────────▼────────┐
-                │                   │  SEARCH ROUTING │
-                │                   │  select_search  │
-                │                   │  _method()      │
-                │                   │                 │
-                │                   │  Strategy:      │
-                │                   │  - cheapest     │
-                │                   │  - fastest      │
-                │                   │  - quality      │
-                │                   │  - balanced     │
-                │                   └────────┬────────┘
-                │                            │
-                │                   ┌────────▼────────┐
-                │                   │  EXECUTE SEARCH │
-                │                   │                 │
-                │                   │  Options:       │
-                │                   │  - Tavily       │
-                │                   │  - Perplexity   │
-                │                   │  - Gemini 2.5   │
-                │                   └────────┬────────┘
-                │                            │
-                │                   ┌────────▼────────┐
-                │                   │  ENRICH CONTEXT │
-                │                   │  - Add search   │
-                │                   │    results      │
-                │                   │  - Add metadata │
-                │                   │  - Track cost   │
-                │                   └────────┬────────┘
-                │                            │
-                └────────────┬───────────────┘
-                             │
-            ┌────────────────▼───────────────┐
-            │   ROUTING: SEQUENTIAL VS       │
-            │   BASELINE                     │
-            │                                │
-            │   Benchmark mode: Both paths   │
-            │   Production: User choice      │
-            └────────────┬───────────────────┘
-                         │
-         ┌───────────────┴───────────────┐
-         │                               │
-┌────────▼─────────┐          ┌─────────▼──────────┐
-│  BASELINE PATH   │          │  SEQUENTIAL PATH   │
-│  (Single Model)  │          │  (5-Stage)         │
-└────────┬─────────┘          └─────────┬──────────┘
-         │                              │
-         │                    ┌─────────▼──────────┐
-         │                    │  STAGE 1: ARCHITECT│
-         │                    │  - Design approach │
-         │                    │  - Output: Markdown│
-         │                    │  - Timeout: 270s   │
-         │                    └─────────┬──────────┘
-         │                              │
-         │                    ┌─────────▼──────────┐
-         │                    │  STAGE 2: CODER    │
-         │                    │  - Implement code  │
-         │                    │  - Output: Code    │
-         │                    │  - Timeout: 216s   │
-         │                    └─────────┬──────────┘
-         │                              │
-         │                    ┌─────────▼──────────┐
-         │                    │  STAGE 3: REVIEWER │
-         │                    │  - Validate code   │
-         │                    │  - Output: JSON    │
-         │                    │  - Timeout: 180s   │
-         │                    └─────────┬──────────┘
-         │                              │
-         │                    ┌─────────▼──────────┐
-         │                    │  STAGE 4: REFINER  │
-         │                    │  - Fix issues      │
-         │                    │  - Iterate up to 2x│
-         │                    │  - Timeout: 180s   │
-         │                    └─────────┬──────────┘
-         │                              │
-         │                    ┌─────────▼──────────┐
-         │                    │  STAGE 5: DOCUMENTER│
-         │                    │  - Add docs        │
-         │                    │  - Output: Markdown│
-         │                    │  - Timeout: 180s   │
-         │                    └─────────┬──────────┘
-         │                              │
-         └──────────────┬───────────────┘
-                        │
-            ┌───────────▼───────────┐
-            │  HALLUCINATION CHECK  │
-            │  HallucinationDetector│
-            │                       │
-            │  Checks:              │
-            │  - Unfounded claims   │
-            │  - Contradictions     │
-            │  - Fabricated details │
-            └───────────┬───────────┘
-                        │
-            ┌───────────▼───────────┐
-            │  QUALITY SCORING      │
-            │                       │
-            │  Sequential:          │
-            │  - Multi-stage quality│
-            │  - Pass@1: >0.7 + no  │
-            │    hallucinations     │
-            │                       │
-            │  Baseline:            │
-            │  - Code heuristics    │
-            │  - Pass@1: has code + │
-            │    logic + no halluc  │
-            └───────────┬───────────┘
-                        │
-            ┌───────────▼───────────┐
-            │  RESULT AGGREGATION   │
-            │                       │
-            │  Fields:              │
-            │  - task_id            │
-            │  - category           │
-            │  - method             │
-            │  - pass (binary)      │
-            │  - quality_score      │
-            │  - duration           │
-            │  - hallucination      │
-            │  - output             │
-            │  - needs_external_info│
-            │  - search_confidence  │
-            │  - matched_patterns   │
-            │  - search_method_used │
-            │  - search_cost        │
-            └───────────┬───────────┘
-                        │
-            ┌───────────▼───────────┐
-            │  W&B WEAVE LOGGING    │
-            │  @weave.op()          │
-            │                       │
-            │  - All function calls │
-            │  - Nested traces      │
-            │  - Performance metrics│
-            │  - Cost tracking      │
-            └───────────┬───────────┘
-                        │
-            ┌───────────▼───────────┐
-            │  FINAL STATISTICS     │
-            │                       │
-            │  Overall:             │
-            │  - Pass@1 %           │
-            │  - Total successes    │
-            │  - Hallucinations     │
-            │  - Avg quality        │
-            │  - Avg duration       │
-            │                       │
-            │  By Task Type:        │
-            │  - Self-contained     │
-            │  - Web-search         │
-            │                       │
-            │  By Search Method:    │
-            │  - Tavily usage       │
-            │  - Perplexity usage   │
-            │  - Total search cost  │
-            └───────────────────────┘
++---------------------------------------------------------------------+
+|                         USER REQUEST ENTRY                          |
+|  (CLI, API, or Direct Function Call)                                |
++--------------------------------+------------------------------------+
+                                 |
+                    +------------v------------+
+                    |   TASK CLASSIFICATION   |
+                    |  (WebSearchRouter)      |
+                    |                         |
+                    |  - detect_needs_web     |
+                    |    _search()            |
+                    |  - Returns: (bool,      |
+                    |    patterns, conf)      |
+                    +----------+--------------+
+                               |
+                +--------------+--------------+
+                |                             |
+     +----------v---------+        +---------v----------+
+     |  SELF-CONTAINED    |        |  WEB SEARCH        |
+     |  confidence < 0.5  |        |  confidence >= 0.5 |
+     +----------+---------+        +---------+----------+
+                |                            |
+                |                   +--------v--------+
+                |                   |  SEARCH ROUTING |
+                |                   |  select_search  |
+                |                   |  _method()      |
+                |                   |                 |
+                |                   |  Strategy:      |
+                |                   |  - cheapest     |
+                |                   |  - fastest      |
+                |                   |  - quality      |
+                |                   |  - balanced     |
+                |                   +--------+--------+
+                |                            |
+                |                   +--------v--------+
+                |                   |  EXECUTE SEARCH |
+                |                   |                 |
+                |                   |  Options:       |
+                |                   |  - Tavily       |
+                |                   |  - Perplexity   |
+                |                   |  - Gemini 2.5   |
+                |                   +--------+--------+
+                |                            |
+                |                   +--------v--------+
+                |                   |  ENRICH CONTEXT |
+                |                   |  - Add search   |
+                |                   |    results      |
+                |                   |  - Add metadata |
+                |                   |  - Track cost   |
+                |                   +--------+--------+
+                |                            |
+                +------------+---------------+
+                             |
+            +----------------v---------------+
+            |   ROUTING: SEQUENTIAL VS       |
+            |   BASELINE                     |
+            |                                |
+            |   Benchmark mode: Both paths   |
+            |   Production: User choice      |
+            +------------+-------------------+
+                         |
+         +---------------+---------------+
+         |                               |
++--------v---------+          +---------v----------+
+|  BASELINE PATH   |          |  SEQUENTIAL PATH   |
+|  (Single Model)  |          |  (5-Stage)         |
++--------+---------+          +---------+----------+
+         |                              |
+         |                    +---------v----------+
+         |                    |  STAGE 1: ARCHITECT|
+         |                    |  - Design approach |
+         |                    |  - Output: Markdown|
+         |                    |  - Timeout: 270s   |
+         |                    +---------+----------+
+         |                              |
+         |                    +---------v----------+
+         |                    |  STAGE 2: CODER    |
+         |                    |  - Implement code  |
+         |                    |  - Output: Code    |
+         |                    |  - Timeout: 216s   |
+         |                    +---------+----------+
+         |                              |
+         |                    +---------v----------+
+         |                    |  STAGE 3: REVIEWER |
+         |                    |  - Validate code   |
+         |                    |  - Output: JSON    |
+         |                    |  - Timeout: 180s   |
+         |                    +---------+----------+
+         |                              |
+         |                    +---------v----------+
+         |                    |  STAGE 4: REFINER  |
+         |                    |  - Fix issues      |
+         |                    |  - Iterate up to 2x|
+         |                    |  - Timeout: 180s   |
+         |                    +---------+----------+
+         |                              |
+         |                    +---------v----------+
+         |                    |  STAGE 5: DOCUMENTER|
+         |                    |  - Add docs        |
+         |                    |  - Output: Markdown|
+         |                    |  - Timeout: 180s   |
+         |                    +---------+----------+
+         |                              |
+         +--------------+---------------+
+                        |
+            +-----------v-----------+
+            |  HALLUCINATION CHECK  |
+            |  HallucinationDetector|
+            |                       |
+            |  Checks:              |
+            |  - Unfounded claims   |
+            |  - Contradictions     |
+            |  - Fabricated details |
+            +-----------+-----------+
+                        |
+            +-----------v-----------+
+            |  QUALITY SCORING      |
+            |                       |
+            |  Sequential:          |
+            |  - Multi-stage quality|
+            |  - Pass@1: >0.7 + no  |
+            |    hallucinations     |
+            |                       |
+            |  Baseline:            |
+            |  - Code heuristics    |
+            |  - Pass@1: has code + |
+            |    logic + no halluc  |
+            +-----------+-----------+
+                        |
+            +-----------v-----------+
+            |  RESULT AGGREGATION   |
+            |                       |
+            |  Fields:              |
+            |  - task_id            |
+            |  - category           |
+            |  - method             |
+            |  - pass (binary)      |
+            |  - quality_score      |
+            |  - duration           |
+            |  - hallucination      |
+            |  - output             |
+            |  - needs_external_info|
+            |  - search_confidence  |
+            |  - matched_patterns   |
+            |  - search_method_used |
+            |  - search_cost        |
+            +-----------+-----------+
+                        |
+            +-----------v-----------+
+            |  W&B WEAVE LOGGING    |
+            |  @weave.op()          |
+            |                       |
+            |  - All function calls |
+            |  - Nested traces      |
+            |  - Performance metrics|
+            |  - Cost tracking      |
+            +-----------+-----------+
+                        |
+            +-----------v-----------+
+            |  FINAL STATISTICS     |
+            |                       |
+            |  Overall:             |
+            |  - Pass@1 %           |
+            |  - Total successes    |
+            |  - Hallucinations     |
+            |  - Avg quality        |
+            |  - Avg duration       |
+            |                       |
+            |  By Task Type:        |
+            |  - Self-contained     |
+            |  - Web-search         |
+            |                       |
+            |  By Search Method:    |
+            |  - Tavily usage       |
+            |  - Perplexity usage   |
+            |  - Total search cost  |
+            +-----------------------+
 ```
 
 ## Component Touch Points

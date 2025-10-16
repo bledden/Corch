@@ -14,7 +14,7 @@ async def main():
     print()
 
     # Initialize orchestrator with sequential mode ENABLED
-    print("🔧 Initializing orchestrator with sequential collaboration...")
+    print(" Initializing orchestrator with sequential collaboration...")
     orchestrator = CollaborativeOrchestrator(
         use_sequential=True,
         use_sponsors=False,  # Disable sponsors for quick test
@@ -25,29 +25,29 @@ async def main():
     # Simple test task
     task = "Create a Python function to calculate fibonacci numbers with memoization"
 
-    print(f"📋 Task: {task}")
+    print(f"[LIST] Task: {task}")
     print()
 
-    print("🚀 Executing sequential workflow...")
+    print("[START] Executing sequential workflow...")
     print()
 
     try:
         result = await orchestrator.collaborate(task)
 
-        print("✅ Workflow completed!")
+        print("[OK] Workflow completed!")
         print()
         print("=" * 80)
         print("RESULTS")
         print("=" * 80)
         print()
 
-        print(f"🔹 Workflow Type: {result.consensus_method}")
-        print(f"🔹 Agents Used: {', '.join(result.agents_used)}")
-        print(f"🔹 Stages Completed: {result.consensus_rounds}")
-        print(f"🔹 Iterations (refinements): {result.conflicts_resolved}")
+        print(f" Workflow Type: {result.consensus_method}")
+        print(f" Agents Used: {', '.join(result.agents_used)}")
+        print(f" Stages Completed: {result.consensus_rounds}")
+        print(f" Iterations (refinements): {result.conflicts_resolved}")
         print()
 
-        print("📊 Metrics:")
+        print("[CHART] Metrics:")
         print(f"  - Quality: {result.metrics['quality']:.2f}")
         print(f"  - Efficiency: {result.metrics['efficiency']:.2f}")
         print(f"  - Harmony: {result.metrics['harmony']:.2f}")
@@ -60,7 +60,7 @@ async def main():
 
         for agent_id, output in result.individual_outputs.items():
             print()
-            print(f"🤖 {agent_id.upper()}")
+            print(f"Agent {agent_id.upper()}")
             print("-" * 80)
             print(output[:300] + "..." if len(output) > 300 else output)
             print()
@@ -73,13 +73,13 @@ async def main():
         print()
 
         print("=" * 80)
-        print("✅ TEST PASSED: Sequential workflow working correctly!")
+        print("[OK] TEST PASSED: Sequential workflow working correctly!")
         print("=" * 80)
 
         return 0
 
     except Exception as e:
-        print(f"❌ TEST FAILED: {e}")
+        print(f"[FAIL] TEST FAILED: {e}")
         import traceback
         traceback.print_exc()
         return 1

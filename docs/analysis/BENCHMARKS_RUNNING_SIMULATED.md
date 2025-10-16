@@ -1,13 +1,13 @@
 # Facilitair Benchmarks - Currently Running
 
-## Status: ✅ BOTH BENCHMARKS ACTIVE
+## Status: [OK] BOTH BENCHMARKS ACTIVE
 
 ---
 
 ## 1. Smoke Test (10 Tasks)
 
 **Process ID**: `0ca59a`
-**Status**: ✅ Running - Task 4/10 complete (40%)
+**Status**: [OK] Running - Task 4/10 complete (40%)
 **W&B Weave**: https://wandb.ai/facilitair/smoke-test/weave
 
 ### Test Tasks:
@@ -15,24 +15,24 @@
 - **5 Web-Search**: Next.js 15, React 19, Stripe 2024, GPT-4 Turbo, OWASP 2023
 
 ### Validation Criteria:
-- ✅ Sequential method >= 70% pass rate
-- ✅ Web search integration triggers correctly
-- ✅ Hallucination detection active
-- ✅ Model type tracking (open vs closed source)
+- [OK] Sequential method >= 70% pass rate
+- [OK] Web search integration triggers correctly
+- [OK] Hallucination detection active
+- [OK] Model type tracking (open vs closed source)
 
 ### Progress:
-- ✅ Task 1: Prime check - COMPLETED
-- ✅ Task 2: Factorial recursion - COMPLETED (with refinement iterations)
-- ✅ Task 3: Reverse string - COMPLETED
-- 🏃 Task 4: Palindrome check - IN PROGRESS
-- ⏳ Task 5-10: Pending
+- [OK] Task 1: Prime check - COMPLETED
+- [OK] Task 2: Factorial recursion - COMPLETED (with refinement iterations)
+- [OK] Task 3: Reverse string - COMPLETED
+- [RUNNING] Task 4: Palindrome check - IN PROGRESS
+- [WAITING] Task 5-10: Pending
 
 ---
 
 ## 2. Optimized 500-Task Benchmark (FULL RUN)
 
 **Process ID**: `a1bb15`
-**Status**: ✅ Running - Just started
+**Status**: [OK] Running - Just started
 **W&B Weave**: https://wandb.ai/facilitair/optimized-500-task-benchmark/weave
 
 ### Task Breakdown:
@@ -55,7 +55,7 @@
 
 ### Features Being Evaluated:
 
-#### 1. Web Search Integration ✅
+#### 1. Web Search Integration [OK]
 - **Tavily API**: $0.001 per search (cheapest)
 - **Perplexity Sonar**: $0.005 per search (fastest)
 - **Perplexity R1**: $0.015 per search (highest quality)
@@ -63,7 +63,7 @@
 - **Routing**: Automatic selection based on strategy (cheapest, fastest, quality, balanced)
 - **Cost Tracking**: Per-search cost recorded in results
 
-#### 2. Hallucination Detection ✅
+#### 2. Hallucination Detection [OK]
 - **8 Pattern Categories**:
   1. Unfounded claims ("I have access to", "I can browse")
   2. Self-contradictions ("both true and false")
@@ -75,22 +75,22 @@
   8. Invalid syntax ("def async lambda")
 - **Output**: `{"hallucination_detected": bool, "confidence": float, "indicators": List[str]}`
 
-#### 3. Open/Closed Source Model Tracking ✅
+#### 3. Open/Closed Source Model Tracking [OK]
 - **Closed Source**: OpenAI/*, Anthropic/*, Google/Gemini*, Perplexity/*
 - **Open Source**: Qwen/*, DeepSeek/*, Alibaba/Qwen*, Meta-Llama/*, Mistralai/Codestral*, Cohere/*
 - **Comparison Tables**: Pass rates, quality scores per model type
 
-#### 4. Task Type Differentiation ✅
+#### 4. Task Type Differentiation [OK]
 - **Self-Contained**: Pure algorithmic tasks (no external info)
 - **Web-Search**: Tasks requiring current documentation
 - **Separate Statistics**: Pass rates calculated independently
 
-#### 5. Pass@1 Scoring (HumanEval Standard) ✅
+#### 5. Pass@1 Scoring (HumanEval Standard) [OK]
 - **Sequential**: Multi-stage validation quality > 0.7 + no hallucinations
 - **Baseline**: Code heuristics (has code + logic) + no hallucinations
 - **Binary Metric**: Task passes (1) or fails (0)
 
-#### 6. W&B Weave Integration ✅
+#### 6. W&B Weave Integration [OK]
 - **All @weave.op() decorated functions tracked**
 - **Nested traces**: Complete call hierarchy
 - **Performance metrics**: Duration, quality, cost
@@ -190,34 +190,34 @@ python3 -c "from agents.bash_tools import BashOutput; print(BashOutput('a1bb15')
 6. **Model Type Analytics**: Open vs closed source performance comparison
 
 ### Original (498 tasks):
-- ❌ 248 redundant/filler tasks
-- ❌ No web search integration
-- ❌ No hallucination detection
-- ❌ No model type tracking
-- ❌ No search cost tracking
+- [FAIL] 248 redundant/filler tasks
+- [FAIL] No web search integration
+- [FAIL] No hallucination detection
+- [FAIL] No model type tracking
+- [FAIL] No search cost tracking
 
 ### Optimized (500 tasks):
-- ✅ 500 unique, high-quality tasks
-- ✅ Web search with cost tracking
-- ✅ Hallucination detection (8 categories)
-- ✅ Open/closed source comparison
-- ✅ Search method breakdown
+- [OK] 500 unique, high-quality tasks
+- [OK] Web search with cost tracking
+- [OK] Hallucination detection (8 categories)
+- [OK] Open/closed source comparison
+- [OK] Search method breakdown
 
 ---
 
 ## Sponsor API Integration
 
-### ✅ W&B Weave (PRIMARY SPONSOR)
+### [OK] W&B Weave (PRIMARY SPONSOR)
 - **Status**: ACTIVE
 - **Usage**: @weave.op() decorators throughout
 - **Dashboards**: Live tracking of all benchmark runs
 
-### ✅ Tavily Search API (SPONSOR)
+### [OK] Tavily Search API (SPONSOR)
 - **Status**: ACTIVE (for web-search tasks)
 - **Cost**: $0.001 per search
 - **Integration**: WebSearchRouter selects Tavily for "cheapest" strategy
 
-### ✅ Daytona Development Environments (SPONSOR)
+### [OK] Daytona Development Environments (SPONSOR)
 - **Status**: INFRASTRUCTURE READY
 - **Usage**: Development environment infrastructure prepared
 
@@ -254,4 +254,4 @@ Once both benchmarks complete, we will analyze:
 ---
 
 **Last Updated**: Oct 12, 2025 16:48 PST
-**Status**: Both benchmarks running successfully ✅
+**Status**: Both benchmarks running successfully [OK]

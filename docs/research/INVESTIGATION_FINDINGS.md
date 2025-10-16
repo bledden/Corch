@@ -9,9 +9,9 @@ Analyzed 10-task test results (test IDs: 6ef037, 2de595, d0a12f). Found 4 critic
 
 | Test ID | Strategy | Sequential | Baseline | Status |
 |---------|----------|------------|----------|--------|
-| 6ef037  | BALANCED | 0% (0/10)  | 60% (6/10) | ❌ FAILED - metadata bug |
-| 2de595  | CLOSED   | 0% (0/10)  | 40% (4/10) | ❌ FAILED - metadata bug |
-| d0a12f  | OPEN     | 0% (0/10)  | 100% (10/10) | ❌ FAILED - metadata bug |
+| 6ef037  | BALANCED | 0% (0/10)  | 60% (6/10) | [FAIL] FAILED - metadata bug |
+| 2de595  | CLOSED   | 0% (0/10)  | 40% (4/10) | [FAIL] FAILED - metadata bug |
+| d0a12f  | OPEN     | 0% (0/10)  | 100% (10/10) | [FAIL] FAILED - metadata bug |
 
 ## Critical Issues Found
 
@@ -23,7 +23,7 @@ Analyzed 10-task test results (test IDs: 6ef037, 2de595, d0a12f). Found 4 critic
 
 **Code**:
 ```python
-models_used = result.metadata.get("models_used", {})  # ❌ FAILS
+models_used = result.metadata.get("models_used", {})  # [FAIL] FAILS
 primary_model = models_used.get("coder", "unknown")
 ```
 
@@ -77,10 +77,10 @@ pass_at_1 = (quality_estimate >= 0.7 and ...)
 
 **Invalid IDs**:
 ```yaml
-- deepseek-ai/deepseek-r1        # ❓ Verify
-- deepseek-ai/deepseek-v3        # ❌ INVALID
-- deepseek-ai/deepseek-v2.5      # ❓ Verify
-- deepseek-ai/deepseek-coder     # ❓ Verify
+- deepseek-ai/deepseek-r1        #  Verify
+- deepseek-ai/deepseek-v3        # [FAIL] INVALID
+- deepseek-ai/deepseek-v2.5      #  Verify
+- deepseek-ai/deepseek-coder     #  Verify
 ```
 
 **Valid IDs on OpenRouter**:
@@ -134,14 +134,14 @@ Task 7-10: Same pattern repeated
 - **Baseline Pass Rate**: 100% (10/10)
 - **Average Quality**: 0.80
 - **Average Duration**: 32.03s per task
-- **Verdict**: ⚠️ Likely inflated due to lenient evaluation
+- **Verdict**: [WARNING] Likely inflated due to lenient evaluation
 
 ### CLOSED Source Models (2de595)
 - **Models**: GPT-5, GPT-5-Pro, Claude Sonnet 4.5
 - **Baseline Pass Rate**: 40% (4/10)
 - **Average Quality**: 0.44
 - **Average Duration**: 22.86s per task
-- **Verdict**: ⚠️ GPT-5 incomplete code issue
+- **Verdict**: [WARNING] GPT-5 incomplete code issue
 
 ## Sequential Method Analysis
 
@@ -157,25 +157,25 @@ Task 7-10: Same pattern repeated
 ## Recommended Actions (Priority Order)
 
 ### P0 - CRITICAL (Blocks all testing)
-1. ✅ **Fix CollaborationResult.metadata bug**
+1. [OK] **Fix CollaborationResult.metadata bug**
    - Prevents all sequential evaluations
    - Must be fixed before any further testing
 
 ### P1 - HIGH (Affects accuracy)
-2. ✅ **Fix invalid DeepSeek model IDs**
+2. [OK] **Fix invalid DeepSeek model IDs**
    - Update config.yaml with valid OpenRouter IDs
    - Enables OPEN source model testing
 
-3. ✅ **Improve baseline evaluation criteria**
+3. [OK] **Improve baseline evaluation criteria**
    - Add code completeness validation
    - Prevent false positives from simple outputs
 
 ### P2 - MEDIUM (Quality improvements)
-4. ⏳ **Investigate GPT-5 incomplete code generation**
+4. [WAITING] **Investigate GPT-5 incomplete code generation**
    - Debug why GPT-5 returns architecture docs without code
    - Improve prompt engineering for consistent output
 
-5. ⏳ **Re-run all tests after fixes**
+5. [WAITING] **Re-run all tests after fixes**
    - Validate sequential method works correctly
    - Get accurate OPEN vs CLOSED comparison
    - Verify 100% OPEN source pass rate is legitimate

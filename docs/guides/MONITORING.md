@@ -37,22 +37,22 @@ The live dashboard displays:
 | **Agent** | Currently active agent (architect, coder, reviewer, etc.) |
 | **Sequential** | Pass rate for sequential collaboration method |
 | **Baseline** | Pass rate for baseline single-agent method |
-| **Status** | Running 🏃, Completed ✅, or Error ❌ |
+| **Status** | Running [RUNNING], Completed [OK], or Error [FAIL] |
 
 ## Example Dashboard Output
 
 ```
-╭─────────────────── 🚀 Facilitair Test Monitor Dashboard ───────────────────╮
-│                                                                              │
-│  Test    Strategy   Progress                     Agent     Sequential   ...  │
-│  ──────────────────────────────────────────────────────────────────────────  │
-│  fe6e5e  BALANCED   ████████████░░░░░░░░ 6/10    coder     Pending...  ...  │
-│  8c42af  OPEN       ███████████████░░░░░ 8/10    reviewer  4/8 (50%)   ...  │
-│  d9ac2f  CLOSED     ████████████████████ 10/10   done      ✅ 7/10 (70%)...  │
-│                                                                              │
-│  Legend: 🏃 Running  ✅ Completed  ❌ Error                                  │
-│  Press Ctrl+C to exit                                                        │
-╰─────────────────────────────────────── 17:45:23 | Monitoring 3 test(s) ─────╯
+------------------- [START] Facilitair Test Monitor Dashboard -------------------
+|                                                                              |
+|  Test    Strategy   Progress                     Agent     Sequential   ...  |
+|  --------------------------------------------------------------------------  |
+|  fe6e5e  BALANCED    6/10    coder     Pending...  ...  |
+|  8c42af  OPEN        8/10    reviewer  4/8 (50%)   ...  |
+|  d9ac2f  CLOSED      10/10   done      [OK] 7/10 (70%)...  |
+|                                                                              |
+|  Legend: [RUNNING] Running  [OK] Completed  [FAIL] Error                                  |
+|  Press Ctrl+C to exit                                                        |
+--------------------------------------- 17:45:23 | Monitoring 3 test(s) -----
 ```
 
 ## How It Works

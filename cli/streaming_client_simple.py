@@ -163,15 +163,15 @@ class SimpleStreamingClient:
 
         elif event_type == "chunk_completed":
             chunk_num = data.get("chunk_number", self.chunk_count)
-            self.console.print(f"\n[green]✅ Stage {chunk_num} complete[/green]\n")
+            self.console.print(f"\n[green][OK] Stage {chunk_num} complete[/green]\n")
 
         elif event_type == "task_completed":
             result = data.get("result", "")
             metrics = data.get("metrics", {})
 
-            self.console.print("\n\n" + "═" * 70)
-            self.console.print("[bold green]✅ Task Completed Successfully![/bold green]")
-            self.console.print("═" * 70 + "\n")
+            self.console.print("\n\n" + "=" * 70)
+            self.console.print("[bold green][OK] Task Completed Successfully![/bold green]")
+            self.console.print("=" * 70 + "\n")
 
             if result:
                 panel = Panel(
@@ -187,11 +187,11 @@ class SimpleStreamingClient:
 
         elif event_type == "task_error":
             error_msg = data.get("error", "Unknown error")
-            self.console.print(f"\n[bold red]❌ Error: {error_msg}[/bold red]\n")
+            self.console.print(f"\n[bold red][FAIL] Error: {error_msg}[/bold red]\n")
 
         elif event_type == "system_message":
             msg = data.get("message", "")
-            self.console.print(f"[dim italic]ℹ️  {msg}[/dim italic]")
+            self.console.print(f"[dim italic][INFO]  {msg}[/dim italic]")
 
         elif event_type == "heartbeat":
             # Silent heartbeat
@@ -201,9 +201,9 @@ class SimpleStreamingClient:
         """Main method: Create stream and consume events"""
 
         # Print header
-        self.console.print("\n" + "═" * 70)
-        self.console.print("[bold cyan]🎯 Facilitair Streaming Collaboration[/bold cyan]")
-        self.console.print("═" * 70)
+        self.console.print("\n" + "=" * 70)
+        self.console.print("[bold cyan][GOAL] Facilitair Streaming Collaboration[/bold cyan]")
+        self.console.print("=" * 70)
         self.console.print(f"\n[bold]Task:[/bold] {task}\n")
 
         # Create stream
@@ -220,11 +220,11 @@ class SimpleStreamingClient:
                 if event_type in ["task_completed", "task_error"]:
                     break
         except KeyboardInterrupt:
-            self.console.print("\n\n[yellow]⚠️  Stream interrupted by user[/yellow]")
+            self.console.print("\n\n[yellow][WARNING]  Stream interrupted by user[/yellow]")
         except Exception as e:
-            self.console.print(f"\n\n[red]❌ Stream error: {e}[/red]")
+            self.console.print(f"\n\n[red][FAIL] Stream error: {e}[/red]")
 
-        self.console.print("\n" + "═" * 70 + "\n")
+        self.console.print("\n" + "=" * 70 + "\n")
 
 
 async def main():

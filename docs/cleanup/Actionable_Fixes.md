@@ -1,9 +1,9 @@
-# 🚨 ACTIONABLE FIX LIST - WeaveHacks 2
+#  ACTIONABLE FIX LIST - WeaveHacks 2
 **Priority-Ordered Issues to Fix Before Going Live**
 
 ---
 
-## ⚡ MUST FIX BEFORE DEMO (Critical - 2-4 hours)
+## [FAST] MUST FIX BEFORE DEMO (Critical - 2-4 hours)
 
 ### 1. **SECURITY: Remove eval() - CODE INJECTION VULNERABILITY**
 - **File**: `agents/strategy_selector.py:130`
@@ -42,7 +42,7 @@
 
 ---
 
-## 🔥 HIGH PRIORITY (Important - 4-6 hours)
+##  HIGH PRIORITY (Important - 4-6 hours)
 
 ### 6. **Add Rate Limiting**
 - **All API clients have NO rate limiting**
@@ -81,7 +81,7 @@
 
 ---
 
-## ⚙️ MEDIUM PRIORITY (Good to Have - 2-3 hours)
+##  MEDIUM PRIORITY (Good to Have - 2-3 hours)
 
 ### 12. **Replace 585 print() with Proper Logging**
 - **Current**: print() statements everywhere
@@ -106,19 +106,19 @@
 
 ---
 
-## 📋 API KEYS NEEDED
+## [LIST] API KEYS NEEDED
 
-✅ **Have**:
+[OK] **Have**:
 - OpenAI API Key (working)
 
-🔑 **Need** (15 minutes total):
+ **Need** (15 minutes total):
 - W&B Weave API Key (https://wandb.ai/authorize) - **CRITICAL FOR HACKATHON**
 - OpenRouter API Key (https://openrouter.ai) - add $5-10 credits
 - Tavily API Key (https://tavily.com) - optional but nice
 
 ---
 
-## 🏗️ PRODUCTION BACKEND REQUIREMENTS
+## Architect PRODUCTION BACKEND REQUIREMENTS
 
 ### If Deploying to Production:
 
@@ -135,17 +135,17 @@
 
 ---
 
-## 🎯 RECOMMENDED FIXES FOR HACKATHON
+## [GOAL] RECOMMENDED FIXES FOR HACKATHON
 
 ### Minimum Viable Demo (2-3 hours):
 
 **MUST DO:**
-1. ✅ Fix eval() security issue (30 min)
-2. ✅ Replace bare except blocks (1 hour)
-3. ✅ Add API key validation (30 min)
-4. ✅ Get W&B Weave API key (5 min)
-5. ✅ Get OpenRouter API key (5 min)
-6. ✅ Add rate limiting (1 hour)
+1. [OK] Fix eval() security issue (30 min)
+2. [OK] Replace bare except blocks (1 hour)
+3. [OK] Add API key validation (30 min)
+4. [OK] Get W&B Weave API key (5 min)
+5. [OK] Get OpenRouter API key (5 min)
+6. [OK] Add rate limiting (1 hour)
 
 **NICE TO HAVE:**
 7. Add retry logic (45 min)
@@ -160,19 +160,19 @@
 
 ---
 
-## 📊 CURRENT STATUS
+## [CHART] CURRENT STATUS
 
 | Category | Status | Action |
 |----------|--------|--------|
-| **Security** | 🔴 CRITICAL | Fix eval(), add validation |
-| **Error Handling** | 🔴 CRITICAL | Fix bare excepts |
-| **Rate Limiting** | 🔴 MISSING | Add immediately |
-| **API Keys** | 🟡 PARTIAL | Need W&B + OpenRouter |
-| **Resource Cleanup** | 🔴 LEAKING | Fix Docker cleanup |
-| **Logging** | 🟡 POOR | 585 print statements |
-| **Testing** | 🔴 NONE | Zero tests |
-| **Documentation** | 🟢 GOOD | README exists |
-| **Production Ready** | 🔴 NO | Needs 3-4 weeks |
+| **Security** | [RED] CRITICAL | Fix eval(), add validation |
+| **Error Handling** | [RED] CRITICAL | Fix bare excepts |
+| **Rate Limiting** | [RED] MISSING | Add immediately |
+| **API Keys** | [YELLOW] PARTIAL | Need W&B + OpenRouter |
+| **Resource Cleanup** | [RED] LEAKING | Fix Docker cleanup |
+| **Logging** | [YELLOW] POOR | 585 print statements |
+| **Testing** | [RED] NONE | Zero tests |
+| **Documentation** | [GREEN] GOOD | README exists |
+| **Production Ready** | [RED] NO | Needs 3-4 weeks |
 
 ---
 
@@ -193,20 +193,20 @@
 
 ---
 
-## 🎪 HONEST ASSESSMENT
+##  HONEST ASSESSMENT
 
 **What Works Right Now:**
-- ✅ Multi-agent collaboration concept
-- ✅ OpenAI API integration
-- ✅ Ray RLlib for reinforcement learning
-- ✅ Basic demo functionality
+- [OK] Multi-agent collaboration concept
+- [OK] OpenAI API integration
+- [OK] Ray RLlib for reinforcement learning
+- [OK] Basic demo functionality
 
 **What's Broken:**
-- 🔴 Security vulnerabilities (eval injection)
-- 🔴 Silent failures (bare excepts)
-- 🔴 No rate limiting (can spend $$$)
-- 🔴 Resource leaks (Docker containers)
-- 🔴 Fake metrics (random numbers)
+- [RED] Security vulnerabilities (eval injection)
+- [RED] Silent failures (bare excepts)
+- [RED] No rate limiting (can spend $$$)
+- [RED] Resource leaks (Docker containers)
+- [RED] Fake metrics (random numbers)
 
 **Verdict**:
 - **For Hackathon**: Fix critical issues (2-3 hours) + get API keys = Ready to demo
@@ -214,7 +214,7 @@
 
 ---
 
-## 📝 COMMIT TO THESE FIXES
+## Documenter COMMIT TO THESE FIXES
 
 Before going live, you MUST fix:
 1. eval() security vulnerability

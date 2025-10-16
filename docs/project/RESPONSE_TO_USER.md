@@ -7,7 +7,7 @@
 
 > "Rust showed improvement capabilities for facilitair_v2. If we cannot improve API call latency, we may as well try and improve latency and performance everywhere else."
 
-**✅ Agreement + Action Plan**:
+**[OK] Agreement + Action Plan**:
 
 You're absolutely right. Since API call latency is the bottleneck we can't control, we should optimize everything else:
 
@@ -30,7 +30,7 @@ I found that you already prototyped Rust integration in v2 with PyO3 bindings. T
 
 > "Streaming API and Semantic Caching seem like no brainers as long as we have a solution to context of the user for caching."
 
-**✅ Solved: Context-Aware Semantic Caching**
+**[OK] Solved: Context-Aware Semantic Caching**
 
 The key insight: **Same query ≠ Same answer** when context differs.
 
@@ -49,7 +49,7 @@ User B Context:
 - Existing stack: Spring Boot
 - Compliance: SOC2, HIPAA
 
-❌ These should NOT hit the same cache
+[FAIL] These should NOT hit the same cache
 ```
 
 **Solution**: Embed the query + context together
@@ -74,10 +74,10 @@ similarity = cosine_similarity(query_embedding, cached_embedding)
 3. **Historical**: User's past choices, preferred patterns
 
 **Cache Hit Scenarios**:
-- ✅ Same user asks same thing twice
-- ✅ Different user with nearly identical context
-- ❌ Same query, but different language/framework
-- ❌ Same query, but enterprise vs startup context
+- [OK] Same user asks same thing twice
+- [OK] Different user with nearly identical context
+- [FAIL] Same query, but different language/framework
+- [FAIL] Same query, but enterprise vs startup context
 
 **Expected Performance**:
 - Cache hit rate: **30-40%** (based on real-world API usage patterns)
@@ -88,7 +88,7 @@ similarity = cosine_similarity(query_embedding, cached_embedding)
 
 > "Streaming Debate Interface is definitely the move. Would be nice to start with something in the CLI first."
 
-**✅ Agreement: CLI First, Then Web**
+**[OK] Agreement: CLI First, Then Web**
 
 **Why CLI first**:
 1. **Faster iteration**: No build step, no browser testing
@@ -101,58 +101,58 @@ similarity = cosine_similarity(query_embedding, cached_embedding)
 ```bash
 $ facilitair collaborate "Build a REST API with JWT auth"
 
-┌─ Collaborative Session ────────────────────────────────────┐
-│ Task: Build a REST API with JWT auth                       │
-│ Strategy: BALANCED (GPT-5 + Claude + DeepSeek)             │
-│ Cache: Miss (no similar solutions found)                   │
-└────────────────────────────────────────────────────────────┘
++- Collaborative Session ------------------------------------+
+| Task: Build a REST API with JWT auth                       |
+| Strategy: BALANCED (GPT-5 + Claude + DeepSeek)             |
+| Cache: Miss (no similar solutions found)                   |
++------------------------------------------------------------+
 
-[00:00.10] 🏗️  Architect: Analyzing requirements...
-[00:00.50] 💭 Architect: This requires:
+[00:00.10] Architect  Architect: Analyzing requirements...
+[00:00.50]  Architect: This requires:
            • JWT tokens (access + refresh)
            • PostgreSQL for user storage
            • bcrypt for password hashing
            • FastAPI framework
 
-[00:00.80] 💻 Coder: Considering architecture...
-[00:01.20] 💭 Coder: Based on JWT requirement:
+[00:00.80] Coder Coder: Considering architecture...
+[00:01.20]  Coder: Based on JWT requirement:
            from fastapi import FastAPI, Depends
            from fastapi.security import HTTPBearer
            # Implementing auth middleware...
 
-[00:01.50] 🔍 Reviewer: Evaluating security...
-[00:01.90] 💭 Reviewer: Good start, but add:
+[00:01.50] Reviewer Reviewer: Evaluating security...
+[00:01.90]  Reviewer: Good start, but add:
            • Rate limiting on /auth endpoints
            • Refresh token rotation
            • HTTPS-only cookies
 
-[00:02.10] 🔄 Synthesizer: Merging perspectives...
-[00:02.30] ✅ Chunk 1 Complete: Auth Architecture
+[00:02.10] [REFRESH] Synthesizer: Merging perspectives...
+[00:02.30] [OK] Chunk 1 Complete: Auth Architecture
 
-┌─ Synthesized Output ───────────────────────────────────────┐
-│ JWT Authentication System:                                 │
-│ • Access tokens: 15 min expiry                             │
-│ • Refresh tokens: 7 day expiry with rotation               │
-│ • Rate limit: 5 req/min on /auth                           │
-│ • Password: bcrypt + salt                                  │
-│ • Storage: PostgreSQL with SQLAlchemy                      │
-└────────────────────────────────────────────────────────────┘
++- Synthesized Output ---------------------------------------+
+| JWT Authentication System:                                 |
+| • Access tokens: 15 min expiry                             |
+| • Refresh tokens: 7 day expiry with rotation               |
+| • Rate limit: 5 req/min on /auth                           |
+| • Password: bcrypt + salt                                  |
+| • Storage: PostgreSQL with SQLAlchemy                      |
++------------------------------------------------------------+
 
-[00:02.50] 💻 Coder: Implementing auth system...
+[00:02.50] Coder Coder: Implementing auth system...
            [Streaming implementation code...]
 
 ...
 
-💾 Solution cached for future use (saves $0.08)
-✅ Collaboration complete (3.2s, $0.09)
+[MEMORY] Solution cached for future use (saves $0.08)
+[OK] Collaboration complete (3.2s, $0.09)
 ```
 
 **Features**:
-- ✅ Real-time progress (timestamped)
-- ✅ Agent icons for quick scanning
-- ✅ Synthesized checkpoints (not just raw outputs)
-- ✅ Cost/time tracking
-- ✅ Cache status indicators
+- [OK] Real-time progress (timestamped)
+- [OK] Agent icons for quick scanning
+- [OK] Synthesized checkpoints (not just raw outputs)
+- [OK] Cost/time tracking
+- [OK] Cache status indicators
 
 **Implementation**: Uses `rich` library (same as your monitor.py from Facilitair_v2)
 
@@ -160,7 +160,7 @@ $ facilitair collaborate "Build a REST API with JWT auth"
 
 > "Ideally the synthesis is occurring while the models work on a solution together. How would this even work, or how do existing solutions handle this?"
 
-**🎯 This is THE key question**
+**[GOAL] This is THE key question**
 
 ### The Honest Answer
 
@@ -238,13 +238,13 @@ for chunk in chunks:
         yield architect_stream.read(5-10 tokens)
 
         # Show architect "reacting" to coder
-        yield "💻 Coder: Considering architect's points..."
+        yield "Coder Coder: Considering architect's points..."
 
         # Show 5-10 tokens from coder
         yield coder_stream.read(5-10 tokens)
 
         # Show reviewer "reacting"
-        yield "🔍 Reviewer: Evaluating approach..."
+        yield "Reviewer Reviewer: Evaluating approach..."
 
         # Show 5-10 tokens from reviewer
         yield reviewer_stream.read(5-10 tokens)
@@ -288,10 +288,10 @@ for chunk in chunks:
 ```
 
 **The Illusion is Perfect** because:
-- ✅ Timing feels real-time (50-200ms between agents)
-- ✅ Content is coherent (all worked on same chunk)
-- ✅ Synthesis uses ALL perspectives (not fake)
-- ✅ Later chunks incorporate earlier synthesis (real learning)
+- [OK] Timing feels real-time (50-200ms between agents)
+- [OK] Content is coherent (all worked on same chunk)
+- [OK] Synthesis uses ALL perspectives (not fake)
+- [OK] Later chunks incorporate earlier synthesis (real learning)
 
 **User Can't Tell The Difference** between:
 - Pseudo-streaming (what we do)
@@ -308,28 +308,28 @@ for chunk in chunks:
 ```
 Timeline of a 3-chunk task:
 
-00:00 ─────────── Chunk 1: Requirements ─────────────> 02:00
-        Architect ████████████ (generating)
-        Coder     ████████████ (generating)
-        Reviewer  ████████████ (generating)
+00:00 ----------- Chunk 1: Requirements -------------> 02:00
+        Architect  (generating)
+        Coder      (generating)
+        Reviewer   (generating)
                                                   ↓
-02:00 ───────── Synthesis 1 ──────────> 02:30
+02:00 --------- Synthesis 1 ----------> 02:30
         Synthesizer merges perspectives
 
-02:30 ─────────── Chunk 2: Architecture ──────────────> 04:30
-        Architect ████████████ (sees synthesis 1)
-        Coder     ████████████ (sees synthesis 1)
-        Reviewer  ████████████ (sees synthesis 1)
+02:30 ----------- Chunk 2: Architecture --------------> 04:30
+        Architect  (sees synthesis 1)
+        Coder      (sees synthesis 1)
+        Reviewer   (sees synthesis 1)
                                                   ↓
-04:30 ───────── Synthesis 2 ──────────> 05:00
+04:30 --------- Synthesis 2 ----------> 05:00
         Synthesizer merges + builds on synthesis 1
 
-05:00 ─────────── Chunk 3: Implementation ────────────> 07:00
-        Architect ████████████ (sees synthesis 1+2)
-        Coder     ████████████ (sees synthesis 1+2)
-        Reviewer  ████████████ (sees synthesis 1+2)
+05:00 ----------- Chunk 3: Implementation ------------> 07:00
+        Architect  (sees synthesis 1+2)
+        Coder      (sees synthesis 1+2)
+        Reviewer   (sees synthesis 1+2)
                                                   ↓
-07:00 ───────── Final Synthesis ──────────> 07:30
+07:00 --------- Final Synthesis ----------> 07:30
         Complete solution
 ```
 
@@ -337,8 +337,8 @@ Timeline of a 3-chunk task:
 **Reality**: Staged synthesis with context propagation
 
 **Why This Is Better Than Post-Processing**:
-- ❌ Post-processing: Agents generate independently, then merge at end
-- ✅ Our approach: Each stage sees previous synthesis (true collaboration)
+- [FAIL] Post-processing: Agents generate independently, then merge at end
+- [OK] Our approach: Each stage sees previous synthesis (true collaboration)
 
 ---
 
@@ -346,13 +346,13 @@ Timeline of a 3-chunk task:
 
 | Feature | ChatGPT | Claude | Multi-Agent Papers | **Facilitair** |
 |---------|---------|--------|-------------------|----------------|
-| **Streaming Output** | ✅ | ✅ | ❌ | ✅ |
-| **Multi-Agent** | ❌ | ❌ | ✅ | ✅ |
-| **Live Synthesis** | ❌ | ❌ | ❌ | ✅ (pseudo) |
-| **Context Propagation** | ❌ | ❌ | ⚠️ (rounds) | ✅ (chunks) |
-| **Semantic Caching** | ⚠️ (basic) | ❌ | ❌ | ✅ (context-aware) |
-| **User Sees Debate** | ❌ | ❌ | ❌ | ✅ |
-| **Rust Performance** | ? | ? | ❌ | ✅ |
+| **Streaming Output** | [OK] | [OK] | [FAIL] | [OK] |
+| **Multi-Agent** | [FAIL] | [FAIL] | [OK] | [OK] |
+| **Live Synthesis** | [FAIL] | [FAIL] | [FAIL] | [OK] (pseudo) |
+| **Context Propagation** | [FAIL] | [FAIL] | [WARNING] (rounds) | [OK] (chunks) |
+| **Semantic Caching** | [WARNING] (basic) | [FAIL] | [FAIL] | [OK] (context-aware) |
+| **User Sees Debate** | [FAIL] | [FAIL] | [FAIL] | [OK] |
+| **Rust Performance** | ? | ? | [FAIL] | [OK] |
 
 **Our Unique Value Proposition**:
 1. **Transparent Collaboration**: Users see HOW models reach consensus
@@ -404,7 +404,7 @@ How detailed should user context tracking be?
 ### 2. Cache Transparency
 Should users know when they get cached results?
 
-- [ ] **Always show**: "💾 Found cached solution (94% match, saved $0.08)"
+- [ ] **Always show**: "[MEMORY] Found cached solution (94% match, saved $0.08)"
 - [ ] **Show on hover**: Default hides, tooltip reveals
 - [ ] **Never show**: Seamless experience
 
@@ -434,28 +434,28 @@ When should synthesis checkpoints happen?
 
 If you approve this plan, by Friday you'll have:
 
-✅ **CLI Interface**:
+[OK] **CLI Interface**:
 ```bash
 $ facilitair collaborate "your task"
 [Real-time streaming debate with synthesis]
 ```
 
-✅ **Context-Aware Caching**:
+[OK] **Context-Aware Caching**:
 ```bash
 $ facilitair collaborate "build api" --context python,small-team
-💾 Cache hit (saved $0.08, 4.2s faster)
+[MEMORY] Cache hit (saved $0.08, 4.2s faster)
 ```
 
-✅ **Cost Tracking**:
+[OK] **Cost Tracking**:
 ```bash
-✅ Collaboration complete
+[OK] Collaboration complete
    Time: 3.2s
    Cost: $0.09
    Agents: architect, coder, reviewer
    Chunks: 3
 ```
 
-✅ **Working Integration** with existing weavehacks-collaborative codebase
+[OK] **Working Integration** with existing weavehacks-collaborative codebase
 
 ---
 
@@ -464,9 +464,9 @@ $ facilitair collaborate "build api" --context python,small-team
 **Review this plan + RESPONSE_TO_USER.md + STREAMING_CONSENSUS_IMPLEMENTATION.md**
 
 Then tell me:
-1. ✅ Approve as-is (I start Day 1)
-2. 🔧 Request changes (I'll revise)
-3. ❓ Questions (I'll clarify)
+1. [OK] Approve as-is (I start Day 1)
+2.  Request changes (I'll revise)
+3.  Questions (I'll clarify)
 
 Ready to build when you are.
 
@@ -488,4 +488,4 @@ Ready to build when you are.
 
 **Timeline**: Week 1 = Working CLI, Week 2-3 = Rust speedup, Week 3-4 = Web UI
 
-**Ready to start?** 🚀
+**Ready to start?** [START]

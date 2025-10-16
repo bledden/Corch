@@ -15,19 +15,19 @@ load_dotenv()
 # VERIFIED WORKING INTEGRATIONS
 # =============================================================================
 
-# 1. W&B Weave - VERIFIED WORKING ✅
+# 1. W&B Weave - VERIFIED WORKING [OK]
 from real_sponsor_stack import WeaveTracking
 
-# 2. Tavily - VERIFIED WORKING ✅
+# 2. Tavily - VERIFIED WORKING [OK]
 from real_sponsor_stack import TavilySearch
 
-# 3. OpenRouter - VERIFIED WORKING ✅
+# 3. OpenRouter - VERIFIED WORKING [OK]
 from real_sponsor_stack import OpenRouterModels
 
-# 4. Google Cloud - VERIFIED WORKING WITH REAL CREDENTIALS ✅
+# 4. Google Cloud - VERIFIED WORKING WITH REAL CREDENTIALS [OK]
 from real_sponsor_stack import GoogleCloudIntegration
 
-# 5. BrowserBase - VERIFIED WORKING WITH PLAYWRIGHT ✅
+# 5. BrowserBase - VERIFIED WORKING WITH PLAYWRIGHT [OK]
 from real_sponsor_stack import BrowserBaseAutomation
 
 # =============================================================================
@@ -41,7 +41,7 @@ try:
     PREFECT_AVAILABLE = True
 except ImportError:
     PREFECT_AVAILABLE = False
-    print("⚠️ Prefect not installed - pip install prefect")
+    print("[WARNING] Prefect not installed - pip install prefect")
 
 
 class PrefectOrchestration:
@@ -50,7 +50,7 @@ class PrefectOrchestration:
     def __init__(self):
         self.is_configured = PREFECT_AVAILABLE
         if self.is_configured:
-            print("✅ Prefect workflow orchestration initialized")
+            print("[OK] Prefect workflow orchestration initialized")
 
     @task
     async def agent_task(self, agent_id: str, prompt: str) -> Dict:
@@ -100,7 +100,7 @@ try:
     RAY_AVAILABLE = True
 except ImportError:
     RAY_AVAILABLE = False
-    print("⚠️ Ray RLlib not installed - pip install ray[rllib]")
+    print("[WARNING] Ray RLlib not installed - pip install ray[rllib]")
 
 
 class RayRLIntegration:
@@ -114,7 +114,7 @@ class RayRLIntegration:
             # Initialize Ray if not already initialized
             if not ray.is_initialized():
                 ray.init(ignore_reinit_error=True, num_cpus=2)
-            print("✅ Ray RLlib reinforcement learning initialized")
+            print("[OK] Ray RLlib reinforcement learning initialized")
 
     def create_ppo_algorithm(self, env_config: Dict) -> Optional[Any]:
         """Create PPO algorithm for training"""
@@ -191,7 +191,7 @@ try:
     PYDANTIC_AI_AVAILABLE = True
 except ImportError:
     PYDANTIC_AI_AVAILABLE = False
-    print("⚠️ Pydantic AI not installed - pip install pydantic-ai")
+    print("[WARNING] Pydantic AI not installed - pip install pydantic-ai")
 
 
 class AGUIVisualization:
@@ -203,7 +203,7 @@ class AGUIVisualization:
         self.agents = {}
 
         if self.is_configured:
-            print("✅ AG-UI agent visualization initialized")
+            print("[OK] AG-UI agent visualization initialized")
 
     async def create_agent_with_ui(self, agent_id: str, system_prompt: str) -> Optional[Agent]:
         """Create Pydantic AI agent with AG-UI support"""
@@ -238,7 +238,7 @@ class AGUIVisualization:
                 port=port,
                 host="0.0.0.0"
             )
-            print(f"✅ AG-UI server running at http://localhost:{port}")
+            print(f"[OK] AG-UI server running at http://localhost:{port}")
             return True
 
         except Exception as e:
@@ -261,7 +261,7 @@ try:
     DOCKER_AVAILABLE = True
 except ImportError:
     DOCKER_AVAILABLE = False
-    print("⚠️ Docker not installed - pip install docker")
+    print("[WARNING] Docker not installed - pip install docker")
 
 
 class IsolatedEnvironments:
@@ -274,16 +274,16 @@ class IsolatedEnvironments:
         if DOCKER_AVAILABLE:
             try:
                 self.docker_client = docker.from_env()
-                print("✅ Docker isolated environments initialized")
+                print("[OK] Docker isolated environments initialized")
             except Exception as e:
-                print(f"⚠️ Docker init failed: {e}")
+                print(f"[WARNING] Docker init failed: {e}")
 
         # Check for Daytona
         self.daytona_url = os.getenv("DAYTONA_API_URL")
         self.daytona_key = os.getenv("DAYTONA_API_KEY")
 
         if self.daytona_url and self.daytona_key:
-            print("✅ Daytona credentials found (API integration pending)")
+            print("[OK] Daytona credentials found (API integration pending)")
 
     async def create_container(self, agent_id: str, image: str = "python:3.11") -> Optional[str]:
         """Create isolated Docker container for agent"""
@@ -331,9 +331,9 @@ class IsolatedEnvironments:
                 container = self.docker_client.containers.get(container_id)
                 container.stop(timeout=5)
                 container.remove()
-                print(f"✅ Cleaned up container {container_id[:12]}")
+                print(f"[OK] Cleaned up container {container_id[:12]}")
             except Exception as e:
-                print(f"⚠️ Failed to cleanup container {container_id[:12]}: {e}")
+                print(f"[WARNING] Failed to cleanup container {container_id[:12]}: {e}")
 
         self.active_containers.clear()
 
@@ -358,20 +358,20 @@ class ProductionSponsorStack:
     Production-grade sponsor stack with ONLY real, working integrations
 
     Working Integrations:
-    1. ✅ W&B Weave - Tracking and learning
-    2. ✅ Tavily - AI web search
-    3. ✅ OpenRouter - Open-source LLMs
-    4. ✅ Google Cloud - Cloud infrastructure (with credentials)
-    5. ✅ BrowserBase - Web automation (with Playwright)
-    6. ✅ Prefect - Workflow orchestration (replacing Mastra)
-    7. ✅ Ray RLlib - Reinforcement learning (replacing Serverless RL)
-    8. ✅ Pydantic AI + AG-UI - Agent visualization
-    9. ✅ Docker/Daytona - Isolated environments
+    1. [OK] W&B Weave - Tracking and learning
+    2. [OK] Tavily - AI web search
+    3. [OK] OpenRouter - Open-source LLMs
+    4. [OK] Google Cloud - Cloud infrastructure (with credentials)
+    5. [OK] BrowserBase - Web automation (with Playwright)
+    6. [OK] Prefect - Workflow orchestration (replacing Mastra)
+    7. [OK] Ray RLlib - Reinforcement learning (replacing Serverless RL)
+    8. [OK] Pydantic AI + AG-UI - Agent visualization
+    9. [OK] Docker/Daytona - Isolated environments
     """
 
     def __init__(self):
         print("\n" + "="*60)
-        print("🚀 Initializing PRODUCTION Sponsor Stack")
+        print("[START] Initializing PRODUCTION Sponsor Stack")
         print("Only REAL, working integrations - NO mocks!")
         print("="*60 + "\n")
 
@@ -407,7 +407,7 @@ class ProductionSponsorStack:
         if self.isolated_envs.docker_client:
             working.append("Docker Isolation")
 
-        print(f"\n✅ {len(working)}/9 integrations working:")
+        print(f"\n[OK] {len(working)}/9 integrations working:")
         for integration in working:
             print(f"  • {integration}")
 
@@ -561,12 +561,12 @@ async def demo_production_stack():
 
     print(f"\nTask: {result['task']}")
     print(f"Agent: {result['agent_id']}")
-    print(f"\n✅ Real Integrations Used ({len(result['real_integrations_used'])}):")
+    print(f"\n[OK] Real Integrations Used ({len(result['real_integrations_used'])}):")
     for integration in result["real_integrations_used"]:
         print(f"  • {integration}")
 
     if result["results"]:
-        print("\n📊 Results:")
+        print("\n[CHART] Results:")
         for key, value in result["results"].items():
             if key == "openrouter":
                 print(f"  • OpenRouter: Generated {len(value)} chars")
@@ -581,13 +581,13 @@ async def demo_production_stack():
             elif key == "rl_action":
                 print(f"  • Ray RL: Action {value}")
             elif key == "weave_tracked":
-                print(f"  • W&B Weave: Tracked ✓")
+                print(f"  • W&B Weave: Tracked [OK]")
 
     # Cleanup
     await stack.cleanup()
 
     print("\n" + "="*60)
-    print("✅ Production demo complete - ALL REAL, NO FAKES!")
+    print("[OK] Production demo complete - ALL REAL, NO FAKES!")
     print("="*60)
 
 

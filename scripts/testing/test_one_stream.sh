@@ -3,7 +3,7 @@
 
 export FAC_API_KEY="test-key"
 
-echo "🧪 Testing streaming with 30-second timeout..."
+echo "Testing streaming with 30-second timeout..."
 echo ""
 
 # Run with timeout to prevent hanging
@@ -13,11 +13,11 @@ EXIT_CODE=$?
 
 echo ""
 if [ $EXIT_CODE -eq 0 ]; then
-    echo "✅ Stream completed successfully"
+    echo "[OK] Stream completed successfully"
 elif [ $EXIT_CODE -eq 124 ]; then
-    echo "⏱️  Timed out after 30 seconds (probably waiting for orchestrator)"
+    echo "[TIMEOUT] Timed out after 30 seconds (probably waiting for orchestrator)"
     echo "    This is normal for MVP - the backend tries to call the real orchestrator"
     echo "    which may not complete. The streaming events should still show!"
 else
-    echo "❌ Failed with exit code: $EXIT_CODE"
+    echo "[FAIL] Failed with exit code: $EXIT_CODE"
 fi

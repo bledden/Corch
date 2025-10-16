@@ -166,35 +166,35 @@ await sse_handler.send_event(
 ### Architecture We'll Adopt
 
 ```
-┌─────────────────────────────────────────────────┐
-│              User Interface (CLI/Web)            │
-│  [Architect] Analyzing requirements...          │
-│  [Coder] Considering FastAPI framework...       │
-│  [Reviewer] Evaluating security implications... │
-│  [Synthesizer] Merging perspectives...          │
-└─────────────────┬───────────────────────────────┘
-                  │ SSE Stream
-┌─────────────────▼───────────────────────────────┐
-│       Streaming Orchestrator (Python)            │
-│                                                  │
-│  ┌──────────────────────────────────────────┐   │
-│  │  Chunked Debate Controller               │   │
-│  │  - Breaks task into semantic chunks      │   │
-│  │  - Manages debate rounds                 │   │
-│  │  - Triggers synthesis at checkpoints     │   │
-│  └──────────────────────────────────────────┘   │
-│                                                  │
-│  ┌────────┐  ┌────────┐  ┌──────────┐          │
-│  │Architect│  │ Coder  │  │ Reviewer │          │
-│  │ Stream │  │ Stream │  │  Stream  │          │
-│  └────────┘  └────────┘  └──────────┘          │
-└──────────────────┬──────────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────────┐
-│       Semantic Cache (Redis + Embeddings)       │
-│  - Cache synthesis results per context          │
-│  - Check cache before spawning agents           │
-└─────────────────────────────────────────────────┘
++-------------------------------------------------+
+|              User Interface (CLI/Web)            |
+|  [Architect] Analyzing requirements...          |
+|  [Coder] Considering FastAPI framework...       |
+|  [Reviewer] Evaluating security implications... |
+|  [Synthesizer] Merging perspectives...          |
++-----------------+-------------------------------+
+                  | SSE Stream
++-----------------v-------------------------------+
+|       Streaming Orchestrator (Python)            |
+|                                                  |
+|  +------------------------------------------+   |
+|  |  Chunked Debate Controller               |   |
+|  |  - Breaks task into semantic chunks      |   |
+|  |  - Manages debate rounds                 |   |
+|  |  - Triggers synthesis at checkpoints     |   |
+|  +------------------------------------------+   |
+|                                                  |
+|  +--------+  +--------+  +----------+          |
+|  |Architect|  | Coder  |  | Reviewer |          |
+|  | Stream |  | Stream |  |  Stream  |          |
+|  +--------+  +--------+  +----------+          |
++------------------+------------------------------+
+                   |
++------------------v------------------------------+
+|       Semantic Cache (Redis + Embeddings)       |
+|  - Cache synthesis results per context          |
+|  - Check cache before spawning agents           |
++-------------------------------------------------+
 ```
 
 ---
@@ -207,45 +207,45 @@ await sse_handler.send_event(
 ```bash
 $ facilitair collaborate "Build a REST API with auth"
 
-┌─ Collaborative Session ────────────────────────────┐
-│ Task: Build a REST API with auth                   │
-│ Strategy: BALANCED (GPT-5 + Claude + DeepSeek)     │
-└────────────────────────────────────────────────────┘
++- Collaborative Session ----------------------------+
+| Task: Build a REST API with auth                   |
+| Strategy: BALANCED (GPT-5 + Claude + DeepSeek)     |
++----------------------------------------------------+
 
-[00:00.10] 🏗️  Architect: Analyzing requirements...
-[00:00.50] 💭 Architect: This requires:
+[00:00.10] Architect  Architect: Analyzing requirements...
+[00:00.50]  Architect: This requires:
            - FastAPI framework for performance
            - JWT authentication
            - PostgreSQL for user storage
            - Redis for session management
 
-[00:00.80] 💻 Coder: Considering architecture...
-[00:01.20] 💭 Coder: Based on JWT auth requirement:
+[00:00.80] Coder Coder: Considering architecture...
+[00:01.20]  Coder: Based on JWT auth requirement:
            ```python
            from fastapi import FastAPI, Depends
            from fastapi.security import HTTPBearer
            ...
            ```
 
-[00:01.50] 🔍 Reviewer: Evaluating security...
-[00:01.90] 💭 Reviewer: Good start, but missing:
+[00:01.50] Reviewer Reviewer: Evaluating security...
+[00:01.90]  Reviewer: Good start, but missing:
            - Rate limiting for auth endpoints
            - Password hashing with bcrypt
            - Refresh token rotation
 
-[00:02.10] 🔄 Synthesizer: Merging perspectives...
-[00:02.30] ✅ Chunk 1 Complete: Requirements + Security
+[00:02.10] [REFRESH] Synthesizer: Merging perspectives...
+[00:02.30] [OK] Chunk 1 Complete: Requirements + Security
 
-┌─ Synthesized Output (Chunk 1) ────────────────────┐
-│ FastAPI REST API with JWT authentication:         │
-│ - JWT access tokens (15 min expiry)               │
-│ - Refresh tokens (7 day expiry)                   │
-│ - bcrypt password hashing                         │
-│ - Rate limiting: 5 req/min on /auth               │
-│ - PostgreSQL + SQLAlchemy ORM                     │
-└────────────────────────────────────────────────────┘
++- Synthesized Output (Chunk 1) --------------------+
+| FastAPI REST API with JWT authentication:         |
+| - JWT access tokens (15 min expiry)               |
+| - Refresh tokens (7 day expiry)                   |
+| - bcrypt password hashing                         |
+| - Rate limiting: 5 req/min on /auth               |
+| - PostgreSQL + SQLAlchemy ORM                     |
++----------------------------------------------------+
 
-[00:02.50] 💻 Coder: Implementing requirements...
+[00:02.50] Coder Coder: Implementing requirements...
            [Streaming code...]
 
 ...
@@ -295,14 +295,14 @@ class CLIDebateInterface:
 
                 elif event.type == "agent_output":
                     self.add_message(
-                        f"[{event.timestamp}] 💭 {event.agent}: {event.content}",
+                        f"[{event.timestamp}]  {event.agent}: {event.content}",
                         style=f"dim {event.agent_color}"
                     )
 
                 elif event.type == "synthesis":
                     self.synthesis_results.append(event.content)
                     self.layout["synthesis"].update(
-                        Panel(event.content, title=f"✅ {event.title}")
+                        Panel(event.content, title=f"[OK] {event.title}")
                     )
 
                 # Update debate view
@@ -584,11 +584,11 @@ class CachedStreamingOrchestrator:
 ```
 $ facilitair collaborate "Build REST API with auth"
 
-💾 Found similar solution (94% match)
+[MEMORY] Found similar solution (94% match)
    Cached: 2 hours ago
    Context: Python, FastAPI, Small team
 
-⚡ Retrieving cached solution...
+[FAST] Retrieving cached solution...
 
 [Streams cached result with realistic pacing]
 ```
@@ -597,12 +597,12 @@ $ facilitair collaborate "Build REST API with auth"
 ```
 $ facilitair collaborate "Build REST API with auth"
 
-🔍 No cached solution found
-🚀 Starting collaborative session...
+Reviewer No cached solution found
+[START] Starting collaborative session...
 
 [Real-time debate as shown in Phase 1]
 
-💾 Solution cached for future use
+[MEMORY] Solution cached for future use
 ```
 
 ---
@@ -623,45 +623,45 @@ $ facilitair collaborate "Build REST API with auth"
 **Architecture**:
 
 ```
-┌──────────────── Python Layer ─────────────────────┐
-│                                                    │
-│  ┌──────────────────────────────────────────┐     │
-│  │    Orchestration Logic (Python)          │     │
-│  │  - Agent coordination                    │     │
-│  │  - Task chunking                         │     │
-│  │  - Synthesis logic                       │     │
-│  └──────────────┬───────────────────────────┘     │
-│                 │                                  │
-│                 ▼                                  │
-│  ┌──────────────────────────────────────────┐     │
-│  │    Rust Bridge (PyO3)                    │     │
-│  │  - Zero-copy data transfer               │     │
-│  │  - Async interop                         │     │
-│  └──────────────┬───────────────────────────┘     │
-└─────────────────┼────────────────────────────────┘
-                  │
-┌─────────────────▼─── Rust Layer ──────────────────┐
-│                                                    │
-│  ┌──────────────────────────────────────────┐     │
-│  │    Stream Router (Tokio)                 │     │
-│  │  - 1M+ concurrent connections            │     │
-│  │  - Token multiplexing                    │     │
-│  │  - Backpressure handling                 │     │
-│  └──────────────────────────────────────────┘     │
-│                                                    │
-│  ┌──────────────────────────────────────────┐     │
-│  │    Embedding Engine (Candle)             │     │
-│  │  - BERT model inference                  │     │
-│  │  - GPU acceleration (Metal/CUDA)         │     │
-│  │  - Batch processing                      │     │
-│  └──────────────────────────────────────────┘     │
-│                                                    │
-│  ┌──────────────────────────────────────────┐     │
-│  │    Cache Layer (Redis)                   │     │
-│  │  - Sub-millisecond lookups               │     │
-│  │  - Vector similarity search              │     │
-│  └──────────────────────────────────────────┘     │
-└────────────────────────────────────────────────────┘
++---------------- Python Layer ---------------------+
+|                                                    |
+|  +------------------------------------------+     |
+|  |    Orchestration Logic (Python)          |     |
+|  |  - Agent coordination                    |     |
+|  |  - Task chunking                         |     |
+|  |  - Synthesis logic                       |     |
+|  +--------------+---------------------------+     |
+|                 |                                  |
+|                 v                                  |
+|  +------------------------------------------+     |
+|  |    Rust Bridge (PyO3)                    |     |
+|  |  - Zero-copy data transfer               |     |
+|  |  - Async interop                         |     |
+|  +--------------+---------------------------+     |
++-------------------------------------------------+
+                  |
++-----------------v--- Rust Layer ------------------+
+|                                                    |
+|  +------------------------------------------+     |
+|  |    Stream Router (Tokio)                 |     |
+|  |  - 1M+ concurrent connections            |     |
+|  |  - Token multiplexing                    |     |
+|  |  - Backpressure handling                 |     |
+|  +------------------------------------------+     |
+|                                                    |
+|  +------------------------------------------+     |
+|  |    Embedding Engine (Candle)             |     |
+|  |  - BERT model inference                  |     |
+|  |  - GPU acceleration (Metal/CUDA)         |     |
+|  |  - Batch processing                      |     |
+|  +------------------------------------------+     |
+|                                                    |
+|  +------------------------------------------+     |
+|  |    Cache Layer (Redis)                   |     |
+|  |  - Sub-millisecond lookups               |     |
+|  |  - Vector similarity search              |     |
+|  +------------------------------------------+     |
++----------------------------------------------------+
 ```
 
 **Rust Implementation**:
@@ -937,57 +937,57 @@ After CLI is working, build web interface using lessons learned.
 **UX Design**:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  Facilitair - Collaborative AI Workspace              [@bledden] │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                   │
-│  📝 Task Input                                                    │
-│  ┌───────────────────────────────────────────────────────────┐   │
-│  │ Build a REST API with JWT authentication                 │   │
-│  │                                                           │   │
-│  └───────────────────────────────────────────────────────────┘   │
-│  [⚙️ Settings] [🎯 Strategy: BALANCED] [▶️ Collaborate]          │
-│                                                                   │
-├─────────────────────────────────────────────────────────────────┤
-│  💬 Live Debate Stream                                           │
-│                                                                   │
-│  ┌─ Chunk 1/3: Requirements Analysis ──────────────────────┐     │
-│  │                                                          │     │
-│  │  🏗️  Architect (GPT-5)         [00:00.50] ━━━━━━━━●○    │     │
-│  │  "This requires JWT tokens, PostgreSQL for users..."    │     │
-│  │                                                          │     │
-│  │  💻 Coder (DeepSeek)           [00:01.20] ━━━━●○○○○○    │     │
-│  │  "Based on JWT requirement, using fastapi.security..."  │     │
-│  │                                                          │     │
-│  │  🔍 Reviewer (Claude)          [00:01.80] ━━●○○○○○○○    │     │
-│  │  "Good, but add rate limiting on /auth endpoints..."    │     │
-│  │                                                          │     │
-│  └──────────────────────────────────────────────────────────┘     │
-│                                                                   │
-│  ┌─ Synthesis (Live) ───────────────────────────────────────┐     │
-│  │  🔄 Merging perspectives...                              │     │
-│  │                                                          │     │
-│  │  ✅ Agreed: FastAPI + JWT + PostgreSQL                   │     │
-│  │  ⚠️  Debate: Rate limiting approach                      │     │
-│  │     - Architect: Application-level                      │     │
-│  │     - Coder: Nginx upstream                             │     │
-│  │     - Reviewer: Both (defense in depth)                 │     │
-│  │                                                          │     │
-│  │  📊 Confidence: 87% (Reviewer concerns noted)            │     │
-│  └──────────────────────────────────────────────────────────┘     │
-│                                                                   │
-├─────────────────────────────────────────────────────────────────┤
-│  📄 Final Output                                                 │
-│                                                                   │
-│  [Code tab] [Architecture tab] [Security Notes tab]              │
-│                                                                   │
-│  ```python                                                       │
-│  from fastapi import FastAPI, Depends, HTTPException             │
-│  from fastapi.security import HTTPBearer, HTTPAuthorizationCred  │
-│  ...                                                             │
-│  ```                                                             │
-│                                                                   │
-└───────────────────────────────────────────────────────────────────┘
++-----------------------------------------------------------------+
+|  Facilitair - Collaborative AI Workspace              [@bledden] |
++-----------------------------------------------------------------+
+|                                                                   |
+|  Documenter Task Input                                                    |
+|  +-----------------------------------------------------------+   |
+|  | Build a REST API with JWT authentication                 |   |
+|  |                                                           |   |
+|  +-----------------------------------------------------------+   |
+|  [ Settings] [[GOAL] Strategy: BALANCED] [ Collaborate]          |
+|                                                                   |
++-----------------------------------------------------------------+
+|   Live Debate Stream                                           |
+|                                                                   |
+|  +- Chunk 1/3: Requirements Analysis ----------------------+     |
+|  |                                                          |     |
+|  |  Architect  Architect (GPT-5)         [00:00.50]     |     |
+|  |  "This requires JWT tokens, PostgreSQL for users..."    |     |
+|  |                                                          |     |
+|  |  Coder Coder (DeepSeek)           [00:01.20]     |     |
+|  |  "Based on JWT requirement, using fastapi.security..."  |     |
+|  |                                                          |     |
+|  |  Reviewer Reviewer (Claude)          [00:01.80]     |     |
+|  |  "Good, but add rate limiting on /auth endpoints..."    |     |
+|  |                                                          |     |
+|  +----------------------------------------------------------+     |
+|                                                                   |
+|  +- Synthesis (Live) ---------------------------------------+     |
+|  |  [REFRESH] Merging perspectives...                              |     |
+|  |                                                          |     |
+|  |  [OK] Agreed: FastAPI + JWT + PostgreSQL                   |     |
+|  |  [WARNING]  Debate: Rate limiting approach                      |     |
+|  |     - Architect: Application-level                      |     |
+|  |     - Coder: Nginx upstream                             |     |
+|  |     - Reviewer: Both (defense in depth)                 |     |
+|  |                                                          |     |
+|  |  [CHART] Confidence: 87% (Reviewer concerns noted)            |     |
+|  +----------------------------------------------------------+     |
+|                                                                   |
++-----------------------------------------------------------------+
+|   Final Output                                                 |
+|                                                                   |
+|  [Code tab] [Architecture tab] [Security Notes tab]              |
+|                                                                   |
+|  ```python                                                       |
+|  from fastapi import FastAPI, Depends, HTTPException             |
+|  from fastapi.security import HTTPBearer, HTTPAuthorizationCred  |
+|  ...                                                             |
+|  ```                                                             |
+|                                                                   |
++-------------------------------------------------------------------+
 ```
 
 **Implementation**:
@@ -1103,7 +1103,7 @@ export function StreamingDebateInterface({ task }: { task: string }) {
       {/* Streaming indicator */}
       {isStreaming && (
         <div className="border-t p-2 text-center text-sm text-gray-600">
-          <span className="animate-pulse">● Streaming...</span>
+          <span className="animate-pulse"> Streaming...</span>
         </div>
       )}
     </div>
@@ -1112,10 +1112,10 @@ export function StreamingDebateInterface({ task }: { task: string }) {
 
 function DebateMessage({ message }: { message: DebateMessage }) {
   const agentStyles = {
-    architect: { icon: '🏗️', color: 'text-blue-600', bg: 'bg-blue-50' },
-    coder: { icon: '💻', color: 'text-green-600', bg: 'bg-green-50' },
-    reviewer: { icon: '🔍', color: 'text-purple-600', bg: 'bg-purple-50' },
-    synthesizer: { icon: '🔄', color: 'text-orange-600', bg: 'bg-orange-50' }
+    architect: { icon: 'Architect', color: 'text-blue-600', bg: 'bg-blue-50' },
+    coder: { icon: 'Coder', color: 'text-green-600', bg: 'bg-green-50' },
+    reviewer: { icon: 'Reviewer', color: 'text-purple-600', bg: 'bg-purple-50' },
+    synthesizer: { icon: '[REFRESH]', color: 'text-orange-600', bg: 'bg-orange-50' }
   };
 
   const style = agentStyles[message.agent];
@@ -1319,10 +1319,10 @@ But until then, our pseudo-streaming is indistinguishable to users.
 ## Conclusion
 
 **We can ship streaming consensus THIS WEEK** using:
-1. ✅ Semantic chunking
-2. ✅ Pseudo-streaming (interleaved outputs)
-3. ✅ Context-aware caching
-4. ✅ Rust performance layer (Week 2-3)
+1. [OK] Semantic chunking
+2. [OK] Pseudo-streaming (interleaved outputs)
+3. [OK] Context-aware caching
+4. [OK] Rust performance layer (Week 2-3)
 
 **The illusion is perfect** - users won't know it's not "true" streaming until APIs support it.
 

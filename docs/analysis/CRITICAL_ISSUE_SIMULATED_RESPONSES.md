@@ -36,7 +36,7 @@ BUT:
 2. LLM client checks: if "gpt" in model and self.openai_client  # False!
 3. LLM client checks: elif "claude" in model and self.anthropic_client  # False!
 4. LLM client checks: elif "gemini" in model and self.google_client  # False!
-5. LLM client falls back: _simulate_response(agent_id, task, model)  # ⚠️ MOCK!
+5. LLM client falls back: _simulate_response(agent_id, task, model)  # [WARNING] MOCK!
 ```
 
 ### Simulated Response Example:
@@ -208,14 +208,14 @@ class LLMClient:
 
 ## Impact on Current Benchmarks
 
-### Smoke Test (0ca59a) - USING MOCKS ⚠️
+### Smoke Test (0ca59a) - USING MOCKS [WARNING]
 - All 10 tasks are getting simulated responses
 - Pass/fail metrics are based on mock data
 - No real API calls being made
 - No token usage tracking
 - Results are NOT VALID for evaluation
 
-### Full 500-Task Benchmark (a1bb15) - USING MOCKS ⚠️
+### Full 500-Task Benchmark (a1bb15) - USING MOCKS [WARNING]
 - All 500 tasks will use simulated responses
 - Estimated 15-20 hours is TOO FAST (should be 50-100 hours with real API calls)
 - Pass@1 scores will be artificially inflated or deflated
@@ -227,11 +227,11 @@ class LLMClient:
 ## Action Items
 
 ### Immediate (Stop Current Benchmarks):
-1. ✅ **Kill both running benchmarks** - They're generating invalid mock data
-2. ✅ **Fix LLM client to use OpenRouter** - Integrate LiteLLM or direct API
-3. ✅ **Verify real API calls** - Check OpenRouter dashboard for token usage
-4. ✅ **Re-run smoke test** - Validate with REAL API calls (should take 15-30 min)
-5. ✅ **Launch full benchmark** - Only after smoke test passes with real data
+1. [OK] **Kill both running benchmarks** - They're generating invalid mock data
+2. [OK] **Fix LLM client to use OpenRouter** - Integrate LiteLLM or direct API
+3. [OK] **Verify real API calls** - Check OpenRouter dashboard for token usage
+4. [OK] **Re-run smoke test** - Validate with REAL API calls (should take 15-30 min)
+5. [OK] **Launch full benchmark** - Only after smoke test passes with real data
 
 ### Verification Steps:
 ```bash
@@ -276,7 +276,7 @@ class LLMClient:
 
 ## Summary
 
-**Current State**: ❌ Benchmarks running with MOCK data (not valid)
+**Current State**: [FAIL] Benchmarks running with MOCK data (not valid)
 **Issue**: LLM client not configured to use OpenRouter
 **Solution**: Integrate LiteLLM or direct OpenRouter API
 **Action**: Kill current benchmarks, fix API integration, restart

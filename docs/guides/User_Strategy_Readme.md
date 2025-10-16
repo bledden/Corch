@@ -1,42 +1,42 @@
 # User-Controlled Model Selection Strategy
 
-## 🎯 Overview
+## [GOAL] Overview
 
 Our collaborative orchestrator now lets **YOU** decide whether to prioritize **quality**, **cost**, or find the perfect **balance**. This gives users complete control over the trade-offs between model performance and expenses.
 
-## 🎮 Available Strategies
+##  Available Strategies
 
-### 1. **QUALITY_FIRST** 🏆
+### 1. **QUALITY_FIRST** [ACHIEVEMENT]
 - **When to use**: Production-critical code, high-stakes projects
 - **Models**: GPT-5, Claude 4.5, O4 series
 - **Cost**: $15-60 per million tokens
 - **Performance**: 95-99% quality scores
 
-### 2. **COST_FIRST** 💰
+### 2. **COST_FIRST** [COST]
 - **When to use**: High-volume processing, budget projects, learning
 - **Models**: Qwen 2.5, DeepSeek V3, Llama 3.3 (all free!)
 - **Cost**: $0 (open-source)
 - **Performance**: 70-85% quality scores
 
-### 3. **BALANCED** ⚖️
+### 3. **BALANCED** 
 - **When to use**: Most projects (recommended default)
 - **Models**: Mix of open and closed based on task
 - **Cost**: 70% savings while maintaining quality
 - **Performance**: 80-90% quality scores
 
-### 4. **SPEED_FIRST** ⚡
+### 4. **SPEED_FIRST** [FAST]
 - **When to use**: Real-time applications, demos
 - **Models**: Lightweight models (Phi-4, Gemma, small variants)
 - **Cost**: Minimal
 - **Performance**: 60-75% quality, but 5-10x faster
 
-### 5. **PRIVACY_FIRST** 🔐
+### 5. **PRIVACY_FIRST** 
 - **When to use**: Sensitive data, regulated industries
 - **Models**: Only local/open-source models
 - **Cost**: $0 (self-hosted)
 - **Performance**: 75-85% quality scores
 
-## 🚀 Quick Start
+## [START] Quick Start
 
 ### Interactive Setup
 ```python
@@ -67,7 +67,7 @@ result = await orchestrator.collaborate("Critical production code")
 orchestrator.set_user_strategy(Strategy.COST_FIRST)
 ```
 
-## 📊 Real Performance Data (October 2025)
+## [CHART] Real Performance Data (October 2025)
 
 ### Quality-First Models
 - **Claude Sonnet 4.5**: 77.2% SWE-bench (best)
@@ -82,7 +82,7 @@ orchestrator.set_user_strategy(Strategy.COST_FIRST)
 ### The Surprise
 **Qwen 2.5 Coder matches GPT-4o quality while being completely free!**
 
-## 🎮 Dynamic Auto-Switching
+##  Dynamic Auto-Switching
 
 The system can automatically switch strategies based on context:
 
@@ -95,7 +95,7 @@ auto_switch:
     - If sensitive_data == true: → PRIVACY_FIRST
 ```
 
-## 💡 Strategy Recommendations
+## [IDEA] Strategy Recommendations
 
 ### By User Type
 - **Enterprise**: QUALITY_FIRST
@@ -111,7 +111,7 @@ auto_switch:
 - **Documentation**: COST_FIRST
 - **Complex Algorithms**: QUALITY_FIRST
 
-## 📈 Cost Savings Examples
+## [UP] Cost Savings Examples
 
 ### Scenario: 100 coding tasks per day
 
@@ -130,7 +130,7 @@ auto_switch:
 - Cost: $0/day (100% savings!)
 - Quality: 75-85%
 
-## 🔧 Configuration
+##  Configuration
 
 Edit `model_strategy_config.yaml` to customize:
 - Model preferences per strategy
@@ -138,7 +138,7 @@ Edit `model_strategy_config.yaml` to customize:
 - Quality requirements
 - Auto-switch rules
 
-## 🎯 Why This Matters
+## [GOAL] Why This Matters
 
 1. **User Control**: You decide the trade-offs
 2. **Cost Transparency**: See exactly what you're spending
@@ -146,7 +146,7 @@ Edit `model_strategy_config.yaml` to customize:
 4. **Smart Defaults**: Balanced mode for most users
 5. **Future-Proof**: Easy to add new models/strategies
 
-## 🏆 Perfect for WeaveHacks
+## [ACHIEVEMENT] Perfect for WeaveHacks
 
 This demonstrates:
 - **Innovation**: User-controlled AI economics
@@ -155,17 +155,17 @@ This demonstrates:
 - **Transparency**: Clear trade-offs
 - **Integration**: Works with W&B Weave tracking
 
-## 📝 Example Output
+## Documenter Example Output
 
 ```
-📊 Task Complete!
+[CHART] Task Complete!
    Strategy Used: BALANCED
    Model Selected: qwen2.5-coder-32b (free!)
    Quality Score: 85%
    Cost: $0.00
    Alternative (QUALITY_FIRST): gpt-5 ($15.00)
 
-💰 You saved: $15.00 on this task!
+[COST] You saved: $15.00 on this task!
 ```
 
 ---

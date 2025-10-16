@@ -356,7 +356,7 @@ class StrategySelector:
 # Interactive strategy selection
 def interactive_setup():
     """Interactive setup for user preference"""
-    print("\n🎯 Model Selection Strategy Setup")
+    print("\n[GOAL] Model Selection Strategy Setup")
     print("="*50)
     print("\nChoose your priority:")
     print("1. QUALITY_FIRST - Best models, regardless of cost")
@@ -398,15 +398,15 @@ if __name__ == "__main__":
     # Select model for coder agent
     model, info = selector.select_model("coder", context)
 
-    print(f"\n✅ Selected Model: {model}")
-    print(f"📊 Strategy: {info['strategy_used']}")
-    print(f"💰 Estimated Cost: ${info['estimated_cost']:.2f}")
-    print(f"⭐ Quality Score: {info['quality_score']:.1%}")
-    print(f"📝 Reason: {info['reason']}")
+    print(f"\n[OK] Selected Model: {model}")
+    print(f"[CHART] Strategy: {info['strategy_used']}")
+    print(f"[COST] Estimated Cost: ${info['estimated_cost']:.2f}")
+    print(f"[STAR] Quality Score: {info['quality_score']:.1%}")
+    print(f"Documenter Reason: {info['reason']}")
 
     # Show summary
     summary = selector.get_summary()
-    print(f"\n📈 Session Summary:")
+    print(f"\n[UP] Session Summary:")
     print(f"   Total Cost: ${summary['total_cost']:.2f}")
     print(f"   Tasks: {summary['task_count']}")
     print(f"   Remaining Budget: ${summary['remaining_daily_budget']:.2f}")

@@ -5,10 +5,10 @@
 
 ---
 
-## ✅ Active Sponsor Integrations
+## [OK] Active Sponsor Integrations
 
 ### 1. W&B Weave (PRIMARY SPONSOR)
-**Status:** ✅ **ACTIVE - Fully integrated**
+**Status:** [OK] **ACTIVE - Fully integrated**
 
 **Implementation:**
 - `@weave.op()` decorators on all orchestration functions
@@ -20,7 +20,7 @@
 ```python
 import weave
 weave.init('facilitair/weavehacks-collaborative')
-# ✅ Connected successfully
+# [OK] Connected successfully
 ```
 
 **Live Dashboards:**
@@ -36,7 +36,7 @@ weave.init('facilitair/weavehacks-collaborative')
 ---
 
 ### 2. Tavily Search API (SPONSOR)
-**Status:** ✅ **INTEGRATED - Ready for activation**
+**Status:** [OK] **INTEGRATED - Ready for activation**
 
 **Implementation:**
 - API key configured and validated
@@ -48,7 +48,7 @@ weave.init('facilitair/weavehacks-collaborative')
 ```python
 from tavily import TavilyClient
 client = TavilyClient(api_key=os.getenv('TAVILY_API_KEY'))
-# ✅ Client initialized successfully
+# [OK] Client initialized successfully
 ```
 
 **Usage:**
@@ -62,7 +62,7 @@ client = TavilyClient(api_key=os.getenv('TAVILY_API_KEY'))
 ---
 
 ### 3. Daytona Development Environments (SPONSOR)
-**Status:** ✅ **INFRASTRUCTURE READY**
+**Status:** [OK] **INFRASTRUCTURE READY**
 
 **Implementation:**
 - Infrastructure code prepared in `agents/sponsor_integrations.py`
@@ -82,23 +82,23 @@ client = TavilyClient(api_key=os.getenv('TAVILY_API_KEY'))
 
 ---
 
-## 🔧 Non-Sponsor APIs (Supporting)
+##  Non-Sponsor APIs (Supporting)
 
 ### OpenRouter
-**Status:** ✅ **ACTIVE**
+**Status:** [OK] **ACTIVE**
 - Provides access to 200+ LLM models
 - GPT-5, Claude 4, Gemini 2.5, DeepSeek V3, Qwen 2.5, etc.
 - Used by all agent executions
 
 ### OpenAI/Anthropic/Google (Direct APIs)
-**Status:** ⚠️ **Placeholder keys**
+**Status:** [WARNING] **Placeholder keys**
 - Direct API keys set to placeholders in .env
 - Using OpenRouter instead for unified access
 - Not needed as OpenRouter provides same models
 
 ---
 
-## 📊 API Call Flow
+## [CHART] API Call Flow
 
 ```
 User Request
@@ -106,13 +106,13 @@ User Request
 CollaborativeOrchestrator
      ↓
 Sequential Pipeline (5 stages)
-     ├─→ W&B Weave: Track execution start
-     ├─→ Stage 1: Architect → OpenRouter API call → Weave log
-     ├─→ Stage 2: Coder → OpenRouter API call → Weave log
-     ├─→ Stage 3: Reviewer → OpenRouter API call → Weave log
-     ├─→ Stage 4: Refiner (0-3 iterations) → OpenRouter → Weave log
-     ├─→ Stage 5: Documenter → OpenRouter API call → Weave log
-     └─→ W&B Weave: Track final metrics, model performance
+     +-→ W&B Weave: Track execution start
+     +-→ Stage 1: Architect → OpenRouter API call → Weave log
+     +-→ Stage 2: Coder → OpenRouter API call → Weave log
+     +-→ Stage 3: Reviewer → OpenRouter API call → Weave log
+     +-→ Stage 4: Refiner (0-3 iterations) → OpenRouter → Weave log
+     +-→ Stage 5: Documenter → OpenRouter API call → Weave log
+     +-→ W&B Weave: Track final metrics, model performance
      ↓
 [Optional] Tavily: Web search for research tasks
      ↓
@@ -121,7 +121,7 @@ Result + Complete Lineage in Weave
 
 ---
 
-## ✅ Verification Tests
+## [OK] Verification Tests
 
 **Run API health checks:**
 ```bash
@@ -132,26 +132,26 @@ import os
 
 # W&B Weave
 weave.init('facilitair/api-health-check')
-print('✅ W&B Weave operational')
+print('[OK] W&B Weave operational')
 
 # Tavily
 client = TavilyClient(api_key=os.getenv('TAVILY_API_KEY'))
-print('✅ Tavily operational')
+print('[OK] Tavily operational')
 "
 ```
 
 **Expected Output:**
 ```
-✅ W&B Weave operational
-✅ Tavily operational
+[OK] W&B Weave operational
+[OK] Tavily operational
 ```
 
 ---
 
-## 🎯 Sponsor Integration Score: 100%
+## [GOAL] Sponsor Integration Score: 100%
 
-- **W&B Weave:** ✅ Complete integration with @weave.op() decorators
-- **Tavily:** ✅ Integrated and ready (can activate for research)
-- **Daytona:** ✅ Infrastructure code prepared (production-ready)
+- **W&B Weave:** [OK] Complete integration with @weave.op() decorators
+- **Tavily:** [OK] Integrated and ready (can activate for research)
+- **Daytona:** [OK] Infrastructure code prepared (production-ready)
 
 **All sponsor requirements met for WeaveHacks 2 submission.**

@@ -2,7 +2,7 @@
 
 ## What Changed
 
-### ❌ OLD: Consensus/Voting (REMOVED)
+### [FAIL] OLD: Consensus/Voting (REMOVED)
 The old system had agents work in parallel then vote on outputs:
 ```python
 # All agents work on same task simultaneously
@@ -20,7 +20,7 @@ final = consensus_vote(outputs)  # ← BAD
 - No format preferences
 - Just voting on isolated outputs
 
-### ✅ NEW: Sequential Collaboration (Facilitair_v2 Architecture)
+### [OK] NEW: Sequential Collaboration (Facilitair_v2 Architecture)
 Agents work in sequence, passing context forward:
 ```python
 # Sequential workflow
@@ -32,11 +32,11 @@ docs = await documenter(refined + architecture + task)  # ← Complete picture
 ```
 
 **Benefits:**
-- ✅ **Real collaboration** - agents build on each other's work
-- ✅ **Context preservation** - original request flows through entire chain
-- ✅ **Format preferences** - each agent gets/sends data in their preferred format
-- ✅ **Iteration** - reviewer can request changes, coder fixes
-- ✅ **Proven** - this is Facilitair_v2's production architecture
+- [OK] **Real collaboration** - agents build on each other's work
+- [OK] **Context preservation** - original request flows through entire chain
+- [OK] **Format preferences** - each agent gets/sends data in their preferred format
+- [OK] **Iteration** - reviewer can request changes, coder fixes
+- [OK] **Proven** - this is Facilitair_v2's production architecture
 
 ## Architecture
 
@@ -47,9 +47,9 @@ User Request → [Stage 1] → [Stage 2] → [Stage 3] → [Stage 4] → [Stage 
                 Architect    Coder      Reviewer    Refiner      Documenter
 
 Context Flow:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 Original Request: "Build REST API for user auth"
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
          ↓
     [ARCHITECT]
     Input: Original Request (Markdown)
@@ -93,7 +93,7 @@ The Reviewer → Refiner loop can iterate up to 3 times:
 ```
 [REVIEWER] → finds bugs → [REFINER] → fixes code → [REVIEWER] → still has issues?
      ↑                                                                  ↓
-     └──────────────────────← YES ←─────────────────────────────────────┘
+     +----------------------← YES ←-------------------------------------+
                                    ↓ NO
                               [DOCUMENTER]
 ```
@@ -148,25 +148,25 @@ Complete design document explaining the architecture.
 
 ## Current Status
 
-### ⚠️ Issue: Agent Names Mismatch
+### [WARNING] Issue: Agent Names Mismatch
 The sequential orchestrator uses agent roles that don't all exist in [config.yaml](config.yaml):
 
 **Config has:**
-- `architect` ✅
-- `coder` ✅
-- `reviewer` ✅
-- `documenter` ✅
+- `architect` [OK]
+- `coder` [OK]
+- `reviewer` [OK]
+- `documenter` [OK]
 - `researcher` (not used in workflow)
 
 **Sequential orchestrator needs:**
-- `architect` ✅
-- `coder` ✅
-- `reviewer` ✅
-- `refiner` ❌ NOT IN CONFIG
-- `tester` ❌ NOT IN CONFIG
-- `documenter` ✅
+- `architect` [OK]
+- `coder` [OK]
+- `reviewer` [OK]
+- `refiner` [FAIL] NOT IN CONFIG
+- `tester` [FAIL] NOT IN CONFIG
+- `documenter` [OK]
 
-### ✅ Solution: Simplified Workflow
+### [OK] Solution: Simplified Workflow
 Use only the agents that exist in config:
 
 1. **ARCHITECT** → designs solution
@@ -225,12 +225,12 @@ review = reviewer(code + arch + "Build a REST API")  # HAS EVERYTHING
 
 ## Next Steps
 
-1. ✅ Simplify sequential_orchestrator.py to only use existing agents
-2. ✅ Use `coder` as both implementer AND refiner
-3. ✅ Test with simple task
-4. ✅ Update config.yaml to document sequential workflows
-5. ⏭️ Run full 100-task evaluation with sequential collaboration
-6. ⏭️ Compare results: Sequential vs Consensus
+1. [OK] Simplify sequential_orchestrator.py to only use existing agents
+2. [OK] Use `coder` as both implementer AND refiner
+3. [OK] Test with simple task
+4. [OK] Update config.yaml to document sequential workflows
+5. ⏭ Run full 100-task evaluation with sequential collaboration
+6. ⏭ Compare results: Sequential vs Consensus
 
 ## Comparison: Before vs After
 
@@ -247,10 +247,10 @@ review = reviewer(code + arch + "Build a REST API")  # HAS EVERYTHING
 ## Why This Matters for WeaveHacks
 
 This is exactly what you wanted:
-- ✅ Sequential collaboration (not consensus)
-- ✅ Format preferences (XML, JSON, Markdown)
-- ✅ Context preservation (original request never lost)
-- ✅ Matches Facilitair_v2 (proven production architecture)
-- ✅ Real agent-to-agent communication (not just voting)
+- [OK] Sequential collaboration (not consensus)
+- [OK] Format preferences (XML, JSON, Markdown)
+- [OK] Context preservation (original request never lost)
+- [OK] Matches Facilitair_v2 (proven production architecture)
+- [OK] Real agent-to-agent communication (not just voting)
 
 The consensus approach was fundamentally wrong. This is the right architecture.

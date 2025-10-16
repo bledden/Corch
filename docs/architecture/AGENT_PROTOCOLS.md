@@ -46,11 +46,11 @@ manager = GroupChatManager(groupchat=groupchat)
 ```
 
 **Key Features:**
-- ✅ **Asynchronous messaging** - Agents communicate via message passing
-- ✅ **Group chat pattern** - Multiple agents can see all messages
-- ✅ **Dynamic speaker selection** - Manager decides who speaks next
-- ✅ **Nested chats** - Agents can spawn sub-conversations
-- ❌ **Limited parallelism** - Still mostly turn-based
+- [OK] **Asynchronous messaging** - Agents communicate via message passing
+- [OK] **Group chat pattern** - Multiple agents can see all messages
+- [OK] **Dynamic speaker selection** - Manager decides who speaks next
+- [OK] **Nested chats** - Agents can spawn sub-conversations
+- [FAIL] **Limited parallelism** - Still mostly turn-based
 
 **Use Case:** Collaborative debugging, iterative refinement
 
@@ -107,11 +107,11 @@ workflow.add_edge("reviewer", END)
 ```
 
 **Key Features:**
-- ✅ **True parallelism** - Agents run simultaneously if no dependencies
-- ✅ **DAG execution** - Clear dependency graph
-- ✅ **State management** - Shared state accessible to all agents
-- ✅ **Checkpointing** - Can pause/resume workflows
-- ✅ **Conditional routing** - Dynamic branching based on results
+- [OK] **True parallelism** - Agents run simultaneously if no dependencies
+- [OK] **DAG execution** - Clear dependency graph
+- [OK] **State management** - Shared state accessible to all agents
+- [OK] **Checkpointing** - Can pause/resume workflows
+- [OK] **Conditional routing** - Dynamic branching based on results
 
 **Use Case:** Complex workflows with clear dependencies
 
@@ -174,11 +174,11 @@ result = crew.kickoff()
 ```
 
 **Key Features:**
-- ✅ **Process modes**: Sequential, Hierarchical, or **Parallel**
-- ✅ **Task delegation** - Agents can delegate subtasks
-- ✅ **Memory** - Agents remember past interactions
-- ✅ **Tool integration** - Agents can use external tools
-- ✅ **Human-in-the-loop** - Can pause for human input
+- [OK] **Process modes**: Sequential, Hierarchical, or **Parallel**
+- [OK] **Task delegation** - Agents can delegate subtasks
+- [OK] **Memory** - Agents remember past interactions
+- [OK] **Tool integration** - Agents can use external tools
+- [OK] **Human-in-the-loop** - Can pause for human input
 
 **Use Case:** Multi-language systems (frontend + backend simultaneously)
 
@@ -223,11 +223,11 @@ class DebateProtocol:
 ```
 
 **Key Features:**
-- ✅ **Concurrent generation** - All agents work simultaneously
-- ✅ **Debate mechanism** - Agents critique each other's work
-- ✅ **Diverse perspectives** - Multiple approaches explored
-- ✅ **Consensus building** - Converge to best solution
-- ❌ **High token cost** - 3-5x more LLM calls
+- [OK] **Concurrent generation** - All agents work simultaneously
+- [OK] **Debate mechanism** - Agents critique each other's work
+- [OK] **Diverse perspectives** - Multiple approaches explored
+- [OK] **Consensus building** - Converge to best solution
+- [FAIL] **High token cost** - 3-5x more LLM calls
 
 **Use Case:** Critical systems requiring multiple perspectives (medical diagnosis, financial decisions)
 
@@ -300,12 +300,12 @@ await asyncio.gather(
 ```
 
 **Key Features:**
-- ✅ **True async** - Agents run completely independently
-- ✅ **Event-driven** - React to events as they occur
-- ✅ **Scalable** - Can distribute agents across machines
-- ✅ **Fault-tolerant** - Messages persist in queue
-- ✅ **Flexible** - Any agent can publish to any topic
-- ❌ **Complex** - Requires infrastructure (Redis/RabbitMQ)
+- [OK] **True async** - Agents run completely independently
+- [OK] **Event-driven** - React to events as they occur
+- [OK] **Scalable** - Can distribute agents across machines
+- [OK] **Fault-tolerant** - Messages persist in queue
+- [OK] **Flexible** - Any agent can publish to any topic
+- [FAIL] **Complex** - Requires infrastructure (Redis/RabbitMQ)
 
 **Use Case:** Large-scale agent swarms, production systems
 
@@ -364,12 +364,12 @@ code, tests = ray.get([code_future, test_future])
 ```
 
 **Key Features:**
-- ✅ **True distributed** - Agents run on different CPUs/machines
-- ✅ **Location transparency** - Agents don't care where others are
-- ✅ **Fault tolerance** - Can handle agent crashes
-- ✅ **Resource management** - Ray handles scheduling
-- ✅ **Low overhead** - Efficient message passing
-- ❌ **Learning curve** - Requires understanding actor model
+- [OK] **True distributed** - Agents run on different CPUs/machines
+- [OK] **Location transparency** - Agents don't care where others are
+- [OK] **Fault tolerance** - Can handle agent crashes
+- [OK] **Resource management** - Ray handles scheduling
+- [OK] **Low overhead** - Efficient message passing
+- [FAIL] **Learning curve** - Requires understanding actor model
 
 **Use Case:** Large-scale distributed agent systems
 
@@ -395,11 +395,11 @@ code, tests = ray.get([code_future, test_future])
 ### **LangGraph** (Best balance for demo)
 
 **Why:**
-1. ✅ True parallelism where it matters (coder + tester simultaneously)
-2. ✅ Clear visual representation (show the DAG graph!)
-3. ✅ Compatible with existing LLM integrations
-4. ✅ Easy to explain to judges
-5. ✅ Impressive speedup (2-3x faster)
+1. [OK] True parallelism where it matters (coder + tester simultaneously)
+2. [OK] Clear visual representation (show the DAG graph!)
+3. [OK] Compatible with existing LLM integrations
+4. [OK] Easy to explain to judges
+5. [OK] Impressive speedup (2-3x faster)
 
 **Architecture:**
 ```

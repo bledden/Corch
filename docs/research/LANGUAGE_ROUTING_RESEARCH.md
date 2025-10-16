@@ -476,15 +476,15 @@ def create_visualizations(results):
 
 **Immediate Actions:**
 
-1. ✅ Review this research plan
-2. ⏳ Implement token counting instrumentation
-3. ⏳ Modify sequential orchestrator for language modes
-4. ⏳ Build experiment runner
-5. ⏳ Run pilot test (10 tasks) to validate setup
-6. ⏳ Run full experiment (50 tasks)
-7. ⏳ Analyze results
-8. ⏳ Create visualizations
-9. ⏳ Prepare presentation
+1. [OK] Review this research plan
+2. [WAITING] Implement token counting instrumentation
+3. [WAITING] Modify sequential orchestrator for language modes
+4. [WAITING] Build experiment runner
+5. [WAITING] Run pilot test (10 tasks) to validate setup
+6. [WAITING] Run full experiment (50 tasks)
+7. [WAITING] Analyze results
+8. [WAITING] Create visualizations
+9. [WAITING] Prepare presentation
 
 **Decision Point:**
 

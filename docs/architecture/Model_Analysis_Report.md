@@ -21,7 +21,7 @@ Ranked by code generation score, considering recency, specialization, and benchm
 
 
 ### 1. deepseek-ai/deepseek-v3
-**Status:** ✅ Available | **Release Date:** 2024-12-26
+**Status:** [OK] Available | **Release Date:** 2024-12-26
 **Code Score:** 98/100 | **Reasoning Score:** 95/100
 **Context Window:** 64K
 
@@ -32,7 +32,7 @@ DeepSeek V3 - SOTA open-source code model
 
 
 ### 2. openai/o1
-**Status:** ✅ Available | **Release Date:** 2024-12-17
+**Status:** [OK] Available | **Release Date:** 2024-12-17
 **Code Score:** 96/100 | **Reasoning Score:** 99/100
 **Context Window:** 128K
 
@@ -43,7 +43,7 @@ O1 - Best reasoning for complex algorithms
 
 
 ### 3. alibaba/qwen2.5-coder-32b-instruct
-**Status:** ✅ Available | **Release Date:** 2024-11-11
+**Status:** [OK] Available | **Release Date:** 2024-11-11
 **Code Score:** 95/100 | **Reasoning Score:** 90/100
 **Context Window:** 128K
 
@@ -54,7 +54,7 @@ Qwen 2.5 Coder - Dedicated code model
 
 
 ### 4. alibaba/qwq-32b-preview
-**Status:** ✅ Available | **Release Date:** 2024-11-28
+**Status:** [OK] Available | **Release Date:** 2024-11-28
 **Code Score:** 94/100 | **Reasoning Score:** 96/100
 **Context Window:** 32K
 
@@ -65,7 +65,7 @@ QwQ - Deep reasoning for code problems
 
 
 ### 5. anthropic/claude-3-5-sonnet
-**Status:** ✅ Available | **Release Date:** 2024-10-22
+**Status:** [OK] Available | **Release Date:** 2024-10-22
 **Code Score:** 94/100 | **Reasoning Score:** 93/100
 **Context Window:** 200K
 
@@ -76,7 +76,7 @@ Claude 3.5 Sonnet - Excellent for Python
 
 
 ### 6. openai/o1-mini
-**Status:** ✅ Available | **Release Date:** 2024-12-17
+**Status:** [OK] Available | **Release Date:** 2024-12-17
 **Code Score:** 93/100 | **Reasoning Score:** 96/100
 **Context Window:** 128K
 
@@ -87,7 +87,7 @@ O1 Mini - Fast reasoning for code
 
 
 ### 7. deepseek-ai/deepseek-r1
-**Status:** ✅ Available | **Release Date:** 2024-11-20
+**Status:** [OK] Available | **Release Date:** 2024-11-20
 **Code Score:** 93/100 | **Reasoning Score:** 94/100
 **Context Window:** 64K
 
@@ -98,7 +98,7 @@ DeepSeek R1 - Reasoning-focused code model
 
 
 ### 8. openai/gpt-4o
-**Status:** ✅ Available | **Release Date:** 2024-05-13
+**Status:** [OK] Available | **Release Date:** 2024-05-13
 **Code Score:** 93/100 | **Reasoning Score:** 92/100
 **Context Window:** 128K
 
@@ -109,7 +109,7 @@ GPT-4o - Multimodal coding powerhouse
 
 
 ### 9. alibaba/qvq-72b-preview
-**Status:** ✅ Available | **Release Date:** 2024-12-24
+**Status:** [OK] Available | **Release Date:** 2024-12-24
 **Code Score:** 92/100 | **Reasoning Score:** 94/100
 **Context Window:** 32K
 
@@ -120,7 +120,7 @@ QVQ - Visual reasoning + code generation
 
 
 ### 10. google/gemini-2.0-pro-exp
-**Status:** ✅ Available | **Release Date:** 2024-12-11
+**Status:** [OK] Available | **Release Date:** 2024-12-11
 **Code Score:** 91/100 | **Reasoning Score:** 93/100
 **Context Window:** 1M
 
@@ -131,7 +131,7 @@ Gemini 2.0 - Multimodal code generation
 
 
 ### 11. deepseek-ai/deepseek-v2.5
-**Status:** ✅ Available | **Release Date:** 2024-09-05
+**Status:** [OK] Available | **Release Date:** 2024-09-05
 **Code Score:** 91/100 | **Reasoning Score:** 89/100
 **Context Window:** 64K
 
@@ -142,7 +142,7 @@ DeepSeek V2.5 - Previous generation still strong
 
 
 ### 12. meta-llama/llama-3.1-405b-instruct
-**Status:** ✅ Available | **Release Date:** 2024-07-23
+**Status:** [OK] Available | **Release Date:** 2024-07-23
 **Code Score:** 91/100 | **Reasoning Score:** 90/100
 **Context Window:** 128K
 
@@ -153,7 +153,7 @@ Llama 3.1 405B - Massive open-source model
 
 
 ### 13. meta-llama/llama-3.3-70b-instruct
-**Status:** ✅ Available | **Release Date:** 2024-12-06
+**Status:** [OK] Available | **Release Date:** 2024-12-06
 **Code Score:** 90/100 | **Reasoning Score:** 89/100
 **Context Window:** 128K
 
@@ -164,7 +164,7 @@ Llama 3.3 - Latest open-source champion
 
 
 ### 14. microsoft/phi-4
-**Status:** ✅ Available | **Release Date:** 2024-12-10
+**Status:** [OK] Available | **Release Date:** 2024-12-10
 **Code Score:** 89/100 | **Reasoning Score:** 88/100
 **Context Window:** 16K
 
@@ -175,7 +175,7 @@ Phi-4 - Compact powerhouse for code
 
 
 ### 15. alibaba/qwen2.5-72b-instruct
-**Status:** ✅ Available | **Release Date:** 2024-09-19
+**Status:** [OK] Available | **Release Date:** 2024-09-19
 **Code Score:** 89/100 | **Reasoning Score:** 88/100
 **Context Window:** 128K
 

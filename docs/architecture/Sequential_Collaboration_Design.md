@@ -8,11 +8,11 @@ We need **sequential collaboration** where agents work in a chain, passing conte
 
 ## Current Issues
 
-1. ❌ All agents run in parallel with same input ([collaborative_orchestrator.py:231-236](../weavehacks-collaborative/collaborative_orchestrator.py#L231-L236))
-2. ❌ Consensus methods just vote/combine outputs ([lines 488-546](../weavehacks-collaborative/collaborative_orchestrator.py#L488-L546))
-3. ❌ No agent-to-agent communication during execution
-4. ❌ No format preference support (XML, JSON, etc.)
-5. ❌ Original user request context gets lost
+1. [FAIL] All agents run in parallel with same input ([collaborative_orchestrator.py:231-236](../weavehacks-collaborative/collaborative_orchestrator.py#L231-L236))
+2. [FAIL] Consensus methods just vote/combine outputs ([lines 488-546](../weavehacks-collaborative/collaborative_orchestrator.py#L488-L546))
+3. [FAIL] No agent-to-agent communication during execution
+4. [FAIL] No format preference support (XML, JSON, etc.)
+5. [FAIL] Original user request context gets lost
 
 ## Proposed Architecture
 
@@ -337,34 +337,34 @@ async def _iterate_with_previous_stage(
 
 ## Implementation Plan
 
-### Phase 1: Add Communication Profiles ✅
+### Phase 1: Add Communication Profiles [OK]
 - [ ] Extend Agent dataclass with communication preferences
 - [ ] Update config.yaml with format preferences
 - [ ] Create FormatConverter class
 
-### Phase 2: Build Workflow System ✅
+### Phase 2: Build Workflow System [OK]
 - [ ] Create workflow data structures
 - [ ] Define standard workflows (feature_development, quick_fix, etc.)
 - [ ] Add workflow selection logic
 
-### Phase 3: Replace Consensus with Sequential Execution ✅
+### Phase 3: Replace Consensus with Sequential Execution [OK]
 - [ ] Implement _execute_workflow() method
 - [ ] Add context building logic
 - [ ] Implement iteration mechanism
 
-### Phase 4: Format Conversion ✅
+### Phase 4: Format Conversion [OK]
 - [ ] Implement XML parser/serializer
 - [ ] Implement JSON handling
 - [ ] Implement Markdown parsing
 - [ ] Test format conversions
 
-### Phase 5: Testing ✅
+### Phase 5: Testing [OK]
 - [ ] Test simple linear workflow (no iteration)
 - [ ] Test iterative workflows (reviewer → coder → reviewer)
 - [ ] Test format conversions between agents
 - [ ] Test original request preservation
 
-### Phase 6: Migration ✅
+### Phase 6: Migration [OK]
 - [ ] Remove old consensus methods
 - [ ] Update CollaborationResult to WorkflowResult
 - [ ] Update evaluation scripts
@@ -447,8 +447,8 @@ async def _iterate_with_previous_stage(
    **Implementation:** auth_service.py
 
    ## Issues Found
-   - ⚠️ Password validation missing
-   - ⚠️ No rate limiting on login endpoint
+   - [WARNING] Password validation missing
+   - [WARNING] No rate limiting on login endpoint
 
    ## Request Changes
    Please add input validation and rate limiting
@@ -460,8 +460,8 @@ async def _iterate_with_previous_stage(
    ```markdown
    # Code Review - Iteration 2
 
-   ✅ All issues resolved
-   ✅ Ready to document
+   [OK] All issues resolved
+   [OK] Ready to document
    ```
 
 5. **Documenter** (receives all context):

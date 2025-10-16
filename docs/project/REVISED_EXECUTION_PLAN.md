@@ -14,17 +14,17 @@
 - Overly ambitious Rust integration timeline
 
 **This Revision**:
-- ✅ Uses existing SSE infrastructure (`backend/routers/streaming.py`)
-- ✅ Leverages existing Supabase context store for semantic caching
-- ✅ Works with current `sequential_orchestrator.py` and `llm_client.py`
-- ✅ Aligns event names with `backend/streaming/sse_handler.py`
-- ✅ Realistic timeline for weavehacks-collaborative codebase
+- [OK] Uses existing SSE infrastructure (`backend/routers/streaming.py`)
+- [OK] Leverages existing Supabase context store for semantic caching
+- [OK] Works with current `sequential_orchestrator.py` and `llm_client.py`
+- [OK] Aligns event names with `backend/streaming/sse_handler.py`
+- [OK] Realistic timeline for weavehacks-collaborative codebase
 
 ---
 
 ## Current State Analysis
 
-### ✅ Already Implemented
+### [OK] Already Implemented
 
 **File**: `backend/routers/streaming.py`
 - `POST /api/stream/task` - Creates stream, returns `stream_id`
@@ -49,7 +49,7 @@
 - Orchestrates multi-agent execution
 - Tracking and telemetry built-in
 
-### 🔧 Needs Implementation
+###  Needs Implementation
 
 1. **Event protocol mapping** to show "debate" metaphor in UI
 2. **Semantic caching integration** with existing Supabase store
@@ -77,13 +77,13 @@ Working CLI that shows live "debate" by consuming existing SSE endpoints.
 #### Map Events to "Debate" UX
 ```python
 # Event name mapping (from sse_handler.py):
-'task_started' → "🚀 Session Started"
-'task_progress' → "📋 Plan: X chunks, ~Ys, ~$Z"
-'chunk_started' → "🏗️ Architect: Analyzing requirements..." (derive role from model/description)
+'task_started' → "[START] Session Started"
+'task_progress' → "[LIST] Plan: X chunks, ~Ys, ~$Z"
+'chunk_started' → "Architect Architect: Analyzing requirements..." (derive role from model/description)
 'token_stream' → Append tokens to agent's output
-'chunk_completed' → "✅ Chunk X complete"
-'task_completed' → "✅ Final Result"
-'task_error' → "❌ Error: ..."
+'chunk_completed' → "[OK] Chunk X complete"
+'task_completed' → "[OK] Final Result"
+'task_error' → "[FAIL] Error: ..."
 'system_message' → System notifications
 'heartbeat' → (ignore or show connection status)
 ```
@@ -185,11 +185,11 @@ class StreamingDebateClient:
         # Active chunks (show as "agents")
         for chunk_id, content in self.state["chunks"].items():
             # Derive "role" from chunk description or model
-            role_icon = "💻"  # Default
+            role_icon = "Coder"  # Default
             if "architect" in chunk_id.lower():
-                role_icon = "🏗️"
+                role_icon = "Architect"
             elif "review" in chunk_id.lower():
-                role_icon = "🔍"
+                role_icon = "Reviewer"
 
             layout.add_row(Panel(
                 content[-1000:],  # Last 1000 chars
@@ -201,13 +201,13 @@ class StreamingDebateClient:
         if self.state["final"]:
             layout.add_row(Panel(
                 self.state["final"],
-                title="✅ Final Result",
+                title="[OK] Final Result",
                 border_style="magenta"
             ))
 
         # Errors
         for err in self.state["errors"]:
-            layout.add_row(Panel(err, title="❌ Error", border_style="red"))
+            layout.add_row(Panel(err, title="[FAIL] Error", border_style="red"))
 
         return layout
 
@@ -229,7 +229,7 @@ class StreamingDebateClient:
                     model = data.get("model", "")
                     desc = data.get("description", "")
                     self.state["current_chunk"] = chunk_id
-                    self.state["chunks"][chunk_id] = f"🧠 {model}: {desc}\n"
+                    self.state["chunks"][chunk_id] = f"[BRAIN] {model}: {desc}\n"
 
                 elif event_type == "token_stream":
                     chunk_id = data.get("chunk_id", self.state["current_chunk"] or "unknown")
@@ -440,7 +440,7 @@ async def process_streaming_task(
             await sse_handler.send_event(
                 stream_id,
                 StreamEventType.SYSTEM_MESSAGE,
-                {"message": f"⚡ Cache hit ({cached['similarity']:.0%} match) • Saved ${0.08:.2f}, ~4s"}
+                {"message": f"[FAST] Cache hit ({cached['similarity']:.0%} match) • Saved ${0.08:.2f}, ~4s"}
             )
 
             # Stream cached result (simulate typing for UX)
@@ -489,7 +489,7 @@ async def process_streaming_task(
 - [ ] Same query + same context = cache hit
 - [ ] Same query + different context = cache miss
 - [ ] Cache hits show in <500ms
-- [ ] User sees savings: "💾 Cache hit (94% match, saved $0.08, 4s faster)"
+- [ ] User sees savings: "[MEMORY] Cache hit (94% match, saved $0.08, 4s faster)"
 
 ---
 
@@ -609,7 +609,7 @@ export function useCollaborativeStream() {
         const d = JSON.parse(e.data)
         setMessages(m => [...m, {
           type: 'system',
-          content: `✅ Chunk ${d.chunk_id} complete`,
+          content: `[OK] Chunk ${d.chunk_id} complete`,
           timestamp: Date.now()
         }])
       })
@@ -674,9 +674,9 @@ export function useCollaborativeStream() {
 ### Revised Scope
 
 **DO NOT attempt**:
-- ❌ Candle embeddings (use OpenAI API)
-- ❌ HNSW vector index (use Supabase pgvector)
-- ❌ Token routing (Python async is fine for MVP)
+- [FAIL] Candle embeddings (use OpenAI API)
+- [FAIL] HNSW vector index (use Supabase pgvector)
+- [FAIL] Token routing (Python async is fine for MVP)
 
 **Consider ONLY if**:
 - Python streaming shows measurable lag
@@ -723,7 +723,7 @@ struct StreamMultiplexer {
 - [ ] **Advanced**: Full stack + compliance + history
 
 ### 2. Cache Transparency
-- [x] **Always show**: "💾 Cache hit (94% match, saved $0.08)" ← **RECOMMENDED**
+- [x] **Always show**: "[MEMORY] Cache hit (94% match, saved $0.08)" ← **RECOMMENDED**
 - [ ] **Show on hover**: Tooltip only
 - [ ] **Never show**: Invisible
 
@@ -783,7 +783,7 @@ vite.config.ts                  # Add dev proxy for SSE auth
 
 ## Next Steps
 
-1. **Answer 4 open questions** ✓ (answered above with recommendations)
+1. **Answer 4 open questions** [OK] (answered above with recommendations)
 2. **Install dependencies**:
    ```bash
    pip install rich httpx
@@ -819,11 +819,11 @@ vite.config.ts                  # Add dev proxy for SSE auth
 ## Conclusion
 
 This revised plan:
-- ✅ Uses **100% existing infrastructure**
-- ✅ Requires **minimal backend changes** (~50 lines)
-- ✅ Delivers **working CLI in 2 days**
-- ✅ Achieves **semantic caching in 4 days**
-- ✅ Adds **web UI in 6 days**
-- ✅ **No Rust complexity** for MVP
+- [OK] Uses **100% existing infrastructure**
+- [OK] Requires **minimal backend changes** (~50 lines)
+- [OK] Delivers **working CLI in 2 days**
+- [OK] Achieves **semantic caching in 4 days**
+- [OK] Adds **web UI in 6 days**
+- [OK] **No Rust complexity** for MVP
 
-**Ready to start?** Just create `cli/streaming_client.py` and run it! 🚀
+**Ready to start?** Just create `cli/streaming_client.py` and run it! [START]

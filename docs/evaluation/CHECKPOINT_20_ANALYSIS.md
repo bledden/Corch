@@ -40,9 +40,9 @@
 ### Top Sequential Wins (Security Tasks):
 1. **Task 11** (CSP header): Sequential 0.940 vs Baseline 0.845 (+0.095)
 2. **Task 5** (XSS sanitizer): Sequential 0.900 vs Baseline 0.500 (+0.400)
-3. **Task 15** (Audit logger): Sequential 0.880 vs Baseline 0.390 (+0.490) ⭐
-4. **Task 16** (2FA tokens): Sequential 0.900 vs Baseline 0.355 (+0.545) ⭐⭐
-5. **Task 12** (AES-256): Sequential 0.820 vs Baseline 0.370 (+0.450) ⭐
+3. **Task 15** (Audit logger): Sequential 0.880 vs Baseline 0.390 (+0.490) [STAR]
+4. **Task 16** (2FA tokens): Sequential 0.900 vs Baseline 0.355 (+0.545) [STAR][STAR]
+5. **Task 12** (AES-256): Sequential 0.820 vs Baseline 0.370 (+0.450) [STAR]
 
 ### Baseline Wins:
 - **Task 8** (Session manager): Baseline 0.810 vs Sequential 0.480 (-0.330)
@@ -57,7 +57,7 @@
 Example scenario:
 - Task: "Implement password hashing with bcrypt"
 - Hallucinated Output: Perfect JWT token validator (wrong problem!)
-- Current Score: 0.75+ (syntax ✓, structure ✓, docs ✓)
+- Current Score: 0.75+ (syntax [OK], structure [OK], docs [OK])
 - **Should Score:** 0.0 (solves wrong problem!)
 
 ### Estimated Impact

@@ -51,8 +51,8 @@ async def test_tier_escalation():
 
     config["fallback"]["mode"] = "interactive"  # User can see tier escalation
 
-    print("💡 This test shows tier escalation: Budget → Balanced → Premium")
-    print("💡 User will be prompted to approve moving to higher-cost tier\n")
+    print("[IDEA] This test shows tier escalation: Budget → Balanced → Premium")
+    print("[IDEA] User will be prompted to approve moving to higher-cost tier\n")
 
     # Create orchestrator with MANUAL MODE enabled
     orchestrator = MultiAgentLLMOrchestrator(config, manual_mode=True)
@@ -60,15 +60,15 @@ async def test_tier_escalation():
     # Try to execute a task
     task = "Implement a binary search algorithm"
 
-    print(f"\n🚀 Executing task: {task}")
-    print("⚠️  This should escalate from Tier 3 → Tier 2 → Tier 1\n")
+    print(f"\n[START] Executing task: {task}")
+    print("[WARNING]  This should escalate from Tier 3 → Tier 2 → Tier 1\n")
 
     try:
         result = await orchestrator.execute_agent_task("coder", task)
-        print(f"\n✅ SUCCESS with Tier 1 (premium) model!")
+        print(f"\n[OK] SUCCESS with Tier 1 (premium) model!")
         print(f"Result: {result[:200]}...\n")
     except Exception as e:
-        print(f"\n❌ FAILED even after tier escalation: {e}\n")
+        print(f"\n[FAIL] FAILED even after tier escalation: {e}\n")
 
     print("=" * 80)
     print("TEST 3 COMPLETE")

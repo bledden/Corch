@@ -49,15 +49,15 @@ async def test_invalid_model_fallback():
     # Try to execute a simple task
     task = "Write a simple hello world function in Python"
 
-    print(f"\n🚀 Executing task: {task}")
-    print("⚠️  This should trigger fallback when invalid model fails\n")
+    print(f"\n[START] Executing task: {task}")
+    print("[WARNING]  This should trigger fallback when invalid model fails\n")
 
     try:
         result = await orchestrator.execute_agent_task("coder", task)
-        print(f"\n✅ SUCCESS! Task completed with result:")
+        print(f"\n[OK] SUCCESS! Task completed with result:")
         print(f"{result[:200]}...\n")
     except Exception as e:
-        print(f"\n❌ FAILED: {e}\n")
+        print(f"\n[FAIL] FAILED: {e}\n")
 
     print("=" * 80)
     print("TEST 1 COMPLETE")

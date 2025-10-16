@@ -143,16 +143,16 @@ def analyze_checkpoint(checkpoint_file: str):
     console.print("="*80)
 
     if seq_results['hallucination_count'] < base_results['hallucination_count']:
-        console.print(f"✅ Sequential has [green]{base_results['hallucination_count'] - seq_results['hallucination_count']} fewer hallucinations[/green] than Baseline")
+        console.print(f"[OK] Sequential has [green]{base_results['hallucination_count'] - seq_results['hallucination_count']} fewer hallucinations[/green] than Baseline")
         console.print("   This validates the hypothesis that multi-stage review catches off-topic outputs!")
     elif seq_results['hallucination_count'] > base_results['hallucination_count']:
-        console.print(f"⚠️  Baseline has [yellow]{seq_results['hallucination_count'] - base_results['hallucination_count']} fewer hallucinations[/yellow] than Sequential")
+        console.print(f"[WARNING]  Baseline has [yellow]{seq_results['hallucination_count'] - base_results['hallucination_count']} fewer hallucinations[/yellow] than Sequential")
         console.print("   Unexpected - may need to investigate why Sequential is generating more hallucinations")
     else:
         console.print("= Both approaches have the same hallucination count")
 
-    console.print(f"\n✅ Sequential relevance: {seq_results['avg_relevance']:.3f} vs Baseline: {base_results['avg_relevance']:.3f}")
-    console.print(f"✅ Sequential requirement: {seq_results['avg_requirement']:.3f} vs Baseline: {base_results['avg_requirement']:.3f}")
+    console.print(f"\n[OK] Sequential relevance: {seq_results['avg_relevance']:.3f} vs Baseline: {base_results['avg_relevance']:.3f}")
+    console.print(f"[OK] Sequential requirement: {seq_results['avg_requirement']:.3f} vs Baseline: {base_results['avg_requirement']:.3f}")
 
     if seq_results['avg_relevance'] > base_results['avg_relevance']:
         console.print("   → Sequential code is more semantically relevant to tasks")

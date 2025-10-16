@@ -435,10 +435,10 @@ def demonstrate_semantic_chunking():
 
     chunks = chunker.chunk_request(request)
 
-    print(f"\n📝 Original Request ({len(request)} chars):")
+    print(f"\nDocumenter Original Request ({len(request)} chars):")
     print(request)
 
-    print(f"\n✂️ Semantic Chunks ({len(chunks)} chunks):\n")
+    print(f"\n[CUT] Semantic Chunks ({len(chunks)} chunks):\n")
 
     for i, chunk in enumerate(chunks, 1):
         print(f"Chunk {i}:")
@@ -449,7 +449,7 @@ def demonstrate_semantic_chunking():
         print(f"  Priority: {chunk.priority}")
         print()
 
-    print("🎯 BENEFITS:")
+    print("[GOAL] BENEFITS:")
     print("  1. Each chunk processed by the BEST model for that task")
     print("  2. Parallel processing possible for independent chunks")
     print("  3. Better context window usage (smaller, focused chunks)")

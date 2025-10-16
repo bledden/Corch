@@ -46,7 +46,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
             await trained.collaborate(training_task)
         trained.advance_generation()
 
-    console.print("[green]✓ Training complete![/green]\n")
+    console.print("[green][OK] Training complete![/green]\n")
 
     # Now execute the actual task with both
     console.print("[bold]Executing with UNTRAINED orchestrator...[/bold]")
@@ -56,7 +56,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
     trained_result = await trained.collaborate(task)
 
     # Display comparison
-    console.print("\n[bold cyan]═══ Results Comparison ═══[/bold cyan]\n")
+    console.print("\n[bold cyan]=== Results Comparison ===[/bold cyan]\n")
 
     # Create comparison table
     comparison = Table(show_header=True, header_style="bold magenta")
@@ -70,7 +70,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
         "Agents Selected",
         ", ".join(untrained_result.agents_used),
         ", ".join(trained_result.agents_used),
-        "✓" if trained_result.agents_used != untrained_result.agents_used else "-"
+        "[OK]" if trained_result.agents_used != untrained_result.agents_used else "-"
     )
 
     # Add consensus method row
@@ -78,7 +78,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
         "Consensus Method",
         untrained_result.consensus_method,
         trained_result.consensus_method,
-        "✓" if trained_result.consensus_method != untrained_result.consensus_method else "-"
+        "[OK]" if trained_result.consensus_method != untrained_result.consensus_method else "-"
     )
 
     # Add metrics rows
@@ -126,7 +126,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
 
     # Show individual outputs if requested
     if show_outputs:
-        console.print("\n[bold cyan]═══ Individual Agent Outputs ═══[/bold cyan]\n")
+        console.print("\n[bold cyan]=== Individual Agent Outputs ===[/bold cyan]\n")
 
         # Untrained outputs
         untrained_panel = Panel(
@@ -152,7 +152,7 @@ async def compare_generations(task: str, show_outputs: bool = False):
         pattern = trained.task_type_patterns.get(task_type, {})
 
         if pattern and pattern.get('best_agents'):
-            console.print("\n[bold cyan]═══ Learning Insights ═══[/bold cyan]\n")
+            console.print("\n[bold cyan]=== Learning Insights ===[/bold cyan]\n")
 
             insights = f"""
 The trained orchestrator learned that for [yellow]{task_type}[/yellow] tasks:
@@ -162,7 +162,7 @@ The trained orchestrator learned that for [yellow]{task_type}[/yellow] tasks:
 • Success rate: [green]{pattern.get('success_rate', 0):.1%}[/green]
             """
 
-            console.print(Panel(insights, title="🧠 What the System Learned", border_style="cyan"))
+            console.print(Panel(insights, title="[BRAIN] What the System Learned", border_style="cyan"))
 
 
 @click.command()
@@ -190,7 +190,7 @@ def execute(task, show_outputs, demo):
 
         async def run_demo():
             for demo_task in demo_tasks:
-                console.print(f"\n[bold blue]{'═' * 60}[/bold blue]\n")
+                console.print(f"\n[bold blue]{'=' * 60}[/bold blue]\n")
                 await compare_generations(demo_task, show_outputs)
                 console.print("\n[dim]Press Enter to continue...[/dim]")
                 input()

@@ -279,19 +279,19 @@ async def demo():
     print("=" * 80)
 
     for task in test_tasks:
-        print(f"\n📝 Task: {task}")
+        print(f"\nDocumenter Task: {task}")
         result = await router.route_task(task, strategy=SearchStrategy.BALANCED)
 
         if result["needs_search"]:
             method = result["search_method"]
-            print(f"   ✅ NEEDS SEARCH (confidence: {result['confidence']:.2f})")
+            print(f"   [OK] NEEDS SEARCH (confidence: {result['confidence']:.2f})")
             print(f"   → Routing to: {method.name}")
             print(f"   → Cost: ${method.cost_per_search:.4f}")
             print(f"   → Latency: {method.avg_latency_ms}ms")
             print(f"   → Quality: {method.quality_score:.2f}")
             print(f"   → Matched: {', '.join(result['matched_patterns'][:3])}")
         else:
-            print(f"   ❌ NO SEARCH NEEDED (confidence: {result['confidence']:.2f})")
+            print(f"   [FAIL] NO SEARCH NEEDED (confidence: {result['confidence']:.2f})")
             print(f"   → Using standard model")
 
     print("\n" + "=" * 80)

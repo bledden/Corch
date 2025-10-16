@@ -5,7 +5,7 @@ Based on the comprehensive review and validation of test results, here's the pri
 
 ---
 
-## ✅ Current Status
+## [OK] Current Status
 
 **Baseline System**: **100% pass rate** across all 3 strategy tests
 - BALANCED strategy: 10/10 tasks passed (100%)
@@ -129,7 +129,7 @@ if token_count % 50 == 0:
 
 **Success Criteria**:
 - [ ] End-to-end working: task input → streaming debate → final result
-- [ ] Costs displayed: "✅ Complete (3.2s, $0.09)"
+- [ ] Costs displayed: "[OK] Complete (3.2s, $0.09)"
 - [ ] Error messages don't crash CLI
 
 ---
@@ -194,7 +194,7 @@ context = {
 1. Check cache before starting debate
 2. If hit: stream cached result (with indication)
 3. If miss: run debate, then cache result
-4. Display cache status: "💾 Cache hit (94% match, saved $0.08, 4.2s faster)"
+4. Display cache status: "[MEMORY] Cache hit (94% match, saved $0.08, 4.2s faster)"
 
 **Success Criteria**:
 - [ ] Run same query twice → second is instant
@@ -254,7 +254,7 @@ How detailed should user context be?
 
 ### 2. Cache Transparency
 Should users know when they get cached results?
-- [ ] **Always show**: "💾 Cache hit (94% match, saved $0.08)"  ← **Recommended** (builds trust)
+- [ ] **Always show**: "[MEMORY] Cache hit (94% match, saved $0.08)"  ← **Recommended** (builds trust)
 - [ ] **Show on hover**: Default hides, tooltip reveals
 - [ ] **Never show**: Seamless experience
 
@@ -392,4 +392,4 @@ Once you answer the 4 open questions and confirm the approach, I'm ready to:
 
 **Estimated time to working prototype**: 3-5 days of focused work.
 
-Let me know if you want to proceed with Phase 1+2, or if you have any adjustments to the plan! 🚀
+Let me know if you want to proceed with Phase 1+2, or if you have any adjustments to the plan! [START]

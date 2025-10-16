@@ -196,13 +196,13 @@ class CLIDebateInterface:
                 elif event.type == "synthesis":
                     self.synthesis_results.append(event.content)
                     self.add_message(
-                        f"{self.get_elapsed_time()} 🔄 Synthesis: {event.title}",
+                        f"{self.get_elapsed_time()} [REFRESH] Synthesis: {event.title}",
                         style="bold magenta"
                     )
 
                 elif event.type == "chunk_started":
                     self.add_message(
-                        f"{self.get_elapsed_time()} 📦 {event.title}",
+                        f"{self.get_elapsed_time()} [PACKAGE] {event.title}",
                         style="bold cyan"
                     )
 

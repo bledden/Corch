@@ -27,15 +27,15 @@ workflow_result = await self.sequential_orchestrator.execute_workflow(...)
 ### 2. Simplified Sequential Workflow
 
 **Issue:** Sequential orchestrator was trying to use agents that don't exist:
-- ❌ `TESTER` - Not in config.yaml
-- ❌ `REFINER` - Not in config.yaml (should reuse CODER)
+- [FAIL] `TESTER` - Not in config.yaml
+- [FAIL] `REFINER` - Not in config.yaml (should reuse CODER)
 
 **Agents that DO exist in config:**
-- ✅ `architect`
-- ✅ `coder`
-- ✅ `reviewer`
-- ✅ `documenter`
-- ✅ `researcher` (unused)
+- [OK] `architect`
+- [OK] `coder`
+- [OK] `reviewer`
+- [OK] `documenter`
+- [OK] `researcher` (unused)
 
 **Solution:** Simplified workflow to 4 stages:
 1. **ARCHITECT** → Design
@@ -54,11 +54,11 @@ You're right - the real baseline is **single model requests**, not consensus.
 
 ## Next Steps
 
-1. ✅ Remove consensus completely
-2. ⏭️ Fix sequential orchestrator to only use existing agents
-3. ⏭️ Run proper evaluation: Sequential vs Single-Model
-4. ⏭️ Measure hallucination rates for both
-5. ⏭️ Generate comparison report
+1. [OK] Remove consensus completely
+2. ⏭ Fix sequential orchestrator to only use existing agents
+3. ⏭ Run proper evaluation: Sequential vs Single-Model
+4. ⏭ Measure hallucination rates for both
+5. ⏭ Generate comparison report
 
 ## Hallucination Detection
 
