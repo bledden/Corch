@@ -270,7 +270,8 @@ async def run_smoke_test():
     console.print(f"Total tasks: {len(SMOKE_TEST_TASKS)}\n")
 
     # Initialize
-    with open("config.yaml") as f:
+    config_path = os.path.join(os.path.dirname(__file__), '../../config/config.yaml')
+    with open(config_path) as f:
         config = yaml.safe_load(f)
 
     weave.init("facilitair/smoke-test")
