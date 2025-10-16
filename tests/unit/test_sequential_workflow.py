@@ -5,7 +5,7 @@ Verifies that the new Facilitair_v2-style sequential architecture works correctl
 
 import asyncio
 import sys
-from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 
 async def main():
     print("=" * 80)

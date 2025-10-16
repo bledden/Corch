@@ -29,7 +29,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger('facilitair_api')
 
-from collaborative_orchestrator import CollaborativeOrchestrator
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
 from backend.routers import streaming
 

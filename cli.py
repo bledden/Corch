@@ -33,7 +33,7 @@ logger = logging.getLogger('facilitair_cli')
 # Load environment
 load_dotenv()
 
-from collaborative_orchestrator import CollaborativeOrchestrator
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
 
 console = Console()
@@ -241,7 +241,7 @@ def collaborate(ctx, task, format, save, sequential, stream):
     if stream:
         # Use streaming debate interface
         async def run_streaming():
-            from cli_streaming_debate import CLIDebateInterface
+            from src.cli.cli_streaming_debate import CLIDebateInterface
             interface = CLIDebateInterface()
             await cli_obj.initialize_orchestrator()
             await interface.stream_debate(task, cli_obj.orchestrator)

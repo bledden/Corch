@@ -62,6 +62,23 @@ htmlcov/
 # Temporary files
 *.tmp
 *.bak
+*.bak2
+*.backup
 .cache/
 tmp/
 temp/
+current_*.txt
+MOVE_CONTEXT.json
+RENAME_MAP.json
+
+# Results (benchmark/evaluation outputs - too large for git)
+results/
+benchmark_*.json
+evaluation_*.json
+smoke_test_results_*.json
+sequential_vs_baseline_results_*.json
+*.json.bak
+
+# Analysis outputs
+all_openrouter_models.txt
+model_analysis_results.txt

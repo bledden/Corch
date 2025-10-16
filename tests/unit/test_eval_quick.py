@@ -2,7 +2,7 @@
 
 import asyncio
 from run_comprehensive_eval import run_single_evaluation, generate_statistics, print_results_dashboard
-from collaborative_orchestrator import CollaborativeOrchestrator, Strategy
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator, Strategy
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 from datetime import datetime
