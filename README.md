@@ -66,13 +66,93 @@ DOCUMENTER → Creates docs
 Result + Metrics
 ```
 
-## Quick Start
+## Installation & Setup
 
-### Setup
+### Prerequisites
+
+**Required:**
+- Python 3.9 or higher
+- pip (Python package manager)
+- Git (for cloning repository)
+
+**Platform-Specific Requirements:**
+
+**macOS:**
 ```bash
-pip3 install -r requirements.txt
-export WANDB_API_KEY="your_key"
-export OPENROUTER_API_KEY="your_key"
+# Install Python 3.9+ via Homebrew (if needed)
+brew install python@3.9
+
+# Verify installation
+python3 --version  # Should show 3.9 or higher
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+# Install Python 3.9+
+sudo apt update
+sudo apt install python3.9 python3-pip python3-venv
+
+# Verify installation
+python3 --version
+```
+
+**Windows:**
+1. Download Python 3.9+ from [python.org](https://www.python.org/downloads/)
+2. During installation, check "Add Python to PATH"
+3. Verify in Command Prompt: `python --version`
+
+### Step-by-Step Installation
+
+**1. Clone Repository**
+```bash
+git clone https://github.com/bledden/weavehacks-collaborative.git
+cd weavehacks-collaborative
+```
+
+**2. Create Virtual Environment (Recommended)**
+```bash
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+```
+
+**3. Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Configure Environment Variables**
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Edit .env with your API keys (use nano, vim, or any text editor)
+nano .env
+```
+
+**Required API Keys:**
+- **WANDB_API_KEY**: Get from [wandb.ai/authorize](https://wandb.ai/authorize) (required for experiment tracking)
+- **OPENROUTER_API_KEY**: Get from [openrouter.ai/keys](https://openrouter.ai/keys) (required for LLM access)
+
+**Optional API Keys:**
+- OPENAI_API_KEY: For direct OpenAI access
+- ANTHROPIC_API_KEY: For direct Anthropic access
+- GOOGLE_API_KEY: For Google AI models
+
+**5. Verify Installation**
+```bash
+python3 cli.py health
+```
+
+Expected output:
+```
+[OK] System Status: Healthy
+[OK] W&B Weave: Connected
+[OK] LLM Provider: Available
 ```
 
 ### CLI
@@ -198,6 +278,265 @@ python3 cli.py init            # Create config
 ```bash
 python3 -m pytest tests/ -v
 ```
+
+## Troubleshooting
+
+### Common Issues & Solutions
+
+#### 1. Installation Issues
+
+**Problem: `pip install` fails with permission errors**
+```bash
+# Solution: Use virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# OR
+venv\Scripts\activate     # Windows
+
+pip install -r requirements.txt
+```
+
+**Problem: `ModuleNotFoundError: No module named 'X'`**
+```bash
+# Solution: Ensure virtual environment is activated and dependencies installed
+source venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+
+# Verify installation
+pip list | grep weave
+```
+
+**Problem: Python version too old (< 3.9)**
+```bash
+# macOS
+brew install python@3.9
+
+# Linux
+sudo apt install python3.9
+
+# Windows: Download from python.org
+
+# Verify
+python3 --version
+```
+
+#### 2. API Key Issues
+
+**Problem: `Error: WANDB_API_KEY not set`**
+```bash
+# Solution 1: Set in .env file
+echo "WANDB_API_KEY=your_key_here" >> .env
+
+# Solution 2: Export as environment variable
+export WANDB_API_KEY="your_key_here"  # macOS/Linux
+set WANDB_API_KEY=your_key_here       # Windows
+
+# Get key from: https://wandb.ai/authorize
+```
+
+**Problem: `Error: OPENROUTER_API_KEY not set`**
+```bash
+# Solution: Add to .env file
+echo "OPENROUTER_API_KEY=your_key_here" >> .env
+
+# Get key from: https://openrouter.ai/keys
+```
+
+**Problem: `401 Unauthorized` errors**
+- Verify API keys are correct (no extra spaces, quotes, or newlines)
+- Check API key has not expired or been revoked
+- For W&B: Visit [wandb.ai/authorize](https://wandb.ai/authorize)
+- For OpenRouter: Visit [openrouter.ai/keys](https://openrouter.ai/keys)
+
+#### 3. Runtime Errors
+
+**Problem: `ImportError: cannot import name 'X' from 'Y'`**
+```bash
+# Solution: Upgrade dependencies
+pip install --upgrade -r requirements.txt
+
+# Or upgrade specific package
+pip install --upgrade weave openai anthropic
+```
+
+**Problem: `ConnectionError` or `Timeout` errors**
+```bash
+# Solution 1: Check internet connection
+ping api.openai.com
+
+# Solution 2: Check firewall/proxy settings
+# Add to .env if using proxy:
+export HTTP_PROXY="http://proxy.example.com:8080"
+export HTTPS_PROXY="http://proxy.example.com:8080"
+
+# Solution 3: Increase timeout (add to .env)
+DEFAULT_TIMEOUT=120
+```
+
+**Problem: `RateLimitError: Rate limit exceeded`**
+```bash
+# Solution: Wait and retry, or upgrade API plan
+# OpenRouter free tier: 10 requests/minute
+# Paid tier: Higher limits
+
+# Check your usage at:
+# - OpenRouter: https://openrouter.ai/usage
+# - W&B: https://wandb.ai/settings
+```
+
+**Problem: CLI crashes with `click` errors**
+```bash
+# Solution: Reinstall click
+pip uninstall click
+pip install click>=8.1.0
+```
+
+#### 4. Platform-Specific Issues
+
+**macOS: SSL Certificate Errors**
+```bash
+# Solution: Install certificates
+/Applications/Python\ 3.9/Install\ Certificates.command
+
+# Or install certifi
+pip install --upgrade certifi
+```
+
+**Linux: `ModuleNotFoundError: No module named '_sqlite3'`**
+```bash
+# Solution: Install SQLite development libraries
+sudo apt install libsqlite3-dev
+
+# Reinstall Python with SQLite support
+# Or use system Python with virtual environment
+```
+
+**Windows: `UnicodeDecodeError` in CLI output**
+```bash
+# Solution: Set console to UTF-8
+# Add to Command Prompt or PowerShell profile:
+chcp 65001
+
+# Or run with UTF-8 encoding:
+python -X utf8 cli.py health
+```
+
+**Windows: `'python3' is not recognized`**
+```bash
+# Solution: Use 'python' instead of 'python3' on Windows
+python cli.py health
+
+# Or add alias in PowerShell profile:
+Set-Alias python3 python
+```
+
+#### 5. Performance Issues
+
+**Problem: Benchmark takes too long (>20 hours)**
+```bash
+# Solution 1: Run quick 10-task benchmark instead
+python3 run_10_task_benchmark_v2.py  # ~30 minutes
+
+# Solution 2: Check API rate limits
+# Sequential uses 5x more API calls than baseline
+
+# Solution 3: Monitor progress via checkpoints
+# Checkpoints saved every 20 tasks in benchmark_100_checkpoint_*.json
+```
+
+**Problem: High memory usage**
+```bash
+# Solution: Process checkpoints in batches
+# Edit benchmark script to reduce concurrent tasks
+
+# Monitor memory usage:
+# macOS/Linux: top -p $(pgrep python)
+# Windows: Task Manager → Details → python.exe
+```
+
+#### 6. W&B Weave Issues
+
+**Problem: `wandb: ERROR Unable to connect`**
+```bash
+# Solution 1: Login to W&B
+wandb login
+
+# Solution 2: Check API key
+wandb status
+
+# Solution 3: Verify network access to wandb.ai
+curl https://api.wandb.ai/health
+
+# Solution 4: Disable W&B (not recommended, loses tracking)
+export WANDB_MODE=disabled
+```
+
+**Problem: Weave traces not showing up**
+```bash
+# Solution: Ensure project name matches in .env
+# Check WANDB_PROJECT=weavehacks-collaborative
+
+# View traces at: https://wandb.ai/YOUR_USERNAME/weavehacks-collaborative/weave
+```
+
+#### 7. Benchmark/Evaluation Issues
+
+**Problem: `FileNotFoundError: config/agents.yaml`**
+```bash
+# Solution: Ensure config directory exists
+ls -la config/
+
+# If missing, create from template:
+python3 cli.py init
+
+# Or check you're in the correct directory
+cd weavehacks-collaborative
+pwd
+```
+
+**Problem: Benchmark fails with syntax errors**
+```bash
+# This is expected! Benchmark measures quality including syntax errors
+# Check BENCHMARK_FAILURE_ANALYSIS.md for details
+
+# Sequential: 18% syntax error rate (expected)
+# Baseline: 75% syntax error rate (expected)
+
+# If ALL tasks fail (0% pass rate), check:
+# - API keys are valid
+# - LLM provider is accessible
+# - Check logs: tail -f facilitair_cli.log
+```
+
+#### 8. Getting More Help
+
+**Check Logs:**
+```bash
+# CLI logs
+tail -f facilitair_cli.log
+
+# API logs
+tail -f facilitair_api.log
+
+# Benchmark output
+tail -f benchmark_100_final_*.json
+```
+
+**Enable Verbose Mode:**
+```bash
+python3 cli.py --verbose health
+python3 cli.py --verbose collaborate "test task"
+```
+
+**Report Issues:**
+- GitHub Issues: [github.com/bledden/weavehacks-collaborative/issues](https://github.com/bledden/weavehacks-collaborative/issues)
+- Include: OS, Python version, error message, logs
+- Check existing issues first
+
+**Additional Resources:**
+- [W&B Weave Docs](https://docs.wandb.ai/guides/weave)
+- [OpenRouter API Docs](https://openrouter.ai/docs)
+- [Python Virtual Environments Guide](https://docs.python.org/3/tutorial/venv.html)
 
 ## Documentation
 
