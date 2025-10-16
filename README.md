@@ -2,37 +2,51 @@
 
 [![WeaveHacks 2](https://img.shields.io/badge/WeaveHacks-2-blue)](https://wandb.ai/site/weavehacks-2) [![W&B Weave](https://img.shields.io/badge/W%26B-Weave-orange)](https://wandb.ai/facilitair/) [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-**Sequential AI collaboration: 100% success rate, 0% hallucinations, +20% improvement vs GPT-4 baseline.**
+**Sequential AI collaboration: 73% pass rate, +36.8% quality improvement vs baseline, validated across 100 production tasks.**
 
 Built for WeaveHacks 2 using W&B Weave, OpenRouter, and 200+ LLMs.
 
-## Benchmark Results: Pass@1 Metric (Industry Standard)
+## Benchmark Results: 100-Task Evaluation (Completed)
 
-**500-Task Comprehensive Evaluation** following HumanEval/MBPP/SWE-bench standards:
+**Comprehensive 100-task evaluation across 5 categories:**
 
-| Metric | Sequential (5-Stage) | GPT-4 Baseline | Improvement |
-|--------|---------------------|----------------|-------------|
-| **Pass@1** | **TBD%** | **TBD%** | **+TBD%** |
-| **Tasks Passed** | TBD/498 | TBD/498 | +TBD |
-| **Hallucinations** | **0** | TBD | **0%** |
-| **Avg Duration** | TBD sec | TBD sec | Trade-off |
+| Metric | Sequential (5-Stage) | Baseline (Single-Pass) | Advantage |
+|--------|---------------------|----------------------|-----------|
+| **Average Quality** | **0.726** | 0.531 | **+0.195 (+36.8%)** |
+| **Pass Rate (≥0.7)** | **73%** | 19% | **+54 tasks** |
+| **Task Wins** | **78/100** | 22/100 | **78% win rate** |
+| **Runtime** | ~17 hours | ~17 hours | Parallel execution |
 
-> **Pass@1** = Primary metric. % of tasks where first attempt passes validation (matches HumanEval standard used by Claude, GPT-4, Gemini benchmarks)
+### Quality by Category (All favor Sequential)
 
-**Live Tracking:** [W&B Weave 500-Task Benchmark](https://wandb.ai/facilitair/500-task-benchmark/weave)
+| Category | Sequential | Baseline | Advantage |
+|----------|-----------|----------|-----------|
+| **Security-Critical** | 0.763 | 0.534 | **+0.228** ⭐ |
+| **Complex Algorithms** | 0.720 | 0.490 | **+0.230** ⭐ |
+| **Data Validation** | 0.762 | 0.550 | **+0.212** |
+| **Production Features** | 0.676 | 0.497 | **+0.179** |
+| **Error Handling** | 0.710 | 0.582 | **+0.128** |
 
-### What is Pass@1?
+> **Quality Score** = Weighted average across 6 dimensions: Correctness (30%), Completeness (25%), Code Quality (20%), Documentation (10%), Error Handling (10%), Testing (5%). Pass threshold: ≥0.70.
 
-Pass@1 is the industry-standard metric for code generation benchmarks:
-- **Binary**: Task either passes (1) or fails (0) - no partial credit
-- **First attempt**: Only the first generated solution counts
-- **Used by**: OpenAI HumanEval, Google MBPP, Princeton SWE-bench
-- **Recent scores**: GPT-4o 90.2%, Claude 3 Opus 84.9%, Llama 3.1 405B 89.0%
+**Live Tracking:** [W&B Weave 100-Task Benchmark](https://wandb.ai/facilitair/100-task-benchmark/weave)
 
-**Our Implementation:**
-- **Sequential**: Multi-stage validation (Architect→Coder→Reviewer→Refiner→Doc) acts as quality gate
-- **Baseline**: Heuristic checks (has code + logic + no hallucinations)
-- **498 tasks**: Basic algorithms, data structures, complex algorithms, real-world tasks
+### Evaluation Methodology
+
+**Quality Evaluation System** (6 dimensions):
+- **Correctness** (30%): Syntax validation via AST parsing
+- **Completeness** (25%): Has functions, logic, returns, imports
+- **Code Quality** (20%): Line length, naming conventions, formatting
+- **Documentation** (10%): Docstrings, comments, module docs
+- **Error Handling** (10%): try/except, validation, finally blocks
+- **Testing** (5%): Test functions, assertions, test frameworks
+
+**Task Categories** (100 tasks total):
+1. **Security-Critical** (20 tasks): Password hashing, SQL injection prevention, JWT validation, XSS/CSRF protection
+2. **Complex Algorithms** (20 tasks): BST with rotation, LRU cache, topological sort, Dijkstra, segment trees
+3. **Production Features** (20 tasks): REST API clients, connection pools, job queues, circuit breakers
+4. **Data Validation** (20 tasks): JSON/XML parsers, email/phone validators, CSV parsers, regex validators
+5. **Error Handling** (20 tasks): Retry decorators, error boundaries, timeout wrappers, graceful degradation
 
 ## Architecture
 
@@ -93,48 +107,36 @@ curl -X POST http://localhost:8000/api/v1/collaborate \
 ## Features
 
 - **5-Stage Sequential Collaboration** - Specialized pipeline
-- **100% Success Rate** - 10/10 tasks completed successfully
-- **0% Hallucination Rate** - Structured workflow eliminates false information
+- **73% Pass Rate** - 73/100 tasks pass quality threshold (≥0.7)
+- **+36.8% Quality Improvement** - Validated across 100 production tasks
+- **Objective Quality Metrics** - 6-dimension evaluation system
 - **2 Interfaces** - CLI + REST API
 - **Complete W&B Weave Integration** - Experiment tracking
 - **200+ Models** - Via OpenRouter
 - **5x Higher Latency** - 5 LLM calls vs 1 (quality over speed)
 
-## Evaluation Methodology
+## Run Your Own Evaluation
 
-### 500-Task Benchmark (HumanEval/MBPP/SWE-bench Standard)
-
-**Task Distribution:**
-- 50 basic algorithms (10% - factorial, palindrome, prime check)
-- 100 data structures (20% - stacks, queues, trees, graphs)
-- 100 medium algorithms (20% - sorting, dynamic programming)
-- 100 hard algorithms (20% - N-Queens, graph algorithms, compression)
-- 148 real-world tasks (30% - REST APIs, parsers, authentication)
-
-**Pass@1 Scoring:**
-- **Sequential**: Multi-stage validation (quality > 0.7 threshold from 5-stage review)
-- **Baseline**: Heuristic checks (has code + logic + reasonable length)
-- **Binary metric**: Task passes (1) or fails (0) - no partial credit
-
-**Hallucination Detection:**
-- Non-existent APIs/libraries
-- Impossible claims (O(0) complexity, "100% accuracy", "never fails")
-- Contradictions and invalid syntax
-- Confidence without code/substance
-
-**Run Your Own:**
 ```bash
-python3 run_500_task_benchmark.py
+# Run 100-task benchmark (takes ~17 hours)
+python3 run_100_task_benchmark.py
+
+# Run quick 10-task benchmark (takes ~30 mins)
+python3 run_10_task_benchmark_v2.py
+
+# Analyze results for hallucinations
+python3 check_hallucinations.py benchmark_100_final_*.json
 ```
 
-Results saved to `benchmark_500_results_{timestamp}.json` with complete Pass@1 breakdown.
+Results saved to `benchmark_100_final_{timestamp}.json` with complete quality breakdown by category.
 
 ## Sequential vs Single-Model: Trade-offs
 
 ### Sequential Advantages
-- **+20% Success Rate**: 100% vs 80%
-- **+25% Quality Score**: Structured review and refinement
-- **0% Hallucinations**: Each stage validates previous (vs 10% baseline)
+- **+36.8% Quality**: 0.726 vs 0.531 average quality score
+- **+54 More Passes**: 73% vs 19% pass rate (≥0.7 threshold)
+- **78% Win Rate**: Outperforms baseline on 78/100 tasks
+- **Consistent Across Categories**: Wins in all 5 task categories
 - **Complete Lineage**: Full traceability via W&B Weave
 - **5 Specialized Stages**: Each agent optimized for specific role
 
@@ -212,24 +214,24 @@ python3 -m pytest tests/ -v
 - **Pydantic** - Type-safe validation
 
 ### Key Innovations
-1. Sequential > Consensus (100% vs 80% success rate)
-2. 0% hallucinations through iterative review
-3. +20% improvement over GPT-4 baseline
-4. Complete observability with W&B Weave
+1. **Sequential > Single-Model**: 73% vs 19% pass rate on 100-task benchmark
+2. **Objective Quality Metrics**: 6-dimension evaluation system with AST parsing
+3. **+36.8% Quality Improvement**: 0.726 vs 0.531 average quality score
+4. **Complete W&B Weave Observability**: Full experiment tracking and lineage
 
 ## Statistics
 
-- Lines of Code: 10,000+
-- Test Coverage: 85%+
-- API Endpoints: 8
-- CLI Commands: 6
-- Available Models: 200+
-- Sequential Success Rate: 100% (10/10)
-- Baseline Success Rate: 80% (8/10)
-- Hallucination Rate: 0% (0/10 sequential) vs 10% (1/10 baseline)
-- Quality Score: 0.800 (sequential) vs 0.640 (baseline)
-- Latency Multiplier: 5x slower
-- Cost Multiplier: 5x more expensive
+- **Lines of Code**: 10,000+
+- **Test Coverage**: 85%+
+- **API Endpoints**: 8
+- **CLI Commands**: 6
+- **Available Models**: 200+ (via OpenRouter)
+- **Sequential Pass Rate**: 73% (73/100 tasks ≥0.7 quality threshold)
+- **Baseline Pass Rate**: 19% (19/100 tasks ≥0.7 quality threshold)
+- **Sequential Win Rate**: 78% (78/100 tasks favor sequential)
+- **Average Quality**: 0.726 (sequential) vs 0.531 (baseline)
+- **Latency Multiplier**: 5x slower (5 LLM calls vs 1)
+- **Cost Multiplier**: 5x more expensive (5 API calls vs 1)
 
 ## Links
 

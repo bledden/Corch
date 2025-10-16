@@ -216,8 +216,9 @@ def cli(ctx, config, verbose):
 @click.option('--format', '-f', type=click.Choice(['text', 'json', 'markdown']), default='text', help='Output format')
 @click.option('--save', '-s', help='Save result to file')
 @click.option('--sequential/--consensus', default=True, help='Use sequential or consensus mode')
+@click.option('--stream/--no-stream', default=False, help='Enable streaming debate interface')
 @click.pass_context
-def collaborate(ctx, task, format, save, sequential):
+def collaborate(ctx, task, format, save, sequential, stream):
     """Execute a collaborative task with AI agents"""
     logger.info(f"CLI collaborate command: task='{task[:50]}...'")
 
@@ -237,11 +238,22 @@ def collaborate(ctx, task, format, save, sequential):
     cli_obj = ctx.obj['cli']
     cli_obj.config['use_sequential'] = sequential
 
-    async def run_task():
-        result = await cli_obj.collaborate(task, output_format=format, save_to=save)
-        cli_obj.display_result(result, format=format)
+    if stream:
+        # Use streaming debate interface
+        async def run_streaming():
+            from cli_streaming_debate import CLIDebateInterface
+            interface = CLIDebateInterface()
+            await cli_obj.initialize_orchestrator()
+            await interface.stream_debate(task, cli_obj.orchestrator)
 
-    asyncio.run(run_task())
+        asyncio.run(run_streaming())
+    else:
+        # Use standard interface
+        async def run_task():
+            result = await cli_obj.collaborate(task, output_format=format, save_to=save)
+            cli_obj.display_result(result, format=format)
+
+        asyncio.run(run_task())
 
 
 @cli.command()

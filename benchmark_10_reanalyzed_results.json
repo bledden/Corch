@@ -1,0 +1,346 @@
+{
+  "metadata": {
+    "source": "benchmark_10_quick_results_20251014_161425.json",
+    "reanalyzed_with": "CodeQualityEvaluator"
+  },
+  "sequential": [
+    {
+      "task_id": 1,
+      "old_quality": 0.8,
+      "new_quality": 0.5700000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 2,
+      "old_quality": 0.8,
+      "new_quality": 0.72,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "java",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 3,
+      "old_quality": 0.8,
+      "new_quality": 0.5700000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 4,
+      "old_quality": 0.8,
+      "new_quality": 0.81,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "java",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 5,
+      "old_quality": 0.8,
+      "new_quality": 0.72,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "java",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 6,
+      "old_quality": 0.8,
+      "new_quality": 0.81,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "java",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 7,
+      "old_quality": 0.8,
+      "new_quality": 0.5700000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 8,
+      "old_quality": 0.8,
+      "new_quality": 0.72,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 9,
+      "old_quality": 0.8,
+      "new_quality": 0.21000000000000002,
+      "dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": false,
+      "passed_new": false
+    },
+    {
+      "task_id": 10,
+      "old_quality": 0.8,
+      "new_quality": 0.5900000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 1.0,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    }
+  ],
+  "baseline": [
+    {
+      "task_id": 1,
+      "old_quality": 0.8,
+      "new_quality": 0.655,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 2,
+      "old_quality": 0.8,
+      "new_quality": 0.5650000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 3,
+      "old_quality": 0.8,
+      "new_quality": 0.76,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.6,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 4,
+      "old_quality": 0.8,
+      "new_quality": 0.655,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 5,
+      "old_quality": 0.8,
+      "new_quality": 0.8300000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 0.4,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 6,
+      "old_quality": 0.8,
+      "new_quality": 0.5650000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 7,
+      "old_quality": 0.8,
+      "new_quality": 0.7550000000000001,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.4,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": true
+    },
+    {
+      "task_id": 8,
+      "old_quality": 0.8,
+      "new_quality": 0.655,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 9,
+      "old_quality": 0.8,
+      "new_quality": 0.675,
+      "dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "passed_old": true,
+      "passed_new": false
+    },
+    {
+      "task_id": 10,
+      "old_quality": 0.8,
+      "new_quality": 0.375,
+      "dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "passed_old": true,
+      "passed_new": false
+    }
+  ],
+  "summary": {
+    "sequential": {
+      "old_avg": 0.7999999999999999,
+      "new_avg": 0.6289999999999999,
+      "new_min": 0.21000000000000002,
+      "new_max": 0.81,
+      "task_wins": 5
+    },
+    "baseline": {
+      "old_avg": 0.7999999999999999,
+      "new_avg": 0.649,
+      "new_min": 0.375,
+      "new_max": 0.8300000000000001,
+      "task_wins": 5
+    }
+  }
+}

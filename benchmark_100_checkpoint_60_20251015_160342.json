@@ -1,0 +1,2646 @@
+{
+  "sequential": [
+    {
+      "task_id": 1,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7550000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 300.854653,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 2,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8400000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 353.722838,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 3,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.7,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 370.430402,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 4,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 329.946161,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 5,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.9,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 344.226226,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 6,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.725,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 0.6,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 295.271904,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 7,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8150000000000002,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 203.829694,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 8,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.48000000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 462.889388,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 9,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.86,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.6,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 438.72259,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 10,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 377.895005,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 11,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.9400000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 351.537496,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 12,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8200000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.7,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 299.905016,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 13,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.455,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 393.213255,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 14,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8450000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.9,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 362.355046,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 15,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.88,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.7,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 351.325678,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 16,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.9,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 266.703618,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 17,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 248.48218,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 18,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8200000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.7,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 322.070776,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 19,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.475,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 1.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 358.88529,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 20,
+      "category": "security_critical",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.48000000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 411.755087,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 21,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8250000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "duration": 282.588239,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 22,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "duration": 332.983833,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 23,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8450000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 0.4,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 251.945108,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 24,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7550000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 467.223195,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 25,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.21000000000000002,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "duration": 1015.513727,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 26,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.515,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 396.874503,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 27,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.665,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 333.495538,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 28,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.6,
+        "documentation": 0.4,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "java",
+      "duration": 262.382663,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 29,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 260.286182,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 30,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.885,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "java",
+      "duration": 237.184577,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 31,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7550000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 256.157555,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 32,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.51,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "duration": 331.049797,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 33,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.42500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.6,
+        "error_handling": 0.3,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 400.62389,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 34,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.665,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "duration": 427.644797,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 35,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 267.820806,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 36,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.785,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 729.241005,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 37,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.9400000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 585.527629,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 38,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8650000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 0.4,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "java",
+      "duration": 530.10042,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 39,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8450000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 1.0,
+        "documentation": 0.8,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "duration": 440.679743,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 40,
+      "category": "complex_algorithms",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.69,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 311.339721,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 41,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.8450000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.9,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 486.711849,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 42,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.765,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.7,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "typescript",
+      "duration": 197.612197,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 43,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.435,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.0,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 315.223145,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 44,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.21000000000000002,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "duration": 1261.386151,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 45,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.6350000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.3,
+        "code_quality": 0.8,
+        "documentation": 0.6,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "duration": 373.678447,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 46,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7250000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.8,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "java",
+      "duration": 302.006939,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 47,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.455,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 286.426349,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 48,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7050000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.6,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "duration": 316.554183,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 49,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.765,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.7,
+        "documentation": 0.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 230.44659,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 50,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.78,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 333.26128,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 51,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.885,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 294.997099,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 52,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.51,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.0,
+        "code_quality": 1.0,
+        "documentation": 0.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "unknown",
+      "duration": 409.848314,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 53,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.805,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.7,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 385.970142,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 54,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.7550000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 272.520335,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 55,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.455,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 267.978097,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 56,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.9400000000000001,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 1.0,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 249.784138,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 57,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.785,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.6,
+        "documentation": 0.4,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 591.232083,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 58,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": false,
+      "quality_score": 0.535,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 1.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 338.230346,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 59,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.765,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 376.292485,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 60,
+      "category": "production_features",
+      "method": "sequential",
+      "pass": true,
+      "quality_score": 0.765,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 473.61533,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    }
+  ],
+  "baseline": [
+    {
+      "task_id": 1,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.375,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 22.468736,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 2,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.435,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 28.792418,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 3,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.48500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 1.0
+      },
+      "language": "python",
+      "duration": 31.466542,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 4,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.49500000000000005,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 1.0
+      },
+      "language": "python",
+      "duration": 31.720878,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 5,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.49999999999999994,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.7
+      },
+      "language": "python",
+      "duration": 32.157922,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 6,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.4850000000000001,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 29.544124,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 7,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.44500000000000006,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 30.861245,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 8,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.8099999999999999,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.0
+      },
+      "language": "javascript",
+      "duration": 51.600914,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 9,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.495,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.7
+      },
+      "language": "python",
+      "duration": 15.679819,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 10,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.44500000000000006,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 26.641651,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 11,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.845,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.6,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "duration": 54.438654,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 12,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.37000000000000005,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.3
+      },
+      "language": "python",
+      "duration": 26.297894,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 13,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.6749999999999999,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 27.013583,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 14,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.92,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.9,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 29.562924,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 15,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.39,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.3
+      },
+      "language": "python",
+      "duration": 28.627282,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 16,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 33.213617,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 17,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.495,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.7
+      },
+      "language": "python",
+      "duration": 31.384335,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 18,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.49,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.5
+      },
+      "language": "python",
+      "duration": 19.597691,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 19,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.69,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 22.53791,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 20,
+      "category": "security_critical",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.49,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 32.348215,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 21,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "duration": 60.727092,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 22,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.435,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 33.465556,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 23,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.4,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.3,
+        "testing": 0.3
+      },
+      "language": "python",
+      "duration": 28.790821,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 24,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.455,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 44.573693,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 25,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.47,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.7
+      },
+      "language": "python",
+      "duration": 29.763365,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 26,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "duration": 62.62227,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 27,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.375,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.7000000000000001,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 34.986189,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 28,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 43.276327,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 29,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.395,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 31.459067,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 30,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 53.653878,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 31,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.505,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 48.952287,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 32,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.385,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.3,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 37.895225,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 33,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.825,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "unknown",
+      "duration": 53.009798,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 34,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.42500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.3,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 37.775765,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 35,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.41500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 28.915687,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 36,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 38.456867,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 37,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.45,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.7
+      },
+      "language": "python",
+      "duration": 31.082854,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 38,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.335,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.7000000000000001,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 78.17543,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 39,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 36.201512,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 40,
+      "category": "complex_algorithms",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.395,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.7000000000000001,
+        "documentation": 0.8,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 50.888092,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 41,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.43,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 41.829622,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 42,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.455,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 39.561012,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 43,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.405,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 38.642762,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 44,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.505,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.5,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 152.294919,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 45,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 48.662199,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 46,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.42500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.7,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 26.502986,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 47,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.86,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.6,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 43.006193,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 48,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.45,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.5
+      },
+      "language": "python",
+      "duration": 52.297685,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 49,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 24.523981,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 50,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.69,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.5,
+        "documentation": 1.0,
+        "error_handling": 0.5,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 29.407302,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 51,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.395,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.8
+      },
+      "language": "python",
+      "duration": 27.412406,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 52,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": true,
+      "quality_score": 0.885,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "code_quality": 0.8,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "typescript",
+      "duration": 32.314586,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 53,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.54,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.8,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 41.448656,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 54,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.465,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.8,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 26.177536,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 55,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.425,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 23.960681,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 56,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.38,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7999999999999999,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 19.618714,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 57,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.46499999999999997,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.9,
+        "documentation": 0.8,
+        "error_handling": 0.3,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 21.36964,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 58,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.405,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.5,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 21.937772,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 59,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.35500000000000004,
+      "quality_dimensions": {
+        "correctness": 0.0,
+        "completeness": 0.7,
+        "code_quality": 0.8,
+        "documentation": 0.2,
+        "error_handling": 0.0,
+        "testing": 0.0
+      },
+      "language": "python",
+      "duration": 38.804663,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    },
+    {
+      "task_id": 60,
+      "category": "production_features",
+      "method": "baseline",
+      "pass": false,
+      "quality_score": 0.695,
+      "quality_dimensions": {
+        "correctness": 1.0,
+        "completeness": 0.5,
+        "code_quality": 0.6,
+        "documentation": 1.0,
+        "error_handling": 0.2,
+        "testing": 0.3
+      },
+      "language": "javascript",
+      "duration": 41.172684,
+      "hallucination": {
+        "hallucination_detected": false,
+        "hallucination_score": 0.0,
+        "patterns_found": []
+      }
+    }
+  ]
+}
