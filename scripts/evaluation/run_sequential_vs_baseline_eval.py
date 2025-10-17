@@ -128,7 +128,7 @@ async def run_sequential_collaborative(
             "duration_seconds": duration,
             "output": result.final_output,
             "quality_score": result.metrics["quality"],
-            "success": result.metrics["overall"] > 0.6,
+            "success": result.metrics["quality"] > 0.7,
             "hallucination_detected": hallucination_analysis["has_hallucinations"],
             "hallucination_score": hallucination_analysis["hallucination_score"],
             "hallucination_details": hallucination_analysis,
@@ -172,10 +172,19 @@ async def run_single_model_baseline(
         detector = HallucinationDetector()
         hallucination_analysis = detector.detect_hallucinations(output)
 
-        # Simple quality heuristic (has code, reasonable length)
-        has_code = "```" in output or "def " in output
-        reasonable_length = 50 < len(output) < 5000
-        quality_score = 0.7 if (has_code and reasonable_length) else 0.4
+        # Use SAME evaluator as sequential (CodeQualityEvaluator with AST analysis)
+        try:
+            from src.evaluation.quality_evaluator import CodeQualityEvaluator, detect_language
+            evaluator = CodeQualityEvaluator()
+            language = detect_language(output)
+            quality_eval = evaluator.evaluate(output, task["description"], language)
+            quality_score = quality_eval.overall
+        except Exception as e:
+            # Fallback to heuristic if evaluator fails
+            print(f"[WARNING] Baseline quality evaluator failed: {type(e).__name__}: {str(e)}")
+            has_code = "```" in output or "def " in output
+            reasonable_length = 50 < len(output) < 5000
+            quality_score = 0.6 if (has_code and reasonable_length) else 0.3
 
         return {
             "task_id": task["id"],
@@ -187,7 +196,7 @@ async def run_single_model_baseline(
             "duration_seconds": duration,
             "output": output,
             "quality_score": quality_score,
-            "success": quality_score > 0.6,
+            "success": quality_score > 0.7,
             "hallucination_detected": hallucination_analysis["has_hallucinations"],
             "hallucination_score": hallucination_analysis["hallucination_score"],
             "hallucination_details": hallucination_analysis,
