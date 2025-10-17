@@ -8,6 +8,13 @@ from .static_analysis_evaluator import (
     AnalysisIssue,
     IssueSeverity
 )
+from .complexity_evaluator import (
+    ComplexityEvaluator,
+    ComplexityScore,
+    FunctionComplexity,
+    ComplexityRank,
+    MaintainabilityRank
+)
 
 __all__ = [
     'SecurityEvaluator',
@@ -18,4 +25,9 @@ __all__ = [
     'StaticAnalysisScore',
     'AnalysisIssue',
     'IssueSeverity',
+    'ComplexityEvaluator',
+    'ComplexityScore',
+    'FunctionComplexity',
+    'ComplexityRank',
+    'MaintainabilityRank',
 ]
