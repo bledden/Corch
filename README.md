@@ -89,6 +89,87 @@ Facilitair implements **research-backed chain-of-thought prompting** across all 
 
 This approach ensures every stage remains grounded in the user's original intent and produces higher-quality, more coherent results.
 
+### Enhanced Code Quality Evaluation
+
+Corch features a **production-grade evaluation system** that assesses generated code across multiple dimensions using industry-standard tools and LLM-as-judge techniques.
+
+#### Evaluation Architecture
+
+Code is evaluated at two critical points in the workflow:
+- **POST_REFINER**: After refinement iterations complete
+- **POST_DOCUMENTER**: After documentation generation
+
+#### The Four Evaluators
+
+**1. SecurityEvaluator** (Weight: 30%)
+- **Tool**: Bandit vulnerability scanner
+- **What it checks**: SQL injection, eval() usage, hardcoded passwords, unsafe deserialization, command injection
+- **Scoring**: Deductive (1.0 - penalties)
+  - Critical issue: -0.4
+  - High issue: -0.2
+  - Medium issue: -0.1
+  - Low issue: -0.05
+- **Pass threshold**: No critical or high severity issues
+
+**2. StaticAnalysisEvaluator** (Weight: 30%)
+- **Tools**: Pylint, Flake8, Mypy
+- **What it checks**: Code quality, PEP 8 compliance, type correctness
+- **Scoring**: Weighted average
+  - Pylint score (0-10): 50%
+  - Flake8 violations: 25%
+  - Mypy type errors: 25%
+- **Pass threshold**: Overall >= 0.7, Pylint >= 7.0
+
+**3. ComplexityEvaluator** (Weight: 20%)
+- **Tool**: Radon cyclomatic complexity & maintainability index
+- **What it checks**: Function complexity, maintainability
+- **Scoring**: Weighted average
+  - Maintainability Index (0-100): 60%
+  - Average complexity penalty: 25%
+  - Max complexity penalty: 15%
+- **Pass threshold**: Overall >= 0.7, MI >= 20
+
+**4. LLMJudgeEvaluator** (Weight: 20%)
+- **Tool**: Claude 3.5 Sonnet semantic analysis
+- **What it checks**: 5 dimensions
+  - Correctness (40%): Logic, bug-free, solves problem
+  - Best Practices (25%): Error handling, security, performance
+  - Readability (15%): Naming, structure, documentation
+  - Edge Cases (15%): Boundary conditions, error states
+  - Design Patterns (5%): SOLID principles, idioms
+- **Pass threshold**: Overall >= 0.7, all dimensions >= 0.6
+
+#### Overall Scoring
+
+**Final Score** = (Security × 0.30) + (Static × 0.30) + (Complexity × 0.20) + (LLM × 0.20)
+
+**Pass Criteria**:
+- Overall score >= 0.7
+- All individual evaluators >= 0.6
+- No critical security issues
+
+#### Observability
+
+All evaluation metrics are automatically logged to **W&B Weave** for:
+- Quality trend tracking
+- Model performance comparison
+- Production monitoring
+- Debugging and improvement
+
+#### Example Output
+
+```
+Evaluation Results:
+  Overall: 0.823 ✅ PASS
+  
+  Security: 1.000 (SAFE - 0 vulnerabilities)
+  Static Analysis: 0.785 (Pylint 8.5/10, 3 style warnings)
+  Complexity: 0.764 (MI 72.3, avg complexity 4.2)
+  LLM Judge: 0.850 (Strong correctness, good practices)
+```
+
+
+
 ## Installation & Setup
 
 ### Prerequisites
