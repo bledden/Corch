@@ -15,6 +15,12 @@ from .complexity_evaluator import (
     ComplexityRank,
     MaintainabilityRank
 )
+from .llm_judge_evaluator import (
+    LLMJudgeEvaluator,
+    LLMJudgeScore,
+    JudgementScore,
+    JudgementCategory
+)
 
 __all__ = [
     'SecurityEvaluator',
@@ -30,4 +36,8 @@ __all__ = [
     'FunctionComplexity',
     'ComplexityRank',
     'MaintainabilityRank',
+    'LLMJudgeEvaluator',
+    'LLMJudgeScore',
+    'JudgementScore',
+    'JudgementCategory',
 ]
