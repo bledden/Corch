@@ -21,7 +21,7 @@ async def test_multiple_failures():
     """Test fallback through multiple consecutive failures"""
 
     # Load config
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # FORCE MULTIPLE INVALID MODELS

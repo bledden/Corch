@@ -592,7 +592,7 @@ async def run_benchmark():
     console.print(f"Total tasks: {len(ALL_TASKS)}\n")
 
     # Initialize
-    with open("config.yaml") as f:
+    with open("config/config.yaml") as f:
         config = yaml.safe_load(f)
 
     weave.init("facilitair/500-task-benchmark")

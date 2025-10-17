@@ -9,7 +9,7 @@ import logging
 from datetime import datetime
 from typing import Dict, Any, Optional
 
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
@@ -254,7 +254,7 @@ async def execute_streaming_task(
 
     try:
         # Import orchestrator
-        from collaborative_orchestrator import CollaborativeOrchestrator
+        from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 
         # Get state
         state = manager.get_stream(stream_id)

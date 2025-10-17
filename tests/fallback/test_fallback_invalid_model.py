@@ -21,7 +21,7 @@ async def test_invalid_model_fallback():
     """Test fallback when model ID is invalid"""
 
     # Load config
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # FORCE INVALID MODEL in coder config

@@ -19,7 +19,7 @@ from rich.text import Text
 from rich.table import Table
 from rich import box
 
-from collaborative_orchestrator import CollaborativeOrchestrator
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 from agents.llm_client import MultiAgentLLMOrchestrator
 import yaml
 
@@ -323,7 +323,7 @@ async def demo_streaming_debate():
     console.print("\n[bold cyan]Facilitair Streaming Debate Interface[/bold cyan]\n")
 
     # Load config
-    with open("config.yaml") as f:
+    with open("config/config.yaml") as f:
         config = yaml.safe_load(f)
 
     # Initialize orchestrator

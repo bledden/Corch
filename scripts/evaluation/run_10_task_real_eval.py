@@ -158,7 +158,7 @@ async def main():
     console.print("[bold cyan]" + "="*80 + "[/bold cyan]\n")
 
     # Load config
-    with open('config.yaml', 'r') as f:
+    with open('config/config.yaml', 'r') as f:
         config = yaml.safe_load(f)
 
     # Initialize Weave

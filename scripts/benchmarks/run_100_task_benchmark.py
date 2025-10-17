@@ -274,7 +274,7 @@ async def run_benchmark():
     console.print("\n[bold cyan]100-Task Benchmark - Sequential vs Baseline[/bold cyan]")
     console.print("[yellow]Tasks designed to favor multi-stage review and refinement[/yellow]\n")
 
-    with open("config.yaml") as f:
+    with open("config/config.yaml") as f:
         config = yaml.safe_load(f)
 
     weave.init("facilitair/100-task-benchmark")

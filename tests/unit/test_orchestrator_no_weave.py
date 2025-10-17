@@ -15,7 +15,7 @@ async def test_orchestrator_no_weave():
 
     try:
         print("\n1. Loading config...")
-        with open('config.yaml', 'r') as f:
+        with open('config/config.yaml', 'r') as f:
             config = yaml.safe_load(f)
 
         print("\n2. Testing LLM client directly (no orchestrator, no weave)...")

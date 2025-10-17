@@ -12,7 +12,7 @@ from rich.panel import Panel
 from rich.columns import Columns
 from rich.syntax import Syntax
 import weave
-from collaborative_orchestrator import CollaborativeOrchestrator
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 
 console = Console()
 

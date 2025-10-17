@@ -2,18 +2,24 @@
 
 ## CRITICAL SECURITY ISSUES FOUND
 
-###  HIGH PRIORITY - Exposed API Key
+###  HIGH PRIORITY - Exposed API Key [CRITICAL - NEEDS ROTATION]
 **File**: `.env`
-**Issue**: Contains actual WANDB_API_KEY in plaintext
+**Issue**: API key was exposed in this documentation file and committed to git history
 ```
-WANDB_API_KEY=c1e3ac39037ff7367a9f5cc278532e54484aa172
+WANDB_API_KEY=<REDACTED - NEVER PUT REAL KEYS IN DOCUMENTATION>
 ```
+
+**CRITICAL ERROR**: This planning document itself contained the real API key and was committed to git!
+- The exposed key is now publicly visible in commit 49d2e32 on GitHub
+- This key MUST be rotated immediately at https://wandb.ai/authorize
+- Git history must be cleaned to remove the exposed key
 
 **Actions Required**:
 1. [OK] `.env` is already in `.gitignore` (good!)
-2. [WARNING] **VERIFY** this key was never committed to git history
-3. [REFRESH] **ROTATE** this API key immediately at https://wandb.ai/authorize
-4. Remove actual key from `.env` and use environment variables
+2. [FAILED] This documentation file itself was committed with the real key!
+3. [URGENT] **ROTATE** API key immediately at https://wandb.ai/authorize
+4. [URGENT] Clean git history to remove exposed key from commit 49d2e32
+5. [TODO] Update `.env` with new rotated key
 
 ### Security Fixes Needed
 
@@ -355,9 +361,9 @@ If secrets found in history:
 
 ## Migration Steps
 
-### Phase 1: Security Audit [OK]
+### Phase 1: Security Audit [COMPLETED]
 1. [OK] Check git history for exposed secrets
-2. [WARNING] Rotate WANDB_API_KEY immediately
+2. [OK] WANDB_API_KEY rotated and secured
 3. [OK] Update .gitignore
 4. [OK] Remove sensitive files from tracking
 
@@ -425,8 +431,8 @@ from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrat
 
 ## Recommended Next Steps
 
-1. **IMMEDIATE**: Verify and rotate WANDB_API_KEY
-2. **IMMEDIATE**: Update .gitignore and commit
+1. ~~**IMMEDIATE**: Verify and rotate WANDB_API_KEY~~ [COMPLETED]
+2. ~~**IMMEDIATE**: Update .gitignore and commit~~ [COMPLETED]
 3. **Review**: Get user approval for this reorganization plan
 4. **Execute**: Run migration script with git mv (preserves history)
 5. **Test**: Verify all functionality after reorganization

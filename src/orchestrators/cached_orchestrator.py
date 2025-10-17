@@ -7,8 +7,8 @@ import asyncio
 from typing import Dict, Any, AsyncGenerator, Optional
 from datetime import datetime
 
-from collaborative_orchestrator import CollaborativeOrchestrator, CollaborationResult
-from semantic_cache import ContextAwareSemanticCache, CacheEntry
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator, CollaborationResult
+from src.caching.semantic_cache import ContextAwareSemanticCache, CacheEntry
 
 
 class CachedStreamingOrchestrator:

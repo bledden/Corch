@@ -50,7 +50,7 @@ class LLMClient:
 
         # Initialize fallback manager ONLY if manual mode is enabled
         if manual_mode and FALLBACK_AVAILABLE:
-            self.fallback_manager = FallbackManager(config_path="config.yaml", config_dict=config)
+            self.fallback_manager = FallbackManager(config_path="config/config.yaml", config_dict=config)
             if os.getenv("DEMO_MODE"):
                 print("[INFO] Fallback manager enabled (manual mode)")
 

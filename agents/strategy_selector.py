@@ -36,7 +36,7 @@ class ModelSelectionContext:
 class StrategySelector:
     """Selects appropriate models based on user strategy preference"""
 
-    def __init__(self, config_path: str = "model_strategy_config.yaml"):
+    def __init__(self, config_path: str = "config/model_strategy_config.yaml"):
         """Initialize with strategy configuration"""
         with open(config_path, 'r') as f:
             self.config = yaml.safe_load(f)

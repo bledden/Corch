@@ -13,7 +13,7 @@ from rich.panel import Panel
 from rich.layout import Layout
 from rich.live import Live
 import weave
-from collaborative_orchestrator import CollaborativeOrchestrator
+from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 
 console = Console()
 

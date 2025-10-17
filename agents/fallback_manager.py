@@ -56,7 +56,7 @@ class FallbackContext:
 class FallbackManager:
     """Manages model fallback strategy with interactive prompts"""
 
-    def __init__(self, config_path: str = "config.yaml", config_dict: Optional[Dict] = None):
+    def __init__(self, config_path: str = "config/config.yaml", config_dict: Optional[Dict] = None):
         self.config_path = config_path
         # Use provided config dict if available, otherwise load from file
         self.config = config_dict if config_dict is not None else self._load_config()

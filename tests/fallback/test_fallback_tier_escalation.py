@@ -21,7 +21,7 @@ async def test_tier_escalation():
     """Test fallback escalation from Tier 3 -> Tier 2 -> Tier 1"""
 
     # Load config
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # Start with invalid Tier 3 model (budget)

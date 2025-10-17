@@ -27,7 +27,7 @@ async def test_auto_fallback():
     console.print("[bold cyan]=" * 40 + "\n")
 
     # Load config
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # Configure AUTO MODE in fallback settings
@@ -76,7 +76,7 @@ async def test_tier_escalation_auto():
 
     console.print("[bold yellow]TEST 2: Tier Escalation (Auto)[/bold yellow]")
 
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # Configure AUTO MODE
@@ -120,7 +120,7 @@ async def test_multiple_agents_fallback():
 
     console.print("[bold yellow]TEST 3: Multiple Agents with Fallback[/bold yellow]")
 
-    with open("config.yaml", "r") as f:
+    with open("config/config.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # Configure AUTO MODE

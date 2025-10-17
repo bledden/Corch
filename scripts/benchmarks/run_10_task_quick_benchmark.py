@@ -184,7 +184,7 @@ async def run_quick_benchmark():
     console.print(f"Total tasks: {len(QUICK_TASKS)}\n")
 
     # Initialize
-    with open("config.yaml") as f:
+    with open("config/config.yaml") as f:
         config = yaml.safe_load(f)
 
     weave.init("facilitair/10-task-quick-benchmark")

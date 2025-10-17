@@ -9,7 +9,7 @@ import yaml
 
 async def test_single_task():
     print("Loading config...")
-    with open('config.yaml', 'r') as f:
+    with open('config/config.yaml', 'r') as f:
         config = yaml.safe_load(f)
 
     print("Initializing orchestrator...")
