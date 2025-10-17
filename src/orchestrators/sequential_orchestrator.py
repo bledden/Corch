@@ -23,6 +23,14 @@ import re
 import uuid
 import logging
 
+# Import middleware
+try:
+    from src.middleware import MiddlewareHook, MiddlewareContext
+except ImportError:
+    # Middleware is optional
+    MiddlewareHook = None
+    MiddlewareContext = None
+
 logger = logging.getLogger(__name__)
 
 # Timeouts from Facilitair_v2
@@ -177,17 +185,19 @@ class SequentialCollaborativeOrchestrator:
     Based on Facilitair_v2's proven architecture.
     """
 
-    def __init__(self, llm_orchestrator, config: Optional[Dict] = None):
+    def __init__(self, llm_orchestrator, config: Optional[Dict] = None, middleware: Optional[List] = None):
         """
         Initialize with LLM orchestrator from weavehacks-collaborative.
 
         Args:
             llm_orchestrator: MultiAgentLLMOrchestrator instance
             config: Optional agent configuration
+            middleware: Optional list of middleware instances
         """
         self.llm = llm_orchestrator
         self.config = config or {}
         self.format_converter = FormatConverter()
+        self.middleware = middleware or []
 
         # Define agent communication profiles
         self.agent_profiles = self._setup_agent_profiles()
@@ -311,12 +321,49 @@ class SequentialCollaborativeOrchestrator:
 
             context["final_implementation"] = context["implementation"]
 
+            # POST_REFINER Hook - Run evaluation middleware
+            if self.middleware and MiddlewareHook:
+                logger.info(f"[{run_id}] Running POST_REFINER middleware")
+                try:
+                    for mw in self.middleware:
+                        if mw.should_execute(MiddlewareHook.POST_REFINER):
+                            mw_context = MiddlewareContext(
+                                hook=MiddlewareHook.POST_REFINER,
+                                stage_name="post_refiner",
+                                input_data=context,
+                                output_data={"code": context["final_implementation"]}
+                            )
+                            mw_result = mw.execute(mw_context)
+                            if mw_result.get("evaluation"):
+                                context["refiner_evaluation"] = mw_result["evaluation"]
+                                logger.info(f"Evaluation: {mw_result['evaluation'].overall_score:.3f}")
+                except Exception as e:
+                    logger.error(f"POST_REFINER middleware failed: {e}")
+
             # Stage 5: Documentation (no testing - can be requested post-delivery)
             logger.info(f"[{run_id}] Stage 5: Documentation")
             if budget_left() > 10:
                 doc_timeout = min(STAGE_TIMEOUT_S, budget_left())
                 doc_result = await self._documenter_stage(context, timeout=doc_timeout, temperature=temperature)
                 stages.append(doc_result)
+
+                # POST_DOCUMENTER Hook - Run evaluation middleware on documentation
+                if self.middleware and MiddlewareHook:
+                    logger.info(f"[{run_id}] Running POST_DOCUMENTER middleware")
+                    try:
+                        for mw in self.middleware:
+                            if mw.should_execute(MiddlewareHook.POST_DOCUMENTER):
+                                mw_context = MiddlewareContext(
+                                    hook=MiddlewareHook.POST_DOCUMENTER,
+                                    stage_name="post_documenter",
+                                    input_data=context,
+                                    output_data={"documentation": doc_result.output}
+                                )
+                                mw_result = mw.execute(mw_context)
+                                if mw_result.get("evaluation"):
+                                    context["documenter_evaluation"] = mw_result["evaluation"]
+                    except Exception as e:
+                        logger.error(f"POST_DOCUMENTER middleware failed: {e}")
                 context["documentation"] = doc_result.output
 
             total_duration = time.time() - start_time
