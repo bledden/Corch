@@ -427,20 +427,30 @@ Return a structured design document in Markdown format."""
         task = context["original_request"]
         architecture = context.get("architecture", "")
 
-        prompt = f"""Implement this solution based on the architecture:
+        prompt = f"""Implement this solution based on the architecture.
 
-Original Task: {task}
+=== ORIGINAL USER REQUEST ===
+{task}
 
-Architecture:
+=== ARCHITECTURAL DESIGN (Context) ===
 {architecture}
 
+=== YOUR TASK ===
 Generate complete, production-ready code that:
-1. Follows the architectural design
-2. Includes robust error handling
-3. Is well-structured and maintainable
-4. Follows best practices
+1. Fulfills the original user request above
+2. Implements the architectural design faithfully
+3. Includes robust error handling
+4. Is well-structured and maintainable
+5. Follows language best practices
 
-Return ONLY the code, no explanations."""
+=== REASONING TRACE ===
+Before coding, consider:
+- How does the architecture map to the user's request?
+- What are the key components needed?
+- What edge cases should be handled?
+- What dependencies/imports are required?
+
+Return ONLY the complete, working code. No explanations outside code comments."""
 
         try:
             output = await self._call_llm(
@@ -491,20 +501,35 @@ Return ONLY the code, no explanations."""
         code = context.get("implementation", "")
         architecture = context.get("architecture", "")
 
-        prompt = f"""Review this code implementation.
+        prompt = f"""Review this code implementation for correctness and quality.
 
-Architecture Intent:
+=== ORIGINAL USER REQUEST ===
+{context.get("original_request", "")}
+
+=== ARCHITECTURAL DESIGN (Expected Implementation) ===
 {architecture}
 
-Code to Review:
+=== CODE TO REVIEW ===
 {code}
+
+=== YOUR TASK ===
+Review the code against BOTH the architectural intent AND the original user request.
+
+=== REASONING TRACE ===
+Before reviewing, consider:
+1. Does the code fulfill the original user's request?
+2. Does it implement the architectural design correctly?
+3. Are there security vulnerabilities?
+4. Are edge cases handled?
+5. Is error handling robust?
+6. Does it follow language best practices?
 
 Return ONLY JSON with this exact schema:
 {{
   "issues_found": true,
-  "critical_issues": ["..."],
-  "suggestions": ["..."],
-  "code_quality_score": 0
+  "critical_issues": ["Security: eval() usage detected", "..."],
+  "suggestions": ["Add input validation for...", "..."],
+  "code_quality_score": 7
 }}"""
 
         try:
@@ -554,24 +579,35 @@ Return ONLY JSON with this exact schema:
         review = context.get("review", "")
         task = context.get("original_request", "")
 
-        prompt = f"""Fix the issues found in code review.
+        prompt = f"""Refine the code based on review feedback.
 
-Original Task: {task}
+=== ORIGINAL USER REQUEST ===
+{task}
 
-Current Code:
+=== ARCHITECTURAL DESIGN (Original Intent) ===
+{context.get("architecture", "")}
+
+=== CURRENT IMPLEMENTATION ===
 {code}
 
-Review Feedback:
+=== REVIEW FINDINGS (Issues to Address) ===
 {review}
 
-Apply the suggested improvements and return the refined code.
-Focus on:
-1. Fixing identified issues
-2. Improving performance
-3. Enhancing readability
-4. Following best practices
+=== YOUR TASK ===
+Fix the identified issues while maintaining:
+1. Alignment with the original user request
+2. Adherence to the architectural design
+3. Code correctness and functionality
+4. Best practices and maintainability
 
-Return ONLY the complete refined code."""
+=== REASONING TRACE ===
+Before refining, consider:
+1. Which issues are critical vs. nice-to-have?
+2. How can fixes maintain the architectural intent?
+3. Are there unintended side effects of proposed changes?
+4. Does the refined code still solve the original request?
+
+Return ONLY the complete, refined code. No explanations outside code comments."""
 
         try:
             output = await self._call_llm(
@@ -621,22 +657,36 @@ Return ONLY the complete refined code."""
 
         architecture = context.get("architecture", "")
         code = context.get("final_implementation", "")
+        task = context.get("original_request", "")
 
-        prompt = f"""Create comprehensive documentation:
+        prompt = f"""Create comprehensive documentation for the implemented solution.
 
-Architecture:
+=== ORIGINAL USER REQUEST ===
+{task}
+
+=== ARCHITECTURAL DESIGN (Context) ===
 {architecture}
 
-Implementation:
+=== IMPLEMENTATION (Code to Document) ===
 {code}
 
-Generate:
-1. README with overview and setup
-2. API documentation
-3. Usage examples
-4. Architecture explanation
+=== YOUR TASK ===
+Generate complete, user-friendly documentation that:
+1. Explains what the solution does (aligned with original request)
+2. Shows how to use it with clear examples
+3. Documents the architecture and design decisions
+4. Includes setup/installation instructions
+5. Provides API reference if applicable
 
-Return Markdown documentation."""
+=== REASONING TRACE ===
+Before documenting, consider:
+- What does a user need to understand to use this solution?
+- How does the implementation fulfill the original request?
+- What are the key architectural concepts to explain?
+- What examples would be most helpful?
+- What edge cases or limitations should be documented?
+
+Return ONLY the complete Markdown documentation. Use clear headings, code blocks, and examples."""
 
         try:
             output = await self._call_llm(
