@@ -136,10 +136,11 @@ class SecurityEvaluator:
             return SecurityScore(overall=0.5, safe=False)
 
         finally:
-            # Cleanup temp file
+            # Cleanup temp file (best effort)
             try:
                 os.unlink(tmp_path)
-            except:
+            except (OSError, FileNotFoundError) as e:
+                # Ignore cleanup errors silently
                 pass
 
     def _parse_bandit_output(self, bandit_output: Dict[str, Any]) -> SecurityScore:
