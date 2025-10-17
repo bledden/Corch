@@ -12,7 +12,7 @@ Each agent:
 """
 
 import weave
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Union
 from dataclasses import dataclass
 from enum import Enum
 import json
@@ -30,6 +30,17 @@ except ImportError:
     # Middleware is optional
     MiddlewareHook = None
     MiddlewareContext = None
+
+# Import result types for error handling
+from src.types import (
+    LLMResult,
+    LLMSuccess,
+    LLMError,
+    is_success,
+    is_error,
+    create_timeout_error,
+    create_api_error,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -427,16 +438,33 @@ Provide:
 Return a structured design document in Markdown format."""
 
         try:
-            output = await self._call_llm(
+            result = await self._call_llm(
                 agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
             )
 
+            # Handle error result
+            if is_error(result):
+                return StageResult(
+                    stage="architecture",
+                    agent_role=AgentRole.ARCHITECT,
+                    model_id=profile.model_id,
+                    timestamp=datetime.now().isoformat(),
+                    input_context={"original_request": task},
+                    output=result.to_string(),  # Convert error to string for backward compatibility
+                    format="markdown",
+                    duration_seconds=time.time() - start,
+                    success=False,
+                    error=result.message
+                )
+
+            # Success case - extract content
+            output = result.content
+
             # Better success detection: check output quality
             has_substantial_content = len(output.strip()) > 100
-            not_error = not output.startswith("[ERROR]")
             has_architecture_keywords = any(keyword in output.lower() for keyword in ['architecture', 'design', 'component', 'system', 'structure'])
 
             return StageResult(
@@ -448,7 +476,7 @@ Return a structured design document in Markdown format."""
                 output=output,
                 format="markdown",
                 duration_seconds=time.time() - start,
-                success=not_error and has_substantial_content and has_architecture_keywords
+                success=has_substantial_content and has_architecture_keywords
             )
         except Exception as e:
             return StageResult(
@@ -503,15 +531,30 @@ Before coding, consider:
 Return ONLY the complete, working code. No explanations outside code comments."""
 
         try:
-            output = await self._call_llm(
+            result = await self._call_llm(
                 agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
             )
 
-            # Extract code blocks
-            code = self.format_converter.extract_code(output)
+            # Handle error result
+            if is_error(result):
+                return StageResult(
+                    stage="implementation",
+                    agent_role=AgentRole.CODER,
+                    model_id=profile.model_id,
+                    timestamp=datetime.now().isoformat(),
+                    input_context={"original_request": task, "architecture": architecture},
+                    output=result.to_string(),
+                    format="code",
+                    duration_seconds=time.time() - start,
+                    success=False,
+                    error=result.message
+                )
+
+            # Success case - extract code blocks
+            code = self.format_converter.extract_code(result.content)
 
             return StageResult(
                 stage="implementation",
@@ -522,7 +565,7 @@ Return ONLY the complete, working code. No explanations outside code comments.""
                 output=code,
                 format="code",
                 duration_seconds=time.time() - start,
-                success=not output.startswith("[ERROR]")
+                success=True
             )
         except Exception as e:
             return StageResult(
@@ -583,12 +626,27 @@ Return ONLY JSON with this exact schema:
 }}"""
 
         try:
-            output = await self._call_llm(
+            result = await self._call_llm(
                 agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
             )
+
+            # Handle error result
+            if is_error(result):
+                return StageResult(
+                    stage="review",
+                    agent_role=AgentRole.REVIEWER,
+                    model_id=profile.model_id,
+                    timestamp=datetime.now().isoformat(),
+                    input_context={"implementation": code[:200], "architecture": architecture[:200]},
+                    output=result.to_string(),
+                    format="json",
+                    duration_seconds=time.time() - start,
+                    success=False,
+                    error=result.message
+                )
 
             return StageResult(
                 stage="review",
@@ -596,10 +654,10 @@ Return ONLY JSON with this exact schema:
                 model_id=profile.model_id,
                 timestamp=datetime.now().isoformat(),
                 input_context={"implementation": code[:200], "architecture": architecture[:200]},
-                output=output,
+                output=result.content,
                 format="json",
                 duration_seconds=time.time() - start,
-                success=not output.startswith("[ERROR]")
+                success=True
             )
         except Exception as e:
             return StageResult(
@@ -660,15 +718,30 @@ Before refining, consider:
 Return ONLY the complete, refined code. No explanations outside code comments."""
 
         try:
-            output = await self._call_llm(
+            result = await self._call_llm(
                 agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
             )
 
+            # Handle error result
+            if is_error(result):
+                return StageResult(
+                    stage="refinement",
+                    agent_role=AgentRole.CODER,  # ← CODER acting as refiner
+                    model_id=profile.model_id,
+                    timestamp=datetime.now().isoformat(),
+                    input_context={"implementation": code[:200], "review": review[:200]},
+                    output=result.to_string(),
+                    format="code",
+                    duration_seconds=time.time() - start,
+                    success=False,
+                    error=result.message
+                )
+
             # Extract code blocks
-            refined_code = self.format_converter.extract_code(output)
+            refined_code = self.format_converter.extract_code(result.content)
 
             return StageResult(
                 stage="refinement",
@@ -679,7 +752,7 @@ Return ONLY the complete, refined code. No explanations outside code comments.""
                 output=refined_code,
                 format="code",
                 duration_seconds=time.time() - start,
-                success=not output.startswith("[ERROR]")
+                success=True
             )
         except Exception as e:
             return StageResult(
@@ -739,12 +812,27 @@ Before documenting, consider:
 Return ONLY the complete Markdown documentation. Use clear headings, code blocks, and examples."""
 
         try:
-            output = await self._call_llm(
+            result = await self._call_llm(
                 agent_role=profile.role,
                 prompt=prompt,
                 temperature=temperature,
                 timeout=timeout
             )
+
+            # Handle error result
+            if is_error(result):
+                return StageResult(
+                    stage="documentation",
+                    agent_role=AgentRole.DOCUMENTER,
+                    model_id=profile.model_id,
+                    timestamp=datetime.now().isoformat(),
+                    input_context={"architecture": architecture[:200], "final_implementation": code[:200]},
+                    output=result.to_string(),
+                    format="markdown",
+                    duration_seconds=time.time() - start,
+                    success=False,
+                    error=result.message
+                )
 
             return StageResult(
                 stage="documentation",
@@ -752,10 +840,10 @@ Return ONLY the complete Markdown documentation. Use clear headings, code blocks
                 model_id=profile.model_id,
                 timestamp=datetime.now().isoformat(),
                 input_context={"architecture": architecture[:200], "final_implementation": code[:200]},
-                output=output,
+                output=result.content,
                 format="markdown",
                 duration_seconds=time.time() - start,
-                success=not output.startswith("[ERROR]")
+                success=True
             )
         except Exception as e:
             return StageResult(
@@ -777,8 +865,10 @@ Return ONLY the complete Markdown documentation. Use clear headings, code blocks
         prompt: str,
         temperature: float,
         timeout: float
-    ) -> str:
-        """Call LLM with timeout and error handling"""
+    ) -> LLMResult:
+        """Call LLM with timeout and error handling, returns typed Result"""
+        start_time = time.time()
+
         try:
             async def _call():
                 # Convert AgentRole enum to agent_id string (e.g., AgentRole.CODER -> "coder")
@@ -787,12 +877,28 @@ Return ONLY the complete Markdown documentation. Use clear headings, code blocks
                 return await self.llm.execute_agent_task(agent_id, prompt)
 
             output = await asyncio.wait_for(_call(), timeout=timeout)
-            return output if isinstance(output, str) else str(output)
+            output_str = output if isinstance(output, str) else str(output)
+
+            # Return success result
+            return LLMSuccess(
+                content=output_str,
+                model="unknown",  # TODO: Get from agent config
+                tokens_used=0,  # TODO: Track tokens
+                latency_ms=(time.time() - start_time) * 1000,
+                metadata={"agent_role": agent_role.value}
+            )
 
         except asyncio.TimeoutError:
-            return "[ERROR] LLM timeout"
+            return create_timeout_error(
+                message=f"LLM call timed out after {timeout}s",
+                context={"agent_role": agent_role.value, "timeout": timeout}
+            )
         except Exception as e:
-            return f"[ERROR] LLM error: {e}"
+            return create_api_error(
+                message=f"LLM execution failed: {str(e)}",
+                exception=e,
+                retryable=True
+            )
 
     def _parse_review_result(self, review_output: str) -> bool:
         """Parse review output to determine if issues were found"""
