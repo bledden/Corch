@@ -207,20 +207,37 @@ class StreamEventBuilder:
 
 
 class StreamManager:
-    """Manages multiple active streams"""
+    """
+    Manages multiple active streams with automatic cleanup and LRU eviction
 
-    def __init__(self):
+    Features:
+    - Immediate cleanup when streams complete
+    - Max streams limit with LRU eviction
+    - 1-hour timeout as safety net for abandoned streams
+    """
+
+    def __init__(self, max_streams: int = 100):
         self.streams: Dict[str, StreamState] = {}
         self.event_queues: Dict[str, asyncio.Queue] = {}
         self._cleanup_tasks: Dict[str, asyncio.Task] = {}
+        self.max_streams = max_streams
+        self._stream_creation_order: list = []  # Track creation order for LRU eviction
 
-    def create_stream(
+    async def create_stream(
         self,
         stream_id: str,
         task: str,
         context: Optional[Dict[str, Any]] = None
     ) -> StreamState:
-        """Create a new stream"""
+        """
+        Create a new stream with LRU eviction if needed
+
+        If max_streams is reached, evicts the oldest stream
+        """
+        # Check if we need to evict old streams
+        if len(self.streams) >= self.max_streams:
+            await self._evict_oldest_stream()
+
         state = StreamState(
             stream_id=stream_id,
             task=task,
@@ -230,11 +247,20 @@ class StreamManager:
 
         self.streams[stream_id] = state
         self.event_queues[stream_id] = asyncio.Queue()
+        self._stream_creation_order.append(stream_id)
 
-        # Schedule cleanup after 1 hour
+        # Schedule cleanup after 1 hour as safety net
         self._schedule_cleanup(stream_id, timeout=3600)
 
         return state
+
+    async def _evict_oldest_stream(self):
+        """Evict the oldest stream (LRU eviction policy)"""
+        if not self._stream_creation_order:
+            return
+
+        oldest_stream_id = self._stream_creation_order[0]
+        await self.cleanup_stream(oldest_stream_id)
 
     def get_stream(self, stream_id: str) -> Optional[StreamState]:
         """Get stream state by ID"""
@@ -276,6 +302,8 @@ class StreamManager:
                 # Check if stream is complete
                 state = self.get_stream(stream_id)
                 if state and state.status in ["completed", "error"]:
+                    # Immediately schedule cleanup for completed streams
+                    asyncio.create_task(self.cleanup_stream(stream_id))
                     break
 
             except asyncio.TimeoutError:
@@ -324,11 +352,29 @@ class StreamManager:
                 task.cancel()
             del self._cleanup_tasks[stream_id]
 
+        # Remove from creation order list
+        if stream_id in self._stream_creation_order:
+            self._stream_creation_order.remove(stream_id)
+
     async def cleanup_all(self):
         """Clean up all streams"""
         stream_ids = list(self.streams.keys())
         for stream_id in stream_ids:
             await self.cleanup_stream(stream_id)
+
+    def get_metrics(self) -> Dict[str, Any]:
+        """Get metrics about active streams"""
+        return {
+            "active_streams": len(self.streams),
+            "max_streams": self.max_streams,
+            "utilization": len(self.streams) / self.max_streams if self.max_streams > 0 else 0.0,
+            "streams_by_status": {
+                "initializing": sum(1 for s in self.streams.values() if s.status == "initializing"),
+                "running": sum(1 for s in self.streams.values() if s.status == "running"),
+                "completed": sum(1 for s in self.streams.values() if s.status == "completed"),
+                "error": sum(1 for s in self.streams.values() if s.status == "error"),
+            }
+        }
 
 
 # Global stream manager instance (process-wide only)

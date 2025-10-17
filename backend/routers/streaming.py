@@ -94,8 +94,8 @@ async def create_stream_task(
         # Generate unique stream ID
         stream_id = str(uuid.uuid4())
 
-        # Create stream state
-        state = manager.create_stream(
+        # Create stream state (async now)
+        state = await manager.create_stream(
             stream_id=stream_id,
             task=request.task,
             context=request.context
