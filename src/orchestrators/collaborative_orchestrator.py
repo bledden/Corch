@@ -237,15 +237,18 @@ class CollaborativeOrchestrator:
             from src.evaluation.quality_evaluator import CodeQualityEvaluator, detect_language
             evaluator = CodeQualityEvaluator()
             language = detect_language(workflow_result.final_output)
-            quality_eval = evaluator.evaluate(workflow_result.final_output, language)
-            quality_score = quality_eval["overall_score"]
+            quality_eval = evaluator.evaluate(workflow_result.final_output, task, language)
+            quality_score = quality_eval.overall  # Use .overall, not dictionary access
+            print(f"[DEBUG] Real quality evaluation succeeded: {quality_score}")
         except Exception as e:
             # Fallback to heuristic if evaluator fails (conservative scoring)
+            print(f"[WARNING] Quality evaluator failed: {type(e).__name__}: {str(e)}")
             output = workflow_result.final_output
             has_code = any(keyword in output for keyword in ['def ', 'function ', 'class ', 'const ', 'let '])
             has_logic = len(output) > 100
             # Use 0.6 max to stay below pass threshold (0.7) - be conservative when evaluator fails
             quality_score = 0.6 if (has_code and has_logic and workflow_result.success) else 0.3
+            print(f"[DEBUG] Using fallback score: {quality_score}")
 
         metrics = {
             "quality": quality_score,
