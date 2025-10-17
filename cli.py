@@ -223,8 +223,14 @@ def cli(ctx, config, verbose):
 @click.option('--save', '-s', help='Save result to file')
 @click.option('--sequential/--consensus', default=True, help='Use sequential or consensus mode')
 @click.option('--stream/--no-stream', default=False, help='Enable streaming debate interface')
+@click.option('--strategy', type=click.Choice(['COST_FIRST', 'QUALITY_FIRST', 'BALANCED', 'SPEED_FIRST', 'PRIVACY_FIRST']), help='Model selection strategy')
+@click.option('--architect-model', help='Override model for architect agent (e.g., claude-3.5-sonnet-20250415)')
+@click.option('--coder-model', help='Override model for coder agent')
+@click.option('--reviewer-model', help='Override model for reviewer agent')
+@click.option('--documenter-model', help='Override model for documenter agent')
+@click.option('--researcher-model', help='Override model for researcher agent')
 @click.pass_context
-def collaborate(ctx, task, format, save, sequential, stream):
+def collaborate(ctx, task, format, save, sequential, stream, strategy, architect_model, coder_model, reviewer_model, documenter_model, researcher_model):
     """Execute a collaborative task with AI agents"""
     logger.info(f"CLI collaborate command: task='{task[:50]}...'")
 
@@ -243,6 +249,30 @@ def collaborate(ctx, task, format, save, sequential, stream):
 
     cli_obj = ctx.obj['cli']
     cli_obj.config['use_sequential'] = sequential
+
+    # Build model overrides dictionary from CLI flags
+    model_overrides = {}
+    if architect_model:
+        model_overrides['architect'] = architect_model
+    if coder_model:
+        model_overrides['coder'] = coder_model
+    if reviewer_model:
+        model_overrides['reviewer'] = reviewer_model
+    if documenter_model:
+        model_overrides['documenter'] = documenter_model
+    if researcher_model:
+        model_overrides['researcher'] = researcher_model
+
+    # Store overrides and strategy in config
+    if model_overrides:
+        cli_obj.config['model_overrides'] = model_overrides
+        console.print(f"[cyan]Using custom model overrides:[/cyan]")
+        for role, model in model_overrides.items():
+            console.print(f"  {role}: {model}")
+
+    if strategy:
+        cli_obj.config['strategy'] = strategy
+        console.print(f"[cyan]Using strategy: {strategy}[/cyan]\n")
 
     if stream:
         # Use streaming debate interface
