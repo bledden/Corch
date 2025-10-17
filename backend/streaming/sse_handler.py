@@ -5,6 +5,7 @@ Manages event formatting, stream state, and SSE protocol compliance.
 
 import asyncio
 import json
+import threading
 from typing import Dict, Any, Optional, AsyncIterator
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -330,13 +331,20 @@ class StreamManager:
             await self.cleanup_stream(stream_id)
 
 
-# Global stream manager instance
+# Global stream manager instance (process-wide only)
 _stream_manager: Optional[StreamManager] = None
+_stream_manager_lock = threading.Lock()
 
 
 def get_stream_manager() -> StreamManager:
-    """Get or create global stream manager"""
+    """Get or create global stream manager (process-wide singleton).
+
+    Thread-safe initialization using double-checked locking pattern.
+    Note: Each gunicorn worker process will have its own instance.
+    """
     global _stream_manager
     if _stream_manager is None:
-        _stream_manager = StreamManager()
+        with _stream_manager_lock:
+            if _stream_manager is None:  # Double-check inside lock
+                _stream_manager = StreamManager()
     return _stream_manager

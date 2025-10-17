@@ -66,6 +66,29 @@ DOCUMENTER → Creates docs
 Result + Metrics
 ```
 
+## Key Features
+
+### Chain-of-Thought Reasoning Trace
+Facilitair implements **research-backed chain-of-thought prompting** across all collaboration stages to improve output quality and alignment:
+
+- **Full Context Preservation**: Each stage receives the complete workflow context including the original user request, architectural design, and all previous outputs
+- **Explicit Reasoning Questions**: Before generating output, each AI agent is prompted to consider:
+  - Alignment with original user intent
+  - Edge cases and error scenarios
+  - Architectural consistency
+  - Dependencies and side effects
+- **Prevents Context Drift**: Models maintain awareness of the original goal throughout the entire workflow
+- **Research-Backed**: Based on studies showing that asking models to reason step-by-step before answering significantly improves response quality
+
+**How It Works:**
+1. **Architect Stage**: Considers original request + requirements analysis
+2. **Coder Stage**: Receives original request + architecture + reasoning questions about implementation
+3. **Reviewer Stage**: Gets original request + architecture + implementation + checklist for review
+4. **Refiner Stage**: Receives ALL previous context + review findings + reasoning about fixes
+5. **Documenter Stage**: Gets full workflow context to create aligned documentation
+
+This approach ensures every stage remains grounded in the user's original intent and produces higher-quality, more coherent results.
+
 ## Installation & Setup
 
 ### Prerequisites

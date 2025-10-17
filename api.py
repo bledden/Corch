@@ -4,6 +4,7 @@ Facilitair REST API - FastAPI server for collaborative AI orchestration
 
 import asyncio
 import logging
+import threading
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 from pathlib import Path
@@ -59,8 +60,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global orchestrator instance
+# Global orchestrator instance (process-wide only)
 orchestrator: Optional[CollaborativeOrchestrator] = None
+orchestrator_lock = threading.Lock()
 
 # In-memory task storage (use Redis/DB in production)
 task_results = {}
@@ -130,12 +132,18 @@ class EvaluationRequest(BaseModel):
 # ============================================================================
 
 def get_orchestrator() -> CollaborativeOrchestrator:
-    """Get or create orchestrator instance"""
+    """Get or create orchestrator instance (process-wide singleton).
+
+    Thread-safe initialization using double-checked locking pattern.
+    Note: Each FastAPI worker process will have its own instance.
+    """
     global orchestrator
     if orchestrator is None:
-        logger.info("Initializing orchestrator...")
-        orchestrator = CollaborativeOrchestrator(use_sequential=True)
-        logger.info("Orchestrator initialized")
+        with orchestrator_lock:
+            if orchestrator is None:  # Double-check inside lock
+                logger.info("Initializing orchestrator...")
+                orchestrator = CollaborativeOrchestrator(use_sequential=True)
+                logger.info("Orchestrator initialized")
     return orchestrator
 
 

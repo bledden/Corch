@@ -345,8 +345,10 @@ class IsolatedEnvironments:
                     container = self.docker_client.containers.get(container_id)
                     container.stop(timeout=2)
                     container.remove()
-                except:
-                    pass  # Best effort cleanup in destructor
+                except Exception as e:
+                    # Best effort cleanup in destructor - log but don't raise
+                    import logging
+                    logging.getLogger(__name__).debug(f"Failed to cleanup container {container_id}: {e}")
 
 
 # =============================================================================
