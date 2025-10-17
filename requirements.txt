@@ -24,3 +24,6 @@ pytest-asyncio>=0.21.0
 
 # Optional performance
 orjson>=3.9.0  # Faster JSON parsing
+
+# Enhanced Evaluation Tools
+-r requirements-evaluation.txt
