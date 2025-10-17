@@ -44,6 +44,7 @@ class StrategySelector:
         self.current_strategy = Strategy[self.config['user_preference']]
         self.total_cost = 0.0
         self.task_count = 0
+        self.model_overrides = {}  # Manual model overrides per agent type
 
     def get_user_strategy(self) -> Strategy:
         """Get current user strategy preference"""
@@ -54,6 +55,17 @@ class StrategySelector:
         self.current_strategy = strategy
         logger.info(f"Strategy changed to: {strategy.value}")
 
+    def set_model_override(self, agent_type: str, model_id: str):
+        """Set a manual model override for a specific agent type"""
+        self.model_overrides[agent_type] = model_id
+        logger.info(f"Model override set: {agent_type} -> {model_id}")
+
+    def set_model_overrides(self, overrides: Dict[str, str]):
+        """Set multiple model overrides at once"""
+        self.model_overrides.update(overrides)
+        for agent_type, model_id in overrides.items():
+            logger.info(f"Model override set: {agent_type} -> {model_id}")
+
     def select_model(self,
                     agent_type: str,
                     context: ModelSelectionContext) -> Tuple[str, Dict]:
@@ -63,6 +75,20 @@ class StrategySelector:
         Returns:
             Tuple of (model_id, selection_info)
         """
+        # CHECK MANUAL OVERRIDES FIRST - highest priority
+        if agent_type in self.model_overrides:
+            override_model = self.model_overrides[agent_type]
+            estimated_cost = self._estimate_cost(override_model, context)
+            logger.info(f"Using manual override for {agent_type}: {override_model}")
+            return override_model, {
+                'strategy_used': 'MANUAL_OVERRIDE',
+                'original_strategy': self.current_strategy.value,
+                'model': override_model,
+                'estimated_cost': estimated_cost,
+                'quality_score': self._get_quality_score(override_model),
+                'reason': f'Manual override specified for {agent_type}'
+            }
+
         # Check if auto-switch should override user preference
         effective_strategy = self._check_auto_switch(context)
 

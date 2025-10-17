@@ -145,6 +145,18 @@ class CollaborativeOrchestrator:
         self.strategy_selector.set_user_strategy(user_strategy)
         print(f"[GOAL] Model selection strategy: {user_strategy.value}")
 
+        # Apply model overrides from config if provided (CLI flags, etc.)
+        if self.config.get('model_overrides'):
+            self.strategy_selector.set_model_overrides(self.config['model_overrides'])
+            print(f"[OVERRIDE] Applied {len(self.config['model_overrides'])} model overrides")
+
+        # Apply strategy override from config if provided (CLI --strategy flag)
+        if self.config.get('strategy'):
+            from agents.strategy_selector import Strategy
+            override_strategy = Strategy[self.config['strategy']]
+            self.strategy_selector.set_user_strategy(override_strategy)
+            print(f"[OVERRIDE] Strategy changed to: {override_strategy.value}")
+
         # Initialize LLM orchestrator if available (pass strategy_selector for dynamic model selection)
         self.llm_orchestrator = MultiAgentLLMOrchestrator(
             self.config,
