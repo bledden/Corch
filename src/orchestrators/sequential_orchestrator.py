@@ -91,7 +91,8 @@ class FormatConverter:
             try:
                 parsed = json.loads(data)
                 return json.dumps(parsed, indent=2)
-            except:
+            except (json.JSONDecodeError, ValueError, TypeError) as e:
+                logger.warning(f"Failed to parse JSON string: {e}")
                 # Wrap string in JSON object
                 return json.dumps({"content": data}, indent=2)
         return json.dumps(data, indent=2)
@@ -147,7 +148,8 @@ class FormatConverter:
         if from_format == "json":
             try:
                 parsed = json.loads(content)
-            except:
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse JSON in convert(): {e}")
                 parsed = {"content": content}
         elif from_format == "code":
             parsed = {"code": self.extract_code(content)}
@@ -700,8 +702,8 @@ Return Markdown documentation."""
             if match:
                 data = json.loads(match.group(0))
                 return bool(data.get("issues_found", False))
-        except:
-            pass
+        except (json.JSONDecodeError, ValueError) as e:
+            logger.debug(f"Failed to parse review result as JSON: {e}")
 
         # Fallback: keyword heuristic
         lower = review_output.lower()
