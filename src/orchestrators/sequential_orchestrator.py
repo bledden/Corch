@@ -73,6 +73,7 @@ class StageResult:
     duration_seconds: float
     success: bool
     error: Optional[str] = None
+    evaluation: Optional[Dict[str, Any]] = None  # Evaluation results from middleware
 
 
 @dataclass
