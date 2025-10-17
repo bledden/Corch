@@ -91,81 +91,135 @@ This approach ensures every stage remains grounded in the user's original intent
 
 ### Enhanced Code Quality Evaluation
 
-Corch features a **production-grade evaluation system** that assesses generated code across multiple dimensions using industry-standard tools and LLM-as-judge techniques.
+Facilitair features a **production-grade, 4-layer evaluation system** that assesses generated code using industry-standard tools and LLM-powered semantic analysis. The system includes **hallucination detection** to catch fabricated APIs, logic errors, and semantic issues.
 
 #### Evaluation Architecture
 
-Code is evaluated at two critical points in the workflow:
-- **POST_REFINER**: After refinement iterations complete
-- **POST_DOCUMENTER**: After documentation generation
+```
+Code Generation → POST_REFINER Hook → 4 Evaluators (parallel) → Aggregation → W&B Logging
+```
+
+Code is evaluated after the refiner stage using middleware that runs all evaluators **in parallel** for performance.
 
 #### The Four Evaluators
 
 **1. SecurityEvaluator** (Weight: 30%)
-- **Tool**: Bandit vulnerability scanner
-- **What it checks**: SQL injection, eval() usage, hardcoded passwords, unsafe deserialization, command injection
+- **Tool**: Bandit vulnerability scanner (250+ test rules)
+- **Detects**: eval() usage, SQL injection, hardcoded secrets, pickle vulnerabilities, command injection, weak crypto
 - **Scoring**: Deductive (1.0 - penalties)
   - Critical issue: -0.4
   - High issue: -0.2
   - Medium issue: -0.1
   - Low issue: -0.05
-- **Pass threshold**: No critical or high severity issues
+- **Pass threshold**: No critical/high issues, score >= 0.6
 
 **2. StaticAnalysisEvaluator** (Weight: 30%)
-- **Tools**: Pylint, Flake8, Mypy
-- **What it checks**: Code quality, PEP 8 compliance, type correctness
-- **Scoring**: Weighted average
-  - Pylint score (0-10): 50%
-  - Flake8 violations: 25%
-  - Mypy type errors: 25%
-- **Pass threshold**: Overall >= 0.7, Pylint >= 7.0
+- **Tools**: Pylint (50%), Flake8 (25%), Mypy (25%)
+- **Detects**: Syntax errors, undefined variables, type errors, PEP 8 violations, unused imports, code smells
+- **Scoring**: `0.5 * (pylint/10) + 0.25 * flake8_score + 0.25 * mypy_score`
+- **Pass threshold**: Overall >= 0.6, Pylint >= 7.0
 
 **3. ComplexityEvaluator** (Weight: 20%)
-- **Tool**: Radon cyclomatic complexity & maintainability index
-- **What it checks**: Function complexity, maintainability
-- **Scoring**: Weighted average
-  - Maintainability Index (0-100): 60%
-  - Average complexity penalty: 25%
-  - Max complexity penalty: 15%
-- **Pass threshold**: Overall >= 0.7, MI >= 20
+- **Tool**: Radon (cyclomatic complexity + maintainability index)
+- **Detects**: High complexity functions, low maintainability code, nested logic
+- **Scoring**: `0.60 * (MI/100) + 0.25 * avg_complexity_score + 0.15 * max_complexity_score`
+- **Pass threshold**: Overall >= 0.6, MI >= 20
+- **Ranks**: A (simple) to F (unmaintainable)
 
-**4. LLMJudgeEvaluator** (Weight: 20%)
-- **Tool**: Claude 3.5 Sonnet semantic analysis
-- **What it checks**: 5 dimensions
-  - Correctness (40%): Logic, bug-free, solves problem
-  - Best Practices (25%): Error handling, security, performance
-  - Readability (15%): Naming, structure, documentation
-  - Edge Cases (15%): Boundary conditions, error states
-  - Design Patterns (5%): SOLID principles, idioms
-- **Pass threshold**: Overall >= 0.7, all dimensions >= 0.6
+**4. LLMJudgeEvaluator** (Weight: 20%) - **Hallucination Detection**
+- **Tool**: Claude Sonnet 4.5 semantic analysis
+- **Detects**: Fabricated APIs, incorrect logic, false assumptions, semantic errors not caught by static analysis
+- **5 Dimensions**:
+  - **Correctness** (40%): Does code actually solve the problem?
+  - **Best Practices** (25%): Uses real APIs, proper patterns?
+  - **Readability** (15%): Clear, maintainable code?
+  - **Edge Cases** (15%): Handles boundary conditions?
+  - **Design Patterns** (5%): Appropriate architecture?
+- **Pass threshold**: Overall >= 0.6, all dimensions >= 0.5
 
-#### Overall Scoring
+#### Overall Scoring & Pass Criteria
 
-**Final Score** = (Security × 0.30) + (Static × 0.30) + (Complexity × 0.20) + (LLM × 0.20)
+**Final Score** = `0.30*Security + 0.30*Static + 0.20*Complexity + 0.20*LLM`
 
-**Pass Criteria**:
-- Overall score >= 0.7
-- All individual evaluators >= 0.6
-- No critical security issues
+**Code passes if**:
+1. Overall score >= 0.7
+2. All individual scores >= 0.6
+3. No critical security issues
 
-#### Observability
+| Score Range | Quality | Action |
+|------------|---------|--------|
+| 0.90-1.00 | Excellent | Production-ready |
+| 0.75-0.89 | Good | Minor improvements |
+| 0.60-0.74 | Acceptable | Needs work |
+| Below 0.60 | Poor | Significant refactoring |
 
-All evaluation metrics are automatically logged to **W&B Weave** for:
-- Quality trend tracking
+#### Hallucination Detection Strategy
+
+The system detects hallucinations through **4 complementary layers**:
+
+1. **SecurityEvaluator** - Catches dangerous hallucinated patterns (eval, exec, etc.)
+2. **StaticAnalysisEvaluator** - Validates syntax/types (hallucinations often have errors)
+3. **ComplexityEvaluator** - Detects abnormal complexity patterns
+4. **LLMJudgeEvaluator** - **Semantic validation** catches:
+   - Fabricated APIs that don't exist
+   - Incorrect library usage
+   - Logic errors not caught by static tools
+   - False assumptions about behavior
+
+#### Configuration
+
+Fully configurable via `config/evaluation.yaml`:
+```yaml
+evaluation:
+  enabled: true
+  pass_threshold: 0.7
+  gate_on_failure: false  # Block low-quality code
+
+  evaluators:
+    security: {enabled: true, weight: 0.30}
+    static_analysis: {enabled: true, weight: 0.30}
+    complexity: {enabled: true, weight: 0.20}
+    llm_judge: {enabled: true, weight: 0.20}
+```
+
+See [docs/EVALUATION_SYSTEM.md](docs/EVALUATION_SYSTEM.md) for complete documentation.
+
+#### W&B Weave Integration
+
+All evaluation metrics automatically logged to W&B Weave:
+- Quality trend tracking over time
 - Model performance comparison
-- Production monitoring
-- Debugging and improvement
+- Individual evaluator scores
+- Detailed feedback (strengths, weaknesses, recommendations)
 
 #### Example Output
 
 ```
-Evaluation Results:
-  Overall: 0.823 ✅ PASS
-  
-  Security: 1.000 (SAFE - 0 vulnerabilities)
-  Static Analysis: 0.785 (Pylint 8.5/10, 3 style warnings)
-  Complexity: 0.764 (MI 72.3, avg complexity 4.2)
-  LLM Judge: 0.850 (Strong correctness, good practices)
+[EVALUATION] Running quality assessment...
+  Security Score: 1.00 ✅ (0 vulnerabilities)
+  Static Analysis: 0.85 ✅ (Pylint 8.5/10, 3 warnings)
+  Complexity: 0.92 ✅ (MI 84.7, avg CC 2.1)
+  LLM Judge: 0.88 ✅ (Strong correctness, good practices)
+
+  Overall Score: 0.91 ✅ PASS
+
+Strengths:
+  - No security vulnerabilities detected
+  - Highly maintainable (MI 84.7)
+
+Recommendations:
+  - Fix 3 PEP 8 style warnings
+```
+
+#### Testing
+
+**27/27 evaluation tests passing (100%)**:
+- SecurityEvaluator: 10 tests
+- StaticAnalysisEvaluator: 9 tests
+- Integration: 8 tests
+
+```bash
+python3 -m pytest tests/evaluation/ -v
 ```
 
 
@@ -644,9 +698,18 @@ python3 cli.py --verbose collaborate "test task"
 
 ## Documentation
 
+### Core Documentation
+- [README.md](README.md) - This file
 - [INTERFACES_README.md](INTERFACES_README.md) - Complete interface guide
 - [SEQUENTIAL_COLLABORATION_DESIGN.md](SEQUENTIAL_COLLABORATION_DESIGN.md) - Architecture
-- API Docs: http://localhost:8000/docs
+
+### Evaluation System
+- [docs/EVALUATION_SYSTEM.md](docs/EVALUATION_SYSTEM.md) - Complete evaluation system documentation (1,050+ lines)
+- [docs/EVALUATION_CONFIGURATION.md](docs/EVALUATION_CONFIGURATION.md) - Configuration guide (500+ lines)
+- [docs/USER_WORKFLOW.md](docs/USER_WORKFLOW.md) - How users run the system manually
+
+### API Documentation
+- API Docs: http://localhost:8000/docs (when server running)
 
 ## WeaveHacks 2
 
