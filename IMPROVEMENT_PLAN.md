@@ -44,21 +44,63 @@ This document outlines a comprehensive plan to improve the Facilitair codebase b
 **Impact**: Prevents graceful shutdown, masks debugging
 
 **Files**: ✅ Confirmed
-- [src/orchestrators/sequential_orchestrator.py:94](src/orchestrators/sequential_orchestrator.py#L94)
-- [src/orchestrators/sequential_orchestrator.py:150](src/orchestrators/sequential_orchestrator.py#L150)
-- [src/orchestrators/sequential_orchestrator.py:703](src/orchestrators/sequential_orchestrator.py#L703)
-- [integrations/production_sponsors.py:348](integrations/production_sponsors.py#L348)
+- [src/orchestrators/sequential_orchestrator.py:94](src/orchestrators/sequential_orchestrator.py#L94) - FormatConverter.to_json
+- [src/orchestrators/sequential_orchestrator.py:150](src/orchestrators/sequential_orchestrator.py#L150) - FormatConverter.convert JSON parse
+- [src/orchestrators/sequential_orchestrator.py:703](src/orchestrators/sequential_orchestrator.py#L703) - _parse_review_result
+- [integrations/production_sponsors.py:348](integrations/production_sponsors.py#L348) - Destructor cleanup
 
-**Note**: Many broad `except Exception` blocks also exist. Consider tightening these in streaming/orchestrators after fixing bare excepts.
+**Note**: Many broad `except Exception` blocks also exist. Consider tightening these in streaming/orchestrators after fixing bare excepts. Defer to Phase 2+.
 
-**Task**:
+#### Implementation Checklist
+
+**FormatConverter.to_json** (sequential_orchestrator.py:94):
 ```
-[ ] Find all bare `except:` blocks (4 confirmed locations)
-[ ] Replace with specific exception types (json.JSONDecodeError, ValueError, etc.)
-[ ] Test that KeyboardInterrupt and SystemExit still work
-[ ] Ensure error messages are preserved
-[ ] Consider tightening broad Exception catches in hot paths
+[ ] Catch (json.JSONDecodeError, ValueError, TypeError) specifically
+[ ] Log at warning level with context
+[ ] Wrap string in JSON on failure (preserve existing behavior)
 ```
+
+**FormatConverter.convert JSON parse** (sequential_orchestrator.py:150):
+```
+[ ] Catch json.JSONDecodeError specifically
+[ ] Fall back to {"content": content} (preserve existing behavior)
+[ ] Add warning log for failed parse attempts
+```
+
+**_parse_review_result** (sequential_orchestrator.py:703):
+```
+[ ] Catch json.JSONDecodeError and ValueError when parsing match.group(0)
+[ ] Log parsing failures for debugging
+[ ] Return appropriate fallback value
+```
+
+**Destructor cleanup** (production_sponsors.py:348):
+```
+[ ] Replace bare except: with except Exception as e:
+[ ] Log at debug/warning level with exception details
+[ ] Never catch BaseException (allows KeyboardInterrupt/SystemExit)
+```
+
+#### Tests
+```
+[ ] Unit: Create tests/unit/test_format_converter.py
+    [ ] Test invalid JSON string → returns wrapped JSON and logs warning
+    [ ] Test _parse_review_result handles malformed JSON without raising
+[ ] Validation: Run full test suite (pytest -q)
+[ ] Manual check: Verify [ERROR] output logic still works in orchestrator stages
+[ ] Repo scan gate: rg -n "except\\s*:\\s*$" -S --glob '!venv' shows no matches
+[ ] Optional: Add static rule with ruff E722 if using ruff
+```
+
+#### Rollback Plan
+- Revert the four targeted hunks only (localized changes)
+- Each location is independent, can rollback individually
+
+#### Acceptance Criteria
+- [ ] Zero bare `except:` in source code (excluding docs/venv)
+- [ ] KeyboardInterrupt/SystemExit not caught (code review confirms)
+- [ ] Same or better behavior in tests
+- [ ] All existing tests pass
 
 **Example**:
 ```python
@@ -84,18 +126,49 @@ except (json.JSONDecodeError, ValueError, TypeError) as e:
 **Impact**: Prevents race conditions in multi-threaded FastAPI environment
 
 **Files**: ✅ Confirmed
-- [backend/streaming/sse_handler.py:334-342](backend/streaming/sse_handler.py#L334-L342) - Global instance without lock
+- [backend/streaming/sse_handler.py:334-342](backend/streaming/sse_handler.py#L334-L342) - Global instance without lock (get_stream_manager)
 - [api.py:63-66](api.py#L63-L66) - Lazy global initialization
-- [api.py:132-139](api.py#L132-L139) - Can race under concurrent requests
+- [api.py:132-139](api.py#L132-L139) - Can race under concurrent requests (get_orchestrator)
 
-**Task**:
+#### Implementation Checklist
+
+**backend/streaming/sse_handler.py** (lines 337-342):
 ```
-[ ] Add threading.Lock to singleton initialization (2 locations)
-[ ] Implement double-check locking pattern
-[ ] Add unit tests for concurrent initialization
-[ ] Test under load with multiple concurrent requests
-[ ] Verify no performance regression
+[ ] Add module-level threading.Lock()
+[ ] Implement double-checked locking around StreamManager creation
+[ ] Keep function sync (no need for asyncio.Lock)
+[ ] Add docstring comment: "process-wide only" (gunicorn workers each initialize once)
 ```
+
+**api.py** (lines 132-139):
+```
+[ ] Add module-level threading.Lock()
+[ ] Implement double-checked locking around CollaborativeOrchestrator creation
+[ ] Keep function sync (FastAPI can run in multi-threaded workers)
+[ ] Add docstring noting singleton behavior
+```
+
+#### Tests
+```
+[ ] Unit: Create tests/unit/test_singletons.py
+    [ ] Test get_stream_manager: Spin 50 concurrent tasks calling it via async wrapper
+    [ ] Test get_orchestrator: Call inside small async endpoint test
+    [ ] Assert all returned id() are identical across calls
+    [ ] Assert constructor side effect ran exactly once (instrument with counter via monkeypatch)
+[ ] Validation: Run pytest -q -k singleton
+[ ] Optional: Load test with Locust/hey against /api/v1/health and /api/stream/task
+[ ] Verify no race-induced multiple initializations under concurrency
+```
+
+#### Rollback Plan
+- Remove the lock and revert to previous simple guard
+- Change is localized to 2 functions
+
+#### Acceptance Criteria
+- [ ] No race-induced multiple initializations observed under concurrency
+- [ ] No added latency on hot path beyond negligible lock acquisition
+- [ ] Concurrency tests pass (all tasks get same singleton instance)
+- [ ] Constructor called exactly once per process
 
 **Example**:
 ```python
@@ -105,6 +178,7 @@ _stream_manager: Optional[StreamManager] = None
 _lock = threading.Lock()
 
 def get_stream_manager() -> StreamManager:
+    """Get or create the global StreamManager instance (process-wide only)."""
     global _stream_manager
     if _stream_manager is None:
         with _lock:
@@ -122,18 +196,82 @@ def get_stream_manager() -> StreamManager:
 
 **Files**: ✅ Confirmed (self-import workaround)
 - [backend/routers/streaming.py:104](backend/routers/streaming.py#L104) - In-function self-import
+- [backend/routers/streaming.py:219-447](backend/routers/streaming.py#L219-L447) - Functions to move
 
 **Note**: Not a true circular import yet, but fragile pattern that can become circular as module grows. Moving task execution logic out prevents this.
 
-**Task**:
+#### Implementation Checklist
+
+**Create new module backend/services/task_executor.py**:
 ```
-[ ] Create new module: backend/services/task_executor.py
-[ ] Move execute_streaming_task (and helpers) to new module
-[ ] Update streaming.py to import from backend.services.task_executor
-[ ] Verify no circular dependencies remain
-[ ] Update tests to use new module
-[ ] Simplifies streaming router and improves testability
+[ ] Create backend/services/ directory if not exists
+[ ] Create backend/services/__init__.py
+[ ] Create backend/services/task_executor.py
+[ ] Move these functions from streaming.py:
+    [ ] send_progress_updates(...) - Helper for progress events
+    [ ] execute_streaming_task(stream_id, task, context) - Main execution logic
+    [ ] stream_collaboration(orchestrator, task, stream_id, manager, builder, state) - Collaboration wrapper
+[ ] Import dependencies in task_executor.py:
+    [ ] get_stream_manager from backend.streaming.sse_handler
+    [ ] StreamEventBuilder, StreamManager from backend.streaming.sse_handler
+    [ ] Other necessary imports from orchestrators
 ```
+
+**Update backend/routers/streaming.py**:
+```
+[ ] Remove line 104 self-import: from backend.routers.streaming import execute_streaming_task
+[ ] Add module-top import: from backend.services.task_executor import execute_streaming_task
+[ ] Remove functions that were moved (lines 219-447)
+[ ] Verify router endpoints still call execute_streaming_task correctly
+[ ] Ensure no back-import from services → routers (one-directional dependency)
+```
+
+#### Tests
+```
+[ ] Integration: Verify existing SSE tests pass
+    [ ] tests/integration/test_sse_direct.py
+    [ ] tests/integration/test_streaming_live.py
+[ ] Smoke test: POST /api/stream/task, then GET /api/stream/events/{stream_id}
+    [ ] Verify events arrive in correct order
+    [ ] Verify stream completes successfully
+[ ] App import check: uvicorn api:app should start without import-time issues
+[ ] Grep verification: rg -n "from backend\\.routers\\.streaming import" backend (should be empty)
+```
+
+#### Rollback Plan
+- Keep a simple re-export shim in routers/streaming.py during cutover:
+  ```python
+  from backend.services.task_executor import execute_streaming_task
+  ```
+- This maintains old import path for one release if needed
+- Can revert by moving functions back to streaming.py
+
+#### Acceptance Criteria
+- [ ] No self-import pattern (backend.routers.streaming no longer imports itself)
+- [ ] SSE endpoints function identically (events stream and complete)
+- [ ] Router imports are acyclic (verified with import graph tool or manual check)
+- [ ] Background task execution runs via backend/services/task_executor.py
+- [ ] All integration tests pass
+
+---
+
+### Phase 1 General Exit Criteria
+
+**Before marking Phase 1 complete, verify ALL of the following**:
+
+```
+[ ] Repo-wide scan: rg -n "except\\s*:\\s*$" -S --glob '!venv' returns no source hits
+[ ] Concurrency tests for singletons pass and show single initialization per process
+[ ] Router imports are acyclic; background task execution runs via backend/services/task_executor.py
+[ ] All tests green: pytest -q
+[ ] No regressions in existing functionality (manual smoke test of key endpoints)
+[ ] Logging is consistent (use module logger over print() in all touched code)
+```
+
+**Scope Note**: Limit Phase 1 to the files/lines listed above. Defer broader improvements like:
+- Tightening broad `except Exception` blocks → Phase 2
+- Stream memory leak fixes → Phase 2.5
+- Additional error handling improvements → Phase 2.1
 
 ---
 
