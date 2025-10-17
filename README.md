@@ -404,12 +404,121 @@ Results saved to `benchmark_100_final_{timestamp}.json` with complete quality br
 
 ## CLI Commands
 
+### Basic Commands
+
 ```bash
 python3 cli.py health          # Check system status
 python3 cli.py collaborate     # Execute task
 python3 cli.py evaluate        # Run evaluation
 python3 cli.py serve           # Start API server
 python3 cli.py init            # Create config
+```
+
+### Custom Model Assignment
+
+Facilitair supports **custom model assignment** per agent role, giving you full control over which LLM powers each stage of the collaboration pipeline.
+
+#### Strategy Selection
+
+Choose from 5 model selection strategies:
+
+```bash
+# Use cost-optimized models (open source)
+python3 cli.py collaborate "Write a factorial function" --strategy COST_FIRST
+
+# Use premium models for maximum quality
+python3 cli.py collaborate "Write a factorial function" --strategy QUALITY_FIRST
+
+# Use balanced mix of premium and open source
+python3 cli.py collaborate "Write a factorial function" --strategy BALANCED
+
+# Optimize for speed
+python3 cli.py collaborate "Write a factorial function" --strategy SPEED_FIRST
+
+# Privacy-focused (local/on-premise models)
+python3 cli.py collaborate "Write a factorial function" --strategy PRIVACY_FIRST
+```
+
+#### Per-Agent Model Overrides
+
+Override specific agent models while maintaining strategy-based selection for others:
+
+```bash
+# Override just the coder model
+python3 cli.py collaborate "Write a factorial function" \
+  --coder-model anthropic/claude-3.5-sonnet-20250415
+
+# Override multiple agents
+python3 cli.py collaborate "Write a REST API" \
+  --architect-model openai/gpt-4o \
+  --coder-model anthropic/claude-3.5-sonnet-20250415 \
+  --reviewer-model deepseek/deepseek-v3.2-exp
+
+# Combine strategy with overrides
+python3 cli.py collaborate "Build authentication system" \
+  --strategy COST_FIRST \
+  --architect-model anthropic/claude-3.5-sonnet-20250415
+```
+
+**Available override flags:**
+- `--architect-model` - Override architect agent model
+- `--coder-model` - Override coder agent model
+- `--reviewer-model` - Override reviewer agent model
+- `--documenter-model` - Override documenter agent model
+- `--researcher-model` - Override researcher agent model
+
+#### Finding Model IDs
+
+**You can copy model IDs directly from [OpenRouter](https://openrouter.ai/models):**
+
+1. Visit https://openrouter.ai/models
+2. Browse available models
+3. Copy the model ID (e.g., `anthropic/claude-3.5-sonnet-20250415`)
+4. Paste into CLI flag
+
+**Popular model IDs:**
+- `anthropic/claude-3.5-sonnet-20250415` - Claude 3.5 Sonnet (latest)
+- `anthropic/claude-sonnet-4.5` - Claude Sonnet 4.5
+- `openai/gpt-4o` - GPT-4 Omni
+- `openai/gpt-5` - GPT-5 (when available)
+- `qwen/qwen-2.5-coder-32b-instruct` - Qwen 2.5 Coder (free)
+- `deepseek/deepseek-v3.2-exp` - DeepSeek v3.2
+- `deepseek/deepseek-chat` - DeepSeek Chat (v3)
+- `google/gemini-pro-1.5` - Gemini Pro 1.5
+
+**Model ID format:** `provider/model-name`
+
+#### How It Works
+
+1. **Manual overrides take highest priority** - If you specify `--coder-model`, that model is used for the coder agent regardless of strategy
+2. **Strategy applies to non-overridden agents** - Other agents use models from the selected strategy
+3. **Fallback system** - If a model is unavailable, the system automatically tries fallback models
+4. **W&B Weave tracking** - All model selections are logged for observability
+
+#### Example Workflows
+
+**Cost-conscious development:**
+```bash
+# Use free models for prototyping, premium for architecture
+python3 cli.py collaborate "Build user auth" \
+  --strategy COST_FIRST \
+  --architect-model anthropic/claude-3.5-sonnet-20250415
+```
+
+**Quality-critical production:**
+```bash
+# Use premium models for everything
+python3 cli.py collaborate "Implement payment processing" \
+  --strategy QUALITY_FIRST
+```
+
+**Mixed approach:**
+```bash
+# Use specific models you trust for each role
+python3 cli.py collaborate "Design database schema" \
+  --architect-model openai/gpt-4o \
+  --coder-model qwen/qwen-2.5-coder-32b-instruct \
+  --reviewer-model anthropic/claude-3.5-sonnet-20250415
 ```
 
 ## API Endpoints
