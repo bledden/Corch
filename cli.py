@@ -20,11 +20,13 @@ from dotenv import load_dotenv
 import logging
 
 # Configure logging
+log_dir = Path('test_results/logs')
+log_dir.mkdir(parents=True, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('facilitair_cli.log'),
+        logging.FileHandler(log_dir / 'facilitair_cli.log'),
         logging.StreamHandler()
     ]
 )

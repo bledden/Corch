@@ -143,7 +143,7 @@ async def run_sequential(orchestrator: CollaborativeOrchestrator, task: Dict) ->
 
         # Get model used - infer from orchestrator's config
         # CollaborationResult doesn't have metadata, use orchestrator's configured model
-        coder_config = orchestrator.llm.config.get("agents", {}).get("coder", {})
+        coder_config = orchestrator.config.get("agents", {}).get("coder", {})
         primary_model = coder_config.get("default_model", "unknown")
         model_type = categorize_model(primary_model)
 

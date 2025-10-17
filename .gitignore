@@ -79,6 +79,16 @@ smoke_test_results_*.json
 sequential_vs_baseline_results_*.json
 *.json.bak
 
+# Test results directory (keep structure, ignore contents)
+test_results/*
+!test_results/README.md
+!test_results/logs/
+!test_results/benchmarks/
+!test_results/evaluations/
+test_results/logs/*
+test_results/benchmarks/*
+test_results/evaluations/*
+
 # Analysis outputs
 all_openrouter_models.txt
 model_analysis_results.txt
