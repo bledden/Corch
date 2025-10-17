@@ -12,6 +12,8 @@ sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 import asyncio
 import yaml
+import signal
+import atexit
 from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 
 # Test task
@@ -19,29 +21,59 @@ TEST_TASK = "Write a function to check if a number is prime"
 
 STRATEGIES = ["COST_FIRST", "QUALITY_FIRST", "BALANCED"]
 
+# Global variable to track config state
+STRATEGY_CONFIG_PATH = "config/model_strategy_config.yaml"
+ORIGINAL_CONFIG_CONTENT = None
+
+
+def restore_config():
+    """Restore config file to original state - called on exit or interrupt"""
+    global ORIGINAL_CONFIG_CONTENT, STRATEGY_CONFIG_PATH
+    if ORIGINAL_CONFIG_CONTENT is not None:
+        try:
+            with open(STRATEGY_CONFIG_PATH, 'w') as f:
+                f.write(ORIGINAL_CONFIG_CONTENT)
+            print("\n[CLEANUP] Config restored to original state")
+        except Exception as e:
+            print(f"\n[CLEANUP ERROR] Failed to restore config: {e}")
+
+
+def signal_handler(signum, frame):
+    """Handle interrupts (Ctrl+C, kill, etc.)"""
+    print(f"\n[INTERRUPT] Received signal {signum}, cleaning up...")
+    restore_config()
+    sys.exit(1)
+
+
+# Register cleanup handlers
+atexit.register(restore_config)
+signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
+signal.signal(signal.SIGTERM, signal_handler)  # kill command
+
 async def test_strategy(strategy_name: str):
     """Test a single strategy"""
+    global ORIGINAL_CONFIG_CONTENT, STRATEGY_CONFIG_PATH
+
     print(f"\n{'='*60}")
     print(f"Testing Strategy: {strategy_name}")
     print(f"{'='*60}\n")
 
     # Load and modify config
     config_path = "config/config.yaml"
-    strategy_config_path = "config/model_strategy_config.yaml"
 
-    # Read original config file content (to preserve formatting)
-    with open(strategy_config_path, 'r') as f:
-        original_config_content = f.read()
+    # Save original config content ONCE (first time only)
+    if ORIGINAL_CONFIG_CONTENT is None:
+        with open(STRATEGY_CONFIG_PATH, 'r') as f:
+            ORIGINAL_CONFIG_CONTENT = f.read()
 
     # Load and parse strategy config
-    strategy_config = yaml.safe_load(original_config_content)
+    strategy_config = yaml.safe_load(ORIGINAL_CONFIG_CONTENT)
 
     # Temporarily set strategy
-    original_preference = strategy_config['user_preference']
     strategy_config['user_preference'] = strategy_name
 
     # Write modified config
-    with open(strategy_config_path, 'w') as f:
+    with open(STRATEGY_CONFIG_PATH, 'w') as f:
         yaml.dump(strategy_config, f, default_flow_style=False)
 
     try:
@@ -85,11 +117,7 @@ async def test_strategy(strategy_name: str):
         print(f"\n[ERROR] {strategy_name} test failed: {e}")
         import traceback
         traceback.print_exc()
-
-    finally:
-        # Restore original config with original formatting
-        with open(strategy_config_path, 'w') as f:
-            f.write(original_config_content)
+        # Config will be restored automatically by atexit handler
 
 
 async def main():
