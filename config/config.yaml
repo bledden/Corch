@@ -115,8 +115,7 @@ agents:
       - openai/o4-mini-high  # Latest reasoning (Sept 2025)
       - anthropic/claude-opus-4.1  # 78% AIME, trusted safety (June 2025)
       - openai/o3-pro  # Deliberate reasoning steps (June 2025)
-    # Initial model (before learning)
-    default_model: qwen/qwen3-coder-plus
+    # Model selected dynamically from model_strategy_config.yaml based on current strategy
     # Model selection strategy
     model_selection: "thompson_sampling"  # or "epsilon_greedy", "ucb"
     temperature: 0.7
@@ -138,7 +137,7 @@ agents:
       - deepseek/deepseek-chat  # DeepSeek V3.1 (Jan 2025) - ACTUAL OpenRouter ID
       - mistralai/codestral-2501  # Codestral 25.01 (Jan 2025) - ACTUAL OpenRouter ID
       - meta-llama/llama-3.3-70b-instruct  # Meta's latest (Jan 2025)
-    default_model: deepseek/deepseek-chat
+    # Model selected dynamically from model_strategy_config.yaml based on current strategy
     model_selection: "thompson_sampling"
     temperature: 0.5
     max_tokens: 3000
@@ -156,7 +155,7 @@ agents:
       - openai/o3-pro  # Step-by-step analysis (June 2025)
       - anthropic/claude-opus-4.1  # Safety and reliability (June 2025)
       - openai/o3  # Strong bug detection (June 2025)
-    default_model: meta-llama/llama-3.3-70b-instruct
+    # Model selected dynamically from model_strategy_config.yaml based on current strategy
     model_selection: "thompson_sampling"
     temperature: 0.3
     max_tokens: 1500
@@ -176,7 +175,7 @@ agents:
       - meta-llama/llama-3.3-70b-instruct  # Strong open option (Jan 2025)
       - mistralai/mistral-small-3  # Efficient, competes with 70B (2025)
       - google/gemma-3-12b  # Google quality, lightweight (2025)
-    default_model: mistralai/codestral-2501
+    # Model selected dynamically from model_strategy_config.yaml based on current strategy
     model_selection: "thompson_sampling"
     temperature: 0.6
     max_tokens: 2500
@@ -194,7 +193,7 @@ agents:
       - openai/gpt-5-pro  # Advanced research capabilities (July 2025)
       - anthropic/claude-opus-4.1  # Thorough research (June 2025)
       - meta-llama/llama-3.3-70b-instruct  # Strong open-source option (Jan 2025)
-    default_model: google/gemini-2.5-flash
+    # Model selected dynamically from model_strategy_config.yaml based on current strategy
     model_selection: "thompson_sampling"
     temperature: 0.8
     max_tokens: 2000
