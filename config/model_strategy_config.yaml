@@ -94,44 +94,55 @@ strategies:
     model_preferences:
       architect:
         fallback:
+        - openai/gpt-5-pro
+        - google/gemini-2.5-pro-exp
+        - openai/gpt-4o-mini
+        never_use: []
+        primary:
         - qwen/qwen-2.5-72b-instruct
         - meta-llama/llama-3.3-70b-instruct
-        never_use: []
-        primary:
         - anthropic/claude-3.5-sonnet-20250415
-        - openai/gpt-4o-mini
       coder:
         fallback:
+        - deepseek/deepseek-v3.2-exp
+        - anthropic/claude-3-7-sonnet
+        - anthropic/claude-3.5-sonnet-20250415
+        - openai/gpt-5
+        - openai/gpt-4o
+        never_use: []
+        primary:
         - qwen/qwen-2.5-coder-32b-instruct
         - deepseek/deepseek-chat
-        never_use: []
-        primary:
-        - anthropic/claude-3.5-sonnet-20250415
-        - openai/gpt-4o
       documenter:
         fallback:
-        - meta-llama/llama-3.3-70b-instruct
-        - mistralai/mistral-small-3
-        never_use: []
-        primary:
+        - anthropic/claude-3-7-sonnet
+        - google/gemini-2.5-flash-exp
         - google/gemini-2.0-flash-exp:free
         - openai/gpt-4o-mini
+        never_use: []
+        primary:
+        - meta-llama/llama-3.3-70b-instruct
+        - mistralai/mistral-small-3
       researcher:
         fallback:
-        - deepseek/deepseek-chat
-        - meta-llama/llama-3.3-70b-instruct
+        - google/gemini-2.5-pro-exp
+        - google/gemini-2.0-flash-thinking-exp:free
+        - perplexity/r1
+        - perplexity/llama-3.1-sonar-huge-128k-online
         never_use: []
         primary:
-        - google/gemini-2.0-flash-thinking-exp:free
-        - perplexity/llama-3.1-sonar-huge-128k-online
+        - meta-llama/llama-3.3-70b-instruct
+        - deepseek/deepseek-chat
       reviewer:
         fallback:
-        - deepseek/deepseek-chat
-        - meta-llama/llama-3.3-70b-instruct
+        - anthropic/claude-sonnet-4.5
+        - anthropic/claude-3.5-sonnet-20250415
+        - openai/o3
+        - openai/gpt-4o
         never_use: []
         primary:
-        - anthropic/claude-3.5-sonnet-20250415
-        - openai/gpt-4o
+        - deepseek/deepseek-chat
+        - meta-llama/llama-3.3-70b-instruct
     name: Balanced Performance
     quality_weight: 0.4
     speed_weight: 0.1
@@ -276,47 +287,68 @@ strategies:
     model_preferences:
       architect:
         fallback:
+        - anthropic/claude-opus-4.1
+        - anthropic/claude-3-opus-20240229
         - anthropic/claude-3-5-sonnet-20241022
+        - openai/o3-pro
         - openai/o1
         never_use: []
         primary:
+        - openai/gpt-5-pro
+        - openai/o4-mini-high
         - anthropic/claude-3.5-sonnet-20250415
         - openai/gpt-4o
+        - google/gemini-2.5-pro-exp
         - google/gemini-2.0-flash-thinking-exp:free
       coder:
         fallback:
+        - anthropic/claude-3-7-sonnet
         - anthropic/claude-3-5-sonnet-20241022
         - openai/gpt-4o-mini
         never_use: []
         primary:
+        - anthropic/claude-sonnet-4.5
         - anthropic/claude-3.5-sonnet-20250415
+        - openai/gpt-5
         - openai/gpt-4o
+        - anthropic/claude-4-opus
         - anthropic/claude-3-opus-20240229
       documenter:
         fallback:
+        - google/gemini-2.5-flash-exp
         - google/gemini-2.0-flash-exp:free
         - openai/gpt-4o-mini
         never_use: []
         primary:
+        - anthropic/claude-3-7-sonnet
         - anthropic/claude-3.5-sonnet-20250415
+        - openai/gpt-5
         - openai/gpt-4o
       researcher:
         fallback:
+        - anthropic/claude-opus-4.1
         - anthropic/claude-3-opus-20240229
         - openai/o1-mini
         never_use: []
         primary:
+        - google/gemini-2.5-pro-exp
         - google/gemini-2.0-flash-thinking-exp:free
+        - openai/gpt-5-pro
         - openai/gpt-4o
+        - perplexity/r1
         - perplexity/llama-3.1-sonar-huge-128k-online
       reviewer:
         fallback:
+        - anthropic/claude-opus-4.1
         - anthropic/claude-3-opus-20240229
         - openai/o1-mini
         never_use: []
         primary:
+        - anthropic/claude-sonnet-4.5
         - anthropic/claude-3.5-sonnet-20250415
+        - openai/gpt-5
         - openai/gpt-4o
+        - openai/o3-pro
         - openai/o1
     name: Maximum Quality
     quality_weight: 0.9
