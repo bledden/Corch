@@ -317,8 +317,9 @@ class EvaluationMiddleware(BaseMiddleware):
         if static_details:
             if static_details.pylint_score >= 8.0:
                 strengths.append(f"High code quality (pylint {static_details.pylint_score}/10)")
-            if static_details.total_violations > 20:
-                weaknesses.append(f"Many code quality violations ({static_details.total_violations})")
+            total_violations = static_details.flake8_violations + static_details.mypy_errors
+            if total_violations > 20:
+                weaknesses.append(f"Many code quality violations ({total_violations})")
                 recommendations.append("Review and fix code quality issues")
 
         # Complexity feedback

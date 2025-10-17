@@ -55,3 +55,19 @@ evaluation:
     log_to_weave: true     # Log scores to W&B Weave
     log_to_console: true   # Print scores to console
     verbose: false         # Detailed evaluation output
+
+# Orchestration Configuration
+orchestration:
+  # Total execution budget and stage timeouts
+  timeouts:
+    total_budget_seconds: 900.0     # 15 minutes total execution time
+    default_stage_timeout: 180.0    # 3 minutes per stage default
+
+    # Stage-specific timeout multipliers (applied to default_stage_timeout)
+    stage_multipliers:
+      architecture: 1.5      # 270s = 4.5 minutes for architecture
+      implementation: 1.2    # 216s = 3.6 minutes for implementation
+      review: 1.0            # 180s = 3 minutes for review
+      refinement: 1.0        # 180s = 3 minutes for refinement
+      documentation: 1.0     # 180s = 3 minutes for documentation
+      testing: 1.0           # 180s = 3 minutes for testing

@@ -31,13 +31,19 @@ except ImportError:
     MiddlewareHook = None
     MiddlewareContext = None
 
+# Import configuration
+from src.config import get_orchestration_config
+
 logger = logging.getLogger(__name__)
 
-# Timeouts from Facilitair_v2
-TOTAL_BUDGET_S = 900.0  # 15 minutes total
-STAGE_TIMEOUT_S = 180.0  # 3 minutes per stage
-ARCHITECTURE_TIMEOUT_MULTIPLIER = 1.5
-IMPLEMENTATION_TIMEOUT_MULTIPLIER = 1.2
+# Load orchestration configuration (timeouts, stage multipliers)
+_orchestration_config = get_orchestration_config()
+
+# Timeout constants loaded from config (with environment variable override support)
+TOTAL_BUDGET_S = _orchestration_config.get_total_budget()
+STAGE_TIMEOUT_S = _orchestration_config.get_default_stage_timeout()
+ARCHITECTURE_TIMEOUT_MULTIPLIER = _orchestration_config.get_stage_multiplier('architecture')
+IMPLEMENTATION_TIMEOUT_MULTIPLIER = _orchestration_config.get_stage_multiplier('implementation')
 
 
 class AgentRole(Enum):

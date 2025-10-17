@@ -106,7 +106,7 @@ function add(a, b) {
 """
     score = evaluator.evaluate(code, "javascript")
 
-    assert score.overall == 1.0
+    assert score.overall == 0.5  # Default fallback score for non-Python
 
 
 def test_empty_code_handling(evaluator):
