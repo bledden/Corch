@@ -168,7 +168,7 @@ class CollaborativeOrchestrator:
         # Sequential orchestrator
         self.use_sequential = use_sequential
         if use_sequential and self.llm_orchestrator:
-            from sequential_orchestrator import SequentialCollaborativeOrchestrator
+            from src.orchestrators.sequential_orchestrator import SequentialCollaborativeOrchestrator
             self.sequential_orchestrator = SequentialCollaborativeOrchestrator(
                 self.llm_orchestrator,
                 self.config
