@@ -1,5 +1,7 @@
 # Facilitair - Collaborative AI Orchestration
 
+If you are reading this you are either 1 of 5 people or you are a really curious github scraper. Touching somethings up but people can start using and playing with Facilitair's Collaborative functionality locally on their device (with their APIs...for now...) TODAY! Let me know how it is, open PRs, tear apart the code, give me all of your feedback. A lot is in the roadmap, but this is a good start after couple of months going at it.
+
 [![WeaveHacks 2](https://img.shields.io/badge/WeaveHacks-2-blue)](https://wandb.ai/site/weavehacks-2) [![W&B Weave](https://img.shields.io/badge/W%26B-Weave-orange)](https://wandb.ai/facilitair/) [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 **Sequential AI collaboration: 73% pass rate, +36.8% quality improvement vs baseline, validated across 100 production tasks.**
@@ -747,4 +749,4 @@ python3 cli.py --verbose collaborate "test task"
 - [WeaveHacks 2](https://wandb.ai/site/weavehacks-2)
 - [GitHub Repository](https://github.com/bledden/weavehacks-collaborative)
 
-**Built for WeaveHacks 2**
+**Built for WeaveHacks 2, Integrated into Facilitair Full-Time (Thanks W&B!)**
