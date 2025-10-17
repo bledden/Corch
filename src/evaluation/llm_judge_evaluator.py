@@ -76,7 +76,7 @@ class LLMJudgeEvaluator:
     def __init__(
         self,
         openrouter_api_key: Optional[str] = None,
-        judge_model: str = "anthropic/claude-sonnet-4-20250514",
+        judge_model: str = "anthropic/claude-sonnet-4.5",
         temperature: float = 0.3,  # Low temp for consistent judgement
         timeout: int = 60
     ):
