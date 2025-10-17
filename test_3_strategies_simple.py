@@ -15,6 +15,7 @@ import yaml
 import signal
 import atexit
 from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
+from agents.strategy_selector import Strategy
 
 # Test task
 TEST_TASK = "Write a function to check if a number is prime"
@@ -81,8 +82,11 @@ async def test_strategy(strategy_name: str):
         with open(config_path, 'r') as f:
             config = yaml.safe_load(f)
 
-        # Create orchestrator
-        orchestrator = CollaborativeOrchestrator(config)
+        # Convert strategy string to Strategy enum
+        strategy_enum = Strategy[strategy_name]
+
+        # Create orchestrator with the specific strategy
+        orchestrator = CollaborativeOrchestrator(config, user_strategy=strategy_enum)
 
         # Run collaboration
         print(f"[TEST] Running: {TEST_TASK}")
