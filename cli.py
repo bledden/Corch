@@ -127,16 +127,20 @@ class FacilitairCLI:
                 )
 
                 progress.update(task_progress, completed=True)
-                logger.info(f"Collaboration completed successfully. Agents: {result.agents_used}")
+
+                # Extract agents from stages
+                agents_used = [stage.agent_role.value for stage in result.stages]
+                logger.info(f"Collaboration completed successfully. Agents: {agents_used}")
 
                 result_dict = {
                     "task": task,
                     "success": result.success,
-                    "agents_used": result.agents_used,
+                    "run_id": result.run_id,
+                    "workflow": result.workflow_name,
+                    "agents_used": agents_used,
                     "output": result.final_output,
-                    "metrics": result.metrics,
-                    "consensus_method": result.consensus_method,
-                    "duration": f"{result.metrics.get('duration', 0):.2f}s"
+                    "iterations": result.iterations,
+                    "duration": f"{result.total_duration_seconds:.2f}s"
                 }
 
                 # Save to file if requested
