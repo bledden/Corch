@@ -338,6 +338,8 @@ class SequentialCollaborativeOrchestrator:
                             if mw_result.get("evaluation"):
                                 context["refiner_evaluation"] = mw_result["evaluation"]
                                 logger.info(f"Evaluation: {mw_result['evaluation'].overall_score:.3f}")
+                                # Log to Weave
+                                weave.attributes({"eval_overall": mw_result['evaluation'].overall_score, "eval_security": mw_result['evaluation'].security_score, "eval_static": mw_result['evaluation'].static_analysis_score, "eval_complexity": mw_result['evaluation'].complexity_score, "eval_llm": mw_result['evaluation'].llm_judge_score})
                 except Exception as e:
                     logger.error(f"POST_REFINER middleware failed: {e}")
 
