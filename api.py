@@ -9,7 +9,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field, validator
@@ -74,11 +74,51 @@ task_results = {}
 
 class CollaborateRequest(BaseModel):
     """Request model for collaboration endpoint"""
-    task: str = Field(..., description="Task description for agents to collaborate on", min_length=1)
+    task: str = Field(
+        ...,
+        description="Task description for agents to collaborate on",
+        min_length=10,
+        max_length=10000
+    )
     use_sequential: bool = Field(True, description="Use sequential workflow (recommended)")
     max_iterations: int = Field(3, ge=1, le=10, description="Maximum refinement iterations")
-    temperature: float = Field(0.2, ge=0.0, le=1.0, description="LLM temperature")
-    force_agents: Optional[List[str]] = Field(None, description="Force specific agents")
+    temperature: float = Field(0.2, ge=0.0, le=2.0, description="LLM temperature (0.0-2.0)")
+    force_agents: Optional[List[str]] = Field(None, description="Force specific agents (e.g., ['architect', 'coder'])")
+
+    @validator('task')
+    def validate_task_content(cls, v):
+        """Validate task content for safety and quality"""
+        if not v or not v.strip():
+            raise ValueError("Task cannot be empty or whitespace-only")
+
+        # Check for minimum meaningful content (at least one word of 3+ chars)
+        words = v.split()
+        if not any(len(word) >= 3 for word in words):
+            raise ValueError("Task must contain meaningful content")
+
+        return v.strip()
+
+    @validator('force_agents')
+    def validate_force_agents(cls, v):
+        """Validate force_agents against known agent roles"""
+        if v is None:
+            return v
+
+        # Known agent roles from sequential orchestrator
+        valid_agents = {
+            'architect', 'coder', 'reviewer', 'refiner',
+            'tester', 'documenter'
+        }
+
+        invalid_agents = [agent for agent in v if agent.lower() not in valid_agents]
+        if invalid_agents:
+            raise ValueError(
+                f"Invalid agent(s): {invalid_agents}. "
+                f"Valid agents are: {sorted(valid_agents)}"
+            )
+
+        # Normalize to lowercase
+        return [agent.lower() for agent in v]
 
     class Config:
         schema_extra = {
@@ -121,10 +161,28 @@ class HealthResponse(BaseModel):
     timestamp: str
 
 
+class TaskListResponse(BaseModel):
+    """Response model for task listing"""
+    tasks: List[CollaborateResponse]
+    total: int
+    limit: int
+    offset: int
+
+
 class EvaluationRequest(BaseModel):
     """Evaluation request model"""
     num_tasks: int = Field(10, ge=1, le=100, description="Number of tasks to evaluate")
     compare_baseline: bool = Field(True, description="Compare against single-model baseline")
+
+
+class EvaluationResponse(BaseModel):
+    """Response model for evaluation endpoint"""
+    eval_id: str
+    status: str
+    message: str
+    num_tasks: int
+    compare_baseline: bool
+    timestamp: str
 
 
 # ============================================================================
@@ -259,9 +317,12 @@ async def get_task(task_id: str):
     return task_results[task_id]
 
 
-@app.get("/api/v1/tasks", tags=["Tasks"])
-async def list_tasks(limit: int = 10, offset: int = 0):
-    """List all tasks"""
+@app.get("/api/v1/tasks", response_model=TaskListResponse, tags=["Tasks"])
+async def list_tasks(
+    limit: int = Query(10, ge=1, le=100, description="Maximum number of tasks to return"),
+    offset: int = Query(0, ge=0, description="Number of tasks to skip")
+):
+    """List all tasks with pagination"""
     logger.info(f"Task list requested: limit={limit}, offset={offset}")
 
     tasks = list(task_results.values())
@@ -270,15 +331,15 @@ async def list_tasks(limit: int = 10, offset: int = 0):
     # Paginate
     paginated = tasks[offset:offset + limit]
 
-    return {
-        "tasks": paginated,
-        "total": total,
-        "limit": limit,
-        "offset": offset
-    }
+    return TaskListResponse(
+        tasks=paginated,
+        total=total,
+        limit=limit,
+        offset=offset
+    )
 
 
-@app.post("/api/v1/evaluate", tags=["Evaluation"])
+@app.post("/api/v1/evaluate", response_model=EvaluationResponse, tags=["Evaluation"])
 async def run_evaluation(request: EvaluationRequest, background_tasks: BackgroundTasks):
     """
     Run evaluation comparing sequential vs single-model baseline
@@ -303,12 +364,14 @@ async def run_evaluation(request: EvaluationRequest, background_tasks: Backgroun
 
     background_tasks.add_task(run_eval)
 
-    return {
-        "eval_id": eval_id,
-        "status": "started",
-        "message": f"Evaluation started with {request.num_tasks} tasks",
-        "compare_baseline": request.compare_baseline
-    }
+    return EvaluationResponse(
+        eval_id=eval_id,
+        status="started",
+        message=f"Evaluation started with {request.num_tasks} tasks",
+        num_tasks=request.num_tasks,
+        compare_baseline=request.compare_baseline,
+        timestamp=datetime.now().isoformat()
+    )
 
 
 @app.get("/api/v1/agents", tags=["Agents"])
