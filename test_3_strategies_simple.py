@@ -29,9 +29,12 @@ async def test_strategy(strategy_name: str):
     config_path = "config/config.yaml"
     strategy_config_path = "config/model_strategy_config.yaml"
 
-    # Read strategy config
+    # Read original config file content (to preserve formatting)
     with open(strategy_config_path, 'r') as f:
-        strategy_config = yaml.safe_load(f)
+        original_config_content = f.read()
+
+    # Load and parse strategy config
+    strategy_config = yaml.safe_load(original_config_content)
 
     # Temporarily set strategy
     original_preference = strategy_config['user_preference']
@@ -55,19 +58,21 @@ async def test_strategy(strategy_name: str):
 
         # Display results
         print(f"\n[RESULT] Strategy: {strategy_name}")
-        print(f"[RESULT] Success: {result.success}")
-        print(f"[RESULT] Workflow: {result.workflow_name}")
-        print(f"[RESULT] Stages: {len(result.stages)}")
+        print(f"[RESULT] Success: {result.success if hasattr(result, 'success') else 'N/A'}")
+        print(f"[RESULT] Workflow: {result.workflow_name if hasattr(result, 'workflow_name') else 'N/A'}")
+        print(f"[RESULT] Run ID: {result.run_id if hasattr(result, 'run_id') else 'N/A'}")
 
-        # Extract models used
-        models_used = []
-        for stage in result.stages:
-            agent_role = stage.agent_role.value
-            # Try to extract model from stage metadata or output
-            models_used.append(f"{agent_role}")
+        # Extract agents and models used from stages
+        if hasattr(result, 'stages') and result.stages:
+            print(f"[RESULT] Stages: {len(result.stages)}")
+            agents_used = [stage.agent_role.value for stage in result.stages]
+            print(f"[RESULT] Agents used: {', '.join(agents_used)}")
 
-        print(f"[RESULT] Agents used: {', '.join(models_used)}")
-        print(f"[RESULT] Duration: {result.total_duration_seconds:.2f}s")
+        # Duration
+        if hasattr(result, 'total_duration_seconds'):
+            print(f"[RESULT] Duration: {result.total_duration_seconds:.2f}s")
+        elif hasattr(result, 'duration'):
+            print(f"[RESULT] Duration: {result.duration:.2f}s")
 
         # Check output
         if result.final_output:
@@ -82,10 +87,9 @@ async def test_strategy(strategy_name: str):
         traceback.print_exc()
 
     finally:
-        # Restore original config
-        strategy_config['user_preference'] = original_preference
+        # Restore original config with original formatting
         with open(strategy_config_path, 'w') as f:
-            yaml.dump(strategy_config, f, default_flow_style=False)
+            f.write(original_config_content)
 
 
 async def main():
