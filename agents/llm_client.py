@@ -185,11 +185,12 @@ Response:"""
 class MultiAgentLLMOrchestrator:
     """Orchestrator for managing multiple LLM agents"""
 
-    def __init__(self, config: Dict[str, Any], manual_mode: bool = False):
+    def __init__(self, config: Dict[str, Any], manual_mode: bool = False, strategy_selector=None):
         self.config = config
         self.manual_mode = manual_mode
         self.llm_client = LLMClient(config, manual_mode=manual_mode)
         self.agent_configs = config.get("agents", {})
+        self.strategy_selector = strategy_selector  # Optional strategy selector for dynamic model selection
 
         # Prompt user for fallback strategy BEFORE starting (if manual mode)
         if manual_mode and self.llm_client.fallback_manager:
@@ -202,11 +203,28 @@ class MultiAgentLLMOrchestrator:
         # Get agent configuration
         agent_config = self.agent_configs.get(agent_id, {})
 
-        # Execute with LLM using default_model from config
+        # Select model: use StrategySelector if available, otherwise fallback to default_model
+        if self.strategy_selector:
+            # Use strategy selector for dynamic model selection
+            from agents.strategy_selector import ModelSelectionContext
+            context = ModelSelectionContext(
+                task_type=agent_id,  # Use agent_id as task type
+                task_complexity=0.7,  # Default complexity, could be estimated
+                remaining_budget=100.0,  # Could track this
+                sensitive_data=False
+            )
+            model, selection_info = self.strategy_selector.select_model(agent_id, context)
+            if os.getenv("DEMO_MODE"):
+                print(f"[LLM] {agent_id} using {model} (strategy: {selection_info['strategy_used']})")
+        else:
+            # Fallback to config default_model (backwards compatible)
+            model = agent_config.get("default_model", "qwen/qwen3-coder-plus")
+
+        # Execute with LLM
         response = await self.llm_client.execute_llm(
             agent_id=agent_id,
             task=task,
-            model=agent_config.get("default_model", "qwen/qwen3-coder-plus"),  # Latest Qwen coding model as fallback
+            model=model,
             temperature=agent_config.get("temperature", 0.7),
             max_tokens=agent_config.get("max_tokens", 2000),
             personality=agent_config.get("personality", ""),

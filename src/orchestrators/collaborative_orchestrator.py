@@ -145,8 +145,11 @@ class CollaborativeOrchestrator:
         self.strategy_selector.set_user_strategy(user_strategy)
         print(f"[GOAL] Model selection strategy: {user_strategy.value}")
 
-        # Initialize LLM orchestrator if available
-        self.llm_orchestrator = MultiAgentLLMOrchestrator(self.config) if LLM_AVAILABLE else None
+        # Initialize LLM orchestrator if available (pass strategy_selector for dynamic model selection)
+        self.llm_orchestrator = MultiAgentLLMOrchestrator(
+            self.config,
+            strategy_selector=self.strategy_selector
+        ) if LLM_AVAILABLE else None
 
         # Initialize sponsor integrations if available and requested
         self.sponsor_orchestrator = None
