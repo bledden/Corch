@@ -19,18 +19,20 @@ from dotenv import load_dotenv
 # Load environment
 load_dotenv()
 
-# Configure logging
+# Configure structured logging
 log_dir = Path('test_results/logs')
 log_dir.mkdir(parents=True, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(log_dir / 'facilitair_api.log'),
-        logging.StreamHandler()
-    ]
+
+from src.logging import setup_logger, LogLevel, LogFormat
+from backend.middleware import LoggingMiddleware
+
+logger = setup_logger(
+    name='facilitair_api',
+    level=LogLevel.INFO,
+    format_type=LogFormat.JSON,  # Use JSON for production, HUMAN for development
+    log_file=str(log_dir / 'facilitair_api.log'),
+    console=True
 )
-logger = logging.getLogger('facilitair_api')
 
 from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
@@ -52,6 +54,9 @@ app = FastAPI(
 
 # Include streaming router
 app.include_router(streaming.router)
+
+# Logging middleware (must be first to capture all requests)
+app.add_middleware(LoggingMiddleware, logger=logger)
 
 # CORS middleware
 app.add_middleware(
