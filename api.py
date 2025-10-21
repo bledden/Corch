@@ -25,6 +25,7 @@ log_dir.mkdir(parents=True, exist_ok=True)
 
 from src.logging import setup_logger, LogLevel, LogFormat
 from backend.middleware import LoggingMiddleware
+from src.monitoring import metrics, update_system_metrics_periodically
 
 logger = setup_logger(
     name='facilitair_api',
@@ -252,8 +253,33 @@ async def root():
         "name": "Facilitair API",
         "version": "1.0.0",
         "docs": "/docs",
-        "health": "/api/v1/health"
+        "health": "/api/v1/health",
+        "metrics": "/metrics"
     }
+
+
+@app.get("/metrics", tags=["Monitoring"])
+async def get_metrics():
+    """
+    Prometheus metrics endpoint
+
+    Returns metrics in Prometheus exposition format for scraping.
+    Metrics include:
+    - HTTP request/response metrics
+    - Agent execution metrics
+    - LLM usage metrics (tokens, cost, latency)
+    - Task completion metrics
+    - System resource metrics (CPU, memory)
+    - Active streams/tasks
+    """
+    # Update system metrics before export
+    update_system_metrics_periodically()
+
+    from fastapi import Response
+    return Response(
+        content=metrics.export_metrics(),
+        media_type=metrics.get_content_type()
+    )
 
 
 @app.get(
