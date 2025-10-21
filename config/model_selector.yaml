@@ -1,0 +1,42 @@
+# Model Selector Configuration
+# Choose which model selection strategy to use and configure it
+
+model_selection:
+  # Strategy to use: user_preference, thompson_sampling, or granular_matching
+  strategy: user_preference
+
+  # Strategy-specific configuration
+  config:
+    # For user_preference strategy:
+    config_path: "config/model_strategy_config.yaml"
+
+    # For thompson_sampling strategy:
+    # models:
+    #   - "anthropic/claude-sonnet-4.5"
+    #   - "anthropic/claude-3.5-sonnet"
+    #   - "openai/gpt-4o"
+    #   - "qwen/qwen-2.5-coder-32b-instruct"
+    #   - "deepseek/deepseek-chat"
+    # alpha: 1.0  # Prior success parameter
+    # beta: 1.0   # Prior failure parameter
+
+# Strategy descriptions:
+#
+# user_preference:
+#   - Uses strategy-based selection (QUALITY_FIRST, COST_FIRST, BALANCED, etc.)
+#   - Best for: Predictable costs, user control over quality/cost trade-offs
+#   - Current production strategy (73% pass rate achieved with this)
+#
+# thompson_sampling:
+#   - Uses reinforcement learning to learn which models work best
+#   - Best for: Automatic optimization, long-term learning
+#   - Starts with exploration (tries all models), then exploits best performers
+#
+# granular_matching:
+#   - Matches models to language/framework/task-specific strengths
+#   - Best for: Multi-language projects, framework-specific tasks
+#   - Uses benchmark data to pick specialized models
+
+# Environment variable overrides:
+# MODEL_SELECTION_STRATEGY=thompson_sampling  # Override strategy
+# MODEL_SELECTION_CONFIG_PATH=/path/to/config.yaml  # Override config file

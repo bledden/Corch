@@ -24,8 +24,10 @@ if not validate_on_startup():
     print("[FAIL] Exiting due to invalid API keys")
     sys.exit(1)
 
-# Import strategy selector
-from agents.strategy_selector import StrategySelector, ModelSelectionContext, Strategy
+# Import unified model selector system
+from agents.model_selector_factory import ModelSelectorFactory, get_model_selector
+from agents.base_model_selector import SelectionStrategy, SelectionContext, SelectionResult
+from agents.strategy_selector import Strategy  # Keep for backward compatibility
 
 # Load configuration
 config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
@@ -140,27 +142,32 @@ class CollaborativeOrchestrator:
         # Use provided config or load from file
         self.config = config or CONFIG
 
-        # Initialize strategy selector for model selection
-        self.strategy_selector = StrategySelector()
-        self.strategy_selector.set_user_strategy(user_strategy)
-        print(f"[GOAL] Model selection strategy: {user_strategy.value}")
+        # Initialize unified model selector (defaults to user_preference strategy)
+        # This allows swapping between strategies via config
+        self.model_selector = get_model_selector()
+        print(f"[GOAL] Model selection system initialized: {self.model_selector.__class__.__name__}")
+
+        # Set user strategy if using UserPreferenceStrategy (backward compatibility)
+        if hasattr(self.model_selector, 'set_user_strategy'):
+            self.model_selector.set_user_strategy(user_strategy)
+            print(f"[GOAL] User preference strategy: {user_strategy.value}")
 
         # Apply model overrides from config if provided (CLI flags, etc.)
         if self.config.get('model_overrides'):
-            self.strategy_selector.set_model_overrides(self.config['model_overrides'])
+            for agent_type, model_id in self.config['model_overrides'].items():
+                self.model_selector.set_model_override(agent_type, model_id)
             print(f"[OVERRIDE] Applied {len(self.config['model_overrides'])} model overrides")
 
         # Apply strategy override from config if provided (CLI --strategy flag)
-        if self.config.get('strategy'):
-            from agents.strategy_selector import Strategy
+        if self.config.get('strategy') and hasattr(self.model_selector, 'set_user_strategy'):
             override_strategy = Strategy[self.config['strategy']]
-            self.strategy_selector.set_user_strategy(override_strategy)
+            self.model_selector.set_user_strategy(override_strategy)
             print(f"[OVERRIDE] Strategy changed to: {override_strategy.value}")
 
-        # Initialize LLM orchestrator if available (pass strategy_selector for dynamic model selection)
+        # Initialize LLM orchestrator if available (pass model_selector for dynamic model selection)
         self.llm_orchestrator = MultiAgentLLMOrchestrator(
             self.config,
-            strategy_selector=self.strategy_selector
+            model_selector=self.model_selector
         ) if LLM_AVAILABLE else None
 
         # Initialize sponsor integrations if available and requested
@@ -217,13 +224,16 @@ class CollaborativeOrchestrator:
         self._patterns_lock = asyncio.Lock()
 
     def set_user_strategy(self, strategy: Strategy):
-        """Allow user to change strategy at runtime"""
-        self.strategy_selector.set_user_strategy(strategy)
-        print(f"[OK] Strategy changed to: {strategy.value}")
+        """Allow user to change strategy at runtime (backward compatibility)"""
+        if hasattr(self.model_selector, 'set_user_strategy'):
+            self.model_selector.set_user_strategy(strategy)
+            print(f"[OK] Strategy changed to: {strategy.value}")
+        else:
+            print(f"[WARN] Current model selector does not support strategy changes")
 
     def get_strategy_summary(self) -> Dict:
         """Get summary of model selection performance"""
-        return self.strategy_selector.get_summary()
+        return self.model_selector.get_stats()
 
     @weave.op()
     async def collaborate(self, task: str, force_agents: Optional[List[str]] = None) -> CollaborationResult:
@@ -372,26 +382,32 @@ class CollaborativeOrchestrator:
     async def _execute_agent(self, agent: Agent, task: str) -> str:
         """Execute task with a single agent"""
 
-        # Create context for model selection
+        # Create context for model selection (unified interface)
         task_complexity = len(task) / 1000.0  # Simple heuristic
-        context = ModelSelectionContext(
-            task_type=agent.id,
+        context = SelectionContext(
+            agent_type=agent.id,
+            task_type=agent.id,  # Use agent ID as task type for now
             task_complexity=min(1.0, task_complexity),
             remaining_budget=100.0,  # Could track actual budget
             sensitive_data=False  # Could detect from task content
         )
 
-        # Select model based on user strategy
-        selected_model, selection_info = self.strategy_selector.select_model(agent.id, context)
+        # Select model using unified selector
+        result = self.model_selector.select_model(context)
+
+        # Extract model ID and metadata
+        selected_model = result.model_id
 
         # Log model selection
         log_metric({
             "model_selection": {
                 "agent": agent.id,
                 "selected_model": selected_model,
-                "strategy": selection_info['strategy_used'],
-                "estimated_cost": selection_info['estimated_cost'],
-                "quality_score": selection_info['quality_score']
+                "strategy": result.strategy_used,
+                "estimated_cost": result.estimated_cost,
+                "quality_score": result.estimated_quality,
+                "confidence": result.confidence,
+                "reasoning": result.reasoning
             }
         })
 
