@@ -154,24 +154,33 @@ class CollaborateRequest(BaseModel):
 
 
 class CollaborateResponse(BaseModel):
-    """Response model for collaboration endpoint"""
-    task_id: str
-    task: str
-    success: bool
-    agents_used: List[str]
-    output: str
-    metrics: Dict[str, Any]
-    consensus_method: str
-    duration_seconds: float
-    timestamp: str
+    """
+    Response model for collaboration endpoint
+
+    Contains the complete results of a collaborative task execution including
+    which agents were used, the final output, performance metrics, and metadata.
+    """
+    task_id: str = Field(..., description="Unique identifier for this task", example="task-uuid-1234")
+    task: str = Field(..., description="The original task description", example="Write a Python function to calculate factorial")
+    success: bool = Field(..., description="Whether the task completed successfully without errors")
+    agents_used: List[str] = Field(..., description="List of agents that participated in this task", example=["architect", "coder", "reviewer"])
+    output: str = Field(..., description="Final output/result from the collaborative agents")
+    metrics: Dict[str, Any] = Field(..., description="Performance metrics including token usage, costs, and quality scores")
+    consensus_method: str = Field(..., description="Method used for consensus (e.g., 'sequential', 'voting')", example="sequential")
+    duration_seconds: float = Field(..., description="Total execution time in seconds", example=45.7)
+    timestamp: str = Field(..., description="ISO 8601 timestamp when task completed", example="2025-10-21T10:30:00")
 
 
 class TaskStatus(BaseModel):
-    """Task status model"""
-    task_id: str
-    status: str  # pending, running, completed, failed
-    progress: float  # 0.0 to 1.0
-    message: str
+    """
+    Task status model for tracking long-running tasks
+
+    Provides real-time progress updates for tasks being executed asynchronously.
+    """
+    task_id: str = Field(..., description="Unique identifier for the task", example="task-uuid-1234")
+    status: str = Field(..., description="Current status: pending, running, completed, or failed", example="running")
+    progress: float = Field(..., ge=0.0, le=1.0, description="Progress from 0.0 (not started) to 1.0 (complete)", example=0.65)
+    message: str = Field(..., description="Human-readable status message", example="Reviewing code...")
 
 
 class HealthResponse(BaseModel):
@@ -242,9 +251,42 @@ async def root():
     }
 
 
-@app.get("/api/v1/health", response_model=HealthResponse, tags=["Health"])
+@app.get(
+    "/api/v1/health",
+    response_model=HealthResponse,
+    tags=["Health"],
+    summary="Health Check",
+    description="Check API health status and readiness",
+    responses={
+        200: {
+            "description": "API is healthy and ready to accept requests",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "status": "healthy",
+                        "version": "1.0.0",
+                        "api_keys_valid": True,
+                        "orchestrator_ready": True,
+                        "timestamp": "2025-10-21T10:30:00"
+                    }
+                }
+            }
+        }
+    }
+)
 async def health_check():
-    """Health check endpoint"""
+    """
+    Check the health and readiness of the Facilitair API.
+
+    Returns information about:
+    - Overall API status (healthy/degraded/unhealthy)
+    - API version
+    - API key validation status
+    - Orchestrator readiness
+    - Current timestamp
+
+    This endpoint should be used for health checks, monitoring, and startup probes.
+    """
     logger.info("Health check requested")
 
     # Validate API keys
@@ -263,19 +305,135 @@ async def health_check():
     )
 
 
-@app.post("/api/v1/collaborate", response_model=CollaborateResponse, tags=["Collaboration"])
+@app.post(
+    "/api/v1/collaborate",
+    response_model=CollaborateResponse,
+    tags=["Collaboration"],
+    summary="Execute Collaborative Task",
+    description="Submit a task for collaborative execution by multiple AI agents",
+    status_code=200,
+    responses={
+        200: {
+            "description": "Task successfully completed",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "task_id": "task-abc123",
+                        "task": "Write a Python function to calculate factorial",
+                        "success": True,
+                        "agents_used": ["architect", "coder", "reviewer", "refiner"],
+                        "output": "def factorial(n):\\n    if n < 0:\\n        raise ValueError('Factorial not defined for negative numbers')\\n    if n == 0:\\n        return 1\\n    return n * factorial(n - 1)",
+                        "metrics": {
+                            "total_tokens": 1500,
+                            "total_cost_usd": 0.045,
+                            "quality_score": 0.92
+                        },
+                        "consensus_method": "sequential",
+                        "duration_seconds": 12.5,
+                        "timestamp": "2025-10-21T10:30:00"
+                    }
+                }
+            }
+        },
+        400: {
+            "description": "Invalid input - validation failed",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "error": "Input validation failed",
+                        "category": "validation",
+                        "hint": "Review the field errors below and correct your input.",
+                        "details": {
+                            "validation_errors": [
+                                {
+                                    "field": "task",
+                                    "message": "ensure this value has at least 10 characters",
+                                    "type": "value_error.any_str.min_length"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        500: {
+            "description": "Internal server error or task execution failed",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "error": "The AI model encountered an issue",
+                        "category": "llm",
+                        "hint": "The AI model encountered an issue. This could be due to rate limits, invalid API keys, or temporary service issues. Please try again in a moment.",
+                        "details": {
+                            "model": "anthropic/claude-3.5-sonnet",
+                            "stage": "architecture"
+                        }
+                    }
+                }
+            }
+        }
+    }
+)
 @weave.op()
 async def collaborate(
     request: CollaborateRequest,
     background_tasks: BackgroundTasks
 ):
     """
-    Execute a collaborative task with AI agents
+    Execute a collaborative task with AI agents using sequential workflow.
 
-    This endpoint uses sequential collaboration where agents work in a chain:
-    Architect → Coder → Reviewer → Refiner → Documenter
+    ## Workflow
+    Tasks are executed using a sequential collaboration pipeline where agents work in a chain:
+    1. **Architect**: Designs the solution structure
+    2. **Coder**: Implements the code
+    3. **Reviewer**: Reviews for issues and suggests improvements
+    4. **Refiner**: Applies improvements (iterative up to max_iterations)
+    5. **Documenter**: Adds documentation and comments
+    6. **Tester**: (Optional) Generates and runs tests
 
-    Returns detailed results including output, metrics, and agent usage.
+    ## Agent Selection
+    - By default, all agents execute in sequence
+    - Use `force_agents` to run only specific agents (e.g., ["architect", "coder"])
+    - Valid agents: architect, coder, reviewer, refiner, tester, documenter
+
+    ## Parameters
+    - **task**: Detailed description of what you want to build (10-10000 chars)
+    - **use_sequential**: Always True (consensus mode deprecated)
+    - **max_iterations**: How many refinement cycles (1-10, default: 3)
+    - **temperature**: LLM creativity (0.0=deterministic, 2.0=very creative, default: 0.2)
+    - **force_agents**: Optional list of specific agents to use
+
+    ## Response
+    Returns a complete task result including:
+    - Unique task ID for retrieval
+    - Success status
+    - List of agents that participated
+    - Final output (code, documentation, etc.)
+    - Performance metrics (tokens, cost, quality score)
+    - Execution duration
+
+    ## Error Handling
+    All errors include:
+    - Clear error message
+    - Error category (validation, llm, timeout, etc.)
+    - Troubleshooting hint with actionable steps
+    - Detailed context for debugging
+
+    ## Example
+    ```python
+    import requests
+
+    response = requests.post(
+        "http://localhost:8000/api/v1/collaborate",
+        json={
+            "task": "Write a Python function to validate email addresses with regex",
+            "temperature": 0.3,
+            "max_iterations": 2
+        }
+    )
+    result = response.json()
+    print(result["output"])
+    ```
     """
     logger.info(f"Collaboration requested: task='{request.task[:50]}...'")
 
