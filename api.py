@@ -35,6 +35,7 @@ logger = logging.getLogger('facilitair_api')
 from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrator
 from utils.api_key_validator import APIKeyValidator
 from backend.routers import streaming
+from src.security import InputSanitizer
 
 # Initialize W&B Weave
 weave.init("facilitair/api")
@@ -87,22 +88,25 @@ class CollaborateRequest(BaseModel):
 
     @validator('task')
     def validate_task_content(cls, v):
-        """Validate task content for safety and quality"""
-        if not v or not v.strip():
-            raise ValueError("Task cannot be empty or whitespace-only")
+        """Validate and sanitize task content for safety and quality"""
+        # Use InputSanitizer for comprehensive security validation
+        v = InputSanitizer.sanitize_task_description(v)
 
         # Check for minimum meaningful content (at least one word of 3+ chars)
         words = v.split()
         if not any(len(word) >= 3 for word in words):
             raise ValueError("Task must contain meaningful content")
 
-        return v.strip()
+        return v
 
     @validator('force_agents')
     def validate_force_agents(cls, v):
-        """Validate force_agents against known agent roles"""
+        """Validate and sanitize force_agents against known agent roles"""
         if v is None:
             return v
+
+        # Sanitize the agent list first (security check)
+        v = InputSanitizer.sanitize_agent_list(v)
 
         # Known agent roles from sequential orchestrator
         valid_agents = {
@@ -110,15 +114,14 @@ class CollaborateRequest(BaseModel):
             'tester', 'documenter'
         }
 
-        invalid_agents = [agent for agent in v if agent.lower() not in valid_agents]
+        invalid_agents = [agent for agent in v if agent not in valid_agents]
         if invalid_agents:
             raise ValueError(
                 f"Invalid agent(s): {invalid_agents}. "
                 f"Valid agents are: {sorted(valid_agents)}"
             )
 
-        # Normalize to lowercase
-        return [agent.lower() for agent in v]
+        return v
 
     class Config:
         schema_extra = {
