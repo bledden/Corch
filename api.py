@@ -36,6 +36,7 @@ from src.orchestrators.collaborative_orchestrator import CollaborativeOrchestrat
 from utils.api_key_validator import APIKeyValidator
 from backend.routers import streaming
 from src.security import InputSanitizer
+from src.errors import format_error, format_validation_errors, FacilitairError
 
 # Initialize W&B Weave
 weave.init("facilitair/api")
@@ -60,6 +61,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Global exception handlers
+@app.exception_handler(FacilitairError)
+async def facilitair_error_handler(request, exc: FacilitairError):
+    """Handle Facilitair-specific errors with user-friendly messages"""
+    error_response = exc.to_dict()
+    status_code = 400 if exc.category in ["validation", "authentication"] else 500
+    logger.error(f"FacilitairError: {exc.message}", exc_info=True, extra={"category": exc.category})
+    return JSONResponse(status_code=status_code, content=error_response)
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request, exc: Exception):
+    """Handle unexpected errors with helpful troubleshooting hints"""
+    error_response = format_error(exc, include_traceback=False, user_facing=True)
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(status_code=500, content=error_response)
+
 
 # Global orchestrator instance (process-wide only)
 orchestrator: Optional[CollaborativeOrchestrator] = None
@@ -306,7 +325,8 @@ async def collaborate(
 
     except Exception as e:
         logger.error(f"Collaboration failed: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Collaboration failed: {str(e)}")
+        # The global exception handler will format this with troubleshooting hints
+        raise
 
 
 @app.get("/api/v1/tasks/{task_id}", response_model=CollaborateResponse, tags=["Tasks"])
