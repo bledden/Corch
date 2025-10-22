@@ -106,6 +106,14 @@ except ImportError:
     SPONSORS_AVAILABLE = False
     print("Warning: Sponsor integrations not available.")
 
+# Import knowledge graph for RAG pattern learning
+try:
+    from src.integrations import get_knowledge_graph
+    KNOWLEDGE_GRAPH_AVAILABLE = True
+except ImportError:
+    KNOWLEDGE_GRAPH_AVAILABLE = False
+    print("Warning: Knowledge graph not available. Pattern learning disabled.")
+
 
 @dataclass
 class Agent:
@@ -223,6 +231,11 @@ class CollaborativeOrchestrator:
         self._history_lock = asyncio.Lock()
         self._patterns_lock = asyncio.Lock()
 
+        # Initialize knowledge graph for RAG pattern learning
+        self.knowledge_graph = get_knowledge_graph() if KNOWLEDGE_GRAPH_AVAILABLE else None
+        if self.knowledge_graph and self.knowledge_graph.enabled:
+            print("[OK] Knowledge graph enabled for RAG pattern learning")
+
     def set_user_strategy(self, strategy: Strategy):
         """Allow user to change strategy at runtime (backward compatibility)"""
         if hasattr(self.model_selector, 'set_user_strategy'):
@@ -243,8 +256,33 @@ class CollaborativeOrchestrator:
         if not self.use_sequential or not self.sequential_orchestrator:
             raise RuntimeError("Sequential orchestrator not initialized. Consensus has been removed.")
 
+        # RAG: Retrieve similar successful patterns from knowledge graph
+        rag_context = ""
+        if self.knowledge_graph and self.knowledge_graph.enabled:
+            try:
+                similar_patterns = await self.knowledge_graph.retrieve_similar_tasks(
+                    task=task,
+                    limit=3,
+                    min_quality=0.7
+                )
+
+                if similar_patterns:
+                    rag_context = "\n\n[KNOWLEDGE GRAPH - Similar Successful Patterns]:\n"
+                    for i, pattern in enumerate(similar_patterns, 1):
+                        rag_context += f"\n{i}. Task: {pattern['task'][:100]}...\n"
+                        rag_context += f"   Quality: {pattern['quality_score']:.2f}\n"
+                        rag_context += f"   Agents: {', '.join(pattern['agents_used'])}\n"
+                        rag_context += f"   Output Preview: {pattern['output'][:150]}...\n"
+
+                    print(f"[KNOWLEDGE_GRAPH] Retrieved {len(similar_patterns)} similar patterns for context")
+            except Exception as e:
+                print(f"[KNOWLEDGE_GRAPH] Failed to retrieve patterns: {e}")
+
+        # Append RAG context to task if available
+        enhanced_task = task + rag_context if rag_context else task
+
         workflow_result = await self.sequential_orchestrator.execute_workflow(
-            task=task,
+            task=enhanced_task,
             max_iterations=3,
             temperature=0.2
         )
@@ -296,6 +334,35 @@ class CollaborativeOrchestrator:
         # Learn from this collaboration
         task_type = self._classify_task(task)
         await self._learn_from_collaboration(result, task_type)
+
+        # Store successful patterns in knowledge graph for future RAG retrieval
+        if self.knowledge_graph and self.knowledge_graph.enabled:
+            try:
+                # Only store if quality meets threshold (0.7)
+                if quality_score >= 0.7:
+                    pattern_id = await self.knowledge_graph.store_successful_task(
+                        task=task,  # Store original task, not enhanced with RAG
+                        output=workflow_result.final_output,
+                        quality_score=quality_score,
+                        agents_used=agents_used,
+                        metrics={
+                            "total_tokens": sum(getattr(stage, 'tokens_used', 0) for stage in workflow_result.stages),
+                            "total_cost_usd": sum(getattr(stage, 'cost_usd', 0.0) for stage in workflow_result.stages),
+                        },
+                        duration_seconds=sum(getattr(stage, 'duration', 0.0) for stage in workflow_result.stages),
+                        metadata={
+                            "task_type": task_type,
+                            "iterations": workflow_result.iterations,
+                            "success": workflow_result.success
+                        }
+                    )
+
+                    if pattern_id:
+                        print(f"[KNOWLEDGE_GRAPH] Stored successful pattern: {pattern_id}")
+                else:
+                    print(f"[KNOWLEDGE_GRAPH] Quality {quality_score:.2f} < 0.7, not storing pattern")
+            except Exception as e:
+                print(f"[KNOWLEDGE_GRAPH] Failed to store pattern: {e}")
 
         return result
 
